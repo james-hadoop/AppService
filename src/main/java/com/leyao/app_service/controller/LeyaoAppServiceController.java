@@ -36,6 +36,8 @@ public class LeyaoAppServiceController {
 
             Map<String, Object> paramMap = new HashMap<String, Object>();
             paramMap.put("sEventTypeCd", sEventTypeCd);
+            paramMap.put("start", start);
+            paramMap.put("end", end);
 
             List<TEventPage> listLeyaoEvent = leyaoServiceService.getAllTEventPage(paramMap);
             int count = leyaoServiceService.getAllTEventPageCount(paramMap);
