@@ -1,4 +1,4 @@
-package com.leyao.app_service.entity;
+package com.leyao.app_service.entity.hs_event;
 
 import java.util.Date;
 

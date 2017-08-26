@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.type.JdbcType;
 
-import com.leyao.app_service.entity.TEventPage;
+import com.leyao.app_service.entity.hs_event.TEventPage;
 
 @Mapper
 public interface TEventPageMapper {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leyao.app_service.entity.GridContent;
-import com.leyao.app_service.entity.TEventPage;
+import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.service.ILeyaoAppService;
 
 @RestController

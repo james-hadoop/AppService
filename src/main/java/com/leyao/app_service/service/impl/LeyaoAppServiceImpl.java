@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leyao.app_service.dao.mapper.hs_event.TEventPageMapper;
-import com.leyao.app_service.entity.TEventPage;
+import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.service.ILeyaoAppService;
 
 @Service
