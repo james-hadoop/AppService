@@ -1,6 +1,3 @@
-create database hs_user;
-use hs_user;
-
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: hs_user
@@ -17,6 +14,14 @@ use hs_user;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `hs_user`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `hs_user` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `hs_user`;
 
 --
 -- Table structure for table `h_user`
@@ -299,6 +304,10 @@ LOCK TABLES `t_user_page` WRITE;
 /*!40000 ALTER TABLE `t_user_page` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_user_page` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'hs_user'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -309,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-05  3:07:31
+-- Dump completed on 2017-08-31  2:01:01

@@ -1,6 +1,3 @@
-create database r_dim;
-use r_dim;
-
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: r_dim
@@ -17,6 +14,14 @@ use r_dim;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `r_dim`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `r_dim` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `r_dim`;
 
 --
 -- Table structure for table `r_event_category`
@@ -71,6 +76,32 @@ LOCK TABLES `r_event_position` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `r_event_type`
+--
+
+DROP TABLE IF EXISTS `r_event_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `r_event_type` (
+  `r_event_type_cd` int(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '事件类型编码',
+  `r_event_type_desc` varchar(500) NOT NULL DEFAULT '?' COMMENT '事件类型定义',
+  `create_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' COMMENT '系统创建时间',
+  `update_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '系统更新时间',
+  PRIMARY KEY (`r_event_type_cd`),
+  KEY `idx_create_ts` (`create_ts`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='事件类型关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `r_event_type`
+--
+
+LOCK TABLES `r_event_type` WRITE;
+/*!40000 ALTER TABLE `r_event_type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `r_event_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `r_message_category`
 --
 
@@ -121,6 +152,10 @@ LOCK TABLES `r_user_gender` WRITE;
 /*!40000 ALTER TABLE `r_user_gender` DISABLE KEYS */;
 /*!40000 ALTER TABLE `r_user_gender` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'r_dim'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -131,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-05  3:09:34
+-- Dump completed on 2017-08-31  2:01:01

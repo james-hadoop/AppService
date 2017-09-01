@@ -1,6 +1,3 @@
-create database ls_user_message;
-use ls_user_message;
-
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: ls_user_message
@@ -17,6 +14,14 @@ use ls_user_message;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `ls_user_message`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ls_user_message` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `ls_user_message`;
 
 --
 -- Table structure for table `l_user_message`
@@ -74,6 +79,10 @@ LOCK TABLES `s_user_message_active` WRITE;
 /*!40000 ALTER TABLE `s_user_message_active` DISABLE KEYS */;
 /*!40000 ALTER TABLE `s_user_message_active` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'ls_user_message'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -84,4 +93,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-05  3:08:58
+-- Dump completed on 2017-08-31  2:01:01
