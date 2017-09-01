@@ -1,5 +1,7 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -42,6 +44,18 @@ public interface HsEventMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     HsEvent selectByPrimaryKey(Long hEventId);
+    
+    @Select({
+        "select",
+        "h_event_id, create_ts, update_ts",
+        "from hs_event"
+    })
+    @Results({
+        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<HsEvent> getAllHsEvent();
 
     @UpdateProvider(type=HsEventSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(HsEvent record);

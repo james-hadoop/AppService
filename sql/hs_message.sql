@@ -1,3 +1,6 @@
+create database hs_message;
+use hs_message;
+
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: hs_message

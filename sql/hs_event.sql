@@ -1,3 +1,6 @@
+create database hs_event;
+use hs_event;
+
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: hs_event

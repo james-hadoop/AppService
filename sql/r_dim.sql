@@ -1,3 +1,6 @@
+create database r_dim;
+use r_dim;
+
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: r_dim
