@@ -1,5 +1,14 @@
 package com.leyao.app_service.service;
 
-public interface IHsEventService {
+import java.util.List;
+import java.util.Map;
 
+import com.leyao.app_service.entity.hs_event.TEventSummary;
+
+public interface IHsEventService {
+    String checkUpdate();
+
+    List<TEventSummary> getHsEventList(Map<String, Object> paramMap);
+
+    void createHsEvent(TEventSummary record);
 }

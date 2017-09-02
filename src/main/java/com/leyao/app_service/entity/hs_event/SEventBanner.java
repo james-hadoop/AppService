@@ -15,6 +15,19 @@ public class SEventBanner {
 
     private Date updateTs;
 
+    public SEventBanner() {
+
+    }
+
+    public SEventBanner(Long hEventId, Integer sEventBannerPositionCd, Integer sEventBannerActiveInd, Date createTs,
+            Date updateTs) {
+        this.hEventId = hEventId;
+        this.sEventBannerPositionCd = sEventBannerPositionCd;
+        this.sEventBannerActiveInd = sEventBannerActiveInd;
+        this.createTs = createTs;
+        this.updateTs = updateTs;
+    }
+
     public Long getsEventBannerId() {
         return sEventBannerId;
     }

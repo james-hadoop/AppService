@@ -1,18 +1,18 @@
-package com.leyao.app_service.entity.hs_event.enums;
+package com.leyao.app_service.entity.enums;
 
-public enum REventCategoryEnum {
-    Activity("Activity", 1), Education("Education", 2), Share("Share", 3), Album("Album", 4);
+public enum StatusEnum {
+    Active("Active", 0), NotActive("NotActive", 1);
 
     private String value;
     private int code;
 
-    private REventCategoryEnum(String value, int code) {
+    private StatusEnum(String value, int code) {
         this.value = value;
         this.code = code;
     }
 
     public static String getValue(int code) {
-        for (REventCategoryEnum c : REventCategoryEnum.values()) {
+        for (StatusEnum c : StatusEnum.values()) {
             if (c.getCode() == code) {
                 return c.value;
             }
@@ -21,7 +21,7 @@ public enum REventCategoryEnum {
     }
 
     public static int getCode(String value) {
-        for (REventCategoryEnum c : REventCategoryEnum.values()) {
+        for (StatusEnum c : StatusEnum.values()) {
             if (c.getValue().equals(value)) {
                 return c.code;
             }
