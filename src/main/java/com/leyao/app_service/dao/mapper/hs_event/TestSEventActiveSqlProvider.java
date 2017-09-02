@@ -1,17 +1,14 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
-import com.leyao.app_service.entity.hs_event.SEventActive;
 import org.apache.ibatis.jdbc.SQL;
 
-public class SEventActiveSqlProvider {
+import com.leyao.app_service.entity.hs_event.TEventPage;
 
-    public String insertSelective(SEventActive record) {
+public class TestSEventActiveSqlProvider {
+
+    public String insertSelective(TEventPage record) {
         SQL sql = new SQL();
         sql.INSERT_INTO("s_event_active");
-        
-        if (record.getsEventActiveId() != null) {
-            sql.VALUES("s_event_active_id", "#{sEventActiveId,jdbcType=BIGINT}");
-        }
         
         if (record.gethEventId() != null) {
             sql.VALUES("h_event_id", "#{hEventId,jdbcType=BIGINT}");
@@ -32,7 +29,7 @@ public class SEventActiveSqlProvider {
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(SEventActive record) {
+    public String updateByPrimaryKeySelective(TEventPage record) {
         SQL sql = new SQL();
         sql.UPDATE("s_event_active");
         

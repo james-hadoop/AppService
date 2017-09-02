@@ -349,6 +349,7 @@ CREATE TABLE `t_event_page` (
   `s_event_title_url` varchar(255) NOT NULL DEFAULT '?' COMMENT '事件标题url',
   `s_event_content_url` varchar(255) NOT NULL DEFAULT '?' COMMENT '事件内容url',
   `s_event_sub_content_1_url` varchar(255) NOT NULL DEFAULT '?' COMMENT '事件子内容1相关url',
+  `s_event_sub_content_2_str` varchar(255) NOT NULL DEFAULT '?' COMMENT '事件子内容2相关内容描述',
   `s_event_search_content_txt` text NOT NULL COMMENT '事件搜索内容，存放搜索相关关键字集合',
   `s_event_active_ind` int(20) NOT NULL DEFAULT '0' COMMENT '事件激活状态',
   `create_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' COMMENT '系统创建时间',

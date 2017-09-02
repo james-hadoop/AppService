@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leyao.app_service.dao.mapper.hs_event.HsEventMapper;
+import com.leyao.app_service.dao.mapper.hs_event.TestSEventActiveMapper;
 import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.hs_event.HsEvent;
-import com.leyao.app_service.util.AppServiceUtil;
+import com.leyao.app_service.entity.hs_event.TEventPage;
+import com.leyao.app_service.util.CommonUtil;
 
 @RestController
 @RequestMapping("/v1/test")
@@ -19,9 +21,12 @@ public class TestController {
     @Autowired
     HsEventMapper hsEventMapper;
 
+    @Autowired
+    TestSEventActiveMapper sEventActiveMapper;
+
     @RequestMapping(value = "/insertHsEvent", method = RequestMethod.GET)
     public void insertHsEvent() {
-        Date date = AppServiceUtil.getCurrentTimestamp();
+        Date date = CommonUtil.getCurrentTimestamp();
 
         HsEvent event = new HsEvent();
         event.setCreateTs(date);
@@ -39,5 +44,25 @@ public class TestController {
         gridcontent.setTotal(hsEventList.size());
 
         return gridcontent;
+    }
+
+    @RequestMapping(value = "/getAllSEventActive", method = RequestMethod.GET)
+    public GridContent getAllSEventActive() {
+        GridContent gridcontent = new GridContent();
+
+        List<TEventPage> sEventActiveList = sEventActiveMapper.getAllSEventActive();
+
+        gridcontent.setRows(sEventActiveList);
+        gridcontent.setTotal(sEventActiveList.size());
+
+        return gridcontent;
+    }
+
+    @RequestMapping(value = "/insertSEventActive", method = RequestMethod.GET)
+    public void insertSEventActive() {
+        List<TEventPage> sEventActiveList = sEventActiveMapper.getAllSEventActive();
+        for (TEventPage es : sEventActiveList) {
+            sEventActiveMapper.insertSelective(es);
+        }
     }
 }

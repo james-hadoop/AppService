@@ -19,6 +19,8 @@ public class TEventPage {
 
     private String sEventSubContent1Url;
 
+    private String sEventSubContent2Str;
+
     private Integer sEventActiveInd;
 
     private Date createTs;
@@ -89,6 +91,14 @@ public class TEventPage {
 
     public void setsEventSubContent1Url(String sEventSubContent1Url) {
         this.sEventSubContent1Url = sEventSubContent1Url;
+    }
+
+    public String getsEventSubContent2Str() {
+        return sEventSubContent2Str;
+    }
+
+    public void setsEventSubContent2Str(String sEventSubContent2Str) {
+        this.sEventSubContent2Str = sEventSubContent2Str;
     }
 
     public Integer getsEventActiveInd() {

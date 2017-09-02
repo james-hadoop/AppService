@@ -4,37 +4,31 @@ import java.util.Date;
 import java.util.List;
 
 public class TEventSummary {
-    private Long sEventContentId;
-
     private Long hEventId;
+
+    private Integer sEventCategoryCd;
+
+    private String rEventCategoryDesc;
+
+    private Integer sEventTypeCd;
+
+    private String rEventTypeDesc;
 
     private String sEventTitleUrl;
 
     private String sEventContentUrl;
 
+    private Integer sEventActiveInd;
+
     private Date createTs;
 
     private Date updateTs;
 
-    private Integer sEventPositionCd;
-
-    private Integer sEventActiveInd;
-
-    private Integer sEventCategoryCd;
-
-    private Integer sEventTypeCd;
+    private String sEventSearchContentTxt;
 
     private List<String> sEventSubContent1UrlList;
 
     private List<String> sEventSubContent2StrList;
-
-    public Long getsEventContentId() {
-        return sEventContentId;
-    }
-
-    public void setsEventContentId(Long sEventContentId) {
-        this.sEventContentId = sEventContentId;
-    }
 
     public Long gethEventId() {
         return hEventId;
@@ -42,6 +36,38 @@ public class TEventSummary {
 
     public void sethEventId(Long hEventId) {
         this.hEventId = hEventId;
+    }
+
+    public Integer getsEventCategoryCd() {
+        return sEventCategoryCd;
+    }
+
+    public void setsEventCategoryCd(Integer sEventCategoryCd) {
+        this.sEventCategoryCd = sEventCategoryCd;
+    }
+
+    public String getrEventCategoryDesc() {
+        return rEventCategoryDesc;
+    }
+
+    public void setrEventCategoryDesc(String rEventCategoryDesc) {
+        this.rEventCategoryDesc = rEventCategoryDesc;
+    }
+
+    public Integer getsEventTypeCd() {
+        return sEventTypeCd;
+    }
+
+    public void setsEventTypeCd(Integer sEventTypeCd) {
+        this.sEventTypeCd = sEventTypeCd;
+    }
+
+    public String getrEventTypeDesc() {
+        return rEventTypeDesc;
+    }
+
+    public void setrEventTypeDesc(String rEventTypeDesc) {
+        this.rEventTypeDesc = rEventTypeDesc;
     }
 
     public String getsEventTitleUrl() {
@@ -60,6 +86,14 @@ public class TEventSummary {
         this.sEventContentUrl = sEventContentUrl;
     }
 
+    public Integer getsEventActiveInd() {
+        return sEventActiveInd;
+    }
+
+    public void setsEventActiveInd(Integer sEventActiveInd) {
+        this.sEventActiveInd = sEventActiveInd;
+    }
+
     public Date getCreateTs() {
         return createTs;
     }
@@ -76,36 +110,12 @@ public class TEventSummary {
         this.updateTs = updateTs;
     }
 
-    public Integer getsEventPositionCd() {
-        return sEventPositionCd;
+    public String getsEventSearchContentTxt() {
+        return sEventSearchContentTxt;
     }
 
-    public void setsEventPositionCd(Integer sEventPositionCd) {
-        this.sEventPositionCd = sEventPositionCd;
-    }
-
-    public Integer getsEventActiveInd() {
-        return sEventActiveInd;
-    }
-
-    public void setsEventActiveInd(Integer sEventActiveInd) {
-        this.sEventActiveInd = sEventActiveInd;
-    }
-
-    public Integer getsEventCategoryCd() {
-        return sEventCategoryCd;
-    }
-
-    public void setsEventCategoryCd(Integer sEventCategoryCd) {
-        this.sEventCategoryCd = sEventCategoryCd;
-    }
-
-    public Integer getsEventTypeCd() {
-        return sEventTypeCd;
-    }
-
-    public void setsEventTypeCd(Integer sEventTypeCd) {
-        this.sEventTypeCd = sEventTypeCd;
+    public void setsEventSearchContentTxt(String sEventSearchContentTxt) {
+        this.sEventSearchContentTxt = sEventSearchContentTxt;
     }
 
     public List<String> getsEventSubContent1UrlList() {
