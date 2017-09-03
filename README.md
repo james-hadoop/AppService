@@ -2,11 +2,11 @@
 
 mvn spring-boot:run
 
-// getEvents
+## getEvents
 http://localhost:8088/v1/service/getEvents?sEventTypeCd=1&page=1&rows=7
 
-// getTEventSummaryByType
-// Image("Image", 1), Audio("Audio", 2), Video("Video", 3);
+#### getTEventSummaryByType
+#### Image("Image", 1), Audio("Audio", 2), Video("Video", 3);
 http://localhost:8088/v1/service/getTEventSummaryByType
 
 http://localhost:8088/v1/service/getTEventSummaryByType?sEventTypeCd=1
