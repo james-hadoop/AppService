@@ -87,13 +87,13 @@ public class LeyaoAppServiceController {
 
         return gridcontent;
     }
-    
+
     @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
     public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "10") Integer rows,
             @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
-        logger.info("/v1/service/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}", sEventCategoryCd,
-                page, rows);
+        logger.info("/v1/service/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}",
+                sEventCategoryCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -112,6 +112,33 @@ public class LeyaoAppServiceController {
             gridcontent.setTotal(count);
         } catch (Exception e) {
             logger.error("/v1/service/getTEventSummaryByCategory()", e);
+            return gridcontent;
+        }
+
+        return gridcontent;
+    }
+
+    @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
+    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
+        logger.info("/v1/service/getTEventSummaryForBanner() called: page={}, rows={}", page, rows);
+        GridContent gridcontent = new GridContent();
+
+        try {
+            int start = (page - 1) * rows;
+            int end = rows;
+
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("start", start);
+            paramMap.put("end", end);
+
+            List<TEventSummary> tEventSummaryList = hsEventService.getTEventPageListForBanner(paramMap);
+            int count = hsEventService.getTEventPageListForBannerCount(paramMap);
+
+            gridcontent.setRows(tEventSummaryList);
+            gridcontent.setTotal(count);
+        } catch (Exception e) {
+            logger.error("/v1/service/getTEventSummaryForBanner()", e);
             return gridcontent;
         }
 

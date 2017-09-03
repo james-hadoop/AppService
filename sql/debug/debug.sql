@@ -20,3 +20,9 @@ SELECT COUNT(1) FROM (SELECT ep.h_event_id FROM (select h_event_id FROM hs_event
 select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0 order by h_event_id desc limit #{start}, #{end}
 
 select count(1) from (select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0 order by h_event_id desc limit #{start}, #{end}) as t;
+
+select ep.* from (select * from hs_event.t_event_page where s_event_active_ind=0) as ep left outer join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id limit #{start}, #{end}
+
+select count(1) from (select ep.h_event_id from (select h_event_id from hs_event.t_event_page where s_event_active_ind=0) as ep left outer join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id limit #{start}, #{end}) as t
+
+

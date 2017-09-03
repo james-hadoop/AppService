@@ -85,21 +85,21 @@ public class HsEventUtil {
         Set<Long> eventIdSet = new HashSet<Long>();
 
         java.util.Collections.sort(tEventPageList, null);
-//        for (TEventPage ep : tEventPageList) {
-//            System.out.print(ep.gethEventId());
-//        }
+        // for (TEventPage ep : tEventPageList) {
+        // System.out.print(ep.gethEventId());
+        // }
 
         TEventSummary es = null;
         for (TEventPage ep : tEventPageList) {
             Long eventId = ep.gethEventId();
 
             if (eventIdSet.contains(eventId)) {
-                String sEventSubContent1Url=ep.getsEventSubContent1Url();
+                String sEventSubContent1Url = ep.getsEventSubContent1Url();
                 if (null != sEventSubContent1Url && !GlobalConstant.NULL_STRING.equals(sEventSubContent1Url)) {
                     es.getsEventSubContent1UrlList().add(sEventSubContent1Url);
                 }
-                
-                String sEventSubContent2Str=ep.getsEventSubContent2Str();
+
+                String sEventSubContent2Str = ep.getsEventSubContent2Str();
                 if (null != sEventSubContent2Str && !GlobalConstant.NULL_STRING.equals(sEventSubContent2Str)) {
                     es.getsEventSubContent2StrList().add(sEventSubContent2Str);
                 }
@@ -117,17 +117,17 @@ public class HsEventUtil {
                 es.setrEventTypeDesc(ep.getrEventTypeDesc());
                 es.setsEventTitleUrl(ep.getsEventTitleUrl());
                 es.setsEventContentUrl(ep.getsEventContentUrl());
-                
-                String sEventSubContent1Url=ep.getsEventSubContent1Url();
+
+                String sEventSubContent1Url = ep.getsEventSubContent1Url();
                 if (null != sEventSubContent1Url && !GlobalConstant.NULL_STRING.equals(sEventSubContent1Url)) {
                     es.getsEventSubContent1UrlList().add(sEventSubContent1Url);
                 }
-                
-                String sEventSubContent2Str=ep.getsEventSubContent2Str();
+
+                String sEventSubContent2Str = ep.getsEventSubContent2Str();
                 if (null != sEventSubContent2Str && !GlobalConstant.NULL_STRING.equals(sEventSubContent2Str)) {
                     es.getsEventSubContent2StrList().add(sEventSubContent2Str);
                 }
-                
+
                 es.setsEventActiveInd(ep.getsEventActiveInd());
                 es.setCreateTs(ep.getCreateTs());
                 es.setUpdateTs(ep.getUpdateTs());
@@ -135,9 +135,7 @@ public class HsEventUtil {
             }
         }
 
-        if (null != es)
-
-        {
+        if (null != es) {
             tEventSummaryList.add(es);
         }
 

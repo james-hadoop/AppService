@@ -17,9 +17,12 @@ public interface IHsEventService {
     List<TEventSummary> getTEventSummaryByType(Map<String, Object> paramMap);
 
     int getTEventSummaryByTypeCount(Map<String, Object> paramMap);
-    
+
     List<TEventSummary> getTEventSummaryByCategory(Map<String, Object> paramMap);
 
     int getTEventSummaryByCategoryCount(Map<String, Object> paramMap);
 
+    List<TEventSummary> getTEventPageListForBanner(Map<String, Object> paramMap);
+
+    int getTEventPageListForBannerCount(Map<String, Object> paramMap);
 }

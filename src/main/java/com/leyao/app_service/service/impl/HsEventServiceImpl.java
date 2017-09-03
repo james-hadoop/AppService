@@ -124,4 +124,18 @@ public class HsEventServiceImpl implements IHsEventService {
 
         return count;
     }
+
+    @Override
+    public List<TEventSummary> getTEventPageListForBanner(Map<String, Object> paramMap) {
+        List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListForBanner(paramMap);
+
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        return tEventSummaryList;
+    }
+
+    @Override
+    public int getTEventPageListForBannerCount(Map<String, Object> paramMap) {
+        int count = tEventPageMapper.getTEventPageListForBannerCount(paramMap);
+        return count;
+    }
 }
