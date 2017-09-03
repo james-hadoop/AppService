@@ -58,7 +58,7 @@ public class LeyaoAppServiceController {
         return gridcontent;
     }
 
-    @RequestMapping(value = "/getTEventSummary", method = RequestMethod.GET)
+    @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
     public GridContent getTEventSummary(@RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "10") Integer rows,
             @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd,
@@ -79,8 +79,8 @@ public class LeyaoAppServiceController {
 
             // List<TEventSummary> getTEventPageListForRecom(Map<String, Object>
             // paramMap);
-            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummary(paramMap);
-            int count = hsEventService.getTEventSummaryCount(paramMap);
+            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
+            int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
 
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);

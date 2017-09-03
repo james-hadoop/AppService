@@ -41,12 +41,12 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
-    public List<TEventSummary> getTEventSummary(Map<String, Object> paramMap) {
+    public List<TEventSummary> getTEventSummaryByType(Map<String, Object> paramMap) {
         List<TEventPage> tEventPageList;
 
         Integer sEventTypeCd = (Integer) paramMap.get("sEventTypeCd");
         if (null == sEventTypeCd) {
-            tEventPageList = tEventPageMapper.getTEventPageListForNoRecom(paramMap);
+            tEventPageList = tEventPageMapper.getAllTEventPageList(paramMap);
         } else {
             switch (sEventTypeCd) {
             case 1:
@@ -59,7 +59,7 @@ public class HsEventServiceImpl implements IHsEventService {
                 tEventPageList = tEventPageMapper.getTEventPageListForRecom3(paramMap);
                 break;
             default:
-                tEventPageList = tEventPageMapper.getTEventPageListForNoRecom(paramMap);
+                tEventPageList = tEventPageMapper.getAllTEventPageList(paramMap);
             }
         }
 
@@ -68,13 +68,13 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
-    public int getTEventSummaryCount(Map<String, Object> paramMap) {
+    public int getTEventSummaryByTypeCount(Map<String, Object> paramMap) {
         Integer sEventTypeCd = (Integer) paramMap.get("sEventTypeCd");
 
         int count = 0;
 
         if (null == sEventTypeCd) {
-            count = tEventPageMapper.getTEventPageListForNoRecomCount(paramMap);
+            count = tEventPageMapper.getAllTEventPageListCount(paramMap);
         } else {
             switch (sEventTypeCd) {
             case 1:
@@ -87,10 +87,32 @@ public class HsEventServiceImpl implements IHsEventService {
                 count = tEventPageMapper.getTEventPageListForRecom3Count(paramMap);
                 break;
             default:
-                count = tEventPageMapper.getTEventPageListForNoRecomCount(paramMap);
+                count = tEventPageMapper.getAllTEventPageListCount(paramMap);
             }
         }
 
         return count;
+    }
+
+    @Override
+    public List<TEventSummary> getTEventSummaryByCategory(Map<String, Object> paramMap) {
+        Integer sEventCategoryCd=(Integer)paramMap.get("sEventCategoryCd");
+        
+        List<TEventPage> tEventPageList;
+
+        if (null == sEventCategoryCd) {
+            tEventPageList = tEventPageMapper.getAllTEventPageList(paramMap);
+        }else{
+            tEventPageMapper.getAllTEventPageList(paramMap);
+        }
+        
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        return tEventSummaryList;
+    }
+
+    @Override
+    public int getTEventSummaryByCategoryCount(Map<String, Object> paramMap) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

@@ -8,6 +8,10 @@ http://localhost:8088/v1/service/getTEventSummary
 
 http://localhost:8088/v1/service/getTEventSummary?sEventTypeCd=1
 
+http://localhost:8088/v1/service/getTEventSummary?sEventTypeCd=2
+
+http://localhost:8088/v1/service/getTEventSummary?sEventTypeCd=3
+
 http://localhost:8088/v1/test/getHsEvent
 
 http://localhost:8088/v1/test/getAllSEventActive
