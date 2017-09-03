@@ -29,6 +29,10 @@ public class TEventSummary {
     private List<String> sEventSubContent1UrlList;
 
     private List<String> sEventSubContent2StrList;
+    
+    private Integer sEventBannerPositionCd;
+    
+    private Integer sEventRecomPositionCd;
 
     public Long gethEventId() {
         return hEventId;
@@ -133,4 +137,20 @@ public class TEventSummary {
     public void setsEventSubContent2StrList(List<String> sEventSubContent2StrList) {
         this.sEventSubContent2StrList = sEventSubContent2StrList;
     }
+
+	public Integer getsEventBannerPositionCd() {
+		return sEventBannerPositionCd;
+	}
+
+	public void setsEventBannerPositionCd(Integer sEventBannerPositionCd) {
+		this.sEventBannerPositionCd = sEventBannerPositionCd;
+	}
+
+	public Integer getsEventRecomPositionCd() {
+		return sEventRecomPositionCd;
+	}
+
+	public void setsEventRecomPositionCd(Integer sEventRecomPositionCd) {
+		this.sEventRecomPositionCd = sEventRecomPositionCd;
+	}
 }

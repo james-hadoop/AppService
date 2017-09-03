@@ -118,8 +118,8 @@ public interface TEventPageMapper {
                     @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
                     @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP), @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
                     @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
-    List<TEventPage> getAllTEventPage(Map<String, Object> paramMap);
+    List<TEventPage> getTEventPageList(Map<String, Object> paramMap);
 
     @Select({ "select count(1) from t_event_page where s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER} limit #{start}, #{end}" })
-    Integer getAllTEventPageCount(Map<String, Object> paramMap);
+    Integer getTEventPageListCount(Map<String, Object> paramMap);
 }

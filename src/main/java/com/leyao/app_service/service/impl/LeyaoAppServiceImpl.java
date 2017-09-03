@@ -16,13 +16,12 @@ public class LeyaoAppServiceImpl implements ILeyaoAppService {
     TEventPageMapper tEventPageMapper;
 
     @Override
-    public List<TEventPage> getAllTEventPage(Map<String, Object> paramMap) {
-        return tEventPageMapper.getAllTEventPage(paramMap);
+    public List<TEventPage> getTEventPageList(Map<String, Object> paramMap) {
+        return tEventPageMapper.getTEventPageList(paramMap);
     }
 
     @Override
-    public int getAllTEventPageCount(Map<String, Object> paramMap) {
-        return tEventPageMapper.getAllTEventPageCount(paramMap);
+    public int getTEventPageListCount(Map<String, Object> paramMap) {
+        return tEventPageMapper.getTEventPageListCount(paramMap);
     }
-
 }

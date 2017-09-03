@@ -9,18 +9,18 @@ import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 
 public class HsEventUtil {
-    public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> eventSummaryList) {
-        if (null == eventSummaryList || 0 == eventSummaryList.size()) {
+    public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> tEventSummaryList) {
+        if (null == tEventSummaryList || 0 == tEventSummaryList.size()) {
             return null;
         }
 
-        List<TEventPage> eventPageList = new ArrayList<TEventPage>();
+        List<TEventPage> tEventPageList = new ArrayList<TEventPage>();
 
-        for (TEventSummary es : eventSummaryList) {
-            eventPageList.addAll(eventSummary2EventPageList(es));
+        for (TEventSummary es : tEventSummaryList) {
+            tEventPageList.addAll(eventSummary2EventPageList(es));
         }
 
-        return eventPageList;
+        return tEventPageList;
     }
 
     private static List<TEventPage> eventSummary2EventPageList(TEventSummary es) {
@@ -28,7 +28,7 @@ public class HsEventUtil {
             return null;
         }
 
-        List<TEventPage> eventPageList = new ArrayList<TEventPage>();
+        List<TEventPage> tEventPageList = new ArrayList<TEventPage>();
 
         List<String> subContent1Url = es.getsEventSubContent1UrlList();
         List<String> subContent2Str = es.getsEventSubContent2StrList();
@@ -48,7 +48,7 @@ public class HsEventUtil {
             ep.setUpdateTs(es.getUpdateTs());
             ep.setsEventSearchContentTxt(es.getsEventSearchContentTxt());
 
-            eventPageList.add(ep);
+            tEventPageList.add(ep);
         } else {
             for (int i = 0; i < subContent1Url.size(); i++) {
                 TEventPage ep = new TEventPage();
@@ -67,23 +67,23 @@ public class HsEventUtil {
                 ep.setUpdateTs(es.getUpdateTs());
                 ep.setsEventSearchContentTxt(es.getsEventSearchContentTxt());
 
-                eventPageList.add(ep);
+                tEventPageList.add(ep);
             }
         }
 
-        return eventPageList;
+        return tEventPageList;
     }
 
-    public static List<TEventSummary> eventPageList2EventSummaryList(List<TEventPage> eventPageList) {
-        if (null == eventPageList || 0 == eventPageList.size()) {
+    public static List<TEventSummary> eventPageList2EventSummaryList(List<TEventPage> tEventPageList) {
+        if (null == tEventPageList || 0 == tEventPageList.size()) {
             return null;
         }
 
-        List<TEventSummary> eventSummaryList = new ArrayList<TEventSummary>();
+        List<TEventSummary> tEventSummaryList = new ArrayList<TEventSummary>();
         
         Set<Long> eventIdSet=new HashSet<Long>();
         
-        for(TEventPage ep:eventPageList){
+        for(TEventPage ep:tEventPageList){
             Long eventId=ep.gethEventId();
             if(eventIdSet.contains(eventId)){
                 
@@ -93,6 +93,6 @@ public class HsEventUtil {
             
         }
 
-        return eventSummaryList;
+        return tEventSummaryList;
     }
 }

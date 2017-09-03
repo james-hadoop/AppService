@@ -1,6 +1,9 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
 import com.leyao.app_service.entity.hs_event.TEventPage;
+
+import java.util.Map;
+
 import org.apache.ibatis.jdbc.SQL;
 
 public class TEventPageSqlProvider {
@@ -119,5 +122,13 @@ public class TEventPageSqlProvider {
         sql.WHERE("h_event_id = #{hEventId,jdbcType=BIGINT}");
         
         return sql.toString();
+    }
+    
+    public String getTEventPageList(Map<String, Object> paramMap) {
+        SQL sql = new SQL();
+        sql.SELECT("t_event_page");
+    	
+    	//TODO
+    	return null;
     }
 }
