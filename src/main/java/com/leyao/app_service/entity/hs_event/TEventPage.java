@@ -2,7 +2,7 @@ package com.leyao.app_service.entity.hs_event;
 
 import java.util.Date;
 
-public class TEventPage {
+public class TEventPage implements Comparable<TEventPage> {
     private Long hEventId;
 
     private Integer sEventCategoryCd;
@@ -131,5 +131,10 @@ public class TEventPage {
 
     public void setsEventSearchContentTxt(String sEventSearchContentTxt) {
         this.sEventSearchContentTxt = sEventSearchContentTxt;
+    }
+
+    @Override
+    public int compareTo(TEventPage o) {
+        return (int) (hEventId - o.gethEventId());
     }
 }

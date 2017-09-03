@@ -1,5 +1,6 @@
 package com.leyao.app_service.entity.hs_event;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +27,12 @@ public class TEventSummary {
 
     private String sEventSearchContentTxt;
 
-    private List<String> sEventSubContent1UrlList;
+    private List<String> sEventSubContent1UrlList = new ArrayList<String>();
 
-    private List<String> sEventSubContent2StrList;
-    
+    private List<String> sEventSubContent2StrList = new ArrayList<String>();
+
     private Integer sEventBannerPositionCd;
-    
+
     private Integer sEventRecomPositionCd;
 
     public Long gethEventId() {
@@ -138,19 +139,19 @@ public class TEventSummary {
         this.sEventSubContent2StrList = sEventSubContent2StrList;
     }
 
-	public Integer getsEventBannerPositionCd() {
-		return sEventBannerPositionCd;
-	}
+    public Integer getsEventBannerPositionCd() {
+        return sEventBannerPositionCd;
+    }
 
-	public void setsEventBannerPositionCd(Integer sEventBannerPositionCd) {
-		this.sEventBannerPositionCd = sEventBannerPositionCd;
-	}
+    public void setsEventBannerPositionCd(Integer sEventBannerPositionCd) {
+        this.sEventBannerPositionCd = sEventBannerPositionCd;
+    }
 
-	public Integer getsEventRecomPositionCd() {
-		return sEventRecomPositionCd;
-	}
+    public Integer getsEventRecomPositionCd() {
+        return sEventRecomPositionCd;
+    }
 
-	public void setsEventRecomPositionCd(Integer sEventRecomPositionCd) {
-		this.sEventRecomPositionCd = sEventRecomPositionCd;
-	}
+    public void setsEventRecomPositionCd(Integer sEventRecomPositionCd) {
+        this.sEventRecomPositionCd = sEventRecomPositionCd;
+    }
 }

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.leyao.app_service.constant.GlobalConstant;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 
@@ -80,17 +81,64 @@ public class HsEventUtil {
         }
 
         List<TEventSummary> tEventSummaryList = new ArrayList<TEventSummary>();
-        
-        Set<Long> eventIdSet=new HashSet<Long>();
-        
-        for(TEventPage ep:tEventPageList){
-            Long eventId=ep.gethEventId();
-            if(eventIdSet.contains(eventId)){
+
+        Set<Long> eventIdSet = new HashSet<Long>();
+
+        java.util.Collections.sort(tEventPageList, null);
+//        for (TEventPage ep : tEventPageList) {
+//            System.out.print(ep.gethEventId());
+//        }
+
+        TEventSummary es = null;
+        for (TEventPage ep : tEventPageList) {
+            Long eventId = ep.gethEventId();
+
+            if (eventIdSet.contains(eventId)) {
+                String sEventSubContent1Url=ep.getsEventSubContent1Url();
+                if (null != sEventSubContent1Url && !GlobalConstant.NULL_STRING.equals(sEventSubContent1Url)) {
+                    es.getsEventSubContent1UrlList().add(sEventSubContent1Url);
+                }
                 
-            }else{
+                String sEventSubContent2Str=ep.getsEventSubContent2Str();
+                if (null != sEventSubContent2Str && !GlobalConstant.NULL_STRING.equals(sEventSubContent2Str)) {
+                    es.getsEventSubContent2StrList().add(sEventSubContent2Str);
+                }
+            } else {
+                if (null != es) {
+                    tEventSummaryList.add(es);
+                }
+
+                es = new TEventSummary();
+
+                es.sethEventId(ep.gethEventId());
+                es.setsEventCategoryCd(ep.getsEventActiveInd());
+                es.setrEventCategoryDesc(ep.getrEventCategoryDesc());
+                es.setsEventTypeCd(ep.getsEventTypeCd());
+                es.setrEventTypeDesc(ep.getrEventTypeDesc());
+                es.setsEventTitleUrl(ep.getsEventTitleUrl());
+                es.setsEventContentUrl(ep.getsEventContentUrl());
                 
+                String sEventSubContent1Url=ep.getsEventSubContent1Url();
+                if (null != sEventSubContent1Url && !GlobalConstant.NULL_STRING.equals(sEventSubContent1Url)) {
+                    es.getsEventSubContent1UrlList().add(sEventSubContent1Url);
+                }
+                
+                String sEventSubContent2Str=ep.getsEventSubContent2Str();
+                if (null != sEventSubContent2Str && !GlobalConstant.NULL_STRING.equals(sEventSubContent2Str)) {
+                    es.getsEventSubContent2StrList().add(sEventSubContent2Str);
+                }
+                
+                es.setsEventActiveInd(ep.getsEventActiveInd());
+                es.setCreateTs(ep.getCreateTs());
+                es.setUpdateTs(ep.getUpdateTs());
+                es.setsEventSearchContentTxt(ep.getsEventSearchContentTxt());
             }
-            
+        }
+
+        if (null != es)
+
+        {
+            tEventSummaryList.add(es);
         }
 
         return tEventSummaryList;
