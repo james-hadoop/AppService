@@ -1,7 +1,8 @@
 package com.leyao.app_service.entity.hs_event.enums;
 
 public enum REventPositionEnum {
-    One("One", 1), Two("Two", 2), Three("Three", 3), Four("Four", 4), Five("Five", 5), Six("Six", 6);
+    Default("Default", 0), One("One", 1), Two("Two", 2), Three("Three", 3), Four("Four", 4), Five("Five", 5), Six("Six",
+            6);
 
     private String value;
     private int code;
