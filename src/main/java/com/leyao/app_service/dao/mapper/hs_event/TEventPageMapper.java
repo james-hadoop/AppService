@@ -192,7 +192,7 @@ public interface TEventPageMapper {
     @Select({ "SELECT COUNT(3) FROM (SELECT ep.h_event_id FROM (select h_event_id FROM hs_event.t_event_page where s_event_type_cd=3) as ep left outer join hs_event.s_event_recom_3 as er3 on er3.h_event_id=ep.h_event_id order by er3.s_event_recom_position_cd asc, ep.h_event_id desc limit #{start}, #{end}) as t" })
       Integer getTEventPageListForRecom3Count(Map<String, Object> paramMap);
     
-    @Select({ "select * from t_event_page where s_event_category_cd = #{sEventCategoryCd} order by limit #{start}, #{end}" })
+    @Select({ "select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0 order by h_event_id desc limit #{start}, #{end}" })
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
                     @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
                     @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
@@ -206,6 +206,6 @@ public interface TEventPageMapper {
                     @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
     List<TEventPage> getTEventPageListByCategory(Map<String, Object> paramMap);
 
-    @Select({ "select count(1) from t_event_page where s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER} limit #{start}, #{end}" })
+    @Select({ "select count(1) from (select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0 order by h_event_id desc limit #{start}, #{end}) as t" })
     Integer getTEventPageListByCategoryCount(Map<String, Object> paramMap);
 }

@@ -1,7 +1,7 @@
 package com.leyao.app_service.entity.hs_event.enums;
 
 public enum REventTypeEnum {
-    Image("Image", 1), Audio("Audio", 2), Vedio("Vedio", 3);
+    Image("Image", 1), Audio("Audio", 2), Video("Video", 3);
 
     private String value;
     private int code;

@@ -59,11 +59,40 @@ public class LeyaoAppServiceController {
     }
 
     @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
-    public GridContent getTEventSummary(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-            @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd,
             @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
-        logger.info("/v1/service/getTEventPageListForRecom() called: sEventCategoryCd={},sEventTypeCd={}, page={}, rows={}", sEventCategoryCd,sEventTypeCd,
+        logger.info("/v1/service/getTEventSummaryByType() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd,
+                page, rows);
+        GridContent gridcontent = new GridContent();
+
+        try {
+            int start = (page - 1) * rows;
+            int end = rows;
+
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("sEventTypeCd", sEventTypeCd);
+            paramMap.put("start", start);
+            paramMap.put("end", end);
+
+            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
+            int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+
+            gridcontent.setRows(tEventSummaryList);
+            gridcontent.setTotal(count);
+        } catch (Exception e) {
+            logger.error("/v1/service/getTEventSummaryByType()", e);
+            return gridcontent;
+        }
+
+        return gridcontent;
+    }
+    
+    @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
+    public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+            @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
+        logger.info("/v1/service/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}", sEventCategoryCd,
                 page, rows);
         GridContent gridcontent = new GridContent();
 
@@ -73,19 +102,16 @@ public class LeyaoAppServiceController {
 
             Map<String, Object> paramMap = new HashMap<String, Object>();
             paramMap.put("sEventCategoryCd", sEventCategoryCd);
-            paramMap.put("sEventTypeCd", sEventTypeCd);
             paramMap.put("start", start);
             paramMap.put("end", end);
 
-            // List<TEventSummary> getTEventPageListForRecom(Map<String, Object>
-            // paramMap);
-            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
-            int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByCategory(paramMap);
+            int count = hsEventService.getTEventSummaryByCategoryCount(paramMap);
 
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/getTEventPageListForRecom()", e);
+            logger.error("/v1/service/getTEventSummaryByCategory()", e);
             return gridcontent;
         }
 
