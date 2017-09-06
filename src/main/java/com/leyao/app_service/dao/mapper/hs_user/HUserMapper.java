@@ -21,7 +21,7 @@ public interface HUserMapper {
     @Insert({
         "insert into h_user (h_user_id, h_user_phone_nr, ",
         "create_ts, update_ts)",
-        "values (#{hUserId,jdbcType=BIGINT}, #{hUserPhoneNr,jdbcType=INTEGER}, ",
+        "values (#{hUserId,jdbcType=BIGINT}, #{hUserPhoneNr,jdbcType=BIGINT}, ",
         "#{createTs,jdbcType=TIMESTAMP}, #{updateTs,jdbcType=TIMESTAMP})"
     })
     int insert(HUser record);
@@ -37,7 +37,7 @@ public interface HUserMapper {
     })
     @Results({
         @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="h_user_phone_nr", property="hUserPhoneNr", jdbcType=JdbcType.INTEGER),
+        @Result(column="h_user_phone_nr", property="hUserPhoneNr", jdbcType=JdbcType.BIGINT),
         @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -48,7 +48,7 @@ public interface HUserMapper {
 
     @Update({
         "update h_user",
-        "set h_user_phone_nr = #{hUserPhoneNr,jdbcType=INTEGER},",
+        "set h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT},",
           "create_ts = #{createTs,jdbcType=TIMESTAMP},",
           "update_ts = #{updateTs,jdbcType=TIMESTAMP}",
         "where h_user_id = #{hUserId,jdbcType=BIGINT}"

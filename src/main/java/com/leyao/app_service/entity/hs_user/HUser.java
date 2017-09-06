@@ -5,7 +5,7 @@ import java.util.Date;
 public class HUser {
     private Long hUserId;
 
-    private Integer hUserPhoneNr;
+    private Long hUserPhoneNr;
 
     private Date createTs;
 
@@ -19,11 +19,11 @@ public class HUser {
         this.hUserId = hUserId;
     }
 
-    public Integer gethUserPhoneNr() {
+    public Long gethUserPhoneNr() {
         return hUserPhoneNr;
     }
 
-    public void sethUserPhoneNr(Integer hUserPhoneNr) {
+    public void sethUserPhoneNr(Long hUserPhoneNr) {
         this.hUserPhoneNr = hUserPhoneNr;
     }
 

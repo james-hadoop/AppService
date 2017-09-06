@@ -1,6 +1,10 @@
 package com.leyao.app_service.dao.mapper.hs_user;
 
 import com.leyao.app_service.entity.hs_user.TUserPage;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.jdbc.SQL;
 
 public class TUserPageSqlProvider {
@@ -14,7 +18,7 @@ public class TUserPageSqlProvider {
         }
         
         if (record.gethUserPhoneNr() != null) {
-            sql.VALUES("h_user_phone_nr", "#{hUserPhoneNr,jdbcType=INTEGER}");
+            sql.VALUES("h_user_phone_nr", "#{hUserPhoneNr,jdbcType=BIGINT}");
         }
         
         if (record.getsUserGenderCd() != null) {
@@ -57,7 +61,7 @@ public class TUserPageSqlProvider {
         sql.UPDATE("t_user_page");
         
         if (record.gethUserPhoneNr() != null) {
-            sql.SET("h_user_phone_nr = #{hUserPhoneNr,jdbcType=INTEGER}");
+            sql.SET("h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
         }
         
         if (record.getsUserGenderCd() != null) {
@@ -95,5 +99,44 @@ public class TUserPageSqlProvider {
         sql.WHERE("h_user_id = #{hUserId,jdbcType=BIGINT}");
         
         return sql.toString();
+    }
+    
+    public String getTUserSummary(Map<String, Object> paramMap){
+        SQL sql = new SQL();
+        sql.SELECT("t_user_page");
+        
+        if (paramMap.get("sUserNameStr") != null) {
+            sql.OR().WHERE("s_user_name_str = #{sUserNameStr,jdbcType=VARCHAR}");
+        }
+        
+        if (paramMap.get("sUserEmailStr") != null) {
+            sql.OR().WHERE("s_user_email_str = #{sUserEmailStr,jdbcType=VARCHAR}");
+        }
+        
+        if (paramMap.get("hUserPhoneNr") != null) {
+            sql.OR().WHERE("h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
+        }
+        
+        return sql.toString();
+    }
+    
+    public static void main(String[] args){
+        TUserPageSqlProvider provider =new TUserPageSqlProvider();
+        
+        TUserPage record=new TUserPage();
+        record.setsUserNameStr("james");
+        record.setsUserEmailStr("james@126.com");
+        record.sethUserPhoneNr(13333333333L);
+        
+        String updateByPrimaryKeySelective=provider.updateByPrimaryKeySelective(record);
+        System.out.println(updateByPrimaryKeySelective);
+        System.out.println("\n");
+        
+        Map<String, Object> paramMap=new HashMap<String,Object>();
+        paramMap.put("sUserNameStr", "james");
+        paramMap.put("sUserEmailStr", "james@mail.com");
+        paramMap.put("hUserPhoneNr",13333333333L);
+        String getTUserSummary=provider.getTUserSummary(paramMap);
+        System.out.println(getTUserSummary);
     }
 }

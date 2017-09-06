@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `h_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `h_user` (
   `h_user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户注册后生成的代理键，自增长',
-  `h_user_phone_nr` int(20) NOT NULL DEFAULT '0' COMMENT '用户注册时使用的手机号',
+  `h_user_phone_nr` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户注册时使用的手机号',
   `create_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' COMMENT '系统创建时间',
   `update_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '系统更新时间',
   PRIMARY KEY (`h_user_id`),
@@ -282,7 +282,7 @@ DROP TABLE IF EXISTS `t_user_page`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_user_page` (
   `h_user_id` bigint(20) unsigned NOT NULL COMMENT '用户注册后生成的代理键',
-  `h_user_phone_nr` int(20) NOT NULL DEFAULT '0' COMMENT '用户注册时使用的手机号',
+  `h_user_phone_nr` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户注册时使用的手机号',
   `s_user_gender_cd` int(20) NOT NULL DEFAULT '0' COMMENT '用户性别编码',
   `s_user_gender_desc` varchar(500) NOT NULL DEFAULT '?' COMMENT '用户性别定义',
   `s_user_name_str` varchar(500) NOT NULL DEFAULT '?' COMMENT '用户姓名',

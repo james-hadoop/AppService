@@ -20,8 +20,8 @@ import com.leyao.app_service.service.ILeyaoAppService;
 
 @RestController
 @RequestMapping("/v1/service")
-public class LeyaoAppServiceController {
-    private static final Logger logger = LoggerFactory.getLogger(LeyaoAppServiceController.class);
+public class HsEventController {
+    private static final Logger logger = LoggerFactory.getLogger(HsEventController.class);
 
     @Autowired
     ILeyaoAppService leyaoServiceService;

@@ -5,7 +5,7 @@ import java.util.Date;
 public class TUserSummary {
     private Long hUserId;
 
-    private Integer hUserPhoneNr;
+    private Long hUserPhoneNr;
 
     private Integer sUserGenderCd;
 
@@ -22,8 +22,10 @@ public class TUserSummary {
     private Date createTs;
 
     private Date updateTs;
-    
+
     private String sUserPasswordStr;
+
+    private Integer identifyingCode;
 
     public Long gethUserId() {
         return hUserId;
@@ -33,11 +35,11 @@ public class TUserSummary {
         this.hUserId = hUserId;
     }
 
-    public Integer gethUserPhoneNr() {
+    public Long gethUserPhoneNr() {
         return hUserPhoneNr;
     }
 
-    public void sethUserPhoneNr(Integer hUserPhoneNr) {
+    public void sethUserPhoneNr(Long hUserPhoneNr) {
         this.hUserPhoneNr = hUserPhoneNr;
     }
 
@@ -103,5 +105,21 @@ public class TUserSummary {
 
     public void setUpdateTs(Date updateTs) {
         this.updateTs = updateTs;
+    }
+
+    public String getsUserPasswordStr() {
+        return sUserPasswordStr;
+    }
+
+    public void setsUserPasswordStr(String sUserPasswordStr) {
+        this.sUserPasswordStr = sUserPasswordStr;
+    }
+
+    public Integer getIdentifyingCode() {
+        return identifyingCode;
+    }
+
+    public void setIdentifyingCode(Integer identifyingCode) {
+        this.identifyingCode = identifyingCode;
     }
 }

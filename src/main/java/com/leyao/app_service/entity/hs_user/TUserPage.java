@@ -5,7 +5,7 @@ import java.util.Date;
 public class TUserPage {
     private Long hUserId;
 
-    private Integer hUserPhoneNr;
+    private Long hUserPhoneNr;
 
     private Integer sUserGenderCd;
 
@@ -31,11 +31,11 @@ public class TUserPage {
         this.hUserId = hUserId;
     }
 
-    public Integer gethUserPhoneNr() {
+    public Long gethUserPhoneNr() {
         return hUserPhoneNr;
     }
 
-    public void sethUserPhoneNr(Integer hUserPhoneNr) {
+    public void sethUserPhoneNr(Long hUserPhoneNr) {
         this.hUserPhoneNr = hUserPhoneNr;
     }
 

@@ -14,7 +14,7 @@ public class HUserSqlProvider {
         }
         
         if (record.gethUserPhoneNr() != null) {
-            sql.VALUES("h_user_phone_nr", "#{hUserPhoneNr,jdbcType=INTEGER}");
+            sql.VALUES("h_user_phone_nr", "#{hUserPhoneNr,jdbcType=BIGINT}");
         }
         
         if (record.getCreateTs() != null) {
@@ -33,7 +33,7 @@ public class HUserSqlProvider {
         sql.UPDATE("h_user");
         
         if (record.gethUserPhoneNr() != null) {
-            sql.SET("h_user_phone_nr = #{hUserPhoneNr,jdbcType=INTEGER}");
+            sql.SET("h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
         }
         
         if (record.getCreateTs() != null) {
