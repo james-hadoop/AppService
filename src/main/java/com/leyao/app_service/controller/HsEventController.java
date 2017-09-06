@@ -30,9 +30,8 @@ public class HsEventController {
     IHsEventService hsEventService;
 
     @RequestMapping(value = "/getEvents", method = RequestMethod.GET)
-    public GridContent getItemUrls(@RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-            @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
+    public GridContent getItemUrls(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
         logger.info("/v1/service/getEvents() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
         GridContent gridcontent = new GridContent();
 
@@ -59,11 +58,9 @@ public class HsEventController {
     }
 
     @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
-    public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-            @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
-        logger.info("/v1/service/getTEventSummaryByType() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd,
-                page, rows);
+    public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
+        logger.info("/v1/service/getTEventSummaryByType() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -89,11 +86,9 @@ public class HsEventController {
     }
 
     @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
-    public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-            @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
-        logger.info("/v1/service/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}",
-                sEventCategoryCd, page, rows);
+    public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                    @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
+        logger.info("/v1/service/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}", sEventCategoryCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -119,8 +114,7 @@ public class HsEventController {
     }
 
     @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
-    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
+    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
         logger.info("/v1/service/getTEventSummaryForBanner() called: page={}, rows={}", page, rows);
         GridContent gridcontent = new GridContent();
 
@@ -143,5 +137,10 @@ public class HsEventController {
         }
 
         return gridcontent;
+    }
+
+    @RequestMapping(value = "/checkUpdate", method = RequestMethod.GET)
+    public String checkUpdate(@RequestParam(value = "eventVersion") String eventVersion) {
+        return hsEventService.checkUpdate(eventVersion);
     }
 }

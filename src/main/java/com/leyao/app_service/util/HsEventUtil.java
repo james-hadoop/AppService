@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.leyao.app_service.constant.GlobalConstant;
+import com.leyao.app_service.common.GlobalConstant;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.mapper.hs_user.TUserPageMapper;
 import com.leyao.app_service.entity.hs_user.TUserPage;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
@@ -33,8 +34,12 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Override
     public int login(TUserSummary tUserSummary) {
-        // TODO Auto-generated method stub
-        return 0;
+        if (null == tUserSummary || null == tUserSummary.getsUserNameStr() || null == tUserSummary.getsUserEmailStr() || null == tUserSummary.gethUserPhoneNr()
+                        || null == tUserSummary.getsUserPasswordStr()) {
+            return Response.ERROR;
+        }
+
+        return Response.SUCCESS;
     }
 
     @Override

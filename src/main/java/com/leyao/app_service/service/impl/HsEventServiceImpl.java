@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.leyao.app_service.common.GlobalConstant;
+import com.leyao.app_service.dao.mapper.hs_event.HsEventMapper;
 import com.leyao.app_service.dao.mapper.hs_event.TEventPageMapper;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
@@ -17,10 +19,18 @@ public class HsEventServiceImpl implements IHsEventService {
     @Autowired
     TEventPageMapper tEventPageMapper;
 
+    @Autowired
+    HsEventMapper hsEventMapper;
+
     @Override
-    public String checkUpdate() {
-        // TODO Auto-generated method stub
-        return null;
+    public String checkUpdate(String eventVersion) {
+        String currentEventVersion = GlobalConstant.getEVENT_VERSION();
+
+        if (currentEventVersion.compareToIgnoreCase(eventVersion) > 0) {
+            return currentEventVersion;
+        } else {
+            return eventVersion;
+        }
     }
 
     @Override
@@ -38,6 +48,9 @@ public class HsEventServiceImpl implements IHsEventService {
     @Override
     public void createHsEvent(TEventSummary record) {
         // TODO
+
+        String currentEventVersion = hsEventMapper.checkUpdate().toString();
+        GlobalConstant.setEVENT_VERSION(currentEventVersion);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -44,6 +45,12 @@ public interface HsEventMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     HsEvent selectByPrimaryKey(Long hEventId);
+    
+    @Select({"select max(update_ts) from hs_event.hs_event;"})
+    @Results({
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
+    })
+    Date checkUpdate();
     
     @Select({
         "select",

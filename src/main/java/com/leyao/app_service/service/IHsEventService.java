@@ -6,7 +6,7 @@ import java.util.Map;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 
 public interface IHsEventService {
-    String checkUpdate();
+    String checkUpdate(String eventVersion);
 
     List<TEventSummary> getTEventSummaryList(Map<String, Object> paramMap);
 
