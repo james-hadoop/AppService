@@ -80,9 +80,9 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
-    public int getVerifyCode(TUserSummary tUserSummary) {
+    public String getVerifyCode(TUserSummary tUserSummary) {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
     }
 
 }
