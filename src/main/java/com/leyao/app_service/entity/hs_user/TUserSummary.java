@@ -25,7 +25,7 @@ public class TUserSummary {
 
     private String sUserPasswordStr;
 
-    private Integer identifyingCode;
+    private Integer verifyCode;
 
     public Long gethUserId() {
         return hUserId;
@@ -115,11 +115,11 @@ public class TUserSummary {
         this.sUserPasswordStr = sUserPasswordStr;
     }
 
-    public Integer getIdentifyingCode() {
-        return identifyingCode;
+    public Integer getVerifyCode() {
+        return verifyCode;
     }
 
-    public void setIdentifyingCode(Integer identifyingCode) {
-        this.identifyingCode = identifyingCode;
+    public void setVerifyCode(Integer verifyCode) {
+        this.verifyCode = verifyCode;
     }
 }

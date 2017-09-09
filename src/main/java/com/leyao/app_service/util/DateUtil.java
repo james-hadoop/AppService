@@ -58,4 +58,8 @@ public class DateUtil {
         }
         return df.parse(sdate);
     }
+    
+    public static Long timeBetween(Date oldDate, Date nowDate){
+        return Math.abs(nowDate.getTime()-oldDate.getTime());
+    }
 }

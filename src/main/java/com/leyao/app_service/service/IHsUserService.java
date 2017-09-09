@@ -16,5 +16,5 @@ public interface IHsUserService {
     
     int reset(TUserSummary tUserSummary);
     
-    int getIdentifyingCode(TUserSummary tUserSummary);
+    int getVerifyCode(TUserSummary tUserSummary);
 }

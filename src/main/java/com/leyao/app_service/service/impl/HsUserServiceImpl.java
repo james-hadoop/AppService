@@ -55,7 +55,7 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
-    public int getIdentifyingCode(TUserSummary tUserSummary) {
+    public int getVerifyCode(TUserSummary tUserSummary) {
         // TODO Auto-generated method stub
         return 0;
     }
