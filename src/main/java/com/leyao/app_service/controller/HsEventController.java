@@ -19,7 +19,7 @@ import com.leyao.app_service.service.IHsEventService;
 import com.leyao.app_service.service.ILeyaoAppService;
 
 @RestController
-@RequestMapping("/v1/service")
+@RequestMapping("/v1/service/event/event")
 public class HsEventController {
     private static final Logger logger = LoggerFactory.getLogger(HsEventController.class);
 
@@ -32,7 +32,7 @@ public class HsEventController {
     @RequestMapping(value = "/getEvents", method = RequestMethod.GET)
     public GridContent getItemUrls(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
-        logger.info("/v1/service/getEvents() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
+        logger.info("/v1/service/event/getEvents() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -50,7 +50,7 @@ public class HsEventController {
             gridcontent.setRows(listLeyaoEvent);
             gridcontent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/getEvents()", e);
+            logger.error("/v1/service/event/getEvents()", e);
             return gridcontent;
         }
 
@@ -60,7 +60,7 @@ public class HsEventController {
     @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
     public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
-        logger.info("/v1/service/getTEventSummaryByType() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
+        logger.info("/v1/service/event/getTEventSummaryByType() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -78,7 +78,7 @@ public class HsEventController {
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/getTEventSummaryByType()", e);
+            logger.error("/v1/service/event/getTEventSummaryByType()", e);
             return gridcontent;
         }
 
@@ -88,7 +88,7 @@ public class HsEventController {
     @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
     public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
-        logger.info("/v1/service/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}", sEventCategoryCd, page, rows);
+        logger.info("/v1/service/event/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}", sEventCategoryCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -106,7 +106,7 @@ public class HsEventController {
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/getTEventSummaryByCategory()", e);
+            logger.error("/v1/service/event/getTEventSummaryByCategory()", e);
             return gridcontent;
         }
 
@@ -115,7 +115,7 @@ public class HsEventController {
 
     @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
     public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
-        logger.info("/v1/service/getTEventSummaryForBanner() called: page={}, rows={}", page, rows);
+        logger.info("/v1/service/event/getTEventSummaryForBanner() called: page={}, rows={}", page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -132,7 +132,7 @@ public class HsEventController {
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/getTEventSummaryForBanner()", e);
+            logger.error("/v1/service/event/getTEventSummaryForBanner()", e);
             return gridcontent;
         }
 

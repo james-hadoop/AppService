@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leyao.app_service.common.Response;
 import com.leyao.app_service.common.VerifyCodeManager;
 import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
@@ -19,7 +20,7 @@ import com.leyao.app_service.service.IHsUserService;
 import com.leyao.app_service.util.VerifyCodeUtil;
 
 @RestController
-@RequestMapping("/v1/service")
+@RequestMapping("/v1/service/user")
 public class HsUserController {
     private static final Logger logger = LoggerFactory.getLogger(HsUserController.class);
 
@@ -48,8 +49,17 @@ public class HsUserController {
 
     @RequestMapping(value = "/getVerifyCode", method = RequestMethod.POST)
     public String getVerifyCode(@RequestParam(value = "phoneNum", required = true) String phoneNum) {
-        String verifyCode = VerifyCodeManager.generateVerifyCode(phoneNum);
-        VerifyCodeUtil.sendPhoneVerifyCode(verifyCode, phoneNum);
+        logger.info("/v1/service/user/getVerifyCode() called: phoneNum={}", phoneNum);
+
+        String verifyCode = String.valueOf(Response.ERROR);
+
+        try {
+            verifyCode = VerifyCodeManager.generateVerifyCode(phoneNum);
+            VerifyCodeUtil.sendPhoneVerifyCode(verifyCode, phoneNum);
+        } catch (Exception e) {
+            logger.error("/v1/service/user/getVerifyCode()", e);
+            return verifyCode;
+        }
 
         return verifyCode;
     }
