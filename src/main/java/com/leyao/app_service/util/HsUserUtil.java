@@ -58,4 +58,20 @@ public class HsUserUtil {
 
         return userPageList;
     }
+
+    public static TUserPage userSummary2UserPage(TUserSummary userSummary) {
+        TUserPage userPage = new TUserPage();
+        userPage.sethUserId(userSummary.gethUserId());
+        userPage.sethUserPhoneNr(userSummary.gethUserPhoneNr());
+        userPage.setsUserGenderCd(userSummary.getsUserGenderCd());
+        userPage.setsUserGenderDesc(userSummary.getsUserGenderDesc());
+        userPage.setsUserNameStr(userSummary.getsUserNameStr());
+        userPage.setsUserProfileUrl(userSummary.getsUserProfileUrl());
+        userPage.setsUserEmailStr(userSummary.getsUserEmailStr());
+        userPage.setsUserActiveInd(userSummary.getsUserActiveInd());
+        userPage.setCreateTs(userSummary.getCreateTs());
+        userPage.setUpdateTs(userSummary.getUpdateTs());
+
+        return userPage;
+    }
 }
