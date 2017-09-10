@@ -19,6 +19,8 @@ import javax.crypto.spec.SecretKeySpec;
 public class CommonUtil {
     public static void main(String[] args){
         System.out.println(CommonUtil.generateUuid("SN",new Date()));
+        
+        System.out.println(CommonUtil.getMD5String("password"));
     }
     
     public static Date getCurrentTimestamp() {

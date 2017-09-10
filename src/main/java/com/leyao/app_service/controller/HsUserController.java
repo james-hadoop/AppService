@@ -96,17 +96,17 @@ public class HsUserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent login(@RequestBody TUserSummary tUserSummary) {
-        logger.info("/v1/service/regist() called: hUserPhoneNr={}", tUserSummary.gethUserPhoneNr());
+        logger.info("/v1/service/login() called: hUserPhoneNr={}", tUserSummary.gethUserPhoneNr());
         ResponseContent responseContent = new ResponseContent();
 
         try {
             int resutl = hsUserService.login(tUserSummary);
             if (Response.ERROR == resutl) {
                 responseContent.setResponseResultEnum(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("Regist fail");
+                responseContent.setResponseResultMsg("Login fail");
             } else {
                 responseContent.setResponseResultEnum(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Regist success");
+                responseContent.setResponseResultMsg("Login success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/login()", e);
