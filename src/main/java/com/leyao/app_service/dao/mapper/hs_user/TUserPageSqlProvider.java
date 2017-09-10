@@ -103,7 +103,7 @@ public class TUserPageSqlProvider {
     
     public String getTUserSummary(Map<String, Object> paramMap){
         SQL sql = new SQL();
-        sql.SELECT("t_user_page");
+        sql.SELECT("*").FROM("t_user_page");
         
         if (paramMap.get("sUserNameStr") != null) {
             sql.OR().WHERE("s_user_name_str = #{sUserNameStr,jdbcType=VARCHAR}");

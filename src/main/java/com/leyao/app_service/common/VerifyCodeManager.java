@@ -28,14 +28,16 @@ public class VerifyCodeManager {
     }
 
     public static String getVerifyCodeByPhoneNum(String phoneNum) {
-        if (null == VERIFY_CODE_MAP.get(phoneNum)) {
+        String verifyCodeWitTimestamp=VERIFY_CODE_MAP.get(phoneNum);
+        
+        if (null == verifyCodeWitTimestamp) {
             return null;
         }
 
-        if (isVerifyCodeOverTime(VERIFY_CODE_MAP.get(phoneNum))) {
+        if (isVerifyCodeOverTime(verifyCodeWitTimestamp)) {
             return null;
         } else {
-            return extractVerifyCode(VERIFY_CODE_MAP.get(phoneNum));
+            return extractVerifyCode(verifyCodeWitTimestamp);
         }
     }
 

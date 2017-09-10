@@ -1,5 +1,6 @@
 package com.leyao.app_service.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,10 +42,10 @@ public class HsUserServiceImpl implements IHsUserService {
 
 	@Override
 	public int regist(TUserSummary tUserSummary) {
-		String verifyCode = VerifyCodeManager.getVerifyCodeByPhoneNum(String.valueOf(tUserSummary.gethUserPhoneNr()));
-		if (null == verifyCode) {
-			return Response.ERROR;
-		}
+        String verifyCode = VerifyCodeManager.getVerifyCodeByPhoneNum(String.valueOf(tUserSummary.gethUserPhoneNr()));
+        if (null == verifyCode) {
+            return Response.ERROR;
+        }
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("hUserPhoneNr", tUserSummary.gethUserPhoneNr());
@@ -52,6 +53,10 @@ public class HsUserServiceImpl implements IHsUserService {
 		if (null != userPageList && 0 < userPageList.size()) {
 			return Response.ERROR;
 		}
+		
+		Date timestamp=new Date();
+		tUserSummary.setCreateTs(timestamp);
+		tUserSummary.setUpdateTs(timestamp);
 
 		// HUser
 		HUser user = HsUserUtil.userSummary2User(tUserSummary);

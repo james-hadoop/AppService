@@ -2,13 +2,14 @@ package com.leyao.app_service.common;
 
 public class GlobalConstant {
     public static final String NULL_STRING = "?";
-    
-    public static final String SESSION_CODE_PREFIX="SN";
-    
-    public static final String HYPHEN="-";
-    
+
+    public static final String SESSION_CODE_PREFIX = "SN";
+
+    public static final String HYPHEN = "-";
+
     // millisecond
-    public static final int OVERTIME_THRESHOLD=60000;
+    // public static final int OVERTIME_THRESHOLD=600000;
+    public static final int OVERTIME_THRESHOLD = 6000000;
 
     private static String EVENT_VERSION = "";
 

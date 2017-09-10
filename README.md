@@ -32,9 +32,11 @@ http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategory
 ## getVerifyCode
 curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=13000000000'
 
-## login
-curl -XPOST 'localhost:8088/v1/service/user/login?hUserPhoneNr=13000000000&sUserPasswordStr=password'
+## regist
+curl -XPOST 'localhost:8088/v1/service/user/login' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13000000000,"sUserPasswordStr":"password","verifyCode":1234}'
 
+## login
+curl -XPOST 'localhost:8088/v1/service/user/login' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13000000000,"sUserPasswordStr":"password" }'
 
 ## test
 http://localhost:8088/v1/test/getHsEvent
