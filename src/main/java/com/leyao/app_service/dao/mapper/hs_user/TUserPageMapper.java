@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
 import com.leyao.app_service.entity.hs_user.TUserPage;
+import com.leyao.app_service.entity.hs_user.TUserSummary;
 
 public interface TUserPageMapper {
     @Delete({
@@ -60,6 +61,24 @@ public interface TUserPageMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     TUserPage selectByPrimaryKey(Long hUserId);
+    
+    @Select({
+        "select u.*,p.hs_user_password from (select * from hs_user.h_user where h_user_phone_nr=#{hUserPhoneNr,jdbcType=BIGINT}) as u left outer join hs_user.s_user_password as p on p.h_user_id=u.h_user_id"
+    })
+    @Results({
+        @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="h_user_phone_nr", property="hUserPhoneNr", jdbcType=JdbcType.BIGINT),
+        @Result(column="s_user_gender_cd", property="sUserGenderCd", jdbcType=JdbcType.INTEGER),
+        @Result(column="s_user_gender_desc", property="sUserGenderDesc", jdbcType=JdbcType.VARCHAR),
+        @Result(column="s_user_name_str", property="sUserNameStr", jdbcType=JdbcType.VARCHAR),
+        @Result(column="s_user_profile_url", property="sUserProfileUrl", jdbcType=JdbcType.VARCHAR),
+        @Result(column="s_user_email_str", property="sUserEmailStr", jdbcType=JdbcType.VARCHAR),
+        @Result(column="s_user_active_ind", property="sUserActiveInd", jdbcType=JdbcType.INTEGER),
+        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="hs_user_password",property="hUserPhoneNr", jdbcType=JdbcType.BIGINT)
+    })
+    TUserSummary selectByhUserPhoneNr(Long hUserPhoneNr);
 
     @UpdateProvider(type=TUserPageSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(TUserPage record);

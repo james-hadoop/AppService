@@ -3,6 +3,8 @@ package com.leyao.app_service.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leyao.app_service.entity.hs_user.HUser;
+import com.leyao.app_service.entity.hs_user.SUserPassword;
 import com.leyao.app_service.entity.hs_user.TUserPage;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 
@@ -15,19 +17,19 @@ public class HsUserUtil {
         List<TUserSummary> userSummaryList = new ArrayList<TUserSummary>();
 
         for (TUserPage userPage : userPageList) {
-            TUserSummary userSummary = new TUserSummary();
-            userSummary.sethUserId(userPage.gethUserId());
-            userSummary.sethUserPhoneNr(userPage.gethUserPhoneNr());
-            userSummary.setsUserGenderCd(userPage.getsUserGenderCd());
-            userSummary.setsUserGenderDesc(userPage.getsUserGenderDesc());
-            userSummary.setsUserNameStr(userPage.getsUserNameStr());
-            userSummary.setsUserProfileUrl(userPage.getsUserProfileUrl());
-            userSummary.setsUserEmailStr(userPage.getsUserEmailStr());
-            userSummary.setsUserActiveInd(userPage.getsUserActiveInd());
-            userSummary.setCreateTs(userPage.getCreateTs());
-            userSummary.setUpdateTs(userPage.getUpdateTs());
+            TUserSummary tUserSummary = new TUserSummary();
+            tUserSummary.sethUserId(userPage.gethUserId());
+            tUserSummary.sethUserPhoneNr(userPage.gethUserPhoneNr());
+            tUserSummary.setsUserGenderCd(userPage.getsUserGenderCd());
+            tUserSummary.setsUserGenderDesc(userPage.getsUserGenderDesc());
+            tUserSummary.setsUserNameStr(userPage.getsUserNameStr());
+            tUserSummary.setsUserProfileUrl(userPage.getsUserProfileUrl());
+            tUserSummary.setsUserEmailStr(userPage.getsUserEmailStr());
+            tUserSummary.setsUserActiveInd(userPage.getsUserActiveInd());
+            tUserSummary.setCreateTs(userPage.getCreateTs());
+            tUserSummary.setUpdateTs(userPage.getUpdateTs());
 
-            userSummaryList.add(userSummary);
+            userSummaryList.add(tUserSummary);
         }
 
         return userSummaryList;
@@ -40,18 +42,18 @@ public class HsUserUtil {
 
         List<TUserPage> userPageList = new ArrayList<TUserPage>();
 
-        for (TUserSummary userSummary : userSummaryList) {
+        for (TUserSummary tUserSummary : userSummaryList) {
             TUserPage userPage = new TUserPage();
-            userPage.sethUserId(userSummary.gethUserId());
-            userPage.sethUserPhoneNr(userSummary.gethUserPhoneNr());
-            userPage.setsUserGenderCd(userSummary.getsUserGenderCd());
-            userPage.setsUserGenderDesc(userSummary.getsUserGenderDesc());
-            userPage.setsUserNameStr(userSummary.getsUserNameStr());
-            userPage.setsUserProfileUrl(userSummary.getsUserProfileUrl());
-            userPage.setsUserEmailStr(userSummary.getsUserEmailStr());
-            userPage.setsUserActiveInd(userSummary.getsUserActiveInd());
-            userPage.setCreateTs(userSummary.getCreateTs());
-            userPage.setUpdateTs(userSummary.getUpdateTs());
+            userPage.sethUserId(tUserSummary.gethUserId());
+            userPage.sethUserPhoneNr(tUserSummary.gethUserPhoneNr());
+            userPage.setsUserGenderCd(tUserSummary.getsUserGenderCd());
+            userPage.setsUserGenderDesc(tUserSummary.getsUserGenderDesc());
+            userPage.setsUserNameStr(tUserSummary.getsUserNameStr());
+            userPage.setsUserProfileUrl(tUserSummary.getsUserProfileUrl());
+            userPage.setsUserEmailStr(tUserSummary.getsUserEmailStr());
+            userPage.setsUserActiveInd(tUserSummary.getsUserActiveInd());
+            userPage.setCreateTs(tUserSummary.getCreateTs());
+            userPage.setUpdateTs(tUserSummary.getUpdateTs());
 
             userPageList.add(userPage);
         }
@@ -59,19 +61,40 @@ public class HsUserUtil {
         return userPageList;
     }
 
-    public static TUserPage userSummary2UserPage(TUserSummary userSummary) {
+    public static TUserPage userSummary2UserPage(TUserSummary tUserSummary) {
         TUserPage userPage = new TUserPage();
-        userPage.sethUserId(userSummary.gethUserId());
-        userPage.sethUserPhoneNr(userSummary.gethUserPhoneNr());
-        userPage.setsUserGenderCd(userSummary.getsUserGenderCd());
-        userPage.setsUserGenderDesc(userSummary.getsUserGenderDesc());
-        userPage.setsUserNameStr(userSummary.getsUserNameStr());
-        userPage.setsUserProfileUrl(userSummary.getsUserProfileUrl());
-        userPage.setsUserEmailStr(userSummary.getsUserEmailStr());
-        userPage.setsUserActiveInd(userSummary.getsUserActiveInd());
-        userPage.setCreateTs(userSummary.getCreateTs());
-        userPage.setUpdateTs(userSummary.getUpdateTs());
+        userPage.sethUserId(tUserSummary.gethUserId());
+        userPage.sethUserPhoneNr(tUserSummary.gethUserPhoneNr());
+        userPage.setsUserGenderCd(tUserSummary.getsUserGenderCd());
+        userPage.setsUserGenderDesc(tUserSummary.getsUserGenderDesc());
+        userPage.setsUserNameStr(tUserSummary.getsUserNameStr());
+        userPage.setsUserProfileUrl(tUserSummary.getsUserProfileUrl());
+        userPage.setsUserEmailStr(tUserSummary.getsUserEmailStr());
+        userPage.setsUserActiveInd(tUserSummary.getsUserActiveInd());
+        userPage.setCreateTs(tUserSummary.getCreateTs());
+        userPage.setUpdateTs(tUserSummary.getUpdateTs());
 
         return userPage;
     }
+    
+    public static HUser userSummary2User(TUserSummary tUserSummary) {
+    	HUser user = new HUser();
+    	user.sethUserPhoneNr(tUserSummary.gethUserPhoneNr());
+    	user.setCreateTs(tUserSummary.getCreateTs());
+    	user.setUpdateTs(tUserSummary.getUpdateTs());
+
+        return user;
+    }
+    
+    public static SUserPassword userSummary2UserPassword(TUserSummary tUserSummary) {
+    	SUserPassword userPassword = new SUserPassword();
+    	userPassword.sethUserId(tUserSummary.gethUserId());
+    	userPassword.setsUserPasswordStr(tUserSummary.getsUserPasswordStr());
+    	userPassword.setCreateTs(tUserSummary.getCreateTs());
+    	userPassword.setUpdateTs(tUserSummary.getUpdateTs());
+
+        return userPassword;
+    }
+    
+    
 }
