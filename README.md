@@ -22,7 +22,10 @@ http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategory
 http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1&page=1&rows=7
 
 ## getVerifyCode
-curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?phoneNum=13000000000 '
+curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?phoneNum=13000000000'
+
+## login
+curl -XPOST 'localhost:8088/v1/service/user/login?phoneNum=13000000000&password=password'
 
 
 ## test
