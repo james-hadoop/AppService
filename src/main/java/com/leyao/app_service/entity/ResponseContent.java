@@ -3,15 +3,15 @@ package com.leyao.app_service.entity;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
 
 public class ResponseContent {
-    private ResponseResultEnum responseResultEnum;
+    private ResponseResultEnum responseResult;
     private String responseResultMsg;
 
-    public ResponseResultEnum getResponseResultEnum() {
-        return responseResultEnum;
+    public ResponseResultEnum getResponseResult() {
+        return responseResult;
     }
 
-    public void setResponseResultEnum(ResponseResultEnum responseResultEnum) {
-        this.responseResultEnum = responseResultEnum;
+    public void setResponseResult(ResponseResultEnum responseResult) {
+        this.responseResult = responseResult;
     }
 
     public String getResponseResultMsg() {

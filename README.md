@@ -29,6 +29,10 @@ http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategory
 
 http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1&page=1&rows=7
 
+## eventVersion
+http://localhost:8088/v1/service/event/checkUpdate?eventVersion=1505223163561
+
+
 ## getVerifyCode
 curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=13000000000'
 

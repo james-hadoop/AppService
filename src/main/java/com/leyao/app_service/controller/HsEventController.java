@@ -1,5 +1,6 @@
 package com.leyao.app_service.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import com.leyao.app_service.service.IHsEventService;
 import com.leyao.app_service.service.ILeyaoAppService;
 
 @RestController
-@RequestMapping("/v1/service/event/event")
+@RequestMapping("/v1/service/event")
 public class HsEventController {
     private static final Logger logger = LoggerFactory.getLogger(HsEventController.class);
 
@@ -57,6 +58,48 @@ public class HsEventController {
         return gridcontent;
     }
 
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName getTEventSummaryByType
+     * 
+     * @api {get} /v1/service/event/getTEventSummaryByType 根据事件类型获取事件
+     * 
+     * @apiParam {Number} sEventTypeCd Event type.
+     * @apiParam {Number} [page] Optional Paging - page number.
+     * @apiParam {Number} [rows] Optional Paging - rows in one page.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * 
+     *  {
+     *      "rows": [
+     *          {
+     *              "hEventId": 7,
+     *              "sEventCategoryCd": 0,
+     *              "rEventCategoryDesc": "d1",
+     *              "sEventTypeCd": 1,
+     *              "rEventTypeDesc": "vedio",
+     *              "sEventTitleUrl": "vedio/1.mp4",
+     *              "sEventContentUrl": "vedio/1.mp4",
+     *              "sEventActiveInd": 0,
+     *              "createTs": 946627200000,
+     *              "updateTs": 946627200000,
+     *              "sEventSearchContentTxt": "7",
+     *              "sEventSubContent1UrlList": [],
+     *              "sEventSubContent2StrList": [],
+     *              "sEventBannerPositionCd": null,
+     *              "sEventRecomPositionCd": null
+     *          }
+     *      ],
+     *      "total": 1
+     *  }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "rows":[],
+     *      "total":0
+     *  }
+     */
     @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
     public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
@@ -72,8 +115,12 @@ public class HsEventController {
             paramMap.put("start", start);
             paramMap.put("end", end);
 
-            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
-            int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+             List<TEventSummary> tEventSummaryList =
+             hsEventService.getTEventSummaryByType(paramMap);
+             int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+
+//            List<TEventSummary> tEventSummaryList = new ArrayList<TEventSummary>();
+//            int count = 0;
 
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);
@@ -85,6 +132,48 @@ public class HsEventController {
         return gridcontent;
     }
 
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName getTEventSummaryByCategory
+     * 
+     * @api {get} /v1/service/event/getTEventSummaryByCategory 根据事件类目获取事件
+     * 
+     * @apiParam {Number} sEventCategoryCd Event category
+     * @apiParam {Number} [page] Optional Paging - page number.
+     * @apiParam {Number} [rows] Optional Paging - rows in one page.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * 
+     *  {
+     *      "rows": [
+     *          {
+     *              "hEventId": 7,
+     *              "sEventCategoryCd": 0,
+     *              "rEventCategoryDesc": "d1",
+     *              "sEventTypeCd": 1,
+     *              "rEventTypeDesc": "vedio",
+     *              "sEventTitleUrl": "vedio/1.mp4",
+     *              "sEventContentUrl": "vedio/1.mp4",
+     *              "sEventActiveInd": 0,
+     *              "createTs": 946627200000,
+     *              "updateTs": 946627200000,
+     *              "sEventSearchContentTxt": "7",
+     *              "sEventSubContent1UrlList": [],
+     *              "sEventSubContent2StrList": [],
+     *              "sEventBannerPositionCd": null,
+     *              "sEventRecomPositionCd": null
+     *          }
+     *      ],
+     *      "total": 1
+     *  }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "rows":[],
+     *      "total":0
+     *  }
+     */
     @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
     public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
@@ -113,6 +202,48 @@ public class HsEventController {
         return gridcontent;
     }
 
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName getTEventSummaryForBanner
+     * 
+     * @api {get} /v1/service/event/getTEventSummaryForBanner 获取Banner事件
+     * 
+     * @apiParam {Number} sEventCategoryCd Event category
+     * @apiParam {Number} [page] Optional Paging - page number.
+     * @apiParam {Number} [rows] Optional Paging - rows in one page.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * 
+     *  {
+     *      "rows": [
+     *          {
+     *              "hEventId": 7,
+     *              "sEventCategoryCd": 0,
+     *              "rEventCategoryDesc": "d1",
+     *              "sEventTypeCd": 1,
+     *              "rEventTypeDesc": "vedio",
+     *              "sEventTitleUrl": "vedio/1.mp4",
+     *              "sEventContentUrl": "vedio/1.mp4",
+     *              "sEventActiveInd": 0,
+     *              "createTs": 946627200000,
+     *              "updateTs": 946627200000,
+     *              "sEventSearchContentTxt": "7",
+     *              "sEventSubContent1UrlList": [],
+     *              "sEventSubContent2StrList": [],
+     *              "sEventBannerPositionCd": null,
+     *              "sEventRecomPositionCd": null
+     *          }
+     *      ],
+     *      "total": 1
+     *  }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "rows":[],
+     *      "total":0
+     *  }
+     */
     @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
     public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
         logger.info("/v1/service/event/getTEventSummaryForBanner() called: page={}, rows={}", page, rows);
@@ -139,6 +270,22 @@ public class HsEventController {
         return gridcontent;
     }
 
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName checkUpdate
+     * 
+     * @api {get} /v1/service/event/checkUpdate 获取事件最新版本
+     * 
+     * @apiParam {String} eventVersion Event version.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * 
+     * 1505223163561
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * 1505223163561
+     */
     @RequestMapping(value = "/checkUpdate", method = RequestMethod.GET)
     public String checkUpdate(@RequestParam(value = "eventVersion") String eventVersion) {
         return hsEventService.checkUpdate(eventVersion);

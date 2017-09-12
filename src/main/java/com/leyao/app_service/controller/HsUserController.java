@@ -31,11 +31,48 @@ public class HsUserController {
     @Autowired
     private IHsUserService hsUserService;
 
+    /**
+     * @apiGroup User
+     * 
+     * @apiName getTUserSummary
+     * 
+     * @api {get} /v1/service/user/getTUserSummary 获取用户详情
+     * 
+     * @apiParam {String} hUserPhoneNr User phone number.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * {
+     *     "rows": [
+     *         {
+     *             "hUserId": 1,
+     *             "hUserPhoneNr": 13333333333,
+     *             "sUserGenderCd": 0,
+     *             "sUserGenderDesc": "?",
+     *             "sUserNameStr": "?",
+     *             "sUserProfileUrl": "?",
+     *             "sUserEmailStr": "?",
+     *             "sUserActiveInd": 0,
+     *             "createTs": 946656000000,
+     *             "updateTs": 946656000000,
+     *             "sUserPasswordStr": null,
+     *             "verifyCode": null
+     *         }
+     *     ],
+     *     "total": 1
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "rows":[],
+     *      "total":0
+     *  }
+     *
+     */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
-    public GridContent TUserSummary(@RequestParam(value = "sUserNameStr") String sUserNameStr,
-            @RequestParam(value = "sUserEmailStr") String sUserEmailStr,
-            @RequestParam(value = "hUserPhoneNr") Integer hUserPhoneNr) {
-        logger.info("/v1/service/getTUserSummary() called: sUserNameStr={}, sUserNameStr={}, hUserPhoneNr={}",
+    public GridContent TUserSummary(@RequestParam(value = "sUserNameStr",required=false) String sUserNameStr,
+            @RequestParam(value = "sUserEmailStr",required=false) String sUserEmailStr,
+            @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr) {
+        logger.info("/v1/service/user/getTUserSummary() called: sUserNameStr={}, sUserNameStr={}, hUserPhoneNr={}",
                 sUserNameStr, sUserNameStr, hUserPhoneNr);
         GridContent gridcontent = new GridContent();
 
@@ -46,11 +83,26 @@ public class HsUserController {
 
         List<TUserSummary> tUserSummaryList = hsUserService.getTUserSummary(paramMap);
         gridcontent.setRows(tUserSummaryList);
-        gridcontent.setTotal(tUserSummaryList.size());
+        gridcontent.setTotal(null==tUserSummaryList?0:tUserSummaryList.size());
 
         return gridcontent;
     }
 
+    /**
+     * @apiGroup User
+     * 
+     * @apiName getVerifyCode
+     * 
+     * @api {post} /v1/service/user/getVerifyCode 获取注册验证码
+     * 
+     * @apiParam {String} hUserPhoneNr User phone number.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * 1234
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * 1234
+     */
     @RequestMapping(value = "/getVerifyCode", method = RequestMethod.POST)
     public String getVerifyCode(@RequestParam(value = "hUserPhoneNr", required = true) String hUserPhoneNr) {
         logger.info("/v1/service/user/getVerifyCode() called: hUserPhoneNr={}", hUserPhoneNr);
@@ -68,49 +120,102 @@ public class HsUserController {
         return verifyCode;
     }
 
+    /**
+     * @apiGroup User
+     * 
+     * @apiName regist
+     * 
+     * @api {post} /v1/service/user/regist 注册
+     * 
+     * @apiParam {String} hUserPhoneNr User phone number.
+     * @apiParam {String} sUserPasswordStr User password.
+     * @apiParam {Number} verifyCode Verify code.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * {
+     *      "responseResult": "SUCCESS",
+     *      "responseResultMsg": "Login success"
+     * }
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * {
+     *      "responseResult": "SUCCESS",
+     *      "responseResultMsg": "Regist success"
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * {
+     *      "responseResult": "ERROR",
+     *      "responseResultMsg": "Regist fail"
+     * }
+     *
+     */
     @RequestMapping(value = "regist", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent regist(@RequestBody TUserSummary tUserSummary) {
-        logger.info("/v1/service/regist() called: hUserPhoneNr={}, verifyCode={}", tUserSummary.gethUserPhoneNr(),
+        logger.info("/v1/service/user/regist() called: hUserPhoneNr={}, verifyCode={}", tUserSummary.gethUserPhoneNr(),
                 tUserSummary.getVerifyCode());
         ResponseContent responseContent = new ResponseContent();
 
         try {
             int resutl = hsUserService.regist(tUserSummary);
             if (Response.ERROR == resutl) {
-                responseContent.setResponseResultEnum(ResponseResultEnum.ERROR);
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Regist fail");
             } else {
-                responseContent.setResponseResultEnum(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
                 responseContent.setResponseResultMsg("Regist success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/regist()", e);
-            responseContent.setResponseResultEnum(ResponseResultEnum.ERROR);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;
         }
         return responseContent;
     }
 
+    /**
+     * @apiGroup User
+     * 
+     * @apiName login
+     * 
+     * @api {post} /v1/service/user/login 登录
+     * 
+     * @apiParam {String} hUserPhoneNr User phone number.
+     * @apiParam {String} sUserPasswordStr User password.
+     * 
+     * @apiSuccessExample {json} Success-Response:
+     * {
+     *      "responseResult": "SUCCESS",
+     *      "responseResultMsg": "Login success"
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * {
+     *      "responseResult": "ERROR",
+     *      "responseResultMsg": "Login fail"
+     * }
+     *
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent login(@RequestBody TUserSummary tUserSummary) {
-        logger.info("/v1/service/login() called: hUserPhoneNr={}", tUserSummary.gethUserPhoneNr());
+        logger.info("/v1/service/user/login() called: hUserPhoneNr={}", tUserSummary.gethUserPhoneNr());
         ResponseContent responseContent = new ResponseContent();
 
         try {
             int resutl = hsUserService.login(tUserSummary);
             if (Response.ERROR == resutl) {
-                responseContent.setResponseResultEnum(ResponseResultEnum.ERROR);
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Login fail");
             } else {
-                responseContent.setResponseResultEnum(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
                 responseContent.setResponseResultMsg("Login success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/login()", e);
-            responseContent.setResponseResultEnum(ResponseResultEnum.ERROR);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;
         }
