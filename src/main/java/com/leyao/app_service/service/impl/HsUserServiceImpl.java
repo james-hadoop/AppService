@@ -20,6 +20,7 @@ import com.leyao.app_service.entity.hs_user.TUserSummary;
 import com.leyao.app_service.service.IHsUserService;
 import com.leyao.app_service.util.CommonUtil;
 import com.leyao.app_service.util.HsUserUtil;
+import com.leyao.app_service.util.VerifyCodeUtil;
 
 @Service
 public class HsUserServiceImpl implements IHsUserService {
@@ -105,13 +106,45 @@ public class HsUserServiceImpl implements IHsUserService {
 	@Override
 	public int reset(TUserSummary tUserSummary) {
 		// TODO Auto-generated method stub
-		return 0;
+        String verifyCode = VerifyCodeManager.getVerifyCodeByPhoneNum(String.valueOf(tUserSummary.gethUserPhoneNr()));
+        if (null == verifyCode) {
+            return Response.ERROR;
+        }
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("hUserPhoneNr", tUserSummary.gethUserPhoneNr());
+        List<TUserPage> userPageList = tUserPageMapper.getTUserPage(paramMap);
+        if (null != userPageList && 0 < userPageList.size()) {
+            return Response.ERROR;
+        }
+        
+        Date timestamp=new Date();
+        tUserSummary.setCreateTs(timestamp);
+        tUserSummary.setUpdateTs(timestamp);
+
+        // HUser
+        HUser user = HsUserUtil.userSummary2User(tUserSummary);
+        long userId = hUserMapper.insertSelective(user);
+
+        tUserSummary.sethUserId(userId);
+        tUserSummary.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()));
+
+        // SUserPassword
+        SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
+        sUserPasswordMapper.insertSelective(sUserPassword);
+
+        // TUserPage
+        TUserPage userPage = HsUserUtil.userSummary2UserPage(tUserSummary);
+        tUserPageMapper.insertSelective(userPage);
+        return Response.SUCCESS;
 	}
 
 	@Override
-	public String getVerifyCode(TUserSummary tUserSummary) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getVerifyCode(String hUserPhoneNr) {
+        String verifyCode = VerifyCodeManager.generateVerifyCode(hUserPhoneNr);
+        VerifyCodeUtil.sendPhoneVerifyCode(verifyCode, hUserPhoneNr);
+        
+        return verifyCode;
 	}
 
 	@Override

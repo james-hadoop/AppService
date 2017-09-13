@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leyao.app_service.common.Response;
-import com.leyao.app_service.common.VerifyCodeManager;
 import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.ResponseContent;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 import com.leyao.app_service.service.IHsUserService;
-import com.leyao.app_service.util.VerifyCodeUtil;
 
 @RestController
 @RequestMapping("/v1/service/user")
@@ -40,40 +38,21 @@ public class HsUserController {
      * 
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
-     * @apiSuccessExample {json} Success-Response:
-     * {
-     *     "rows": [
-     *         {
-     *             "hUserId": 1,
-     *             "hUserPhoneNr": 13333333333,
-     *             "sUserGenderCd": 0,
-     *             "sUserGenderDesc": "?",
-     *             "sUserNameStr": "?",
-     *             "sUserProfileUrl": "?",
-     *             "sUserEmailStr": "?",
-     *             "sUserActiveInd": 0,
-     *             "createTs": 946656000000,
-     *             "updateTs": 946656000000,
-     *             "sUserPasswordStr": null,
-     *             "verifyCode": null
-     *         }
-     *     ],
-     *     "total": 1
-     * }
+     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hUserId": 1,
+     *                    "hUserPhoneNr": 13333333333, "sUserGenderCd": 0,
+     *                    "sUserGenderDesc": "?", "sUserNameStr": "?",
+     *                    "sUserProfileUrl": "?", "sUserEmailStr": "?",
+     *                    "sUserActiveInd": 0, "createTs": 946656000000,
+     *                    "updateTs": 946656000000, "sUserPasswordStr": null,
+     *                    "verifyCode": null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     *  {
-     *      "rows":[],
-     *      "total":0
-     *  }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      *
      */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
-    public GridContent TUserSummary(@RequestParam(value = "sUserNameStr",required=false) String sUserNameStr,
-            @RequestParam(value = "sUserEmailStr",required=false) String sUserEmailStr,
-            @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr) {
-        logger.info("/v1/service/user/getTUserSummary() called: sUserNameStr={}, sUserNameStr={}, hUserPhoneNr={}",
-                sUserNameStr, sUserNameStr, hUserPhoneNr);
+    public GridContent TUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr, @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
+                    @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr) {
+        logger.info("/v1/service/user/getTUserSummary() called: sUserNameStr={}, sUserNameStr={}, hUserPhoneNr={}", sUserNameStr, sUserNameStr, hUserPhoneNr);
         GridContent gridcontent = new GridContent();
 
         Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -83,7 +62,7 @@ public class HsUserController {
 
         List<TUserSummary> tUserSummaryList = hsUserService.getTUserSummary(paramMap);
         gridcontent.setRows(tUserSummaryList);
-        gridcontent.setTotal(null==tUserSummaryList?0:tUserSummaryList.size());
+        gridcontent.setTotal(null == tUserSummaryList ? 0 : tUserSummaryList.size());
 
         return gridcontent;
     }
@@ -97,11 +76,9 @@ public class HsUserController {
      * 
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
-     * @apiSuccessExample {json} Success-Response:
-     * 1234
+     * @apiSuccessExample {json} Success-Response: 1234
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * 1234
+     * @apiSuccessExample {json} Error-Response: -1
      */
     @RequestMapping(value = "/getVerifyCode", method = RequestMethod.POST)
     public String getVerifyCode(@RequestParam(value = "hUserPhoneNr", required = true) String hUserPhoneNr) {
@@ -110,8 +87,7 @@ public class HsUserController {
         String verifyCode = String.valueOf(Response.ERROR);
 
         try {
-            verifyCode = VerifyCodeManager.generateVerifyCode(hUserPhoneNr);
-            VerifyCodeUtil.sendPhoneVerifyCode(verifyCode, hUserPhoneNr);
+            verifyCode = hsUserService.getVerifyCode(hUserPhoneNr);
         } catch (Exception e) {
             logger.error("/v1/service/user/getVerifyCode()", e);
             return verifyCode;
@@ -131,30 +107,20 @@ public class HsUserController {
      * @apiParam {String} sUserPasswordStr User password.
      * @apiParam {Number} verifyCode Verify code.
      * 
-     * @apiSuccessExample {json} Success-Response:
-     * {
-     *      "responseResult": "SUCCESS",
-     *      "responseResultMsg": "Login success"
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult":
+     *                    "SUCCESS", "responseResultMsg": "Login success" }
      * 
-     * @apiSuccessExample {json} Success-Response:
-     * {
-     *      "responseResult": "SUCCESS",
-     *      "responseResultMsg": "Regist success"
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult":
+     *                    "SUCCESS", "responseResultMsg": "Regist success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *      "responseResult": "ERROR",
-     *      "responseResultMsg": "Regist fail"
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Regist fail" }
      *
      */
     @RequestMapping(value = "regist", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent regist(@RequestBody TUserSummary tUserSummary) {
-        logger.info("/v1/service/user/regist() called: hUserPhoneNr={}, verifyCode={}", tUserSummary.gethUserPhoneNr(),
-                tUserSummary.getVerifyCode());
+        logger.info("/v1/service/user/regist() called: hUserPhoneNr={}, verifyCode={}", tUserSummary.gethUserPhoneNr(), tUserSummary.getVerifyCode());
         ResponseContent responseContent = new ResponseContent();
 
         try {
@@ -185,17 +151,11 @@ public class HsUserController {
      * @apiParam {String} hUserPhoneNr User phone number.
      * @apiParam {String} sUserPasswordStr User password.
      * 
-     * @apiSuccessExample {json} Success-Response:
-     * {
-     *      "responseResult": "SUCCESS",
-     *      "responseResultMsg": "Login success"
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult":
+     *                    "SUCCESS", "responseResultMsg": "Login success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *      "responseResult": "ERROR",
-     *      "responseResultMsg": "Login fail"
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Login fail" }
      *
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -215,6 +175,30 @@ public class HsUserController {
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/login()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+
+    @RequestMapping(value = "reset", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent reset(@RequestBody TUserSummary tUserSummary) {
+        logger.info("/v1/service/user/reset() called: hUserPhoneNr={}, verifyCode={}", tUserSummary.gethUserPhoneNr(), tUserSummary.getVerifyCode());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsUserService.reset(tUserSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("reset fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("reset success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/user/reset()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;

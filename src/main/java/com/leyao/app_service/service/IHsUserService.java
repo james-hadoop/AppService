@@ -16,7 +16,7 @@ public interface IHsUserService {
     
     int reset(TUserSummary tUserSummary);
     
-    String getVerifyCode(TUserSummary tUserSummary);
+    String getVerifyCode(String hUserPhoneNr);
     
     TUserSummary selectByhUserPhoneNr(Long hUserPhoneNr);
 }
