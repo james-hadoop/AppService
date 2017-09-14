@@ -36,6 +36,7 @@ public class HsUserController {
      * 
      * @api {get} /v1/service/user/getTUserSummary 获取用户详情
      * 
+     * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
      * @apiSuccessExample {json} Success-Response: { "rows": [ { "hUserId": 1,
@@ -51,8 +52,8 @@ public class HsUserController {
      */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
     public GridContent TUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr, @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
-                    @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr) {
-        logger.info("/v1/service/user/getTUserSummary() called: sUserNameStr={}, sUserNameStr={}, hUserPhoneNr={}", sUserNameStr, sUserNameStr, hUserPhoneNr);
+                    @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+        logger.info("/v1/service/user/getTUserSummary() called: sessionCode={}, sUserNameStr={}, sUserEmailStr={}, hUserPhoneNr={}", sessionCode, sUserNameStr, sUserNameStr, hUserPhoneNr);
         GridContent gridcontent = new GridContent();
 
         Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -108,9 +109,6 @@ public class HsUserController {
      * @apiParam {Number} verifyCode Verify code.
      * 
      * @apiSuccessExample {json} Success-Response: { "responseResult":
-     *                    "SUCCESS", "responseResultMsg": "Login success" }
-     * 
-     * @apiSuccessExample {json} Success-Response: { "responseResult":
      *                    "SUCCESS", "responseResultMsg": "Regist success" }
      * 
      * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
@@ -152,7 +150,9 @@ public class HsUserController {
      * @apiParam {String} sUserPasswordStr User password.
      * 
      * @apiSuccessExample {json} Success-Response: { "responseResult":
-     *                    "SUCCESS", "responseResultMsg": "Login success" }
+     *                    "SUCCESS", "responseResultMsg":
+     *                    "SNb5412b7c-7fdf-4d6e-add4-04ba9f7821932017-09-14
+     *                    10:20:01" }
      * 
      * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
      *                    "responseResultMsg": "Login fail" }
@@ -165,13 +165,13 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.login(tUserSummary);
-            if (Response.ERROR == resutl) {
+            String sessionCode = hsUserService.login(tUserSummary);
+            if (null == sessionCode) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Login fail");
             } else {
                 responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Login success");
+                responseContent.setResponseResultMsg(sessionCode);
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/login()", e);

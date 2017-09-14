@@ -26,6 +26,8 @@ public class TUserSummary {
     private String sUserPasswordStr;
 
     private Integer verifyCode;
+    
+    private String sessionCode;
 
     public Long gethUserId() {
         return hUserId;
@@ -121,5 +123,13 @@ public class TUserSummary {
 
     public void setVerifyCode(Integer verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public String getSessionCode() {
+        return sessionCode;
+    }
+
+    public void setSessionCode(String sessionCode) {
+        this.sessionCode = sessionCode;
     }
 }

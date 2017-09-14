@@ -1,6 +1,5 @@
 package com.leyao.app_service.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +31,8 @@ public class HsEventController {
 
     @RequestMapping(value = "/getEvents", method = RequestMethod.GET)
     public GridContent getItemUrls(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
-        logger.info("/v1/service/event/getEvents() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
+                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+        logger.info("/v1/service/event/getEvents() called: sessionCode={}, sEventTypeCd={}, page={}, rows={}", sessionCode, sEventTypeCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -65,45 +64,30 @@ public class HsEventController {
      * 
      * @api {get} /v1/service/event/getTEventSummaryByType 根据事件类型获取事件
      * 
+     * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} sEventTypeCd Event type.
      * @apiParam {Number} [page] Optional Paging - page number.
      * @apiParam {Number} [rows] Optional Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response:
      * 
-     *  {
-     *      "rows": [
-     *          {
-     *              "hEventId": 7,
-     *              "sEventCategoryCd": 0,
-     *              "rEventCategoryDesc": "d1",
-     *              "sEventTypeCd": 1,
-     *              "rEventTypeDesc": "vedio",
-     *              "sEventTitleUrl": "vedio/1.mp4",
-     *              "sEventContentUrl": "vedio/1.mp4",
-     *              "sEventActiveInd": 0,
-     *              "createTs": 946627200000,
-     *              "updateTs": 946627200000,
-     *              "sEventSearchContentTxt": "7",
-     *              "sEventSubContent1UrlList": [],
-     *              "sEventSubContent2StrList": [],
-     *              "sEventBannerPositionCd": null,
-     *              "sEventRecomPositionCd": null
-     *          }
-     *      ],
-     *      "total": 1
-     *  }
+     *                    { "rows": [ { "hEventId": 7, "sEventCategoryCd": 0,
+     *                    "rEventCategoryDesc": "d1", "sEventTypeCd": 1,
+     *                    "rEventTypeDesc": "vedio", "sEventTitleUrl":
+     *                    "vedio/1.mp4", "sEventContentUrl": "vedio/1.mp4",
+     *                    "sEventActiveInd": 0, "createTs": 946627200000,
+     *                    "updateTs": 946627200000, "sEventSearchContentTxt":
+     *                    "7", "sEventSubContent1UrlList": [],
+     *                    "sEventSubContent2StrList": [],
+     *                    "sEventBannerPositionCd": null,
+     *                    "sEventRecomPositionCd": null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     *  {
-     *      "rows":[],
-     *      "total":0
-     *  }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
     public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd) {
-        logger.info("/v1/service/event/getTEventSummaryByType() called: sEventTypeCd={}, page={}, rows={}", sEventTypeCd, page, rows);
+                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+        logger.info("/v1/service/event/getTEventSummaryByType() called: sessionCode={}, sEventTypeCd={}, page={}, rows={}", sessionCode, sEventTypeCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -115,12 +99,12 @@ public class HsEventController {
             paramMap.put("start", start);
             paramMap.put("end", end);
 
-             List<TEventSummary> tEventSummaryList =
-             hsEventService.getTEventSummaryByType(paramMap);
-             int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
+            int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
 
-//            List<TEventSummary> tEventSummaryList = new ArrayList<TEventSummary>();
-//            int count = 0;
+            // List<TEventSummary> tEventSummaryList = new
+            // ArrayList<TEventSummary>();
+            // int count = 0;
 
             gridcontent.setRows(tEventSummaryList);
             gridcontent.setTotal(count);
@@ -139,45 +123,30 @@ public class HsEventController {
      * 
      * @api {get} /v1/service/event/getTEventSummaryByCategory 根据事件类目获取事件
      * 
+     * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} sEventCategoryCd Event category
      * @apiParam {Number} [page] Optional Paging - page number.
      * @apiParam {Number} [rows] Optional Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response:
      * 
-     *  {
-     *      "rows": [
-     *          {
-     *              "hEventId": 7,
-     *              "sEventCategoryCd": 0,
-     *              "rEventCategoryDesc": "d1",
-     *              "sEventTypeCd": 1,
-     *              "rEventTypeDesc": "vedio",
-     *              "sEventTitleUrl": "vedio/1.mp4",
-     *              "sEventContentUrl": "vedio/1.mp4",
-     *              "sEventActiveInd": 0,
-     *              "createTs": 946627200000,
-     *              "updateTs": 946627200000,
-     *              "sEventSearchContentTxt": "7",
-     *              "sEventSubContent1UrlList": [],
-     *              "sEventSubContent2StrList": [],
-     *              "sEventBannerPositionCd": null,
-     *              "sEventRecomPositionCd": null
-     *          }
-     *      ],
-     *      "total": 1
-     *  }
+     *                    { "rows": [ { "hEventId": 7, "sEventCategoryCd": 0,
+     *                    "rEventCategoryDesc": "d1", "sEventTypeCd": 1,
+     *                    "rEventTypeDesc": "vedio", "sEventTitleUrl":
+     *                    "vedio/1.mp4", "sEventContentUrl": "vedio/1.mp4",
+     *                    "sEventActiveInd": 0, "createTs": 946627200000,
+     *                    "updateTs": 946627200000, "sEventSearchContentTxt":
+     *                    "7", "sEventSubContent1UrlList": [],
+     *                    "sEventSubContent2StrList": [],
+     *                    "sEventBannerPositionCd": null,
+     *                    "sEventRecomPositionCd": null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     *  {
-     *      "rows":[],
-     *      "total":0
-     *  }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
     public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd) {
-        logger.info("/v1/service/event/getTEventSummaryByCategory() called: sEventCategoryCd={}, page={}, rows={}", sEventCategoryCd, page, rows);
+                    @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+        logger.info("/v1/service/event/getTEventSummaryByCategory() called: sessionCode={}, sEventCategoryCd={}, page={}, rows={}", sessionCode, sEventCategoryCd, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -209,44 +178,30 @@ public class HsEventController {
      * 
      * @api {get} /v1/service/event/getTEventSummaryForBanner 获取Banner事件
      * 
+     * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} sEventCategoryCd Event category
      * @apiParam {Number} [page] Optional Paging - page number.
      * @apiParam {Number} [rows] Optional Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response:
      * 
-     *  {
-     *      "rows": [
-     *          {
-     *              "hEventId": 7,
-     *              "sEventCategoryCd": 0,
-     *              "rEventCategoryDesc": "d1",
-     *              "sEventTypeCd": 1,
-     *              "rEventTypeDesc": "vedio",
-     *              "sEventTitleUrl": "vedio/1.mp4",
-     *              "sEventContentUrl": "vedio/1.mp4",
-     *              "sEventActiveInd": 0,
-     *              "createTs": 946627200000,
-     *              "updateTs": 946627200000,
-     *              "sEventSearchContentTxt": "7",
-     *              "sEventSubContent1UrlList": [],
-     *              "sEventSubContent2StrList": [],
-     *              "sEventBannerPositionCd": null,
-     *              "sEventRecomPositionCd": null
-     *          }
-     *      ],
-     *      "total": 1
-     *  }
+     *                    { "rows": [ { "hEventId": 7, "sEventCategoryCd": 0,
+     *                    "rEventCategoryDesc": "d1", "sEventTypeCd": 1,
+     *                    "rEventTypeDesc": "vedio", "sEventTitleUrl":
+     *                    "vedio/1.mp4", "sEventContentUrl": "vedio/1.mp4",
+     *                    "sEventActiveInd": 0, "createTs": 946627200000,
+     *                    "updateTs": 946627200000, "sEventSearchContentTxt":
+     *                    "7", "sEventSubContent1UrlList": [],
+     *                    "sEventSubContent2StrList": [],
+     *                    "sEventBannerPositionCd": null,
+     *                    "sEventRecomPositionCd": null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     *  {
-     *      "rows":[],
-     *      "total":0
-     *  }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
-    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
-        logger.info("/v1/service/event/getTEventSummaryForBanner() called: page={}, rows={}", page, rows);
+    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                    @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+        logger.info("/v1/service/event/getTEventSummaryForBanner() called: sessionCode={}, page={}, rows={}", sessionCode, page, rows);
         GridContent gridcontent = new GridContent();
 
         try {
@@ -281,10 +236,9 @@ public class HsEventController {
      * 
      * @apiSuccessExample {json} Success-Response:
      * 
-     * 1505223163561
+     *                    1505223163561
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * 1505223163561
+     * @apiSuccessExample {json} Error-Response: 1505223163561
      */
     @RequestMapping(value = "/checkUpdate", method = RequestMethod.GET)
     public String checkUpdate(@RequestParam(value = "eventVersion") String eventVersion) {

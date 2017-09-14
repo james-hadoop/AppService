@@ -10,7 +10,7 @@ public interface IHsUserService {
     
     int regist(TUserSummary tUserSummary);
     
-    int login(TUserSummary tUserSummary);
+    String login(TUserSummary tUserSummary);
     
     int logout(TUserSummary tUserSummary);
     
