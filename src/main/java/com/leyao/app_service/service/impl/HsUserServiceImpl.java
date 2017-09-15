@@ -106,7 +106,7 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Override
     public int reset(TUserSummary tUserSummary) {
-        // TODO Auto-generated method stub
+        // TODO Test
         String verifyCode = VerifyCodeManager.getVerifyCodeByPhoneNum(String.valueOf(tUserSummary.gethUserPhoneNr()));
         if (null == verifyCode) {
             return Response.ERROR;
@@ -115,28 +115,27 @@ public class HsUserServiceImpl implements IHsUserService {
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("hUserPhoneNr", tUserSummary.gethUserPhoneNr());
         List<TUserPage> userPageList = tUserPageMapper.getTUserPage(paramMap);
-        if (null != userPageList && 0 < userPageList.size()) {
+        if (null == userPageList || 0 == userPageList.size()) {
             return Response.ERROR;
         }
 
         Date timestamp = new Date();
-        tUserSummary.setCreateTs(timestamp);
-        tUserSummary.setUpdateTs(timestamp);
+
+        TUserSummary tUserSummaryResult = HsUserUtil.userPage2UserSummary(userPageList).get(0);
+        tUserSummaryResult.setUpdateTs(timestamp);
 
         // HUser
-        HUser user = HsUserUtil.userSummary2User(tUserSummary);
-        long userId = hUserMapper.insertSelective(user);
-
-        tUserSummary.sethUserId(userId);
-        tUserSummary.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()));
+        HUser user = HsUserUtil.userSummary2User(tUserSummaryResult);
+        hUserMapper.updateByPrimaryKeySelective(user);
 
         // SUserPassword
-        SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
-        sUserPasswordMapper.insertSelective(sUserPassword);
+        tUserSummaryResult.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummaryResult.getsUserPasswordStr()));
+        SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummaryResult);
+        sUserPasswordMapper.updateByPrimaryKeySelective(sUserPassword);
 
         // TUserPage
-        TUserPage userPage = HsUserUtil.userSummary2UserPage(tUserSummary);
-        tUserPageMapper.insertSelective(userPage);
+        TUserPage userPage = HsUserUtil.userSummary2UserPage(tUserSummaryResult);
+        tUserPageMapper.updateByPrimaryKeySelective(userPage);
         return Response.SUCCESS;
     }
 
