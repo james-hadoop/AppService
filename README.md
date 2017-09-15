@@ -22,7 +22,7 @@ http://localhost:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=1&ses
 http://localhost:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=hello&page=1&rows=7
 
 ## getTEventSummaryByCategory
-#### Activity("Activity", 1), Education("Education", 2), Share("Share", 3), Album("Album", 4);
+#### Activity("Activity", 1), Education("Education", 2),  Share("Share", 3), Album("Album", 4);
 http://localhost:8088/v1/service/event/getTEventSummaryByCategory
 
 http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=4&sessionCode=hello
