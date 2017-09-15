@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leyao.app_service.common.GlobalConstant;
+import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.mapper.hs_event.HsEventMapper;
 import com.leyao.app_service.dao.mapper.hs_event.TEventPageMapper;
 import com.leyao.app_service.entity.hs_event.TEventPage;
@@ -150,5 +151,17 @@ public class HsEventServiceImpl implements IHsEventService {
     public int getTEventPageListForBannerCount(Map<String, Object> paramMap) {
         int count = tEventPageMapper.getTEventPageListForBannerCount(paramMap);
         return count;
+    }
+
+    @Override
+    public int postTEventSummary(TEventSummary tEventSummary) {
+        // TODO Auto-generated method stub
+        Long hEventId=tEventSummary.gethEventId();
+        if(null==hEventId){
+            return Response.ERROR;
+        }
+        
+        
+        return Response.SUCCESS;
     }
 }

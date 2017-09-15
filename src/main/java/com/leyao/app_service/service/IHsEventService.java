@@ -25,4 +25,6 @@ public interface IHsEventService {
     List<TEventSummary> getTEventPageListForBanner(Map<String, Object> paramMap);
 
     int getTEventPageListForBannerCount(Map<String, Object> paramMap);
+    
+    int postTEventSummary(TEventSummary tEventSummary);
 }
