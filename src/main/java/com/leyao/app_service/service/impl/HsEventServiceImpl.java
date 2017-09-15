@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.leyao.app_service.common.GlobalConstant;
 import com.leyao.app_service.common.Response;
@@ -195,6 +196,7 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
+    @Transactional
     public int postTEventSummary(TEventSummary tEventSummary) {
         Long hEventId = tEventSummary.gethEventId();
         if (null == hEventId) {
