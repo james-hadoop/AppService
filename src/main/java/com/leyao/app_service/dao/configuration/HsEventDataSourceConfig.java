@@ -26,9 +26,7 @@ public class HsEventDataSourceConfig {
     public SqlSessionFactory sqlSessionFactory(@Qualifier("hsUserDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
-        sessionFactoryBean.setMapperLocations(
-                new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/master/*.xml"));
+        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/master/*.xml"));
         return sessionFactoryBean.getObject();
     }
-
 }
