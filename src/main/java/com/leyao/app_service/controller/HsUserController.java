@@ -40,16 +40,16 @@ public class HsUserController {
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
      * @apiSuccessExample {json} Success-Response:
-     * {
-     *  "rows": [ 
-     *      { 
-     *          "hUserId": 1,
-     *          "hUserPhoneNr": 13333333333, "sUserGenderCd": 0,
-     *          "sUserGenderDesc": "?", "sUserNameStr": "?",
-     *          "sUserProfileUrl": "?", "sUserEmailStr": "?",
-     *          "sUserActiveInd": 0, "createTs": 946656000000,
-     *          "updateTs": 946656000000, "sUserPasswordStr": null,
-     *          "verifyCode": null 
+     *  {
+     *      "rows": [ 
+     *          { 
+     *              "hUserId": 1,
+     *              "hUserPhoneNr": 13333333333, "sUserGenderCd": 0,
+     *              "sUserGenderDesc": "?", "sUserNameStr": "?",
+     *              "sUserProfileUrl": "?", "sUserEmailStr": "?",
+     *              "sUserActiveInd": 0, "createTs": 946656000000,
+     *              "updateTs": 946656000000, "sUserPasswordStr": null,
+     *              "verifyCode": null 
      *          }
      *      ],
      *      "total": 1
@@ -178,7 +178,6 @@ public class HsUserController {
      *      "responseResult": "ERROR",
      *      "responseResultMsg": "Login fail" 
      *  }
-     *
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -226,7 +225,6 @@ public class HsUserController {
      *      "responseResult": "ERROR",
      *      "responseResultMsg": "Login fail" 
      *  }
-     *
      */
     @RequestMapping(value = "reset", method = RequestMethod.POST)
     @ResponseBody

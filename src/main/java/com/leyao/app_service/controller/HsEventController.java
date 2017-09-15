@@ -70,7 +70,6 @@ public class HsEventController {
      * @apiParam {Number} [rows] Optional Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response:
-     * 
      *  {
      *      "rows": [
      *          {
@@ -145,7 +144,6 @@ public class HsEventController {
      * @apiParam {Number} [rows] Optional Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response:
-     * 
      *  {
      *      "rows": [
      *          {
@@ -216,7 +214,6 @@ public class HsEventController {
      * @apiParam {Number} [rows] Optional Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response:
-     * 
      *  {
      *      "rows": [
      *          {
@@ -282,8 +279,7 @@ public class HsEventController {
      * 
      * @apiParam {String} eventVersion Event version.
      * 
-     * @apiSuccessExample {json} Success-Response:
-     * 
+     * @apiSuccessExample {json} Success-Response: 
      * 1505223163561
      * 
      * @apiSuccessExample {json} Error-Response: 
