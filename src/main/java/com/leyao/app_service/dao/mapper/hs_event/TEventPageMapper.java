@@ -191,7 +191,7 @@ public interface TEventPageMapper {
 
     // getTEventPageListByCategory
     @Select({
-            "select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0 order by h_event_id desc limit #{start}, #{end}" })
+            "select p.*,sc.s_event_sub_content_1_url as s_event_sub_content_1_url_r,sc.s_event_sub_content_2_str as s_event_sub_content_2_str_r from  (select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0) as p left outer join (select sc1.h_event_id, sc1.s_event_sub_content_1_url,sc2.s_event_sub_content_2_str from hs_event.s_event_sub_content_1 as sc1 inner join hs_event.s_event_sub_content_2 as sc2 on sc1.s_event_sub_content_1_id = sc2.s_event_sub_content_2_id) as sc on sc.h_event_id=p.h_event_id order by h_event_id desc limit #{start}, #{end}" })
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
@@ -199,7 +199,8 @@ public interface TEventPageMapper {
             @Result(column = "r_event_type_desc", property = "rEventTypeDesc", jdbcType = JdbcType.VARCHAR),
             @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
             @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "s_event_sub_content_1_url", property = "sEventSubContent1Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_1_url_r", property = "sEventSubContent1Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_2_str_r", property = "sEventSubContent2Str", jdbcType = JdbcType.VARCHAR),
             @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
             @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
             @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),

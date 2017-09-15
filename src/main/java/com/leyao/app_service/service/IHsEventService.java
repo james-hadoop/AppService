@@ -12,8 +12,6 @@ public interface IHsEventService {
 
     int getTEventSummaryListCount(Map<String, Object> paramMap);
 
-    void createHsEvent(TEventSummary record);
-
     List<TEventSummary> getTEventSummaryByType(Map<String, Object> paramMap);
 
     int getTEventSummaryByTypeCount(Map<String, Object> paramMap);

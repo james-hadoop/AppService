@@ -89,14 +89,6 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
-    public void createHsEvent(TEventSummary record) {
-        // TODO
-
-        String currentEventVersion = hsEventMapper.checkUpdate().toString();
-        GlobalConstant.setEVENT_VERSION(currentEventVersion);
-    }
-
-    @Override
     public List<TEventSummary> getTEventSummaryByType(Map<String, Object> paramMap) {
         List<TEventPage> tEventPageList;
 

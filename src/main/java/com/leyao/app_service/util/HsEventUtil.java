@@ -115,6 +115,8 @@ public class HsEventUtil {
                     es.getsEventSubContent2StrList().add(sEventSubContent2Str);
                 }
             } else {
+                eventIdSet.add(eventId);
+                
                 if (null != es) {
                     tEventSummaryList.add(es);
                 }

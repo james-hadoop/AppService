@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.common.SessionManager;
@@ -43,6 +44,7 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
+    @Transactional
     public int regist(TUserSummary tUserSummary) {
         String verifyCode = VerifyCodeManager.getVerifyCodeByPhoneNum(String.valueOf(tUserSummary.gethUserPhoneNr()));
         if (null == verifyCode) {
@@ -105,8 +107,8 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
+    @Transactional
     public int reset(TUserSummary tUserSummary) {
-        // TODO Test
         String verifyCode = VerifyCodeManager.getVerifyCodeByPhoneNum(String.valueOf(tUserSummary.gethUserPhoneNr()));
         if (null == verifyCode) {
             return Response.ERROR;
