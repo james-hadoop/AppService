@@ -35,7 +35,7 @@ public class HsEventUtil {
         return tEventPageList;
     }
 
-    private static List<TEventPage> eventSummary2EventPageList(TEventSummary es) {
+    public static List<TEventPage> eventSummary2EventPageList(TEventSummary es) {
         if (null == es) {
             return null;
         }

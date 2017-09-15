@@ -28,10 +28,10 @@ public interface HsEventMapper {
         "values (#{hEventId,jdbcType=BIGINT}, #{createTs,jdbcType=TIMESTAMP}, ",
         "#{updateTs,jdbcType=TIMESTAMP})"
     })
-    int insert(HsEvent record);
+    long insert(HsEvent record);
 
     @InsertProvider(type=HsEventSqlProvider.class, method="insertSelective")
-    int insertSelective(HsEvent record);
+    long insertSelective(HsEvent record);
 
     @Select({
         "select",
