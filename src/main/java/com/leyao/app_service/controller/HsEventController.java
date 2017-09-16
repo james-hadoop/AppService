@@ -29,38 +29,7 @@ public class HsEventController {
     private static final Logger logger = LoggerFactory.getLogger(HsEventController.class);
 
     @Autowired
-    ILeyaoAppService leyaoServiceService;
-
-    @Autowired
     IHsEventService hsEventService;
-
-    @RequestMapping(value = "/getEvents", method = RequestMethod.GET)
-    public GridContent getItemUrls(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
-        logger.info("/v1/service/event/getEvents() called: sessionCode={}, sEventTypeCd={}, page={}, rows={}", sessionCode, sEventTypeCd, page, rows);
-        GridContent gridcontent = new GridContent();
-
-        try {
-            int start = (page - 1) * rows;
-            int end = rows;
-
-            Map<String, Object> paramMap = new HashMap<String, Object>();
-            paramMap.put("sEventTypeCd", sEventTypeCd);
-            paramMap.put("start", start);
-            paramMap.put("end", end);
-
-            List<TEventPage> listLeyaoEvent = leyaoServiceService.getTEventPageList(paramMap);
-            int count = leyaoServiceService.getTEventPageListCount(paramMap);
-
-            gridcontent.setRows(listLeyaoEvent);
-            gridcontent.setTotal(count);
-        } catch (Exception e) {
-            logger.error("/v1/service/event/getEvents()", e);
-            return gridcontent;
-        }
-
-        return gridcontent;
-    }
 
     /**
      * @apiGroup Event

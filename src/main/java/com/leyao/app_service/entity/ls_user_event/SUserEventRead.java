@@ -1,3 +1,4 @@
+
 package com.leyao.app_service.entity.ls_user_event;
 
 import java.util.Date;

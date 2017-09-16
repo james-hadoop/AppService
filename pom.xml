@@ -91,6 +91,24 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <targetPath>BOOT-INF/lib/</targetPath>
+        <includes>
+          <include>*.jar</include>
+        </includes>
+      </resource>
+
+      <resource>
+        <directory>src/main/resources</directory>
+        <targetPath>BOOT-INF/</targetPath>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 
   <repositories>
