@@ -11,5 +11,5 @@ public interface IHsMessageService {
 
     int getTMessageSummaryListCount(Map<String, Object> paramMap);
     
-    long postTMessageSummary(TMessageSummary TMessageSummary);
+    int addTMessageSummary(TMessageSummary TMessageSummary);
 }

@@ -189,12 +189,7 @@ public class HsEventServiceImpl implements IHsEventService {
 
     @Override
     @Transactional
-    public int postTEventSummary(TEventSummary tEventSummary) {
-        Long hEventId = tEventSummary.gethEventId();
-        if (null == hEventId) {
-            return Response.ERROR;
-        }
-
+    public int addTEventSummary(TEventSummary tEventSummary) {
         Date timestamp = new Date();
         tEventSummary.setCreateTs(timestamp);
         tEventSummary.setUpdateTs(timestamp);

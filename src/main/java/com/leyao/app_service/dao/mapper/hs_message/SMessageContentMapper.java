@@ -1,12 +1,18 @@
 package com.leyao.app_service.dao.mapper.hs_message;
 
 import com.leyao.app_service.entity.hs_message.SMessageContent;
+import com.leyao.app_service.entity.hs_message.TMessageSummary;
+
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
@@ -45,6 +51,20 @@ public interface SMessageContentMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     SMessageContent selectByPrimaryKey(Long sMessageContentId);
+    
+    @SelectProvider(type=SMessageContentSqlProvider.class, method="getTMessageSummaryList")
+    @Results({
+        @Result(column="s_message_content_id", property="sMessageContentId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="h_message_id", property="hMessageId", jdbcType=JdbcType.BIGINT),
+        @Result(column="s_message_content_str", property="sMessageContentStr", jdbcType=JdbcType.VARCHAR),
+        @Result(column="s_message_category_cd", property="sMessageCategoryCd", jdbcType=JdbcType.INTEGER),
+        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<TMessageSummary> getTMessageSummaryList(Map<String, Object> paramMap);
+    
+    @SelectProvider(type=SMessageContentSqlProvider.class, method="getTMessageSummaryListCount")
+    int getTMessageSummaryListCount(Map<String, Object> paramMap);
 
     @UpdateProvider(type=SMessageContentSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SMessageContent record);
