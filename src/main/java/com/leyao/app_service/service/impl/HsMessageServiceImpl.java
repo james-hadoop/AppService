@@ -72,4 +72,17 @@ public class HsMessageServiceImpl implements IHsMessageService {
         return 0;
     }
 
+    @Override
+    public List<TMessageSummary> getTMessageSummaryListByCondition(Map<String, Object> paramMap) {
+        // TODO Auto-generated method stub
+        // hs_user -> ls_user_message -> hs_message
+        
+        return null;
+    }
+
+    @Override
+    public int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

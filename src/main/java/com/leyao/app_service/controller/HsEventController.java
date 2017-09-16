@@ -18,10 +18,8 @@ import com.leyao.app_service.common.Response;
 import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.ResponseContent;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
-import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 import com.leyao.app_service.service.IHsEventService;
-import com.leyao.app_service.service.ILeyaoAppService;
 
 @RestController
 @RequestMapping("/v1/service/event")
@@ -61,7 +59,7 @@ public class HsEventController {
     public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventTypeCd", defaultValue = "-1") Integer sEventTypeCd, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info("/v1/service/event/getTEventSummaryByType() called: sessionCode={}, sEventTypeCd={}, page={}, rows={}", sessionCode, sEventTypeCd, page, rows);
-        GridContent gridcontent = new GridContent();
+        GridContent gridContent = new GridContent();
 
         try {
             int start = (page - 1) * rows;
@@ -79,14 +77,14 @@ public class HsEventController {
             // ArrayList<TEventSummary>();
             // int count = 0;
 
-            gridcontent.setRows(tEventSummaryList);
-            gridcontent.setTotal(count);
+            gridContent.setRows(tEventSummaryList);
+            gridContent.setTotal(count);
         } catch (Exception e) {
             logger.error("/v1/service/event/getTEventSummaryByType()", e);
-            return gridcontent;
+            return gridContent;
         }
 
-        return gridcontent;
+        return gridContent;
     }
 
     /**
@@ -119,7 +117,7 @@ public class HsEventController {
     public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sEventCategoryCd", defaultValue = "-1") Integer sEventCategoryCd, @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info("/v1/service/event/getTEventSummaryByCategory() called: sessionCode={}, sEventCategoryCd={}, page={}, rows={}", sessionCode, sEventCategoryCd, page, rows);
-        GridContent gridcontent = new GridContent();
+        GridContent gridContent = new GridContent();
 
         try {
             int start = (page - 1) * rows;
@@ -133,14 +131,14 @@ public class HsEventController {
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByCategory(paramMap);
             int count = hsEventService.getTEventSummaryByCategoryCount(paramMap);
 
-            gridcontent.setRows(tEventSummaryList);
-            gridcontent.setTotal(count);
+            gridContent.setRows(tEventSummaryList);
+            gridContent.setTotal(count);
         } catch (Exception e) {
             logger.error("/v1/service/event/getTEventSummaryByCategory()", e);
-            return gridcontent;
+            return gridContent;
         }
 
-        return gridcontent;
+        return gridContent;
     }
 
     /**
@@ -173,7 +171,7 @@ public class HsEventController {
     public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info("/v1/service/event/getTEventSummaryForBanner() called: sessionCode={}, page={}, rows={}", sessionCode, page, rows);
-        GridContent gridcontent = new GridContent();
+        GridContent gridContent = new GridContent();
 
         try {
             int start = (page - 1) * rows;
@@ -186,14 +184,14 @@ public class HsEventController {
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventPageListForBanner(paramMap);
             int count = hsEventService.getTEventPageListForBannerCount(paramMap);
 
-            gridcontent.setRows(tEventSummaryList);
-            gridcontent.setTotal(count);
+            gridContent.setRows(tEventSummaryList);
+            gridContent.setTotal(count);
         } catch (Exception e) {
             logger.error("/v1/service/event/getTEventSummaryForBanner()", e);
-            return gridcontent;
+            return gridContent;
         }
 
-        return gridcontent;
+        return gridContent;
     }
 
     /**
@@ -214,23 +212,23 @@ public class HsEventController {
         return hsEventService.checkUpdate(eventVersion);
     }
 
-    @RequestMapping(value = "/postTEventSummary", method = RequestMethod.POST)
+    @RequestMapping(value = "/addTEventSummary", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseContent postTEventSummary(@RequestBody TEventSummary tEventSummary) {
-        logger.info("/v1/service/event/postTEventSummary() called: hEventId={}", tEventSummary.gethEventId());
+    public ResponseContent addTEventSummary(@RequestBody TEventSummary tEventSummary) {
+        logger.info("/v1/service/event/addTEventSummary() called: hEventId={}", tEventSummary.gethEventId());
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsEventService.postTEventSummary(tEventSummary);
+            int resutl = hsEventService.addTEventSummary(tEventSummary);
             if (Response.ERROR == resutl) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("Post fail");
+                responseContent.setResponseResultMsg("Add fail");
             } else {
                 responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Post success");
+                responseContent.setResponseResultMsg("Add success");
             }
         } catch (Exception e) {
-            logger.error("/v1/service/user/postTEventSummary()", e);
+            logger.error("/v1/service/event/addTEventSummary()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;

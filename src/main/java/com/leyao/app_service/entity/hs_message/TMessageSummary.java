@@ -15,6 +15,8 @@ public class TMessageSummary {
 
     private Date updateTs;
 
+    private Long hUserPhoneNr;
+
     public Long gethMessageId() {
         return hMessageId;
     }
@@ -61,5 +63,13 @@ public class TMessageSummary {
 
     public void setUpdateTs(Date updateTs) {
         this.updateTs = updateTs;
+    }
+
+    public Long gethUserPhoneNr() {
+        return hUserPhoneNr;
+    }
+
+    public void sethUserPhoneNr(Long hUserPhoneNr) {
+        this.hUserPhoneNr = hUserPhoneNr;
     }
 }

@@ -1,6 +1,5 @@
 package com.leyao.app_service.dao.mapper.hs_message;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -78,7 +77,7 @@ public class SMessageContentSqlProvider {
         return sql.toString();
     }
     
-    public static String getTMessageSummaryListCount(Map<String, Object> paramMap) {
+    public String getTMessageSummaryListCount(Map<String, Object> paramMap) {
         SQL sql = new SQL();
         sql.SELECT("count(1)").FROM("hs_message.s_message_content c");
 
@@ -95,15 +94,15 @@ public class SMessageContentSqlProvider {
         return sql.toString();
     }
 
-    public static void main(String[] args) {
-        Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("hMessageId", 1);
-        paramMap.put("sMessageCategoryCd", 1);
-
-        String sql = getTMessageSummaryList(paramMap);
-        System.out.println("sql=\n" + sql);
-        
-        String sqlCount = getTMessageSummaryListCount(paramMap);
-        System.out.println("sqlCount=\n" + sqlCount);
-    }
+//    public static void main(String[] args) {
+//        Map<String, Object> paramMap = new HashMap<String, Object>();
+//        paramMap.put("hMessageId", 1);
+//        paramMap.put("sMessageCategoryCd", 1);
+//
+//        String sql = getTMessageSummaryList(paramMap);
+//        System.out.println("sql=\n" + sql);
+//        
+//        String sqlCount = getTMessageSummaryListCount(paramMap);
+//        System.out.println("sqlCount=\n" + sqlCount);
+//    }
 }
