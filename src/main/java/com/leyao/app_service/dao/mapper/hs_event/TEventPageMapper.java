@@ -236,7 +236,7 @@ public interface TEventPageMapper {
     Integer getTEventPageListForBannerCount(Map<String, Object> paramMap);
     
     // getTEventPageListByCondition
-    @SelectProvider(type=TEventPageSqlProvider.class, method="getTMessageSummaryListByCondition")
+    @SelectProvider(type=TEventPageSqlProvider.class, method="getTEventPageListByCondition")
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
