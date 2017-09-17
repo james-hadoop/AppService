@@ -1,5 +1,6 @@
 package com.leyao.app_service.dao.mapper.hs_message;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.jdbc.SQL;
@@ -72,11 +73,12 @@ public class SMessageContentSqlProvider {
             sql.OR().WHERE("s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
         }
 
-        sql.INNER_JOIN("hs_message.s_message_active a on a.h_message_id= c.h_message_id and a.s_message_active_ind=0").INNER_JOIN("hs_message.s_message_category ca on ca.h_message_id= c.h_message_id");
+        sql.INNER_JOIN("hs_message.s_message_active a on a.h_message_id= c.h_message_id and a.s_message_active_ind=0")
+                        .INNER_JOIN("hs_message.s_message_category ca on ca.h_message_id= c.h_message_id");
 
         return sql.toString();
     }
-    
+
     public String getTMessageSummaryListCount(Map<String, Object> paramMap) {
         SQL sql = new SQL();
         sql.SELECT("count(1)").FROM("hs_message.s_message_content c");
@@ -88,21 +90,71 @@ public class SMessageContentSqlProvider {
         if (paramMap.get("sMessageCategoryCd") != null) {
             sql.OR().WHERE("s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
         }
-        
-        sql.INNER_JOIN("hs_message.s_message_active a on a.h_message_id= c.h_message_id and a.s_message_active_ind=0").INNER_JOIN("hs_message.s_message_category ca on ca.h_message_id= c.h_message_id");
-        
+
+        sql.INNER_JOIN("hs_message.s_message_active a on a.h_message_id= c.h_message_id and a.s_message_active_ind=0")
+                        .INNER_JOIN("hs_message.s_message_category ca on ca.h_message_id= c.h_message_id");
+
         return sql.toString();
     }
 
-//    public static void main(String[] args) {
-//        Map<String, Object> paramMap = new HashMap<String, Object>();
-//        paramMap.put("hMessageId", 1);
-//        paramMap.put("sMessageCategoryCd", 1);
-//
-//        String sql = getTMessageSummaryList(paramMap);
-//        System.out.println("sql=\n" + sql);
-//        
-//        String sqlCount = getTMessageSummaryListCount(paramMap);
-//        System.out.println("sqlCount=\n" + sqlCount);
-//    }
+    public static String getTMessageSummaryListByCondition(Map<String, Object> paramMap) {
+        SQL sql = new SQL();
+
+        sql.SELECT("mc.*, mca.s_message_category_cd").FROM(
+                        "hs_user.h_user u, ls_user_message.l_user_message um, ls_user_message.s_user_message_active uma,hs_message.s_message_content mc,hs_message.s_message_category mca,hs_message.s_message_active ma");
+
+        sql.WHERE("u.h_user_id=um.h_user_id and um.l_user_message_id=uma.l_user_message_id and uma.s_user_message_active_ind=0 and um.h_message_id= mc.h_message_id and mc.h_message_id=mca.h_message_id and mc.h_message_id=ma.h_message_id and ma.s_message_active_ind=0");
+
+         if (paramMap.get("hUserPhoneNr") != null) {
+         sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
+         }
+        
+         if (paramMap.get("sMessageCategoryCd") != null) {
+         sql.WHERE("mca.s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
+         }
+
+        return sql.toString();
+    }
+
+    public String getTMessageSummaryListByConditionCount(Map<String, Object> paramMap) {
+        SQL sql = new SQL();
+
+        sql.SELECT("count(1)").FROM(
+                        "hs_user.h_user u, ls_user_message.l_user_message um, ls_user_message.s_user_message_active uma,hs_message.s_message_content mc,hs_message.s_message_category mca,hs_message.s_message_active ma");
+
+        sql.WHERE("u.h_user_id=um.h_user_id and um.l_user_message_id=uma.l_user_message_id and uma.s_user_message_active_ind=0 and um.h_message_id= mc.h_message_id and mc.h_message_id=mca.h_message_id and mc.h_message_id=ma.h_message_id and ma.s_message_active_ind=0");
+
+         if (paramMap.get("hUserPhoneNr") != null) {
+         sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
+         }
+        
+         if (paramMap.get("sMessageCategoryCd") != null) {
+         sql.WHERE("mca.s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
+         }
+
+        return sql.toString();
+    }
+
+    public static void main(String[] args) {
+        // Map<String, Object> paramMap = new HashMap<String, Object>();
+        // paramMap.put("hMessageId", 1);
+        // paramMap.put("sMessageCategoryCd", 1);
+        //
+        // String sql = getTMessageSummaryList(paramMap);
+        // System.out.println("sql=\n" + sql);
+        //
+        // String sqlCount = getTMessageSummaryListCount(paramMap);
+        // System.out.println("sqlCount=\n" + sqlCount);
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("hUserPhoneNr", 13333333333l);
+        paramMap.put("sMessageCategoryCd", 1);
+
+        String sql = getTMessageSummaryListByCondition(paramMap);
+        System.out.println("getTMessageSummaryListByCondition=\n" + sql);
+
+        // String sqlCount = getTMessageSummaryListByConditionCount(paramMap);
+        // System.out.println("getTMessageSummaryListByConditionCount=\n" +
+        // sqlCount);
+    }
 }

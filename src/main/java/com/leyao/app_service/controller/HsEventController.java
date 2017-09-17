@@ -235,4 +235,40 @@ public class HsEventController {
         }
         return responseContent;
     }
+
+    @RequestMapping(value = "/getTEventSummaryByCondition", method = RequestMethod.GET)
+    public GridContent getTEventSummaryByCondition(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                    @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
+                    @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,
+                    @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,
+                    @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt) {
+        logger.info("/v1/service/event/getTEventSummaryByCondition() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd{},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt{}",
+                        sessionCode, page, rows, hUserPhoneNr, sEventCategoryCd, sEventTypeCd, sUserEventLikeInd, sUserEventReadLogTxt);
+        GridContent gridContent = new GridContent();
+
+        try {
+            int start = (page - 1) * rows;
+            int end = rows;
+
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("start", start);
+            paramMap.put("end", end);
+            paramMap.put("hUserPhoneNr", hUserPhoneNr);
+            paramMap.put("sEventCategoryCd", sEventCategoryCd);
+            paramMap.put("sEventTypeCd", sEventTypeCd);
+            paramMap.put("sUserEventLikeInd", sUserEventLikeInd);
+            paramMap.put("sUserEventReadLogTxt", sUserEventReadLogTxt);
+
+            List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByCondition(paramMap);
+            int count = hsEventService.getTEventSummaryByConditionCount(paramMap);
+
+            gridContent.setRows(tEventSummaryList);
+            gridContent.setTotal(count);
+        } catch (Exception e) {
+            logger.error("/v1/service/event/getTEventSummaryByCondition()", e);
+            return gridContent;
+        }
+
+        return gridContent;
+    }
 }
