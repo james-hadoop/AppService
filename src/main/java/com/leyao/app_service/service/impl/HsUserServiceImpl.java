@@ -66,7 +66,7 @@ public class HsUserServiceImpl implements IHsUserService {
         HUser user = HsUserUtil.userSummary2User(tUserSummary);
         long userId = hUserMapper.insertSelective(user);
 
-        tUserSummary.sethUserId(userId);
+        tUserSummary.sethUserId(userId+1);
         tUserSummary.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()));
 
         // SUserPassword
@@ -87,7 +87,7 @@ public class HsUserServiceImpl implements IHsUserService {
 
         TUserSummary tUserSummaryResult = selectByhUserPhoneNr(tUserSummary.gethUserPhoneNr());
 
-        if (null == tUserSummaryResult) {
+        if (null == tUserSummaryResult||null==tUserSummaryResult.getsUserPasswordStr()) {
             return null;
         }
 

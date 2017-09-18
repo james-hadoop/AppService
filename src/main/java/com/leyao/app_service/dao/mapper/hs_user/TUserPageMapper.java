@@ -63,11 +63,12 @@ public interface TUserPageMapper {
     TUserPage selectByPrimaryKey(Long hUserId);
     
     @Select({
-        "select u.*,p.s_user_password_str from (select * from hs_user.h_user where h_user_phone_nr=#{hUserPhoneNr,jdbcType=BIGINT}) as u left outer join hs_user.s_user_password as p on p.h_user_id=u.h_user_id"
+        "select u.*,p.s_user_password_str as s_user_password_str from (select * from hs_user.h_user where h_user_phone_nr=#{hUserPhoneNr,jdbcType=BIGINT}) as u left outer join hs_user.s_user_password as p on p.h_user_id=u.h_user_id"
     })
     @Results({
         @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="h_user_phone_nr", property="hUserPhoneNr", jdbcType=JdbcType.BIGINT),
+        @Result(column="s_user_password_str",property="sUserPasswordStr", jdbcType=JdbcType.VARCHAR),
         @Result(column="s_user_gender_cd", property="sUserGenderCd", jdbcType=JdbcType.INTEGER),
         @Result(column="s_user_gender_desc", property="sUserGenderDesc", jdbcType=JdbcType.VARCHAR),
         @Result(column="s_user_name_str", property="sUserNameStr", jdbcType=JdbcType.VARCHAR),
@@ -75,8 +76,7 @@ public interface TUserPageMapper {
         @Result(column="s_user_email_str", property="sUserEmailStr", jdbcType=JdbcType.VARCHAR),
         @Result(column="s_user_active_ind", property="sUserActiveInd", jdbcType=JdbcType.INTEGER),
         @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="s_user_password_str",property="sUserPasswordStr", jdbcType=JdbcType.BIGINT)
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     TUserSummary selectByhUserPhoneNr(Long hUserPhoneNr);
 
