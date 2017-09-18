@@ -1,15 +1,18 @@
 package com.leyao.app_service.dao.mapper.hs_user;
 
-import com.leyao.app_service.entity.hs_user.HUser;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.mapping.ResultSetType;
 import org.apache.ibatis.type.JdbcType;
+
+import com.leyao.app_service.entity.hs_user.HUser;
 
 public interface HUserMapper {
     @Delete({
@@ -24,10 +27,12 @@ public interface HUserMapper {
         "values (#{hUserId,jdbcType=BIGINT}, #{hUserPhoneNr,jdbcType=BIGINT}, ",
         "#{createTs,jdbcType=TIMESTAMP}, #{updateTs,jdbcType=TIMESTAMP})"
     })
-    int insert(HUser record);
+    @Options(useGeneratedKeys=true, keyProperty="hUserId", keyColumn="h_user_id")
+    long insert(HUser record);
 
     @InsertProvider(type=HUserSqlProvider.class, method="insertSelective")
-    int insertSelective(HUser record);
+    @Options(useGeneratedKeys=true, keyProperty="hUserId", keyColumn="h_user_id")
+    long insertSelective(HUser record);
 
     @Select({
         "select",
