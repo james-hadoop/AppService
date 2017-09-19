@@ -129,10 +129,10 @@ public class HsUserServiceImpl implements IHsUserService {
 
         // HUser
         HUser user = HsUserUtil.userSummary2User(tUserSummaryResult);
-        hUserMapper.updateByPrimaryKeySelective(user);
-
+        tUserSummaryResult.sethUserId(user.gethUserId());
+        
         // SUserPassword
-        tUserSummaryResult.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummaryResult.getsUserPasswordStr()));
+        tUserSummaryResult.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()));
         SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummaryResult);
         sUserPasswordMapper.updateByPrimaryKeySelective(sUserPassword);
 

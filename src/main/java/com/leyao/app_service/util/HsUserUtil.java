@@ -79,6 +79,7 @@ public class HsUserUtil {
     
     public static HUser userSummary2User(TUserSummary tUserSummary) {
     	HUser user = new HUser();
+    	user.sethUserId(tUserSummary.gethUserId());
     	user.sethUserPhoneNr(tUserSummary.gethUserPhoneNr());
     	user.setCreateTs(tUserSummary.getCreateTs());
     	user.setUpdateTs(tUserSummary.getUpdateTs());

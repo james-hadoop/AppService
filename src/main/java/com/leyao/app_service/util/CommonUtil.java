@@ -34,6 +34,10 @@ public class CommonUtil {
     }
 
     public static String getMD5String(String inStr) {
+        if(null==inStr||0==inStr.length()){
+            return null;
+        }
+        
         String md5String = null;
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
