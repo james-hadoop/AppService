@@ -328,6 +328,7 @@ public class HsEventController {
      * @apiParam {Number} [sEventTypeCd] Event type code.
      * @apiParam {Number} [sUserEventLikeInd] Event like code.
      * @apiParam {String} [sUserEventReadLogTxt] Event read log.
+     * @apiParam {String} [sEventSearchContentTxt] User search text.
      * 
      * @apiSuccessExample {json} Success-Response: 
      * {
@@ -364,9 +365,10 @@ public class HsEventController {
                     @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
                     @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,
                     @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,
-                    @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt) {
-        logger.info("/v1/service/event/getTEventSummaryByCondition() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd{},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt{}",
-                        sessionCode, page, rows, hUserPhoneNr, sEventCategoryCd, sEventTypeCd, sUserEventLikeInd, sUserEventReadLogTxt);
+                    @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt,
+                    @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt) {
+        logger.info("/v1/service/event/getTEventSummaryByCondition() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd{},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt={},sEventSearchContentTxt={}",
+                        sessionCode, page, rows, hUserPhoneNr, sEventCategoryCd, sEventTypeCd, sUserEventLikeInd, sUserEventReadLogTxt,sEventSearchContentTxt);
         GridContent gridContent = new GridContent();
 
         try {
@@ -381,6 +383,7 @@ public class HsEventController {
             paramMap.put("sEventTypeCd", sEventTypeCd);
             paramMap.put("sUserEventLikeInd", sUserEventLikeInd);
             paramMap.put("sUserEventReadLogTxt", sUserEventReadLogTxt);
+            paramMap.put("sEventSearchContentTxt", sEventSearchContentTxt);
 
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByCondition(paramMap);
             int count = hsEventService.getTEventSummaryByConditionCount(paramMap);

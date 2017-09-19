@@ -143,6 +143,10 @@ public class TEventPageSqlProvider {
         if (paramMap.get("sEventTypeCd") != null) {
             sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
         }
+        
+        if (paramMap.get("sEventSearchContentTxt") != null) {
+            sql.WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+        }
 
         if (paramMap.get("sUserEventLikeInd") != null) {
             sql.INNER_JOIN("ls_user_event.s_user_event_like uel on uel.l_user_event_id=l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}");
