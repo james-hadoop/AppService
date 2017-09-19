@@ -64,9 +64,10 @@ public class HsUserServiceImpl implements IHsUserService {
 
         // HUser
         HUser user = HsUserUtil.userSummary2User(tUserSummary);
-        long userId = hUserMapper.insertSelective(user);
+        hUserMapper.insertSelective(user);
+        long userId = hUserMapper.getMaxHUserId();
 
-        tUserSummary.sethUserId(userId+1);
+        tUserSummary.sethUserId(userId);
         tUserSummary.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()));
 
         // SUserPassword
@@ -75,7 +76,7 @@ public class HsUserServiceImpl implements IHsUserService {
 
         // TUserPage
         TUserPage userPage = HsUserUtil.userSummary2UserPage(tUserSummary);
-        tUserPageMapper.insertSelective(userPage);
+        int tUserPageId = tUserPageMapper.insertSelective(userPage);
         return Response.SUCCESS;
     }
 
@@ -87,7 +88,7 @@ public class HsUserServiceImpl implements IHsUserService {
 
         TUserSummary tUserSummaryResult = selectByhUserPhoneNr(tUserSummary.gethUserPhoneNr());
 
-        if (null == tUserSummaryResult||null==tUserSummaryResult.getsUserPasswordStr()) {
+        if (null == tUserSummaryResult || null == tUserSummaryResult.getsUserPasswordStr()) {
             return null;
         }
 

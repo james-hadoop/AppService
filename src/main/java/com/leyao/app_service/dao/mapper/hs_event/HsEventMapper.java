@@ -46,7 +46,7 @@ public interface HsEventMapper {
     })
     HsEvent selectByPrimaryKey(Long hEventId);
     
-    @Select({"select max(update_ts) from hs_event.hs_event;"})
+    @Select({"select max(update_ts) from hs_event.hs_event"})
     @Results({
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })

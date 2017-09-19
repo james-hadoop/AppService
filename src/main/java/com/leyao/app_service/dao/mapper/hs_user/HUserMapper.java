@@ -59,4 +59,10 @@ public interface HUserMapper {
         "where h_user_id = #{hUserId,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(HUser record);
+    
+    @Select({"select max(h_user_id) as h_user_id from hs_user.h_user"})
+    @Results({
+        @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT)
+    })
+    long getMaxHUserId();
 }
