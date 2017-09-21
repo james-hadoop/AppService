@@ -56,5 +56,4 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
 
         return 0;
     }
-
 }

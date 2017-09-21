@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.leyao.app_service.entity.hs_event.TEventSummary;
-import com.leyao.app_service.entity.ls_user_event.TUserEventSummary;
 
 public interface IHsEventService {
     String checkUpdate(String eventVersion);
