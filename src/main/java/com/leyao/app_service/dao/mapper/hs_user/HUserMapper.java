@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.mapping.ResultSetType;
 import org.apache.ibatis.type.JdbcType;
 
 import com.leyao.app_service.entity.hs_user.HUser;
