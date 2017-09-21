@@ -59,4 +59,10 @@ public interface LUserEventMapper {
         "where l_user_event_id = #{lUserEventId,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(LUserEvent record);
+    
+    @Select({"select max(l_user_event_id) as l_user_event_id from ls_user_event.l_user_event"})
+    @Results({
+        @Result(column="l_user_event_id", property="lUserEventId", jdbcType=JdbcType.BIGINT)
+    })
+    long getMaxLUserEventId();
 }

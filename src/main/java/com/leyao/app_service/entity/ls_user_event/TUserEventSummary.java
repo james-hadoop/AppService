@@ -19,6 +19,8 @@ public class TUserEventSummary {
 
     private Date updateTs;
 
+    private Long hUserPhoneNr;
+
     public Long getlUserEventId() {
         return lUserEventId;
     }
@@ -81,5 +83,13 @@ public class TUserEventSummary {
 
     public void setUpdateTs(Date updateTs) {
         this.updateTs = updateTs;
+    }
+
+    public Long gethUserPhoneNr() {
+        return hUserPhoneNr;
+    }
+
+    public void sethUserPhoneNr(Long hUserPhoneNr) {
+        this.hUserPhoneNr = hUserPhoneNr;
     }
 }

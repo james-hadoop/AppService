@@ -35,8 +35,11 @@ import com.leyao.app_service.entity.hs_event.SEventSubContent2;
 import com.leyao.app_service.entity.hs_event.SEventType;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
+import com.leyao.app_service.entity.ls_user_event.LUserEvent;
+import com.leyao.app_service.entity.ls_user_event.TUserEventSummary;
 import com.leyao.app_service.service.IHsEventService;
 import com.leyao.app_service.util.HsEventUtil;
+import com.leyao.app_service.util.LsUserEventUtil;
 
 @Service
 public class HsEventServiceImpl implements IHsEventService {

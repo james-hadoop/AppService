@@ -1,27 +1,50 @@
 package com.leyao.app_service.util;
 
-import com.leyao.app_service.entity.ls_user_message.LUserMessage;
-import com.leyao.app_service.entity.ls_user_message.SUserMessageActive;
-import com.leyao.app_service.entity.ls_user_message.TUserMessageSummary;
+import com.leyao.app_service.entity.ls_user_event.LUserEvent;
+import com.leyao.app_service.entity.ls_user_event.SUserEventActive;
+import com.leyao.app_service.entity.ls_user_event.SUserEventLike;
+import com.leyao.app_service.entity.ls_user_event.SUserEventRead;
+import com.leyao.app_service.entity.ls_user_event.TUserEventSummary;
 
 public class LsUserEventUtil {
-    public static LUserMessage userMessageSummary2UserMessage(TUserMessageSummary tUserMessageSummary) {
-        LUserMessage lUserMessage = new LUserMessage();
-        lUserMessage.setCreateTs(tUserMessageSummary.getCreateTs());
-        lUserMessage.sethMessageId(tUserMessageSummary.gethMessageId());
-        lUserMessage.sethUserId(tUserMessageSummary.gethUserId());
-        lUserMessage.setUpdateTs(tUserMessageSummary.getUpdateTs());
+    public static LUserEvent userEventSummary2UserEvent(TUserEventSummary tUserEventSummary) {
+        LUserEvent lUserEvent = new LUserEvent();
+        lUserEvent.setCreateTs(tUserEventSummary.getCreateTs());
+        lUserEvent.setlUserEventId(tUserEventSummary.getlUserEventId());
+        lUserEvent.sethEventId(tUserEventSummary.gethEventId());
+        lUserEvent.setUpdateTs(tUserEventSummary.getUpdateTs());
 
-        return lUserMessage;
+        return lUserEvent;
     }
 
-    public static SUserMessageActive userMessageSummary2UserMessageActive(TUserMessageSummary tUserMessageSummary) {
-        SUserMessageActive sUserMessageActive = new SUserMessageActive();
-        sUserMessageActive.setCreateTs(tUserMessageSummary.getCreateTs());
-        sUserMessageActive.setlUserMessageId(tUserMessageSummary.gethMessageId());
-        sUserMessageActive.setsUserMessageActiveInd(tUserMessageSummary.getsUserMessageActiveInd());
-        sUserMessageActive.setUpdateTs(tUserMessageSummary.getUpdateTs());
+    public static SUserEventActive userEventSummary2UserEventActive(TUserEventSummary tUserEventSummary) {
+        SUserEventActive sUserEventActive = new SUserEventActive();
+        sUserEventActive.setCreateTs(tUserEventSummary.getCreateTs());
+        sUserEventActive.setlUserEventId(tUserEventSummary.getlUserEventId());
+        sUserEventActive.setsUserEventActiveInd(tUserEventSummary.getsUserEventActiveInd());
+        sUserEventActive.setsUserEventActiveId(tUserEventSummary.getlUserEventId());
+        sUserEventActive.setUpdateTs(tUserEventSummary.getUpdateTs());
 
-        return sUserMessageActive;
+        return sUserEventActive;
+    }
+
+    public static SUserEventLike userEventSummary2UserEventLike(TUserEventSummary tUserEventSummary) {
+        SUserEventLike sUserEventLike = new SUserEventLike();
+        sUserEventLike.setCreateTs(tUserEventSummary.getCreateTs());
+        sUserEventLike.setlUserEventId(tUserEventSummary.getlUserEventId());
+        sUserEventLike.setsUserEventLikeInd(tUserEventSummary.getsUserEventLikeInd());
+        sUserEventLike.setUpdateTs(tUserEventSummary.getUpdateTs());
+
+        return sUserEventLike;
+    }
+
+    public static SUserEventRead userEventSummary2UserEventRead(TUserEventSummary tUserEventSummary) {
+        SUserEventRead sUserEventRead = new SUserEventRead();
+        sUserEventRead.setCreateTs(tUserEventSummary.getCreateTs());
+        sUserEventRead.setlUserEventId(tUserEventSummary.getlUserEventId());
+        sUserEventRead.setsUserEventReadLogTxt(tUserEventSummary.getsUserEventReadLogTxt());
+        sUserEventRead.setUpdateTs(tUserEventSummary.getUpdateTs());
+
+        return sUserEventRead;
     }
 }
