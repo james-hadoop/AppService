@@ -2,6 +2,8 @@ package com.leyao.app_service.entity.ls_user_event;
 
 import java.util.Date;
 
+import com.leyao.app_service.entity.ls_user_event.enums.RUserEventCategoryEnum;
+
 public class TUserEventSummary {
     private Long lUserEventId;
 
@@ -20,6 +22,16 @@ public class TUserEventSummary {
     private Date updateTs;
 
     private Long hUserPhoneNr;
+    
+    private RUserEventCategoryEnum rUserEventCategory;
+
+    public RUserEventCategoryEnum getrUserEventCategory() {
+        return rUserEventCategory;
+    }
+
+    public void setrUserEventCategory(RUserEventCategoryEnum rUserEventCategory) {
+        this.rUserEventCategory = rUserEventCategory;
+    }
 
     public Long getlUserEventId() {
         return lUserEventId;

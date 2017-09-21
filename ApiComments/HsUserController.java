@@ -140,8 +140,8 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.regist(tUserSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsUserService.regist(tUserSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Regist fail");
             } else {

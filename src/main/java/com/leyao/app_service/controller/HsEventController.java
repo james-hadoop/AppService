@@ -397,13 +397,4 @@ public class HsEventController {
 
         return gridContent;
     }
-    
-    @RequestMapping(value = "/feedbackTEventSummary", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseContent feedbackTEventSummary(@RequestBody TEventSummary tEventSummary) {
-        logger.info("/v1/service/event/feedbackTEventSummary() called: hEventId={}", tEventSummary.gethEventId());
-        ResponseContent responseContent = new ResponseContent();
-        
-        return responseContent;
-    }
 }

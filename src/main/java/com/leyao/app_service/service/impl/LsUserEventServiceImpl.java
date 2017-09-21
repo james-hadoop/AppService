@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.mapper.ls_user_event.LUserEventMapper;
 import com.leyao.app_service.dao.mapper.ls_user_event.SUserEventActiveMapper;
 import com.leyao.app_service.dao.mapper.ls_user_event.SUserEventLikeMapper;
@@ -13,6 +14,7 @@ import com.leyao.app_service.entity.ls_user_event.SUserEventActive;
 import com.leyao.app_service.entity.ls_user_event.SUserEventLike;
 import com.leyao.app_service.entity.ls_user_event.SUserEventRead;
 import com.leyao.app_service.entity.ls_user_event.TUserEventSummary;
+import com.leyao.app_service.entity.ls_user_event.enums.RUserEventCategoryEnum;
 import com.leyao.app_service.service.ILsUserEventService;
 import com.leyao.app_service.util.LsUserEventUtil;
 
@@ -47,13 +49,17 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
         sUserEventActiveMapper.insertSelective(sUserEventActive);
 
         // SUserEventLike
-        SUserEventLike sUserEventLike = LsUserEventUtil.userEventSummary2UserEventLike(tUserEventSummary);
-        sUserEventLikeMapper.insertSelective(sUserEventLike);
+        if (tUserEventSummary.getrUserEventCategory() == RUserEventCategoryEnum.Like) {
+            SUserEventLike sUserEventLike = LsUserEventUtil.userEventSummary2UserEventLike(tUserEventSummary);
+            sUserEventLikeMapper.insertSelective(sUserEventLike);
+        }
 
         // SUserEventRead
-        SUserEventRead sUserEventRead = LsUserEventUtil.userEventSummary2UserEventRead(tUserEventSummary);
-        sUserEventReadMapper.insertSelective(sUserEventRead);
+        if (tUserEventSummary.getrUserEventCategory() == RUserEventCategoryEnum.Read) {
+            SUserEventRead sUserEventRead = LsUserEventUtil.userEventSummary2UserEventRead(tUserEventSummary);
+            sUserEventReadMapper.insertSelective(sUserEventRead);
+        }
 
-        return 0;
+        return Response.SUCCESS;
     }
 }
