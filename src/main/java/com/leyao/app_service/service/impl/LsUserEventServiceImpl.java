@@ -3,6 +3,7 @@ package com.leyao.app_service.service.impl;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.mapper.ls_user_event.LUserEventMapper;
@@ -18,6 +19,7 @@ import com.leyao.app_service.entity.ls_user_event.enums.RUserEventCategoryEnum;
 import com.leyao.app_service.service.ILsUserEventService;
 import com.leyao.app_service.util.LsUserEventUtil;
 
+@Service
 public class LsUserEventServiceImpl implements ILsUserEventService {
     @Autowired
     LUserEventMapper lUserEventMapper;
