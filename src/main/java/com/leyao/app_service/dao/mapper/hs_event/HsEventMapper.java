@@ -51,6 +51,12 @@ public interface HsEventMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     Date checkUpdate();
+
+    @Select({"select max(h_event_id) as h_event_id from hs_event.hs_event"})
+    @Results({
+        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.TIMESTAMP)
+    })
+    Long getMaxHEventId();
     
     @Select({
         "select",

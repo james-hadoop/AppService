@@ -3,6 +3,8 @@ package com.leyao.app_service.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 
 public interface IHsUserService {
@@ -19,4 +21,6 @@ public interface IHsUserService {
     String getVerifyCode(String hUserPhoneNr);
     
     TUserSummary selectByhUserPhoneNr(Long hUserPhoneNr);
+    
+    int editTUserSummary(TUserSummary tUserSummary);
 }

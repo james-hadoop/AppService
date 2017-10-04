@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.leyao.app_service.entity.hs_event.enums.REventCategoryEnum;
+import com.leyao.app_service.entity.hs_event.enums.REventTypeEnum;
+
 public class TEventSummary {
     private Long hEventId;
 
-    private Integer sEventCategoryCd;
+    private Integer sEventCategoryCd = 0;
 
     private String rEventCategoryDesc;
 
-    private Integer sEventTypeCd;
+    private Integer sEventTypeCd = 0;
 
     private String rEventTypeDesc;
 
@@ -19,21 +22,21 @@ public class TEventSummary {
 
     private String sEventContentUrl;
 
-    private Integer sEventActiveInd;
+    private Integer sEventActiveInd = 0;
 
     private Date createTs;
 
     private Date updateTs;
 
-    private String sEventSearchContentTxt;
+    private String sEventSearchContentTxt = "?";
 
     private List<String> sEventSubContent1UrlList = new ArrayList<String>();
 
     private List<String> sEventSubContent2StrList = new ArrayList<String>();
 
-    private Integer sEventBannerPositionCd;
+    private Integer sEventBannerPositionCd = 0;
 
-    private Integer sEventRecomPositionCd;
+    private Integer sEventRecomPositionCd = 0;
 
     public Long gethEventId() {
         return hEventId;
@@ -56,7 +59,7 @@ public class TEventSummary {
     }
 
     public void setrEventCategoryDesc(String rEventCategoryDesc) {
-        this.rEventCategoryDesc = rEventCategoryDesc;
+        this.rEventCategoryDesc = REventCategoryEnum.getValue(sEventCategoryCd);
     }
 
     public Integer getsEventTypeCd() {
@@ -72,7 +75,7 @@ public class TEventSummary {
     }
 
     public void setrEventTypeDesc(String rEventTypeDesc) {
-        this.rEventTypeDesc = rEventTypeDesc;
+        this.rEventTypeDesc = REventTypeEnum.getValue(sEventTypeCd);
     }
 
     public String getsEventTitleUrl() {

@@ -1,18 +1,18 @@
 package com.leyao.app_service.entity.hs_event.enums;
 
-public enum REventTypeEnum {
-    Undefined("Undefined", 0), Image("Image", 1), Audio("Audio", 2), Video("Video", 3);
+public enum REventActiveEnum {
+    Active("Active", 0), Unactive("Unactive", 1);
 
     private String value;
     private int code;
 
-    private REventTypeEnum(String value, int code) {
+    private REventActiveEnum(String value, int code) {
         this.value = value;
         this.code = code;
     }
 
     public static String getValue(int code) {
-        for (REventTypeEnum c : REventTypeEnum.values()) {
+        for (REventActiveEnum c : REventActiveEnum.values()) {
             if (c.getCode() == code) {
                 return c.value;
             }
@@ -21,7 +21,7 @@ public enum REventTypeEnum {
     }
 
     public static int getCode(String value) {
-        for (REventTypeEnum c : REventTypeEnum.values()) {
+        for (REventActiveEnum c : REventActiveEnum.values()) {
             if (c.getValue().equals(value)) {
                 return c.code;
             }

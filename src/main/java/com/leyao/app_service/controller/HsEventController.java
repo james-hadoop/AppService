@@ -297,58 +297,6 @@ public class HsEventController {
     /**
      * @apiGroup Event
      * 
-     * @apiName addTEventSummary
-     * 
-     * @api {post} /v1/service/event/addTEventSummary 添加事件
-     * 
-     * @apiParam {Number} sEventCategoryCd Event category code.
-     * @apiParam {String} rEventCategoryDesc Event category description.
-     * @apiParam {Number} sEventTypeCd Event type code.
-     * @apiParam {String} rEventTypeDesc Event type description.
-     * @apiParam {String} sEventTitleUrl Event title url.
-     * @apiParam {String} sEventContentUrl Event content url.
-     * @apiParam {Number} sEventBannerPositionCd Event banner position.
-     * @apiParam {Number} sEventRecomPositionCd Event recommend position.
-     *
-     * @apiSuccessExample {json} Success-Response: 
-     *  {
-     *      "responseResult": "SUCCESS",
-     *      "responseResultMsg": "Reset success"
-     *  }
-     * 
-     * @apiSuccessExample {json} Error-Response: 
-     *  {
-     *      "responseResult": "ERROR",
-     *      "responseResultMsg": "Login fail" 
-     *  }
-     */
-    @RequestMapping(value = "/addTEventSummary", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseContent addTEventSummary(@RequestBody TEventSummary tEventSummary) {
-        logger.info("/v1/service/event/addTEventSummary() called: hEventId={}", tEventSummary.gethEventId());
-        ResponseContent responseContent = new ResponseContent();
-
-        try {
-            int resutl = hsEventService.addTEventSummary(tEventSummary);
-            if (Response.ERROR == resutl) {
-                responseContent.setResponseResult(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("Add fail");
-            } else {
-                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Add success");
-            }
-        } catch (Exception e) {
-            logger.error("/v1/service/event/addTEventSummary()", e);
-            responseContent.setResponseResult(ResponseResultEnum.ERROR);
-            responseContent.setResponseResultMsg("Server internal error");
-            return responseContent;
-        }
-        return responseContent;
-    }
-
-    /**
-     * @apiGroup Event
-     * 
      * @apiName getTEventSummaryByCondition
      * 
      * @api {get} /v1/service/event/getTEventSummaryByCondition 获取我的历史/我的关注/我的反馈事件
@@ -429,5 +377,105 @@ public class HsEventController {
         }
 
         return gridContent;
+    }
+    
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName addTEventSummary
+     * 
+     * @api {post} /v1/service/event/addTEventSummary 添加事件
+     * 
+     * @apiParam {Number} sEventCategoryCd Event category code.
+     * @apiParam {String} rEventCategoryDesc Event category description.
+     * @apiParam {Number} sEventTypeCd Event type code.
+     * @apiParam {String} rEventTypeDesc Event type description.
+     * @apiParam {String} sEventTitleUrl Event title url.
+     * @apiParam {String} sEventContentUrl Event content url.
+     * @apiParam {Number} sEventBannerPositionCd Event banner position.
+     * @apiParam {Number} sEventRecomPositionCd Event recommend position.
+     *
+     * @apiSuccessExample {json} Success-Response: 
+     *  {
+     *      "responseResult": "SUCCESS",
+     *      "responseResultMsg": "Reset success"
+     *  }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "responseResult": "ERROR",
+     *      "responseResultMsg": "Login fail" 
+     *  }
+     */
+    @RequestMapping(value = "/addTEventSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent addTEventSummary(@RequestBody TEventSummary tEventSummary) {
+        logger.info("/v1/service/event/addTEventSummary() called: sEventTitleUrl={}", tEventSummary.getsEventTitleUrl());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsEventService.addTEventSummary(tEventSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Add fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Add success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/event/addTEventSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+    
+    @RequestMapping(value = "/editTEventSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent editTEventSummary(@RequestBody TEventSummary tEventSummary) {
+        logger.info("/v1/service/event/editTEventSummary() called: sEventTitleUrl={}", tEventSummary.getsEventTitleUrl());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsEventService.editTEventSummary(tEventSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Add fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Add success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/event/editTEventSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+    
+    @RequestMapping(value = "/deleteTEventSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent deleteTEventSummary(@RequestBody TEventSummary tEventSummary) {
+        logger.info("/v1/service/event/deleteTEventSummary() called: sEventTitleUrl={}", tEventSummary.getsEventTitleUrl());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsEventService.deleteTEventSummary(tEventSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Add fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Add success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/event/deleteTEventSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
     }
 }

@@ -155,4 +155,10 @@ public class HsUserServiceImpl implements IHsUserService {
     public TUserSummary selectByhUserPhoneNr(Long hUserPhoneNr) {
         return tUserPageMapper.selectByhUserPhoneNr(hUserPhoneNr);
     }
+
+    @Override
+    public int editTUserSummary(TUserSummary tUserSummary) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

@@ -1,7 +1,7 @@
 package com.leyao.app_service.entity.hs_event.enums;
 
 public enum REventCategoryEnum {
-    Activity("Activity", 1), Education("Education", 2), Share("Share", 3), Album("Album", 4);
+    Undefined("Undefined", 0),Activity("Activity", 1), Education("Education", 2), Share("Share", 3), Album("Album", 4);
 
     private String value;
     private int code;

@@ -35,6 +35,7 @@ import com.leyao.app_service.entity.hs_event.SEventSubContent2;
 import com.leyao.app_service.entity.hs_event.SEventType;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
+import com.leyao.app_service.entity.hs_event.enums.REventActiveEnum;
 import com.leyao.app_service.service.IHsEventService;
 import com.leyao.app_service.util.HsEventUtil;
 
@@ -188,6 +189,19 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
+    public List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) {
+        List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListByCondition(paramMap);
+
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        return tEventSummaryList;
+    }
+
+    @Override
+    public int getTEventSummaryByConditionCount(Map<String, Object> paramMap) {
+        return tEventPageMapper.getTEventPageListByConditionCount(paramMap);
+    }
+
+    @Override
     @Transactional
     public int addTEventSummary(TEventSummary tEventSummary) {
         Date timestamp = new Date();
@@ -196,9 +210,11 @@ public class HsEventServiceImpl implements IHsEventService {
 
         // HsEvent
         HsEvent hsEvent = HsEventUtil.eventSummary2Event(tEventSummary);
-        long eventId = hsEventMapper.insertSelective(hsEvent);
+        hsEventMapper.insertSelective(hsEvent);
+        long eventId = hsEventMapper.getMaxHEventId();
 
         tEventSummary.sethEventId(eventId);
+        tEventSummary.setsEventSearchContentTxt("?");
 
         // SEventActive
         SEventActive sEventActive = HsEventUtil.eventSummary2EventActive(tEventSummary);
@@ -254,15 +270,79 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
-    public List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) {
-        List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListByCondition(paramMap);
+    @Transactional
+    public int editTEventSummary(TEventSummary tEventSummary) {
+        Date timestamp = new Date();
+        tEventSummary.setUpdateTs(timestamp);
 
-        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
-        return tEventSummaryList;
+        // HsEvent
+        HsEvent hsEvent = HsEventUtil.eventSummary2Event(tEventSummary);
+        hsEventMapper.updateByPrimaryKeySelective(hsEvent);
+
+        // SEventActive
+        SEventActive sEventActive = HsEventUtil.eventSummary2EventActive(tEventSummary);
+        sEventActiveMapper.updateByPrimaryKeySelective(sEventActive);
+
+        // SEventBanner
+        SEventBanner sEventBanner = HsEventUtil.eventSummary2EventBanner(tEventSummary);
+        sEventBannerMapper.updateByPrimaryKeySelective(sEventBanner);
+
+        // SEventCategory
+        SEventCategory sEventCategory = HsEventUtil.eventSummary2EventCategory(tEventSummary);
+        sEventCategoryMapper.updateByPrimaryKeySelective(sEventCategory);
+
+        // SEventContent
+        SEventContent sEventContent = HsEventUtil.eventSummary2EventContent(tEventSummary);
+        sEventContentMapper.updateByPrimaryKeySelective(sEventContent);
+
+        // SEventRecom1
+        SEventRecom1 sEventRecom1 = HsEventUtil.eventSummary2EventRecom1(tEventSummary);
+        sEventRecom1Mapper.updateByPrimaryKeySelective(sEventRecom1);
+
+        // SEventRecom2
+        SEventRecom2 sEventRecom2 = HsEventUtil.eventSummary2EventRecom2(tEventSummary);
+        sEventRecom2Mapper.updateByPrimaryKeySelective(sEventRecom2);
+
+        // SEventRecom3
+        SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
+        sEventRecom3Mapper.updateByPrimaryKeySelective(sEventRecom3);
+
+        // SEventSubContent1
+        List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
+        for (SEventSubContent1 record : sEventSubContent1List) {
+            sEventSubContent1Mapper.updateByPrimaryKeySelective(record);
+        }
+
+        // SEventSubContent2
+        List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
+        for (SEventSubContent2 record : sEventSubContent2List) {
+            sEventSubContent2Mapper.updateByPrimaryKeySelective(record);
+        }
+
+        // SEventType
+        SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
+        sEventTypeMapper.updateByPrimaryKeySelective(sEventType);
+
+        // TEventPage
+        List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
+        for (TEventPage record : tEventPageList) {
+            tEventPageMapper.updateByPrimaryKeySelective(record);
+        }
+
+        return Response.SUCCESS;
     }
 
     @Override
-    public int getTEventSummaryByConditionCount(Map<String, Object> paramMap) {
-        return tEventPageMapper.getTEventPageListByConditionCount(paramMap);
+    @Transactional
+    public int deleteTEventSummary(TEventSummary tEventSummary) {
+        Date timestamp = new Date();
+        tEventSummary.setUpdateTs(timestamp);
+        tEventSummary.setsEventActiveInd(REventActiveEnum.Unactive.getCode());
+
+        // SEventActive
+        SEventActive sEventActive = HsEventUtil.eventSummary2EventActive(tEventSummary);
+        sEventActiveMapper.updateByPrimaryKeySelective(sEventActive);
+
+        return Response.SUCCESS;
     }
 }
