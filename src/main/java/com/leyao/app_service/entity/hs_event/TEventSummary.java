@@ -55,11 +55,11 @@ public class TEventSummary {
     }
 
     public String getrEventCategoryDesc() {
-        return rEventCategoryDesc;
+        return REventCategoryEnum.getValue(sEventCategoryCd);
     }
 
     public void setrEventCategoryDesc(String rEventCategoryDesc) {
-        this.rEventCategoryDesc = REventCategoryEnum.getValue(sEventCategoryCd);
+        this.rEventCategoryDesc = rEventCategoryDesc;
     }
 
     public Integer getsEventTypeCd() {
@@ -71,11 +71,11 @@ public class TEventSummary {
     }
 
     public String getrEventTypeDesc() {
-        return rEventTypeDesc;
+        return REventTypeEnum.getValue(sEventTypeCd);
     }
 
     public void setrEventTypeDesc(String rEventTypeDesc) {
-        this.rEventTypeDesc = REventTypeEnum.getValue(sEventTypeCd);
+        this.rEventTypeDesc = rEventTypeDesc;
     }
 
     public String getsEventTitleUrl() {

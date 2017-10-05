@@ -340,9 +340,12 @@ public class HsEventServiceImpl implements IHsEventService {
         tEventSummary.setsEventActiveInd(REventActiveEnum.Unactive.getCode());
 
         // SEventActive
-        SEventActive sEventActive = HsEventUtil.eventSummary2EventActive(tEventSummary);
-        sEventActiveMapper.updateByPrimaryKeySelective(sEventActive);
-        
+        List<SEventActive> eventActiveList = sEventActiveMapper.selectByEventId(tEventSummary.gethEventId());
+        for (SEventActive ea : eventActiveList) {
+            ea.setsEventActiveInd(REventActiveEnum.Unactive.getCode());
+            sEventActiveMapper.updateByPrimaryKeySelective(ea);
+        }
+
         // TEventPage
         List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
         for (TEventPage record : tEventPageList) {

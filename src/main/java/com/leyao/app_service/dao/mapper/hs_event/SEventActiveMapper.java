@@ -1,6 +1,9 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
 import com.leyao.app_service.entity.hs_event.SEventActive;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -45,6 +48,21 @@ public interface SEventActiveMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     SEventActive selectByPrimaryKey(Long sEventActiveId);
+    
+    @Select({
+        "select",
+        "s_event_active_id, h_event_id, s_event_active_ind, create_ts, update_ts",
+        "from s_event_active",
+        "where h_event_id = #{hEventId,jdbcType=BIGINT}"
+    })
+    @Results({
+        @Result(column="s_event_active_id", property="sEventActiveId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.BIGINT),
+        @Result(column="s_event_active_ind", property="sEventActiveInd", jdbcType=JdbcType.INTEGER),
+        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<SEventActive> selectByEventId(Long hEventId);
 
     @UpdateProvider(type=SEventActiveSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SEventActive record);

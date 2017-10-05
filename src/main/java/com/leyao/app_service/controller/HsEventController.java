@@ -342,7 +342,7 @@ public class HsEventController {
      * }
      */
     @RequestMapping(value = "/getTEventSummaryByCondition", method = RequestMethod.GET)
-    public GridContent getTEventSummaryByCondition(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+    public GridContent getTEventSummaryByCondition(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "100") Integer rows,
                     @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
                     @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,
                     @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,

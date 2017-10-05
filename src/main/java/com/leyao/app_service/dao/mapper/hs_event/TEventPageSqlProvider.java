@@ -128,9 +128,9 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("ep.*").FROM("hs_event.t_event_page ep, l_user_event.l_user_event ue, l_user_event.s_user_event_active uea,hs_user.h_user u");
+        sql.SELECT("ep.*").FROM("hs_event.t_event_page ep");
 
-        sql.WHERE("ep.s_event_active_ind=0 and ep.h_event_id=ue.h_event_id and ue.l_user_event_id=uea.l_user_event_id and uea.s_user_event_active_ind=0 and ue.h_user_id=u.h_user_id");
+        sql.WHERE("ep.s_event_active_ind=0");
 
         if (paramMap.get("hUserPhoneNr") != null) {
             sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
@@ -163,9 +163,9 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByConditionCount(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("count(1)").FROM("hs_event.t_event_page ep, l_user_event.l_user_event ue, l_user_event.s_user_event_active uea,hs_user.h_user u");
+        sql.SELECT("count(1)").FROM("hs_event.t_event_page ep");
 
-        sql.WHERE("ep.s_event_active_ind=0 and ep.h_event_id=ue.h_event_id and ue.l_user_event_id=uea.l_user_event_id and uea.s_user_event_active_ind=0 and ue.h_user_id=u.h_user_id");
+        sql.WHERE("ep.s_event_active_ind=0");
 
         if (paramMap.get("hUserPhoneNr") != null) {
             sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");

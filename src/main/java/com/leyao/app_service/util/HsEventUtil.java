@@ -124,7 +124,7 @@ public class HsEventUtil {
                 es = new TEventSummary();
 
                 es.sethEventId(ep.gethEventId());
-                es.setsEventCategoryCd(ep.getsEventActiveInd());
+                es.setsEventCategoryCd(ep.getsEventCategoryCd());
                 es.setrEventCategoryDesc(ep.getrEventCategoryDesc());
                 es.setsEventTypeCd(ep.getsEventTypeCd());
                 es.setrEventTypeDesc(ep.getrEventTypeDesc());
