@@ -128,9 +128,9 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("ep.*").FROM("hs_user.h_user u, ls_user_event.l_user_event ue, ls_user_event.s_user_event_active uea,hs_event.t_event_page ep,hs_event.s_event_active ea");
+        sql.SELECT("ep.*").FROM("hs_event.t_event_page ep, l_user_event.l_user_event ue, l_user_event.s_user_event_active uea,hs_user.h_user u");
 
-        sql.WHERE("u.h_user_id=ue.h_user_id and ue.l_user_event_id=uea.l_user_event_id and uea.s_user_event_active_ind=0 and ue.h_event_id= ep.h_event_id and ep.h_event_id=ea.h_event_id and ea.s_event_active_ind=0");
+        sql.WHERE("ep.s_event_active_ind=0 and ep.h_event_id=ue.h_event_id and ue.l_user_event_id=uea.l_user_event_id and uea.s_user_event_active_ind=0 and ue.h_user_id=u.h_user_id");
 
         if (paramMap.get("hUserPhoneNr") != null) {
             sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
@@ -163,9 +163,9 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByConditionCount(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("count(1)").FROM("hs_user.h_user u, ls_user_event.l_user_event ue, ls_user_event.s_user_event_active uea,hs_event.t_event_page ep,hs_event.s_event_active ea");
+        sql.SELECT("count(1)").FROM("hs_event.t_event_page ep, l_user_event.l_user_event ue, l_user_event.s_user_event_active uea,hs_user.h_user u");
 
-        sql.WHERE("u.h_user_id=ue.h_user_id and ue.l_user_event_id=uea.l_user_event_id and uea.s_user_event_active_ind=0 and ue.h_event_id= ep.h_event_id and ep.h_event_id=ea.h_event_id and ea.s_event_active_ind=0");
+        sql.WHERE("ep.s_event_active_ind=0 and ep.h_event_id=ue.h_event_id and ue.l_user_event_id=uea.l_user_event_id and uea.s_user_event_active_ind=0 and ue.h_user_id=u.h_user_id");
 
         if (paramMap.get("hUserPhoneNr") != null) {
             sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");

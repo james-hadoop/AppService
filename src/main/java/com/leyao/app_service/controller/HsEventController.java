@@ -348,7 +348,7 @@ public class HsEventController {
                     @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,
                     @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt,
                     @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt) {
-        logger.info("/v1/service/event/getTEventSummaryByCondition() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd{},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt={},sEventSearchContentTxt={}",
+        logger.info("/v1/service/event/getTEventSummaryByCondition() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd={},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt={},sEventSearchContentTxt={}",
                         sessionCode, page, rows, hUserPhoneNr, sEventCategoryCd, sEventTypeCd, sUserEventLikeInd, sUserEventReadLogTxt,sEventSearchContentTxt);
         GridContent gridContent = new GridContent();
 
