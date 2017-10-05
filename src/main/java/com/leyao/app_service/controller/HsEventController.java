@@ -458,7 +458,8 @@ public class HsEventController {
     @RequestMapping(value = "/deleteTEventSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent deleteTEventSummary(@RequestBody TEventSummary tEventSummary) {
-        logger.info("/v1/service/event/deleteTEventSummary() called: sEventTitleUrl={}", tEventSummary.getsEventTitleUrl());
+        logger.info("/v1/service/event/deleteTEventSummary() called: hEventId={}", tEventSummary.gethEventId()
+                        );
         ResponseContent responseContent = new ResponseContent();
 
         try {
