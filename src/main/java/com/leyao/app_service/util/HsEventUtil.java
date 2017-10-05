@@ -19,6 +19,7 @@ import com.leyao.app_service.entity.hs_event.SEventSubContent2;
 import com.leyao.app_service.entity.hs_event.SEventType;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
+import com.leyao.app_service.entity.hs_event.enums.REventTypeEnum;
 
 public class HsEventUtil {
     public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> tEventSummaryList) {
@@ -116,7 +117,7 @@ public class HsEventUtil {
                 }
             } else {
                 eventIdSet.add(eventId);
-                
+
                 if (null != es) {
                     tEventSummaryList.add(es);
                 }
@@ -212,8 +213,10 @@ public class HsEventUtil {
         SEventRecom1 sEventRecom1 = new SEventRecom1();
         sEventRecom1.setCreateTs(es.getCreateTs());
         sEventRecom1.sethEventId(es.gethEventId());
-        sEventRecom1.setsEventRecomActiveInd(es.getsEventActiveInd());
-        sEventRecom1.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        if (es.getsEventTypeCd() == REventTypeEnum.Audio.getCode()) {
+            sEventRecom1.setsEventRecomActiveInd(es.getsEventActiveInd());
+            sEventRecom1.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        }
         sEventRecom1.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom1;
@@ -223,8 +226,10 @@ public class HsEventUtil {
         SEventRecom2 sEventRecom2 = new SEventRecom2();
         sEventRecom2.setCreateTs(es.getCreateTs());
         sEventRecom2.sethEventId(es.gethEventId());
-        sEventRecom2.setsEventRecomActiveInd(es.getsEventActiveInd());
-        sEventRecom2.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        if (es.getsEventTypeCd() == REventTypeEnum.Video.getCode()) {
+            sEventRecom2.setsEventRecomActiveInd(es.getsEventActiveInd());
+            sEventRecom2.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        }
         sEventRecom2.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom2;
@@ -234,8 +239,10 @@ public class HsEventUtil {
         SEventRecom3 sEventRecom3 = new SEventRecom3();
         sEventRecom3.setCreateTs(es.getCreateTs());
         sEventRecom3.sethEventId(es.gethEventId());
-        sEventRecom3.setsEventRecomActiveInd(es.getsEventActiveInd());
-        sEventRecom3.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        if (es.getsEventTypeCd() == REventTypeEnum.Image.getCode()) {
+            sEventRecom3.setsEventRecomActiveInd(es.getsEventActiveInd());
+            sEventRecom3.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        }
         sEventRecom3.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom3;
