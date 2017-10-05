@@ -342,6 +342,12 @@ public class HsEventServiceImpl implements IHsEventService {
         // SEventActive
         SEventActive sEventActive = HsEventUtil.eventSummary2EventActive(tEventSummary);
         sEventActiveMapper.updateByPrimaryKeySelective(sEventActive);
+        
+        // TEventPage
+        List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
+        for (TEventPage record : tEventPageList) {
+            tEventPageMapper.updateByPrimaryKeySelective(record);
+        }
 
         return Response.SUCCESS;
     }

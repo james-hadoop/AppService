@@ -157,6 +157,7 @@ public class HsEventUtil {
 
     public static HsEvent eventSummary2Event(TEventSummary es) {
         HsEvent event = new HsEvent();
+        event.sethEventId(es.gethEventId());
         event.setCreateTs(es.getCreateTs());
         event.sethEventId(es.gethEventId());
         event.setUpdateTs(es.getUpdateTs());
@@ -166,6 +167,7 @@ public class HsEventUtil {
 
     public static SEventActive eventSummary2EventActive(TEventSummary es) {
         SEventActive eventActive = new SEventActive();
+        eventActive.sethEventId(es.gethEventId());
         eventActive.setCreateTs(es.getCreateTs());
         eventActive.sethEventId(es.gethEventId());
         eventActive.setsEventActiveInd(es.getsEventActiveInd());
