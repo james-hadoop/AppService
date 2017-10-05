@@ -244,16 +244,23 @@ public class HsEventServiceImpl implements IHsEventService {
         SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
         sEventRecom3Mapper.insertSelective(sEventRecom3);
 
-        // SEventSubContent1
-        List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
-        for (SEventSubContent1 record : sEventSubContent1List) {
-            sEventSubContent1Mapper.insertSelective(record);
-        }
+        if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
+            try {
+                // SEventSubContent1
+                List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
+                for (SEventSubContent1 record : sEventSubContent1List) {
+                    sEventSubContent1Mapper.insertSelective(record);
+                }
 
-        // SEventSubContent2
-        List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
-        for (SEventSubContent2 record : sEventSubContent2List) {
-            sEventSubContent2Mapper.insertSelective(record);
+                // SEventSubContent2
+                List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
+                for (SEventSubContent2 record : sEventSubContent2List) {
+                    sEventSubContent2Mapper.insertSelective(record);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Response.ERROR;
+            }
         }
 
         // SEventType
@@ -307,16 +314,23 @@ public class HsEventServiceImpl implements IHsEventService {
         SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
         sEventRecom3Mapper.updateByPrimaryKeySelective(sEventRecom3);
 
-        // SEventSubContent1
-        List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
-        for (SEventSubContent1 record : sEventSubContent1List) {
-            sEventSubContent1Mapper.updateByPrimaryKeySelective(record);
-        }
+        if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
+            try {
+                // SEventSubContent1
+                List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
+                for (SEventSubContent1 record : sEventSubContent1List) {
+                    sEventSubContent1Mapper.insertSelective(record);
+                }
 
-        // SEventSubContent2
-        List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
-        for (SEventSubContent2 record : sEventSubContent2List) {
-            sEventSubContent2Mapper.updateByPrimaryKeySelective(record);
+                // SEventSubContent2
+                List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
+                for (SEventSubContent2 record : sEventSubContent2List) {
+                    sEventSubContent2Mapper.insertSelective(record);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Response.ERROR;
+            }
         }
 
         // SEventType

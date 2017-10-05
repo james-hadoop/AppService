@@ -33,6 +33,8 @@ public class TEventSummary {
     private List<String> sEventSubContent1UrlList = new ArrayList<String>();
 
     private List<String> sEventSubContent2StrList = new ArrayList<String>();
+    
+    private String sEventSubContent=null;
 
     private Integer sEventBannerPositionCd = 0;
 
@@ -140,6 +142,14 @@ public class TEventSummary {
 
     public void setsEventSubContent2StrList(List<String> sEventSubContent2StrList) {
         this.sEventSubContent2StrList = sEventSubContent2StrList;
+    }
+
+    public String getsEventSubContent() {
+        return sEventSubContent;
+    }
+
+    public void setsEventSubContent(String sEventSubContent) {
+        this.sEventSubContent = sEventSubContent;
     }
 
     public Integer getsEventBannerPositionCd() {

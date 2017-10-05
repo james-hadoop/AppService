@@ -48,9 +48,19 @@ http://localhost:8088/v1/test/getHsEvent
 http://localhost:8088/v1/test/getAllSEventActive
 
 ## SEventSubContent1 & SEventSubContent2
-{
-    "url": "audio/a.mp3",
-    "lyricist": "peter",
-    "composer": "tom",
-    "singer": "linda"
-}
+[
+    {
+        "url": "audio/a.mp3",
+        "lyricist": "peter",
+        "composer": "tom",
+        "singer": "linda"
+    },
+    {
+        "url": "audio/b.mp3",
+        "lyricist": "fang",
+        "composer": "jay",
+        "singer": "jay"
+    }
+]
+
+[{"url":"audio/a.mp3","lyricist":"peter","composer":"tom","singer":"linda"},{"url":"audio/b.mp3","lyricist":"fang","composer":"jay","singer":"jay"}]

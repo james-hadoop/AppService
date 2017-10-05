@@ -1,36 +1,26 @@
 package com.leyao.app_service.entity.hs_event;
 
 /**
- * { "url": "audio/a.mp3", "lyricist": "peter", "composer": "tom", "singer":
+ * { "lyricist": "peter", "composer": "tom", "singer":
  * "linda" }
  * 
  * @author qjiang
  *
  */
-public class SubContentJsonEntity {
-    String url;
+public class SubContentJsonEntityWithoutUrl {
     String lyricist;
     String composer;
     String singer;
 
-    public SubContentJsonEntity() {
+    public SubContentJsonEntityWithoutUrl() {
 
     }
 
-    public SubContentJsonEntity(String url, String lyricist, String composer, String singer) {
-        this.url = url;
+    public SubContentJsonEntityWithoutUrl(String lyricist, String composer, String singer) {
         this.lyricist = lyricist;
         this.composer = composer;
         this.singer = singer;
 
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getLyricist() {
@@ -55,9 +45,5 @@ public class SubContentJsonEntity {
 
     public void setSinger(String singer) {
         this.singer = singer;
-    }
-
-    public SubContentJsonEntityWithoutUrl toSubContentJsonEntityWithoutUrl() {
-        return new SubContentJsonEntityWithoutUrl(lyricist, composer, singer);
     }
 }
