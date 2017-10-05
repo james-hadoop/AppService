@@ -1,10 +1,15 @@
 package com.leyao.app_service.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leyao.app_service.common.GlobalConstant;
 import com.leyao.app_service.entity.hs_event.HsEvent;
 import com.leyao.app_service.entity.hs_event.SEventActive;
@@ -17,6 +22,7 @@ import com.leyao.app_service.entity.hs_event.SEventRecom3;
 import com.leyao.app_service.entity.hs_event.SEventSubContent1;
 import com.leyao.app_service.entity.hs_event.SEventSubContent2;
 import com.leyao.app_service.entity.hs_event.SEventType;
+import com.leyao.app_service.entity.hs_event.SubContentJsonEntity;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 import com.leyao.app_service.entity.hs_event.enums.REventTypeEnum;
@@ -296,5 +302,28 @@ public class HsEventUtil {
         sEventType.setUpdateTs(es.getUpdateTs());
 
         return sEventType;
+    }
+
+    private static ObjectMapper mapper = new ObjectMapper();
+
+    public static String SubContentJsonEntity2JsonString(SubContentJsonEntity entity) throws JsonProcessingException {
+        String convertedJobParam = mapper.writeValueAsString(entity);
+
+        return convertedJobParam;
+    }
+
+    public static SubContentJsonEntity JsonString2SubContentJsonEntity(String json) throws JsonParseException, JsonMappingException, IOException {
+        SubContentJsonEntity entity = mapper.readValue(json, (new SubContentJsonEntity().getClass()));
+        return entity;
+    }
+
+    public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
+        String jsonOrigin = "{\"url\":\"audio/a.mp3\",\"lyricist\":\"peter\",\"composer\":\"tom\",\"singer\":\"linda\"}";
+
+        SubContentJsonEntity entity = HsEventUtil.JsonString2SubContentJsonEntity(jsonOrigin);
+        System.out.println(entity.getUrl() + " " + entity.getSinger());
+
+        String jsonString = HsEventUtil.SubContentJsonEntity2JsonString(entity);
+        System.out.println(jsonString);
     }
 }
