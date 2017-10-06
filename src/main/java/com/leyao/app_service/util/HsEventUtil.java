@@ -3,7 +3,6 @@ package com.leyao.app_service.util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -28,6 +27,7 @@ import com.leyao.app_service.entity.hs_event.SubContentJsonEntity;
 import com.leyao.app_service.entity.hs_event.SubContentJsonEntityWithoutUrl;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
+import com.leyao.app_service.entity.hs_event.enums.REventCategoryEnum;
 import com.leyao.app_service.entity.hs_event.enums.REventTypeEnum;
 
 public class HsEventUtil {
@@ -59,10 +59,10 @@ public class HsEventUtil {
             TEventPage ep = new TEventPage();
 
             ep.sethEventId(es.gethEventId());
-            ep.setsEventCategoryCd(es.getsEventActiveInd());
-            ep.setrEventCategoryDesc(es.getrEventCategoryDesc());
+            ep.setsEventCategoryCd(es.getsEventCategoryCd());
+            ep.setrEventCategoryDesc(REventCategoryEnum.getValue(es.getsEventCategoryCd()));
             ep.setsEventTypeCd(es.getsEventTypeCd());
-            ep.setrEventTypeDesc(es.getrEventTypeDesc());
+            ep.setrEventTypeDesc(REventTypeEnum.getValue(es.getsEventTypeCd()));
             ep.setsEventTitleUrl(es.getsEventTitleUrl());
             ep.setsEventContentUrl(es.getsEventContentUrl());
             ep.setsEventActiveInd(es.getsEventActiveInd());
@@ -76,10 +76,10 @@ public class HsEventUtil {
                 TEventPage ep = new TEventPage();
 
                 ep.sethEventId(es.gethEventId());
-                ep.setsEventCategoryCd(es.getsEventActiveInd());
-                ep.setrEventCategoryDesc(es.getrEventCategoryDesc());
+                ep.setsEventCategoryCd(es.getsEventCategoryCd());
+                ep.setrEventCategoryDesc(REventCategoryEnum.getValue(es.getsEventCategoryCd()));
                 ep.setsEventTypeCd(es.getsEventTypeCd());
-                ep.setrEventTypeDesc(es.getrEventTypeDesc());
+                ep.setrEventTypeDesc(REventTypeEnum.getValue(es.getsEventTypeCd()));
                 ep.setsEventTitleUrl(es.getsEventTitleUrl());
                 ep.setsEventContentUrl(es.getsEventContentUrl());
                 ep.setsEventSubContent1Url(subContent1Url.get(i));
