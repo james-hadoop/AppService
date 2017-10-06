@@ -3,11 +3,13 @@ package com.leyao.app_service.util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leyao.app_service.common.GlobalConstant;
@@ -309,6 +311,10 @@ public class HsEventUtil {
 
     private static ObjectMapper mapper = new ObjectMapper();
 
+    public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
+        return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
+    }
+
     public static String SubContentJsonEntity2JsonString(List<SubContentJsonEntity> entities) throws JsonProcessingException {
         String jsonString = mapper.writeValueAsString(entities);
 
@@ -316,7 +322,9 @@ public class HsEventUtil {
     }
 
     public static List<SubContentJsonEntity> JsonString2SubContentJsonEntity(String json) throws JsonParseException, JsonMappingException, IOException {
-        List<SubContentJsonEntity> entities = mapper.readValue(json, (new ArrayList<SubContentJsonEntity>().getClass()));
+        JavaType javaType = getCollectionType(ArrayList.class, SubContentJsonEntity.class);
+
+        List<SubContentJsonEntity> entities = mapper.readValue(json, javaType);
         return entities;
     }
 
@@ -338,6 +346,9 @@ public class HsEventUtil {
 
         List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(jsonOrigin);
         System.out.println(entities.size());
+        for (SubContentJsonEntity entity : entities) {
+            System.out.println(entity.getUrl() + " " + entity.getSinger());
+        }
 
         String jsonString = HsEventUtil.SubContentJsonEntity2JsonString(entities);
         System.out.println(jsonString);
