@@ -53,7 +53,7 @@ public class SEventCategorySqlProvider {
             sql.SET("update_ts = #{updateTs,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("s_event_category_id = #{sEventCategoryId,jdbcType=BIGINT}");
+        sql.WHERE("h_event_id = #{hEventId,jdbcType=BIGINT}");
         
         return sql.toString();
     }

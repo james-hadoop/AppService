@@ -1,6 +1,9 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
 import com.leyao.app_service.entity.hs_event.SEventSubContent1;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -52,6 +55,22 @@ public interface SEventSubContent1Mapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     SEventSubContent1 selectByPrimaryKey(Long sEventSubContent1Id);
+    
+    @Select({
+        "select",
+        "s_event_sub_content_1_id, h_event_id, s_event_sub_content_1_url, create_ts, ",
+        "update_ts",
+        "from s_event_sub_content_1",
+        "where h_event_id = #{hEventId,jdbcType=BIGINT}"
+    })
+    @Results({
+        @Result(column="s_event_sub_content_1_id", property="sEventSubContent1Id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.BIGINT),
+        @Result(column="s_event_sub_content_1_url", property="sEventSubContent1Url", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<SEventSubContent1> getEventSubContent1ByEventId(Long hEventId);
 
     @UpdateProvider(type=SEventSubContent1SqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SEventSubContent1 record);

@@ -18,6 +18,12 @@ public interface SEventBannerMapper {
         "where s_event_banner_id = #{sEventBannerId,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long sEventBannerId);
+    
+    @Delete({
+        "delete from s_event_banner",
+        "where h_event_id = #{hEventId,jdbcType=BIGINT}"
+    })
+    int deleteEventId(Long hEventId);
 
     @Insert({
         "insert into s_event_banner (s_event_banner_id, h_event_id, ",

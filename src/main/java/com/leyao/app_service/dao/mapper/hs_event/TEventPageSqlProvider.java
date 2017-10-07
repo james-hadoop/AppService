@@ -189,6 +189,29 @@ public class TEventPageSqlProvider {
 
         return sql.toString();
     }
+    
+    // getTEventSummaryByCondition
+    public String getTEventSummaryByCondition(Map<String, Object> paramMap) {
+        SQL sql = new SQL();
+
+        sql.SELECT("ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd, eb.s_event_banner_position_cd").FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id");
+
+        sql.WHERE("ep.s_event_active_ind=0");
+
+        if (paramMap.get("sEventCategoryCd") != null) {
+            sql.WHERE("ep.s_event_category_cd = #{sEventCategoryCd,jdbcType=INTEGER}");
+        }
+
+        if (paramMap.get("sEventTypeCd") != null) {
+            sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
+        }
+        
+        if (paramMap.get("sEventSearchContentTxt") != null) {
+            sql.WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+        }
+
+        return sql.toString();
+    }
 
     public static void main(String[] args) {
         // Map<String, Object> paramMap = new HashMap<String, Object>();

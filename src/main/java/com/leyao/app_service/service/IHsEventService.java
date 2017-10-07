@@ -1,8 +1,11 @@
 package com.leyao.app_service.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.leyao.app_service.entity.hs_event.SEventSubContent1;
+import com.leyao.app_service.entity.hs_event.SEventSubContent2;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
 
 public interface IHsEventService {
@@ -24,7 +27,7 @@ public interface IHsEventService {
 
     int getTEventPageListForBannerCount(Map<String, Object> paramMap);
     
-    List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap);
+    List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) throws IOException;
 
     int getTEventSummaryByConditionCount(Map<String, Object> paramMap);
     
@@ -33,4 +36,8 @@ public interface IHsEventService {
     int editTEventSummary(TEventSummary tEventSummary);
     
     int deleteTEventSummary(TEventSummary tEventSummary);
+    
+    List<SEventSubContent1> getEventSubContent1ByEventId(Long hEventId);
+    
+    List<SEventSubContent2> getEventSubContent2ByEventId(Long hEventId);
 }

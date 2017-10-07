@@ -190,10 +190,22 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
-    public List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) {
-        List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListByCondition(paramMap);
+    public List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) throws IOException {
+        // List<TEventPage> tEventPageList =
+        // tEventPageMapper.getTEventPageListByCondition(paramMap);
+        //
+        // List<TEventSummary> tEventSummaryList =
+        // HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        // return tEventSummaryList;
 
-        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        List<TEventSummary> tEventSummaryList = tEventPageMapper.getTEventSummaryByCondition(paramMap);
+        for(TEventSummary event:tEventSummaryList){
+            List<SEventSubContent1> eventSubContent1List=sEventSubContent1Mapper.getEventSubContent1ByEventId(event.gethEventId());
+            List<SEventSubContent2> eventSubContent2List=sEventSubContent2Mapper.getEventSubContent2ByEventId(event.gethEventId());
+            
+            event.setsEventSubContent(HsEventUtil.makeEventSubContent(eventSubContent1List, eventSubContent2List));
+        }
+        
         return tEventSummaryList;
     }
 
@@ -319,7 +331,7 @@ public class HsEventServiceImpl implements IHsEventService {
             if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
                 sEventSubContent1Mapper.deleteByEventId(tEventSummary.gethEventId());
                 sEventSubContent2Mapper.deleteByEventId(tEventSummary.gethEventId());
-                
+
                 // SEventSubContent1
                 List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
                 for (SEventSubContent1 record : sEventSubContent1List) {
@@ -378,5 +390,15 @@ public class HsEventServiceImpl implements IHsEventService {
         }
 
         return Response.SUCCESS;
+    }
+
+    @Override
+    public List<SEventSubContent1> getEventSubContent1ByEventId(Long hEventId) {
+        return sEventSubContent1Mapper.getEventSubContent1ByEventId(hEventId);
+    }
+
+    @Override
+    public List<SEventSubContent2> getEventSubContent2ByEventId(Long hEventId) {
+        return sEventSubContent2Mapper.getEventSubContent2ByEventId(hEventId);
     }
 }

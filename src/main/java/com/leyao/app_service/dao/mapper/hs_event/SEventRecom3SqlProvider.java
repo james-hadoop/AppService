@@ -61,7 +61,7 @@ public class SEventRecom3SqlProvider {
             sql.SET("update_ts = #{updateTs,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("s_event_recom_3_id = #{sEventRecom3Id,jdbcType=BIGINT}");
+        sql.WHERE("h_event_id = #{hEventId,jdbcType=BIGINT}");
         
         return sql.toString();
     }

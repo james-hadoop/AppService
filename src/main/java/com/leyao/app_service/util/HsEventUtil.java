@@ -382,6 +382,29 @@ public class HsEventUtil {
         SubContentJsonEntityWithoutUrl entity = mapper.readValue(json, (new SubContentJsonEntityWithoutUrl().getClass()));
         return entity;
     }
+    
+    public static String makeEventSubContent(List<SEventSubContent1> eventSubContent1List,List<SEventSubContent2> eventSubContent2List) throws IOException{
+        String result=null;
+        
+        if(null==eventSubContent1List||0==eventSubContent1List.size()||null==eventSubContent2List||0==eventSubContent1List.size()){
+            return null;
+        }
+        
+        List<SubContentJsonEntity> eventSubContentList=new ArrayList<SubContentJsonEntity>();
+        for(int i=0;i<eventSubContent1List.size();i++){
+            SEventSubContent2 eventSubContent2=eventSubContent2List.get(i);
+            SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil.JsonString2SubContentJsonEntityWithoutUrl(eventSubContent2.getsEventSubContent2Str());
+            
+            SubContentJsonEntity subContentJsonEntity=new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
+            subContentJsonEntity.setUrl(eventSubContent1List.get(i).getsEventSubContent1Url());
+            
+            eventSubContentList.add(subContentJsonEntity);
+        }
+        
+        result=HsEventUtil.SubContentJsonEntity2JsonString(eventSubContentList);
+        
+        return result;
+    }
 
     public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
         // String jsonOrigin =

@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
 import com.leyao.app_service.entity.hs_event.TEventPage;
+import com.leyao.app_service.entity.hs_event.TEventSummary;
 
 public interface TEventPageMapper {
     @Delete({ "delete from t_event_page", "where h_event_id = #{hEventId,jdbcType=BIGINT}" })
@@ -255,4 +256,21 @@ public interface TEventPageMapper {
     // getTEventPageListByConditionCount
     @SelectProvider(type=TEventPageSqlProvider.class, method="getTEventPageListByConditionCount")
     Integer getTEventPageListByConditionCount(Map<String, Object> paramMap);
+    
+    // getTEventSummaryByCondition
+    @SelectProvider(type=TEventPageSqlProvider.class, method="getTEventSummaryByCondition")
+    @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_type_cd", property = "sEventTypeCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_type_desc", property = "rEventTypeDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR),
+            @Result(column = "s_event_banner_position_cd", property = "sEventBannerPositionCd", jdbcType = JdbcType.INTEGER)})
+    
+    List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap);
 }
