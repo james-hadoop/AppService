@@ -1,5 +1,6 @@
 package com.leyao.app_service.service.impl;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -244,8 +245,8 @@ public class HsEventServiceImpl implements IHsEventService {
         SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
         sEventRecom3Mapper.insertSelective(sEventRecom3);
 
-        if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
-            try {
+        try {
+            if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
                 // SEventSubContent1
                 List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
                 for (SEventSubContent1 record : sEventSubContent1List) {
@@ -257,20 +258,20 @@ public class HsEventServiceImpl implements IHsEventService {
                 for (SEventSubContent2 record : sEventSubContent2List) {
                     sEventSubContent2Mapper.insertSelective(record);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Response.ERROR;
             }
-        }
 
-        // SEventType
-        SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
-        sEventTypeMapper.insertSelective(sEventType);
+            // SEventType
+            SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
+            sEventTypeMapper.insertSelective(sEventType);
 
-        // TEventPage
-        List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
-        for (TEventPage record : tEventPageList) {
-            tEventPageMapper.insertSelective(record);
+            // TEventPage
+            List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
+            for (TEventPage record : tEventPageList) {
+                tEventPageMapper.insertSelective(record);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.ERROR;
         }
 
         return Response.SUCCESS;
@@ -314,8 +315,11 @@ public class HsEventServiceImpl implements IHsEventService {
         SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
         sEventRecom3Mapper.updateByPrimaryKeySelective(sEventRecom3);
 
-        if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
-            try {
+        try {
+            if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
+                sEventSubContent1Mapper.deleteByEventId(tEventSummary.gethEventId());
+                sEventSubContent2Mapper.deleteByEventId(tEventSummary.gethEventId());
+                
                 // SEventSubContent1
                 List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
                 for (SEventSubContent1 record : sEventSubContent1List) {
@@ -327,20 +331,20 @@ public class HsEventServiceImpl implements IHsEventService {
                 for (SEventSubContent2 record : sEventSubContent2List) {
                     sEventSubContent2Mapper.insertSelective(record);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Response.ERROR;
             }
-        }
 
-        // SEventType
-        SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
-        sEventTypeMapper.updateByPrimaryKeySelective(sEventType);
+            // SEventType
+            SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
+            sEventTypeMapper.updateByPrimaryKeySelective(sEventType);
 
-        // TEventPage
-        List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
-        for (TEventPage record : tEventPageList) {
-            tEventPageMapper.updateByPrimaryKeySelective(record);
+            // TEventPage
+            List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
+            for (TEventPage record : tEventPageList) {
+                tEventPageMapper.updateByPrimaryKeySelective(record);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.ERROR;
         }
 
         return Response.SUCCESS;
@@ -361,9 +365,16 @@ public class HsEventServiceImpl implements IHsEventService {
         }
 
         // TEventPage
-        List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
-        for (TEventPage record : tEventPageList) {
-            tEventPageMapper.updateByPrimaryKeySelective(record);
+        List<TEventPage> tEventPageList;
+        try {
+            tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
+
+            for (TEventPage record : tEventPageList) {
+                tEventPageMapper.updateByPrimaryKeySelective(record);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Response.ERROR;
         }
 
         return Response.SUCCESS;

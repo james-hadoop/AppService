@@ -245,6 +245,7 @@ public interface TEventPageMapper {
             @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
             @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
             @Result(column = "s_event_sub_content_1_url", property = "sEventSubContent1Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_2_str", property = "sEventSubContent2Str", jdbcType = JdbcType.VARCHAR),
             @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
             @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
             @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),

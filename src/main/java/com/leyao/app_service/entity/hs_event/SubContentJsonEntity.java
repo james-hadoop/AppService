@@ -24,6 +24,13 @@ public class SubContentJsonEntity {
         this.singer = singer;
 
     }
+    
+    public SubContentJsonEntity(SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl){
+        this.url=null;
+        this.lyricist=subContentJsonEntityWithoutUrl.getLyricist();
+        this.composer=subContentJsonEntityWithoutUrl.getComposer();
+        this.singer=subContentJsonEntityWithoutUrl.getSinger();
+    }
 
     public String getUrl() {
         return url;

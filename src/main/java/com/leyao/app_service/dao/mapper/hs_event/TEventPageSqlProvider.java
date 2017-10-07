@@ -128,7 +128,7 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("ep.*").FROM("hs_event.t_event_page ep");
+        sql.SELECT("ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str").FROM("hs_event.t_event_page ep left outer join hs_event.s_event_sub_content_1 sub1 on ep.h_event_id=sub1.h_event_id left outer join hs_event.s_event_sub_content_2 sub2 on sub1.s_event_sub_content_1_id=sub2.s_event_sub_content_2_id");
 
         sql.WHERE("ep.s_event_active_ind=0");
 

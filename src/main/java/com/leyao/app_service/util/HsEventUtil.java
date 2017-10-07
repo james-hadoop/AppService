@@ -31,7 +31,7 @@ import com.leyao.app_service.entity.hs_event.enums.REventCategoryEnum;
 import com.leyao.app_service.entity.hs_event.enums.REventTypeEnum;
 
 public class HsEventUtil {
-    public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> tEventSummaryList) {
+    public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> tEventSummaryList) throws JsonParseException, JsonMappingException, IOException {
         if (null == tEventSummaryList || 0 == tEventSummaryList.size()) {
             return null;
         }
@@ -45,15 +45,24 @@ public class HsEventUtil {
         return tEventPageList;
     }
 
-    public static List<TEventPage> eventSummary2EventPageList(TEventSummary es) {
+    public static List<TEventPage> eventSummary2EventPageList(TEventSummary es) throws JsonParseException, JsonMappingException, IOException {
         if (null == es) {
             return null;
         }
 
         List<TEventPage> tEventPageList = new ArrayList<TEventPage>();
 
-        List<String> subContent1Url = es.getsEventSubContent1UrlList();
+        List<SEventSubContent1> subContent1s = HsEventUtil.eventSummary2EventSubContent1(es);
+        List<String> subContent1Url = new ArrayList<String>();
+        for (SEventSubContent1 subContent1 : subContent1s) {
+            subContent1Url.add(subContent1.toString());
+        }
+
+        List<SEventSubContent2> subContent2s = HsEventUtil.eventSummary2EventSubContent2(es);
         List<String> subContent2Str = es.getsEventSubContent2StrList();
+        for (SEventSubContent2 subContent2 : subContent2s) {
+            subContent2Str.add(subContent2.toString());
+        }
 
         if (null == subContent1Url || 0 == subContent1Url.size()) {
             TEventPage ep = new TEventPage();
@@ -161,8 +170,43 @@ public class HsEventUtil {
         if (null != es) {
             tEventSummaryList.add(es);
         }
+        
+       HsEventUtil.makeSubContent(tEventSummaryList);
 
         return tEventSummaryList;
+    }
+
+    public static List<TEventSummary> makeSubContent(List<TEventSummary> eventSummaryList) {
+        try {
+            if (null == eventSummaryList || 0 == eventSummaryList.size()) {
+                return null;
+            }
+
+            for (TEventSummary event : eventSummaryList) {
+                List<String> subContent2StrList = event.getsEventSubContent2StrList();
+
+                if (null != subContent2StrList && 0 != subContent2StrList.size()) {
+                    List<SubContentJsonEntity> subContentJsonEntityList = new ArrayList<SubContentJsonEntity>();
+
+                    for (int i = 0; i < subContent2StrList.size(); i++) {
+                        String subContent2Str = subContent2StrList.get(i);
+                        String subContent1Url = event.getsEventSubContent1UrlList().get(i);
+
+                        SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil.JsonString2SubContentJsonEntityWithoutUrl(subContent2Str);
+                        SubContentJsonEntity subContentJsonEntity = new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
+                        subContentJsonEntity.setUrl(subContent1Url);
+                        subContentJsonEntityList.add(subContentJsonEntity);
+                    }
+
+                    event.setsEventSubContent(HsEventUtil.SubContentJsonEntity2JsonString(subContentJsonEntityList));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return eventSummaryList;
+        }
+
+        return eventSummaryList;
     }
 
     public static HsEvent eventSummary2Event(TEventSummary es) {

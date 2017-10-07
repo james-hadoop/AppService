@@ -17,6 +17,12 @@ public interface SEventSubContent2Mapper {
         "where s_event_sub_content_2_id = #{sEventSubContent2Id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long sEventSubContent2Id);
+    
+    @Delete({
+        "delete from s_event_sub_content_2",
+        "where h_event_id = #{hEventId,jdbcType=BIGINT}"
+    })
+    int deleteByEventId(Long hEventId);
 
     @Insert({
         "insert into s_event_sub_content_2 (s_event_sub_content_2_id, h_event_id, ",
