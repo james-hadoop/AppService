@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.entity.GridContent;
@@ -20,6 +21,8 @@ import com.leyao.app_service.entity.enums.ResponseResultEnum;
 import com.leyao.app_service.entity.hs_message.TMessageSummary;
 import com.leyao.app_service.service.IHsMessageService;
 
+@RestController
+@RequestMapping("/v1/service/message")
 public class HsMessageController {
     private static final Logger logger = LoggerFactory.getLogger(HsMessageController.class);
 
