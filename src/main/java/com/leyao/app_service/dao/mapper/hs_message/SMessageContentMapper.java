@@ -68,13 +68,11 @@ public interface SMessageContentMapper {
     
     @SelectProvider(type=SMessageContentSqlProvider.class, method="getTMessageSummaryListByCondition")
     @Results({
-        @Result(column="s_message_content_id", property="sMessageContentId", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="h_message_id", property="hMessageId", jdbcType=JdbcType.BIGINT),
+       @Result(column="h_message_id", property="hMessageId", jdbcType=JdbcType.BIGINT),
         @Result(column="s_message_content_str", property="sMessageContentStr", jdbcType=JdbcType.VARCHAR),
         @Result(column="s_message_category_cd", property="sMessageCategoryCd", jdbcType=JdbcType.INTEGER),
         @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
-    })
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP) })
     List<TMessageSummary> getTMessageSummaryListByCondition(Map<String, Object> paramMap);
     
     @SelectProvider(type=SMessageContentSqlProvider.class, method="getTMessageSummaryListByConditionCount")
