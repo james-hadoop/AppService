@@ -56,7 +56,7 @@ public class HsMessageController {
     /**
      * @apiGroup Message
      * 
-     * @apiName getTMessageSummaryListByConditionv
+     * @apiName getTMessageSummaryListByCondition
      * 
      * @api {get} /v1/service/message/getTMessageSummaryListByCondition 获取我的消息
      * 

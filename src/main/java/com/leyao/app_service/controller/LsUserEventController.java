@@ -28,7 +28,7 @@ public class LsUserEventController {
      * 
      * @apiName feedbackTEventSummary
      * 
-     * @api {post} /v1/service/event/feedbackTEventSummary 添加用户反馈
+     * @api {post} /v1/service/event/feedbackTEventSummary 添加用户阅读记录
      * 
      * @apiParam {Number} hUserPhoneNr User phone number.
      * @apiParam {Number} hEventId Event ID.

@@ -516,6 +516,34 @@ public class HsEventController {
         return responseContent;
     }
     
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName editTEventSummary
+     * 
+     * @api {post} /v1/service/event/editTEventSummary 编辑事件
+     * 
+     * @apiParam {Number} sEventCategoryCd Event category code.
+     * @apiParam {String} rEventCategoryDesc Event category description.
+     * @apiParam {Number} sEventTypeCd Event type code.
+     * @apiParam {String} rEventTypeDesc Event type description.
+     * @apiParam {String} sEventTitleUrl Event title url.
+     * @apiParam {String} sEventContentUrl Event content url.
+     * @apiParam {Number} sEventBannerPositionCd Event banner position.
+     * @apiParam {Number} sEventRecomPositionCd Event recommend position.
+     *
+     * @apiSuccessExample {json} Success-Response: 
+     *  {
+     *      "responseResult": "SUCCESS",
+     *      "responseResultMsg": "Reset success"
+     *  }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "responseResult": "ERROR",
+     *      "responseResultMsg": "Login fail" 
+     *  }
+     */
     @RequestMapping(value = "/editTEventSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent editTEventSummary(@RequestBody TEventSummary tEventSummary) {
@@ -540,6 +568,34 @@ public class HsEventController {
         return responseContent;
     }
     
+    /**
+     * @apiGroup Event
+     * 
+     * @apiName deleteTEventSummary
+     * 
+     * @api {post} /v1/service/event/deleteTEventSummary 删除事件
+     * 
+     * @apiParam {Number} sEventCategoryCd Event category code.
+     * @apiParam {String} rEventCategoryDesc Event category description.
+     * @apiParam {Number} sEventTypeCd Event type code.
+     * @apiParam {String} rEventTypeDesc Event type description.
+     * @apiParam {String} sEventTitleUrl Event title url.
+     * @apiParam {String} sEventContentUrl Event content url.
+     * @apiParam {Number} sEventBannerPositionCd Event banner position.
+     * @apiParam {Number} sEventRecomPositionCd Event recommend position.
+     *
+     * @apiSuccessExample {json} Success-Response: 
+     *  {
+     *      "responseResult": "SUCCESS",
+     *      "responseResultMsg": "Reset success"
+     *  }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     *  {
+     *      "responseResult": "ERROR",
+     *      "responseResultMsg": "Login fail" 
+     *  }
+     */
     @RequestMapping(value = "/deleteTEventSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent deleteTEventSummary(@RequestBody TEventSummary tEventSummary) {
