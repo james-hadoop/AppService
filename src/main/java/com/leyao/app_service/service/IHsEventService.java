@@ -27,9 +27,13 @@ public interface IHsEventService {
 
     int getTEventPageListForBannerCount(Map<String, Object> paramMap);
     
-    List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) throws IOException;
+    List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap);
 
     int getTEventSummaryByConditionCount(Map<String, Object> paramMap);
+    
+    List<TEventSummary> getTEventSummaryByConditionGlobal(Map<String, Object> paramMap) throws IOException;
+
+    int getTEventSummaryByConditionGlobalCount(Map<String, Object> paramMap);
     
     int addTEventSummary(TEventSummary tEventSummary);
     

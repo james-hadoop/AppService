@@ -190,27 +190,35 @@ public class HsEventServiceImpl implements IHsEventService {
     }
 
     @Override
-    public List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) throws IOException {
-        // List<TEventPage> tEventPageList =
-        // tEventPageMapper.getTEventPageListByCondition(paramMap);
-        //
-        // List<TEventSummary> tEventSummaryList =
-        // HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
-        // return tEventSummaryList;
+    public List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap) {
+        List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListByCondition(paramMap);
 
-        List<TEventSummary> tEventSummaryList = tEventPageMapper.getTEventSummaryByCondition(paramMap);
-        for(TEventSummary event:tEventSummaryList){
-            List<SEventSubContent1> eventSubContent1List=sEventSubContent1Mapper.getEventSubContent1ByEventId(event.gethEventId());
-            List<SEventSubContent2> eventSubContent2List=sEventSubContent2Mapper.getEventSubContent2ByEventId(event.gethEventId());
-            
-            event.setsEventSubContent(HsEventUtil.makeEventSubContent(eventSubContent1List, eventSubContent2List));
-        }
-        
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
         return tEventSummaryList;
     }
 
     @Override
     public int getTEventSummaryByConditionCount(Map<String, Object> paramMap) {
+        return tEventPageMapper.getTEventPageListByConditionCount(paramMap);
+    }
+
+    @Override
+    public List<TEventSummary> getTEventSummaryByConditionGlobal(Map<String, Object> paramMap) throws IOException {
+        List<TEventSummary> tEventSummaryList = tEventPageMapper.getTEventSummaryByCondition(paramMap);
+        for (TEventSummary event : tEventSummaryList) {
+            List<SEventSubContent1> eventSubContent1List = sEventSubContent1Mapper
+                    .getEventSubContent1ByEventId(event.gethEventId());
+            List<SEventSubContent2> eventSubContent2List = sEventSubContent2Mapper
+                    .getEventSubContent2ByEventId(event.gethEventId());
+
+            event.setsEventSubContent(HsEventUtil.makeEventSubContent(eventSubContent1List, eventSubContent2List));
+        }
+
+        return tEventSummaryList;
+    }
+
+    @Override
+    public int getTEventSummaryByConditionGlobalCount(Map<String, Object> paramMap) {
         return tEventPageMapper.getTEventPageListByConditionCount(paramMap);
     }
 
@@ -260,13 +268,15 @@ public class HsEventServiceImpl implements IHsEventService {
         try {
             if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
                 // SEventSubContent1
-                List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
+                List<SEventSubContent1> sEventSubContent1List = HsEventUtil
+                        .eventSummary2EventSubContent1(tEventSummary);
                 for (SEventSubContent1 record : sEventSubContent1List) {
                     sEventSubContent1Mapper.insertSelective(record);
                 }
 
                 // SEventSubContent2
-                List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
+                List<SEventSubContent2> sEventSubContent2List = HsEventUtil
+                        .eventSummary2EventSubContent2(tEventSummary);
                 for (SEventSubContent2 record : sEventSubContent2List) {
                     sEventSubContent2Mapper.insertSelective(record);
                 }
@@ -333,13 +343,15 @@ public class HsEventServiceImpl implements IHsEventService {
                 sEventSubContent2Mapper.deleteByEventId(tEventSummary.gethEventId());
 
                 // SEventSubContent1
-                List<SEventSubContent1> sEventSubContent1List = HsEventUtil.eventSummary2EventSubContent1(tEventSummary);
+                List<SEventSubContent1> sEventSubContent1List = HsEventUtil
+                        .eventSummary2EventSubContent1(tEventSummary);
                 for (SEventSubContent1 record : sEventSubContent1List) {
                     sEventSubContent1Mapper.insertSelective(record);
                 }
 
                 // SEventSubContent2
-                List<SEventSubContent2> sEventSubContent2List = HsEventUtil.eventSummary2EventSubContent2(tEventSummary);
+                List<SEventSubContent2> sEventSubContent2List = HsEventUtil
+                        .eventSummary2EventSubContent2(tEventSummary);
                 for (SEventSubContent2 record : sEventSubContent2List) {
                     sEventSubContent2Mapper.insertSelective(record);
                 }
