@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.entity.GridContent;
@@ -20,6 +21,8 @@ import com.leyao.app_service.entity.enums.ResponseResultEnum;
 import com.leyao.app_service.entity.hs_message.TMessageSummary;
 import com.leyao.app_service.service.IHsMessageService;
 
+@RestController
+@RequestMapping("/v1/service/message")
 public class HsMessageController {
     private static final Logger logger = LoggerFactory.getLogger(HsMessageController.class);
 
@@ -53,9 +56,9 @@ public class HsMessageController {
     /**
      * @apiGroup Message
      * 
-     * @apiName getTMessageSummary
+     * @apiName getTMessageSummaryListByCondition
      * 
-     * @api {get} /v1/service/message/getTMessageSummary 获取我的消息
+     * @api {get} /v1/service/message/getTMessageSummaryListByCondition 获取我的消息
      * 
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} [page] Paging - page number.
@@ -84,10 +87,10 @@ public class HsMessageController {
      *  "total":0
      * }
      */
-    @RequestMapping(value = "/getTMessageSummary", method = RequestMethod.GET)
-    public GridContent getTMessageSummary( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+    @RequestMapping(value = "/getTMessageSummaryListByCondition", method = RequestMethod.GET)
+    public GridContent getTMessageSummaryListByCondition( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd) {
-        logger.info("/v1/service/message/getTMessageSummary() called: hUserPhoneNr={},sMessageCategoryCd={}", hUserPhoneNr,sMessageCategoryCd);
+        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={}", hUserPhoneNr,sMessageCategoryCd);
         GridContent gridContent = new GridContent();
 
         try {
@@ -106,7 +109,7 @@ public class HsMessageController {
             gridContent.setRows(tMessageSummaryList);
             gridContent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/message/getTMessageSummary()", e);
+            logger.error("/v1/service/message/getTMessageSummaryListByCondition()", e);
             return gridContent;
         }
         return gridContent;
