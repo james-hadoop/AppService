@@ -248,7 +248,7 @@ public class HsEventController {
      * }
      */
     @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
-    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+    public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "5") Integer rows,
                     @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info("/v1/service/event/getTEventSummaryForBanner() called: sessionCode={}, page={}, rows={}", sessionCode, page, rows);
         GridContent gridContent = new GridContent();

@@ -27,7 +27,7 @@ import com.leyao.app_service.service.IHsUserService;
 
 @RestController
 @RequestMapping("/v1/service/user")
-@EnableConfigurationProperties({ResourceConfig.class})
+@EnableConfigurationProperties({ ResourceConfig.class })
 public class HsUserController {
     private static final Logger logger = LoggerFactory.getLogger(HsUserController.class);
 
@@ -284,20 +284,18 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            System.out.println("upload()");
+            System.out.println("uploadPortrait()");
 
             byte[] bytes;
 
             if (!file.isEmpty()) {
                 bytes = file.getBytes();
-                // store file in storage
             }
 
-            System.out.println(System.getProperty("java.io.tmpdir") + file.getOriginalFilename());
+            String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + "jpg";
+            System.out.println("destPath=" + destPath);
 
-            String path = System.getProperty("java.io.tmpdir") + file.getOriginalFilename();
-
-            file.transferTo(new File(path));
+            file.transferTo(new File(destPath));
 
             System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), hUserPhoneNr));
         } catch (Exception e) {
