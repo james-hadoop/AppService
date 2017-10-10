@@ -1,5 +1,6 @@
 package com.leyao.app_service.dao.configuration;
 
+import javax.sql.CommonDataSource;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,17 +14,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.hs_user", sqlSessionFactoryRef = "hsUserSqlSessionFactory")
+@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.hs_event", sqlSessionFactoryRef = "hsEventSqlSessionFactory")
 public class HsEventDataSourceConfig {
 
-    @Bean(name = "hsUserDataSource")
-    @ConfigurationProperties("datasource.hs_user")
+    @Bean(name = "hsEventDataSource")
+    @ConfigurationProperties("datasource.hs_event")
     public DataSource masterDataSource() {
-        return DataSourceBuilder.create().build();
+        DataSource dataSource=DataSourceBuilder.create().build();
+        return dataSource;
     }
 
-    @Bean(name = "hsUserSqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("hsUserDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "hsEventSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("hsEventDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/master/*.xml"));

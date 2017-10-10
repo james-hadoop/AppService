@@ -13,17 +13,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.hs_event", sqlSessionFactoryRef = "hsEventSqlSessionFactory")
+@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.hs_user", sqlSessionFactoryRef = "hsUserSqlSessionFactory")
 public class HsUserDataSourceConfig {
 
-    @Bean(name = "hsEventDataSource")
-    @ConfigurationProperties("datasource.hs_event")
+    @Bean(name = "hsUserDataSource")
+    @ConfigurationProperties("datasource.hs_user")
     public DataSource masterDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "hsEventSqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("hsEventDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "hsUserSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("hsUserDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/master/*.xml"));

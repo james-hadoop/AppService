@@ -19,7 +19,9 @@ public class HsMessageDataSourceConfig {
     @Bean(name = "hsMessageDataSource")
     @ConfigurationProperties("datasource.hs_message")
     public DataSource masterDataSource() {
-        return DataSourceBuilder.create().build();
+        DataSource dataSource=DataSourceBuilder.create().build();
+
+        return dataSource;
     }
 
     @Bean(name = "hsMessageSqlSessionFactory")
