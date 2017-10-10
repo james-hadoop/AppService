@@ -37,7 +37,7 @@ public interface HUserMapper {
         "select",
         "h_user_id, h_user_phone_nr, create_ts, update_ts",
         "from h_user",
-        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
+        "where h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT, id=true),

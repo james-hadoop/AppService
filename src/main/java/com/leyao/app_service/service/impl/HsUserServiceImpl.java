@@ -13,9 +13,12 @@ import com.leyao.app_service.common.Response;
 import com.leyao.app_service.common.SessionManager;
 import com.leyao.app_service.common.VerifyCodeManager;
 import com.leyao.app_service.dao.mapper.hs_user.HUserMapper;
+import com.leyao.app_service.dao.mapper.hs_user.SUserFeedbackMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserPasswordMapper;
 import com.leyao.app_service.dao.mapper.hs_user.TUserPageMapper;
 import com.leyao.app_service.entity.hs_user.HUser;
+import com.leyao.app_service.entity.hs_user.SUserFeedback;
+import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
 import com.leyao.app_service.entity.hs_user.SUserPassword;
 import com.leyao.app_service.entity.hs_user.TUserPage;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
@@ -34,6 +37,9 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Autowired
     SUserPasswordMapper sUserPasswordMapper;
+
+    @Autowired
+    SUserFeedbackMapper sUserFeedbackMapper;
 
     @Override
     public List<TUserSummary> getTUserSummary(Map<String, Object> paramMap) {
@@ -77,13 +83,14 @@ public class HsUserServiceImpl implements IHsUserService {
         // TUserPage
         TUserPage userPage = HsUserUtil.userSummary2UserPage(tUserSummary);
         tUserPageMapper.insertSelective(userPage);
-        
+
         return Response.SUCCESS;
     }
 
     @Override
     public String login(TUserSummary tUserSummary) {
-        if (null == tUserSummary || null == tUserSummary.gethUserPhoneNr() || null == tUserSummary.getsUserPasswordStr()) {
+        if (null == tUserSummary || null == tUserSummary.gethUserPhoneNr()
+                || null == tUserSummary.getsUserPasswordStr()) {
             return null;
         }
 
@@ -93,7 +100,8 @@ public class HsUserServiceImpl implements IHsUserService {
             return null;
         }
 
-        if (!tUserSummaryResult.getsUserPasswordStr().equals(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()))) {
+        if (!tUserSummaryResult.getsUserPasswordStr()
+                .equals(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()))) {
             return null;
         }
 
@@ -160,5 +168,33 @@ public class HsUserServiceImpl implements IHsUserService {
     public int editTUserSummary(TUserSummary tUserSummary) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public List<SUserFeedbackSummary> getSUserFeedbackSummaryByCondition(Map<String, Object> paramMap) {
+        return sUserFeedbackMapper.getSUserFeedbackSummaryByCondition(paramMap);
+    }
+
+    @Override
+    public int getSUserFeedbackSummaryByConditionCount(Map<String, Object> paramMap) {
+        return sUserFeedbackMapper.getSUserFeedbackSummaryByConditionCount(paramMap);
+    }
+
+    @Override
+    public int addSUserFeedbackSummary(SUserFeedbackSummary sUserFeedbackSummary) {
+        Long hUserPhoneNr = sUserFeedbackSummary.gethUserPhoneNr();
+        if (null == hUserPhoneNr) {
+            return Response.ERROR;
+        }
+
+        HUser hUser = hUserMapper.selectByPrimaryKey(hUserPhoneNr);
+        if (null == hUser) {
+            return Response.ERROR;
+        }
+
+        sUserFeedbackSummary.sethUserId(hUser.gethUserId());
+
+        SUserFeedback sUserFeedback = HsUserUtil.userFeedbackSummanry2UserFeedback(sUserFeedbackSummary);
+        return sUserFeedbackMapper.insertSelective(sUserFeedback);
     }
 }

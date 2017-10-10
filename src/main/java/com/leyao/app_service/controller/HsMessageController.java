@@ -56,9 +56,9 @@ public class HsMessageController {
     /**
      * @apiGroup Message
      * 
-     * @apiName getTMessageSummary
+     * @apiName getTMessageSummaryListByConditionv
      * 
-     * @api {get} /v1/service/message/getTMessageSummary 获取我的消息
+     * @api {get} /v1/service/message/getTMessageSummaryListByCondition 获取我的消息
      * 
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} [page] Paging - page number.
@@ -87,10 +87,10 @@ public class HsMessageController {
      *  "total":0
      * }
      */
-    @RequestMapping(value = "/getTMessageSummary", method = RequestMethod.GET)
-    public GridContent getTMessageSummary( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+    @RequestMapping(value = "/getTMessageSummaryListByCondition", method = RequestMethod.GET)
+    public GridContent getTMessageSummaryListByCondition( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                     @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd) {
-        logger.info("/v1/service/message/getTMessageSummary() called: hUserPhoneNr={},sMessageCategoryCd={}", hUserPhoneNr,sMessageCategoryCd);
+        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={}", hUserPhoneNr,sMessageCategoryCd);
         GridContent gridContent = new GridContent();
 
         try {
@@ -109,7 +109,7 @@ public class HsMessageController {
             gridContent.setRows(tMessageSummaryList);
             gridContent.setTotal(count);
         } catch (Exception e) {
-            logger.error("/v1/service/message/getTMessageSummary()", e);
+            logger.error("/v1/service/message/getTMessageSummaryListByCondition()", e);
             return gridContent;
         }
         return gridContent;

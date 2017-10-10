@@ -23,6 +23,9 @@ import com.leyao.app_service.dao.configuration.ResourceConfig;
 import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.ResponseContent;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
+import com.leyao.app_service.entity.hs_event.TEventSummary;
+import com.leyao.app_service.entity.hs_message.TMessageSummary;
+import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 import com.leyao.app_service.service.IHsUserService;
 
@@ -344,6 +347,61 @@ public class HsUserController {
             responseContent.setResponseResultMsg(resourceConfig.getPortrait() + hUserPhoneNr + ".jpg");
         } catch (Exception e) {
             logger.error("/v1/service/user/getPortrait()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+
+    @RequestMapping(value = "/getSUserFeedbackSummaryByCondition", method = RequestMethod.GET)
+    public GridContent getSUserFeedbackSummaryByCondition(
+            @RequestParam(value = "sessionCode", required = true) String sessionCode,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+            @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr) {
+        logger.info("/v1/service/user/getSUserFeedbackSummaryByCondition() called: hUserPhoneNr={}", hUserPhoneNr);
+        GridContent gridContent = new GridContent();
+
+        try {
+            int start = (page - 1) * rows;
+            int end = rows;
+
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("hUserPhoneNr", hUserPhoneNr);
+            paramMap.put("start", start);
+            paramMap.put("end", end);
+
+            List<SUserFeedbackSummary> sUserFeedbackSummaryList = hsUserService
+                    .getSUserFeedbackSummaryByCondition(paramMap);
+            int count = hsUserService.getSUserFeedbackSummaryByConditionCount(paramMap);
+
+            gridContent.setRows(sUserFeedbackSummaryList);
+            gridContent.setTotal(count);
+        } catch (Exception e) {
+            logger.error("/v1/service/user/getSUserFeedbackSummaryByCondition()", e);
+            return gridContent;
+        }
+        return gridContent;
+    }
+    
+    @RequestMapping(value = "/addSUserFeedbackSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent addSUserFeedbackSummary(@RequestBody SUserFeedbackSummary sUserFeedbackSummary) {
+        logger.info("/v1/service/event/addSUserFeedbackSummary() called: hUserPhoneNr={},sUserFeedbackStr={}", sUserFeedbackSummary.gethUserPhoneNr(),sUserFeedbackSummary.getsUserFeedbackStr());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsUserService.addSUserFeedbackSummary(sUserFeedbackSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Add fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Add success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/event/addSUserFeedbackSummary()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;
