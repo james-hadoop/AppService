@@ -2,6 +2,8 @@
 
 mvn spring-boot:run
 
+apidoc -i LeyaoAppService/ -o LeyaoAppServiceApiDoc/
+
 
 ## Reponse format
 {"responseResultEnum":"SUCCESS","responseResultMsg":"Login success"}
