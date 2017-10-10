@@ -1,6 +1,7 @@
 package com.leyao.app_service.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -278,7 +279,7 @@ public class HsUserController {
         return responseContent;
     }
 
-    @RequestMapping(value = "/uploadPortrait")
+    @RequestMapping(value = "/uploadPortrait", method = RequestMethod.POST)
     public ResponseContent uploadPortrait(@RequestParam("file") MultipartFile file,
             @RequestParam("hUserPhoneNr") Long hUserPhoneNr) {
         ResponseContent responseContent = new ResponseContent();
@@ -292,7 +293,7 @@ public class HsUserController {
                 bytes = file.getBytes();
             }
 
-            String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + "jpg";
+            String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
             System.out.println("destPath=" + destPath);
 
             file.transferTo(new File(destPath));
@@ -305,6 +306,28 @@ public class HsUserController {
             return responseContent;
         }
         return responseContent;
+    }
+
+    @RequestMapping(value = "/upload")
+    public void upload(@RequestParam("file") MultipartFile file, @RequestParam("username") String username)
+            throws IOException {
+        System.out.println("upload()");
+
+        byte[] bytes;
+
+        if (!file.isEmpty()) {
+            bytes = file.getBytes();
+            // store file in storage
+        }
+
+        System.out.println(System.getProperty("java.io.tmpdir") + file.getOriginalFilename());
+
+        String path = System.getProperty("java.io.tmpdir") + file.getOriginalFilename();
+
+        file.transferTo(new File(path));
+
+        System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), username));
+
     }
 
     @RequestMapping(value = "/getPortrait", method = RequestMethod.GET)
