@@ -34,7 +34,9 @@ public class TEventSummary {
 
     private List<String> sEventSubContent2StrList = new ArrayList<String>();
     
-    private String sEventSubContent=null;
+    private List<SubContentJsonEntity> sEventSubContent=new ArrayList<SubContentJsonEntity>();
+    
+    private String sEventSubContentString=null;
 
     private Integer sEventBannerPositionCd = 0;
 
@@ -144,12 +146,20 @@ public class TEventSummary {
         this.sEventSubContent2StrList = sEventSubContent2StrList;
     }
 
-    public String getsEventSubContent() {
+    public List<SubContentJsonEntity> getsEventSubContent() {
         return sEventSubContent;
     }
 
-    public void setsEventSubContent(String sEventSubContent) {
+    public void setsEventSubContent(List<SubContentJsonEntity> sEventSubContent) {
         this.sEventSubContent = sEventSubContent;
+    }
+
+    public String getsEventSubContentString() {
+        return sEventSubContentString;
+    }
+
+    public void setsEventSubContentString(String sEventSubContentString) {
+        this.sEventSubContentString = sEventSubContentString;
     }
 
     public Integer getsEventBannerPositionCd() {

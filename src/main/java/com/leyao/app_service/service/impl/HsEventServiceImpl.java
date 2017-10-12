@@ -212,6 +212,7 @@ public class HsEventServiceImpl implements IHsEventService {
                     .getEventSubContent2ByEventId(event.gethEventId());
 
             event.setsEventSubContent(HsEventUtil.makeEventSubContent(eventSubContent1List, eventSubContent2List));
+            event.setsEventSubContentString(HsEventUtil.makeEventSubContentString(eventSubContent1List, eventSubContent2List));
         }
 
         return tEventSummaryList;
@@ -266,7 +267,7 @@ public class HsEventServiceImpl implements IHsEventService {
         sEventRecom3Mapper.insertSelective(sEventRecom3);
 
         try {
-            if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
+            if (null != tEventSummary.getsEventSubContentString() && 0 != tEventSummary.getsEventSubContentString().length()) {
                 // SEventSubContent1
                 List<SEventSubContent1> sEventSubContent1List = HsEventUtil
                         .eventSummary2EventSubContent1(tEventSummary);
@@ -338,7 +339,7 @@ public class HsEventServiceImpl implements IHsEventService {
         sEventRecom3Mapper.updateByPrimaryKeySelective(sEventRecom3);
 
         try {
-            if (null != tEventSummary.getsEventSubContent() && 0 != tEventSummary.getsEventSubContent().length()) {
+            if (null != tEventSummary.getsEventSubContentString() && 0 != tEventSummary.getsEventSubContentString().length()) {
                 sEventSubContent1Mapper.deleteByEventId(tEventSummary.gethEventId());
                 sEventSubContent2Mapper.deleteByEventId(tEventSummary.gethEventId());
 

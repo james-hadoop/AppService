@@ -198,7 +198,8 @@ public class HsEventUtil {
                         subContentJsonEntityList.add(subContentJsonEntity);
                     }
 
-                    event.setsEventSubContent(HsEventUtil.SubContentJsonEntity2JsonString(subContentJsonEntityList));
+                    event.setsEventSubContentString(HsEventUtil.SubContentJsonEntity2JsonString(subContentJsonEntityList));
+                    event.setsEventSubContent(subContentJsonEntityList);
                 }
             }
         } catch (Exception e) {
@@ -302,11 +303,11 @@ public class HsEventUtil {
     }
 
     public static List<SEventSubContent1> eventSummary2EventSubContent1(TEventSummary es) throws JsonParseException, JsonMappingException, IOException {
-        if (null == es || null == es.getsEventSubContent() || 0 == es.getsEventSubContent().length()) {
+        if (null == es || null == es.getsEventSubContent() || 0 == es.getsEventSubContentString().length()) {
             return null;
         }
 
-        List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(es.getsEventSubContent());
+        List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(es.getsEventSubContentString());
 
         List<SEventSubContent1> sEventSubContent1List = new ArrayList<SEventSubContent1>();
         for (SubContentJsonEntity entity : entities) {
@@ -323,11 +324,11 @@ public class HsEventUtil {
     }
 
     public static List<SEventSubContent2> eventSummary2EventSubContent2(TEventSummary es) throws IOException {
-        if (null == es || null == es.getsEventSubContent() || 0 == es.getsEventSubContent().length()) {
+        if (null == es || null == es.getsEventSubContent() || 0 == es.getsEventSubContentString().length()) {
             return null;
         }
 
-        List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(es.getsEventSubContent());
+        List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(es.getsEventSubContentString());
 
         List<SEventSubContent2> sEventSubContent2List = new ArrayList<SEventSubContent2>();
         for (SubContentJsonEntity entity : entities) {
@@ -383,7 +384,7 @@ public class HsEventUtil {
         return entity;
     }
     
-    public static String makeEventSubContent(List<SEventSubContent1> eventSubContent1List,List<SEventSubContent2> eventSubContent2List) throws IOException{
+    public static String makeEventSubContentString(List<SEventSubContent1> eventSubContent1List,List<SEventSubContent2> eventSubContent2List) throws IOException{
         String result=null;
         
         if(null==eventSubContent1List||0==eventSubContent1List.size()||null==eventSubContent2List||0==eventSubContent1List.size()){
@@ -404,6 +405,25 @@ public class HsEventUtil {
         result=HsEventUtil.SubContentJsonEntity2JsonString(eventSubContentList);
         
         return result;
+    }
+    
+    public static List<SubContentJsonEntity> makeEventSubContent(List<SEventSubContent1> eventSubContent1List,List<SEventSubContent2> eventSubContent2List) throws IOException{
+        if(null==eventSubContent1List||0==eventSubContent1List.size()||null==eventSubContent2List||0==eventSubContent1List.size()){
+            return null;
+        }
+        
+        List<SubContentJsonEntity> eventSubContentList=new ArrayList<SubContentJsonEntity>();
+        for(int i=0;i<eventSubContent1List.size();i++){
+            SEventSubContent2 eventSubContent2=eventSubContent2List.get(i);
+            SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil.JsonString2SubContentJsonEntityWithoutUrl(eventSubContent2.getsEventSubContent2Str());
+            
+            SubContentJsonEntity subContentJsonEntity=new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
+            subContentJsonEntity.setUrl(eventSubContent1List.get(i).getsEventSubContent1Url());
+            
+            eventSubContentList.add(subContentJsonEntity);
+        }
+        
+        return eventSubContentList;
     }
 
     public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
