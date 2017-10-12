@@ -13,10 +13,12 @@ import com.leyao.app_service.common.Response;
 import com.leyao.app_service.common.SessionManager;
 import com.leyao.app_service.common.VerifyCodeManager;
 import com.leyao.app_service.dao.mapper.hs_user.HUserMapper;
+import com.leyao.app_service.dao.mapper.hs_user.SUserActiveMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserFeedbackMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserPasswordMapper;
 import com.leyao.app_service.dao.mapper.hs_user.TUserPageMapper;
 import com.leyao.app_service.entity.hs_user.HUser;
+import com.leyao.app_service.entity.hs_user.SUserActive;
 import com.leyao.app_service.entity.hs_user.SUserFeedback;
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
 import com.leyao.app_service.entity.hs_user.SUserPassword;
@@ -37,6 +39,9 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Autowired
     SUserPasswordMapper sUserPasswordMapper;
+
+    @Autowired
+    SUserActiveMapper sUserActiveMapper;
 
     @Autowired
     SUserFeedbackMapper sUserFeedbackMapper;
@@ -79,6 +84,10 @@ public class HsUserServiceImpl implements IHsUserService {
         // SUserPassword
         SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
         sUserPasswordMapper.insertSelective(sUserPassword);
+
+        // SUserActive
+        SUserActive sUserActive = HsUserUtil.userSummary2UserActive(tUserSummary);
+        sUserActiveMapper.insertSelective(sUserActive);
 
         // TUserPage
         TUserPage userPage = HsUserUtil.userSummary2UserPage(tUserSummary);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.leyao.app_service.entity.hs_user.HUser;
+import com.leyao.app_service.entity.hs_user.SUserActive;
 import com.leyao.app_service.entity.hs_user.SUserFeedback;
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
 import com.leyao.app_service.entity.hs_user.SUserPassword;
@@ -97,6 +98,16 @@ public class HsUserUtil {
         userPassword.setUpdateTs(tUserSummary.getUpdateTs());
 
         return userPassword;
+    }
+    
+    public static SUserActive userSummary2UserActive(TUserSummary tUserSummary) {
+        SUserActive userActive = new SUserActive();
+        userActive.sethUserId(tUserSummary.gethUserId());
+        userActive.setsUserActiveInd(tUserSummary.getsUserActiveInd());
+        userActive.setCreateTs(tUserSummary.getCreateTs());
+        userActive.setUpdateTs(tUserSummary.getUpdateTs());
+
+        return userActive;
     }
 
     public static SUserFeedback userFeedbackSummanry2UserFeedback(SUserFeedbackSummary sUserFeedbackSummary) {

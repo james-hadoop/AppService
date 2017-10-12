@@ -165,6 +165,7 @@ public class HsEventController {
      *          "sEventSearchContentTxt": "7",
      *          "sEventSubContent1UrlList": [],
      *          "sEventSubContent2StrList": [],
+     *          "sEventSubContent": [],
      *          "sEventBannerPositionCd": null,
      *          "sEventRecomPositionCd": null
      *      }
