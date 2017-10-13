@@ -1,7 +1,7 @@
 package com.leyao.app_service.entity.hs_message.enums;
 
 public enum RMessageCategoryEnum {
-    System("System", 1);
+    System("系统消息", 1);
 
     private String value;
     private int code;
