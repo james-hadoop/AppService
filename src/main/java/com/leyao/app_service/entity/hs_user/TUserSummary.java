@@ -2,6 +2,9 @@ package com.leyao.app_service.entity.hs_user;
 
 import java.util.Date;
 
+import com.leyao.app_service.entity.hs_user.enums.RUserGenderEnum;
+import com.leyao.app_service.util.DateUtil;
+
 public class TUserSummary {
     private Long hUserId;
 
@@ -20,8 +23,12 @@ public class TUserSummary {
     private Integer sUserActiveInd;
 
     private Date createTs;
+    
+    private String createTsString;
 
     private Date updateTs;
+    
+    private String updateTsString;
 
     private String sUserPasswordStr;
 
@@ -54,7 +61,7 @@ public class TUserSummary {
     }
 
     public String getsUserGenderDesc() {
-        return sUserGenderDesc;
+        return RUserGenderEnum.getValue(sUserGenderCd);
     }
 
     public void setsUserGenderDesc(String sUserGenderDesc) {
@@ -131,5 +138,21 @@ public class TUserSummary {
 
     public void setSessionCode(String sessionCode) {
         this.sessionCode = sessionCode;
+    }
+
+    public String getCreateTsString() {
+        return DateUtil.DateToString(createTs);
+    }
+
+    public void setCreateTsString(String createTsString) {
+        this.createTsString = createTsString;
+    }
+
+    public String getUpdateTsString() {
+        return DateUtil.DateToString(updateTs);
+    }
+
+    public void setUpdateTsString(String updateTsString) {
+        this.updateTsString = updateTsString;
     }
 }

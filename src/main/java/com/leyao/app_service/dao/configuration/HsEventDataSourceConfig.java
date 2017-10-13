@@ -1,6 +1,5 @@
 package com.leyao.app_service.dao.configuration;
 
-import javax.sql.CommonDataSource;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;

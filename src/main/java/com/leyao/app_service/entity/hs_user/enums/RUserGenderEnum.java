@@ -1,7 +1,7 @@
 package com.leyao.app_service.entity.hs_user.enums;
 
 public enum RUserGenderEnum {
-    UnKnown("UnKnown", 0), Male("Male", 1), FeMaie("FeMaie", 2);
+    UnKnown("未知", 0), Male("男", 1), FeMaie("女", 2);
 
     private String value;
     private int code;
