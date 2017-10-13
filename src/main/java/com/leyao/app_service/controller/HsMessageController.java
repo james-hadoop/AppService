@@ -114,4 +114,52 @@ public class HsMessageController {
         }
         return gridContent;
     }
+    
+    @RequestMapping(value = "/editTMessageSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent editTMessageSummary(@RequestBody TMessageSummary tMessageSummary) {
+        logger.info("/v1/service/message/editTMessageSummary() called: hMessageId={}", tMessageSummary.gethMessageId());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsMessageService.editTMessageSummary(tMessageSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Edit fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Edit success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/message/editTMessageSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+    
+    @RequestMapping(value = "/deleteTMessageSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent deleteTMessageSummary(TMessageSummary tMessageSummary) {
+        logger.info("/v1/service/message/deleteTMessageSummary() called: hMessageId={}", tMessageSummary.gethMessageId());
+        ResponseContent responseContent = new ResponseContent();
+        
+        try {
+            int resutl = hsMessageService.deleteTMessageSummary(tMessageSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Delete fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Delete success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/message/deleteTMessageSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
 }

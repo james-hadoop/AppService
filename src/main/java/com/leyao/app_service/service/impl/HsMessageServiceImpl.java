@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.mapper.hs_message.HsMessageMapper;
 import com.leyao.app_service.dao.mapper.hs_message.SMessageActiveMapper;
 import com.leyao.app_service.dao.mapper.hs_message.SMessageCategoryMapper;
 import com.leyao.app_service.dao.mapper.hs_message.SMessageContentMapper;
+import com.leyao.app_service.entity.enums.StatusEnum;
 import com.leyao.app_service.entity.hs_message.HsMessage;
 import com.leyao.app_service.entity.hs_message.SMessageActive;
 import com.leyao.app_service.entity.hs_message.SMessageCategory;
@@ -69,7 +71,46 @@ public class HsMessageServiceImpl implements IHsMessageService {
         SMessageContent sMessageContent = HsMessageUtil.messageSummary2MessageContent(tMessageSummary);
         sMessageContentMapper.insertSelective(sMessageContent);
 
-        return 0;
+        return Response.SUCCESS;
+    }
+
+    @Override
+    @Transactional
+    public int editTMessageSummary(TMessageSummary tMessageSummary) {
+        Date timestamp = new Date();
+        tMessageSummary.setUpdateTs(timestamp);
+
+        // HsMessage
+        HsMessage hsMessage = HsMessageUtil.messageSummary2Message(tMessageSummary);
+        hsMessageMapper.updateByPrimaryKeySelective(hsMessage);
+
+        // SMessageActive
+        SMessageActive sMessageActive = HsMessageUtil.messageSummary2MessageActive(tMessageSummary);
+        sMessageActiveMapper.updateByPrimaryKeySelective(sMessageActive);
+
+        // SMessageCategory
+        SMessageCategory sMessageCategory = HsMessageUtil.messageSummary2MessageCategory(tMessageSummary);
+        sMessageCategoryMapper.updateByPrimaryKeySelective(sMessageCategory);
+
+        // SMessageContent
+        SMessageContent sMessageContent = HsMessageUtil.messageSummary2MessageContent(tMessageSummary);
+        sMessageContentMapper.updateByPrimaryKeySelective(sMessageContent);
+
+        return Response.SUCCESS;
+    }
+
+    @Override
+    @Transactional
+    public int deleteTMessageSummary(TMessageSummary tMessageSummary) {
+        Date timestamp = new Date();
+        tMessageSummary.setUpdateTs(timestamp);
+        tMessageSummary.setsMessageActiveInd(StatusEnum.Unactive.getCode());
+
+        // SMessageActive
+        SMessageActive sMessageActive = HsMessageUtil.messageSummary2MessageActive(tMessageSummary);
+        sMessageActiveMapper.updateByPrimaryKeySelective(sMessageActive);
+
+        return Response.SUCCESS;
     }
 
     @Override

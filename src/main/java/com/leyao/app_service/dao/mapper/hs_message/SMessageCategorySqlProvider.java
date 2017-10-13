@@ -52,7 +52,7 @@ public class SMessageCategorySqlProvider {
             sql.SET("update_ts = #{updateTs,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("s_message_content_id = #{sMessageContentId,jdbcType=BIGINT}");
+        sql.WHERE("h_message_id = #{hMessageId,jdbcType=BIGINT}");
         
         return sql.toString();
     }

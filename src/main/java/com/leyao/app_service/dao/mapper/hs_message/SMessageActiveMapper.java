@@ -35,7 +35,7 @@ public interface SMessageActiveMapper {
         "select",
         "s_message_active_id, h_message_id, s_message_active_ind, create_ts, update_ts",
         "from s_message_active",
-        "where s_message_active_id = #{sMessageActiveId,jdbcType=BIGINT}"
+        "where h_message_id = #{hMessageId,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="s_message_active_id", property="sMessageActiveId", jdbcType=JdbcType.BIGINT, id=true),

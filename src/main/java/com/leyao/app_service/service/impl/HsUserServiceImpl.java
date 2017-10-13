@@ -54,16 +54,16 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Autowired
     SUserFeedbackMapper sUserFeedbackMapper;
-    
+
     @Autowired
     SUserEmailMapper sUserEmailMapper;
-    
+
     @Autowired
     SUserNameMapper sUserNameMapper;
-    
+
     @Autowired
     SUserGenderMapper sUserGenderMapper;
-    
+
     @Autowired
     SUserProfileMapper sUserProfileMapper;
 
@@ -205,6 +205,7 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
+    @Transactional
     public int addSUserFeedbackSummary(SUserFeedbackSummary sUserFeedbackSummary) {
         Long hUserPhoneNr = sUserFeedbackSummary.gethUserPhoneNr();
         if (null == hUserPhoneNr) {
@@ -223,6 +224,7 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
+    @Transactional
     public int addTUserSummary(TUserSummary tUserSummary) {
         Date timestamp = new Date();
         tUserSummary.setCreateTs(timestamp);
@@ -235,37 +237,38 @@ public class HsUserServiceImpl implements IHsUserService {
         tUserSummary.sethUserId(hUserId);
 
         // SUserActive
-        SUserActive sUserActive=HsUserUtil.userSummary2UserActive(tUserSummary);
+        SUserActive sUserActive = HsUserUtil.userSummary2UserActive(tUserSummary);
         sUserActiveMapper.insertSelective(sUserActive);
 
         // SUserEmail
-        SUserEmail sUserEmail=HsUserUtil.userSummary2UserEmail(tUserSummary);
+        SUserEmail sUserEmail = HsUserUtil.userSummary2UserEmail(tUserSummary);
         sUserEmailMapper.insertSelective(sUserEmail);
 
         // SUserGender
-        SUserGender sUserGender=HsUserUtil.userSummary2UserGender(tUserSummary);
+        SUserGender sUserGender = HsUserUtil.userSummary2UserGender(tUserSummary);
         sUserGenderMapper.insertSelective(sUserGender);
 
         // SUserName
-        SUserName sUserName=HsUserUtil.userSummary2UserName(tUserSummary);
+        SUserName sUserName = HsUserUtil.userSummary2UserName(tUserSummary);
         sUserNameMapper.insertSelective(sUserName);
 
         // SUserPassword
-        SUserPassword sUserPassword=HsUserUtil.userSummary2UserPassword(tUserSummary);
+        SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
         sUserPasswordMapper.insertSelective(sUserPassword);
 
         // SUserProfile
-        SUserProfile sUserProfile=HsUserUtil.userSummary2UserProfile(tUserSummary);
+        SUserProfile sUserProfile = HsUserUtil.userSummary2UserProfile(tUserSummary);
         sUserProfileMapper.insertSelective(sUserProfile);
 
         // TUserPage
-        TUserPage tUserPage=HsUserUtil.userSummary2UserPage(tUserSummary);
+        TUserPage tUserPage = HsUserUtil.userSummary2UserPage(tUserSummary);
         tUserPageMapper.insertSelective(tUserPage);
 
         return Response.SUCCESS;
     }
 
     @Override
+    @Transactional
     public int editTUserSummary(TUserSummary tUserSummary) {
         Date timestamp = new Date();
         tUserSummary.setUpdateTs(timestamp);
@@ -275,46 +278,51 @@ public class HsUserServiceImpl implements IHsUserService {
         hUserMapper.updateByPrimaryKeySelective(hUser);
 
         // SUserActive
-        SUserActive sUserActive=HsUserUtil.userSummary2UserActive(tUserSummary);
+        SUserActive sUserActive = HsUserUtil.userSummary2UserActive(tUserSummary);
         sUserActiveMapper.updateByPrimaryKeySelective(sUserActive);
 
         // SUserEmail
-        SUserEmail sUserEmail=HsUserUtil.userSummary2UserEmail(tUserSummary);
+        SUserEmail sUserEmail = HsUserUtil.userSummary2UserEmail(tUserSummary);
         sUserEmailMapper.updateByPrimaryKeySelective(sUserEmail);
 
         // SUserGender
-        SUserGender sUserGender=HsUserUtil.userSummary2UserGender(tUserSummary);
+        SUserGender sUserGender = HsUserUtil.userSummary2UserGender(tUserSummary);
         sUserGenderMapper.updateByPrimaryKeySelective(sUserGender);
 
         // SUserName
-        SUserName sUserName=HsUserUtil.userSummary2UserName(tUserSummary);
+        SUserName sUserName = HsUserUtil.userSummary2UserName(tUserSummary);
         sUserNameMapper.updateByPrimaryKeySelective(sUserName);
 
         // SUserPassword
-        SUserPassword sUserPassword=HsUserUtil.userSummary2UserPassword(tUserSummary);
+        SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
         sUserPasswordMapper.updateByPrimaryKeySelective(sUserPassword);
 
         // SUserProfile
-        SUserProfile sUserProfile=HsUserUtil.userSummary2UserProfile(tUserSummary);
+        SUserProfile sUserProfile = HsUserUtil.userSummary2UserProfile(tUserSummary);
         sUserProfileMapper.updateByPrimaryKeySelective(sUserProfile);
 
         // TUserPage
-        TUserPage tUserPage=HsUserUtil.userSummary2UserPage(tUserSummary);
+        TUserPage tUserPage = HsUserUtil.userSummary2UserPage(tUserSummary);
         tUserPageMapper.updateByPrimaryKeySelective(tUserPage);
 
         return Response.SUCCESS;
     }
 
     @Override
+    @Transactional
     public int deleteTUserSummary(TUserSummary tUserSummary) {
         Date timestamp = new Date();
         tUserSummary.setUpdateTs(timestamp);
         tUserSummary.setsUserActiveInd(StatusEnum.Unactive.getCode());
 
         // SUserActive
-        SUserActive sUserActive=HsUserUtil.userSummary2UserActive(tUserSummary);
+        SUserActive sUserActive = HsUserUtil.userSummary2UserActive(tUserSummary);
         sUserActiveMapper.updateByPrimaryKeySelective(sUserActive);
-        
+
+        // TUserPage
+        TUserPage tUserPage = HsUserUtil.userSummary2UserPage(tUserSummary);
+        tUserPageMapper.updateByPrimaryKeySelective(tUserPage);
+
         return Response.SUCCESS;
     }
 }

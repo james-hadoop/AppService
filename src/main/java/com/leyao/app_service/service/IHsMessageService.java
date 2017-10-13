@@ -13,5 +13,9 @@ public interface IHsMessageService {
     List<TMessageSummary> getTMessageSummaryListByCondition(Map<String, Object> paramMap);
     int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap);
     
-    int addTMessageSummary(TMessageSummary TMessageSummary);
+    int addTMessageSummary(TMessageSummary tMessageSummary);
+    
+    int editTMessageSummary(TMessageSummary tMessageSummary);
+    
+    int deleteTMessageSummary(TMessageSummary tMessageSummary);
 }
