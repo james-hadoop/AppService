@@ -77,9 +77,9 @@ public class HsUserController {
      * }
      */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
-    public GridContent TUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
-            @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
-            @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr,
+    public GridContent getTUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
+            @RequestParam(value = "sUserEmailStr", required=false) String sUserEmailStr,
+            @RequestParam(value = "hUserPhoneNr", required = false) String hUserPhoneNr,
             @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info(
                 "/v1/service/user/getTUserSummary() called: sessionCode={}, sUserNameStr={}, sUserEmailStr={}, hUserPhoneNr={}",
@@ -270,6 +270,33 @@ public class HsUserController {
         }
         return responseContent;
     }
+    
+    @RequestMapping(value = "/addTUserSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent addTUserSummary(@RequestBody TUserSummary tUserSummary) {
+        logger.info(
+                "/v1/service/user/addTUserSummary() called: hUserPhoneNr={},sUserEmailStr={},sUserGenderDesc={},sUserNameStr={}",
+                tUserSummary.gethUserPhoneNr(), tUserSummary.getsUserEmailStr(), tUserSummary.getsUserGenderDesc(),
+                tUserSummary.getsUserNameStr());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsUserService.addTUserSummary(tUserSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("editTUserSummary fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("editTUserSummary success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/user/addTUserSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
 
     /**
      * @apiGroup User
@@ -314,6 +341,31 @@ public class HsUserController {
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/editTUserSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+    
+    @RequestMapping(value = "/deleteTUserSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent deleteTUserSummary(@RequestBody TUserSummary tUserSummary) {
+        logger.info("/v1/service/event/deleteTUserSummary() called: hUserId={}", tUserSummary.gethUserId()
+                        );
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsUserService.deleteTUserSummary(tUserSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Delete fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Delete success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/event/deleteTUserSummary()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;

@@ -35,7 +35,7 @@ public interface SUserProfileMapper {
         "select",
         "s_user_profile_id, h_user_id, s_user_profile_url, create_ts, update_ts",
         "from s_user_profile",
-        "where s_user_profile_id = #{sUserProfileId,jdbcType=BIGINT}"
+        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="s_user_profile_id", property="sUserProfileId", jdbcType=JdbcType.BIGINT, id=true),

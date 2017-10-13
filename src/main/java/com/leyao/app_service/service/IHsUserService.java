@@ -20,8 +20,12 @@ public interface IHsUserService {
     String getVerifyCode(String hUserPhoneNr);
 
     TUserSummary selectByhUserPhoneNr(Long hUserPhoneNr);
+    
+    int addTUserSummary(TUserSummary tUserSummary);
 
     int editTUserSummary(TUserSummary tUserSummary);
+    
+    int deleteTUserSummary(TUserSummary tUserSummary);
 
     List<SUserFeedbackSummary> getSUserFeedbackSummaryByCondition(Map<String, Object> paramMap);
 

@@ -35,7 +35,7 @@ public interface SUserActiveMapper {
         "select",
         "s_user_active_id, h_user_id, s_user_active_ind, create_ts, update_ts",
         "from s_user_active",
-        "where s_user_active_id = #{sUserActiveId,jdbcType=BIGINT}"
+        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="s_user_active_id", property="sUserActiveId", jdbcType=JdbcType.BIGINT, id=true),

@@ -35,7 +35,7 @@ public interface SUserPasswordMapper {
         "select",
         "s_user_password_id, h_user_id, s_user_password_str, create_ts, update_ts",
         "from s_user_password",
-        "where s_user_password_id = #{sUserPasswordId,jdbcType=BIGINT}"
+        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="s_user_password_id", property="sUserPasswordId", jdbcType=JdbcType.BIGINT, id=true),

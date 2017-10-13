@@ -35,7 +35,7 @@ public interface SUserEmailMapper {
         "select",
         "s_user_email_id, h_user_id, s_user_email_str, create_ts, update_ts",
         "from s_user_email",
-        "where s_user_email_id = #{sUserEmailId,jdbcType=BIGINT}"
+        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="s_user_email_id", property="sUserEmailId", jdbcType=JdbcType.BIGINT, id=true),

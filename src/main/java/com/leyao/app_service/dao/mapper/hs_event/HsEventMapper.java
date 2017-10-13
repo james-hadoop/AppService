@@ -54,7 +54,7 @@ public interface HsEventMapper {
 
     @Select({"select max(h_event_id) as h_event_id from hs_event.hs_event"})
     @Results({
-        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.BIGINT)
     })
     Long getMaxHEventId();
     

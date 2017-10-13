@@ -23,6 +23,7 @@ import com.leyao.app_service.dao.mapper.hs_event.SEventSubContent1Mapper;
 import com.leyao.app_service.dao.mapper.hs_event.SEventSubContent2Mapper;
 import com.leyao.app_service.dao.mapper.hs_event.SEventTypeMapper;
 import com.leyao.app_service.dao.mapper.hs_event.TEventPageMapper;
+import com.leyao.app_service.entity.enums.StatusEnum;
 import com.leyao.app_service.entity.hs_event.HsEvent;
 import com.leyao.app_service.entity.hs_event.SEventActive;
 import com.leyao.app_service.entity.hs_event.SEventBanner;
@@ -36,7 +37,6 @@ import com.leyao.app_service.entity.hs_event.SEventSubContent2;
 import com.leyao.app_service.entity.hs_event.SEventType;
 import com.leyao.app_service.entity.hs_event.TEventPage;
 import com.leyao.app_service.entity.hs_event.TEventSummary;
-import com.leyao.app_service.entity.hs_event.enums.REventActiveEnum;
 import com.leyao.app_service.service.IHsEventService;
 import com.leyao.app_service.util.HsEventUtil;
 
@@ -212,7 +212,8 @@ public class HsEventServiceImpl implements IHsEventService {
                     .getEventSubContent2ByEventId(event.gethEventId());
 
             event.setsEventSubContent(HsEventUtil.makeEventSubContent(eventSubContent1List, eventSubContent2List));
-            event.setsEventSubContentString(HsEventUtil.makeEventSubContentString(eventSubContent1List, eventSubContent2List));
+            event.setsEventSubContentString(
+                    HsEventUtil.makeEventSubContentString(eventSubContent1List, eventSubContent2List));
         }
 
         return tEventSummaryList;
@@ -267,7 +268,8 @@ public class HsEventServiceImpl implements IHsEventService {
         sEventRecom3Mapper.insertSelective(sEventRecom3);
 
         try {
-            if (null != tEventSummary.getsEventSubContentString() && 0 != tEventSummary.getsEventSubContentString().length()) {
+            if (null != tEventSummary.getsEventSubContentString()
+                    && 0 != tEventSummary.getsEventSubContentString().length()) {
                 // SEventSubContent1
                 List<SEventSubContent1> sEventSubContent1List = HsEventUtil
                         .eventSummary2EventSubContent1(tEventSummary);
@@ -339,7 +341,8 @@ public class HsEventServiceImpl implements IHsEventService {
         sEventRecom3Mapper.updateByPrimaryKeySelective(sEventRecom3);
 
         try {
-            if (null != tEventSummary.getsEventSubContentString() && 0 != tEventSummary.getsEventSubContentString().length()) {
+            if (null != tEventSummary.getsEventSubContentString()
+                    && 0 != tEventSummary.getsEventSubContentString().length()) {
                 sEventSubContent1Mapper.deleteByEventId(tEventSummary.gethEventId());
                 sEventSubContent2Mapper.deleteByEventId(tEventSummary.gethEventId());
 
@@ -380,12 +383,12 @@ public class HsEventServiceImpl implements IHsEventService {
     public int deleteTEventSummary(TEventSummary tEventSummary) {
         Date timestamp = new Date();
         tEventSummary.setUpdateTs(timestamp);
-        tEventSummary.setsEventActiveInd(REventActiveEnum.Unactive.getCode());
+        tEventSummary.setsEventActiveInd(StatusEnum.Unactive.getCode());
 
         // SEventActive
         List<SEventActive> eventActiveList = sEventActiveMapper.selectByEventId(tEventSummary.gethEventId());
         for (SEventActive ea : eventActiveList) {
-            ea.setsEventActiveInd(REventActiveEnum.Unactive.getCode());
+            ea.setsEventActiveInd(StatusEnum.Unactive.getCode());
             sEventActiveMapper.updateByPrimaryKeySelective(ea);
         }
 

@@ -46,7 +46,7 @@ public interface HUserMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     HUser selectByPrimaryKey(Long hUserId);
-
+    
     @UpdateProvider(type=HUserSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(HUser record);
 

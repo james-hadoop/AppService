@@ -5,9 +5,13 @@ import java.util.List;
 
 import com.leyao.app_service.entity.hs_user.HUser;
 import com.leyao.app_service.entity.hs_user.SUserActive;
+import com.leyao.app_service.entity.hs_user.SUserEmail;
 import com.leyao.app_service.entity.hs_user.SUserFeedback;
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
+import com.leyao.app_service.entity.hs_user.SUserGender;
+import com.leyao.app_service.entity.hs_user.SUserName;
 import com.leyao.app_service.entity.hs_user.SUserPassword;
+import com.leyao.app_service.entity.hs_user.SUserProfile;
 import com.leyao.app_service.entity.hs_user.TUserPage;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 
@@ -99,7 +103,7 @@ public class HsUserUtil {
 
         return userPassword;
     }
-    
+
     public static SUserActive userSummary2UserActive(TUserSummary tUserSummary) {
         SUserActive userActive = new SUserActive();
         userActive.sethUserId(tUserSummary.gethUserId());
@@ -123,5 +127,45 @@ public class HsUserUtil {
         sUserFeedback.setUpdateTs(sUserFeedback.getUpdateTs());
 
         return sUserFeedback;
+    }
+
+    public static SUserEmail userSummary2UserEmail(TUserSummary tUserSummary) {
+        SUserEmail sUserEmail = new SUserEmail();
+        sUserEmail.sethUserId(tUserSummary.gethUserId());
+        sUserEmail.setCreateTs(tUserSummary.getCreateTs());
+        sUserEmail.setUpdateTs(tUserSummary.getUpdateTs());
+        sUserEmail.setsUserEmailStr(tUserSummary.getsUserEmailStr());
+
+        return sUserEmail;
+    }
+
+    public static SUserProfile userSummary2UserProfile(TUserSummary tUserSummary) {
+        SUserProfile sUserProfile = new SUserProfile();
+        sUserProfile.sethUserId(tUserSummary.gethUserId());
+        sUserProfile.setsUserProfileUrl(tUserSummary.getsUserProfileUrl());
+        sUserProfile.setCreateTs(tUserSummary.getCreateTs());
+        sUserProfile.setUpdateTs(tUserSummary.getUpdateTs());
+
+        return sUserProfile;
+    }
+
+    public static SUserGender userSummary2UserGender(TUserSummary tUserSummary) {
+        SUserGender sUserGender = new SUserGender();
+        sUserGender.sethUserId(tUserSummary.gethUserId());
+        sUserGender.setsUserGenderCd(tUserSummary.getsUserGenderCd());
+        sUserGender.setCreateTs(tUserSummary.getCreateTs());
+        sUserGender.setUpdateTs(tUserSummary.getUpdateTs());
+
+        return sUserGender;
+    }
+
+    public static SUserName userSummary2UserName(TUserSummary tUserSummary) {
+        SUserName sUserName = new SUserName();
+        sUserName.sethUserId(tUserSummary.gethUserId());
+        sUserName.setsUserNameStr(tUserSummary.getsUserNameStr());
+        sUserName.setCreateTs(tUserSummary.getCreateTs());
+        sUserName.setUpdateTs(tUserSummary.getUpdateTs());
+
+        return sUserName;
     }
 }

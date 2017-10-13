@@ -1,7 +1,7 @@
 package com.leyao.app_service.entity.enums;
 
 public enum StatusEnum {
-    Active("Active", 0), NotActive("NotActive", 1);
+    Active("Active", 0), Unactive("Unactive", 1);
 
     private String value;
     private int code;

@@ -35,7 +35,7 @@ public interface SUserGenderMapper {
         "select",
         "s_user_gender_id, h_user_id, s_user_gender_cd, create_ts, update_ts",
         "from s_user_gender",
-        "where s_user_gender_id = #{sUserGenderId,jdbcType=BIGINT}"
+        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="s_user_gender_id", property="sUserGenderId", jdbcType=JdbcType.BIGINT, id=true),

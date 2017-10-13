@@ -14,14 +14,23 @@ import com.leyao.app_service.common.SessionManager;
 import com.leyao.app_service.common.VerifyCodeManager;
 import com.leyao.app_service.dao.mapper.hs_user.HUserMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserActiveMapper;
+import com.leyao.app_service.dao.mapper.hs_user.SUserEmailMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserFeedbackMapper;
+import com.leyao.app_service.dao.mapper.hs_user.SUserGenderMapper;
+import com.leyao.app_service.dao.mapper.hs_user.SUserNameMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserPasswordMapper;
+import com.leyao.app_service.dao.mapper.hs_user.SUserProfileMapper;
 import com.leyao.app_service.dao.mapper.hs_user.TUserPageMapper;
+import com.leyao.app_service.entity.enums.StatusEnum;
 import com.leyao.app_service.entity.hs_user.HUser;
 import com.leyao.app_service.entity.hs_user.SUserActive;
+import com.leyao.app_service.entity.hs_user.SUserEmail;
 import com.leyao.app_service.entity.hs_user.SUserFeedback;
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
+import com.leyao.app_service.entity.hs_user.SUserGender;
+import com.leyao.app_service.entity.hs_user.SUserName;
 import com.leyao.app_service.entity.hs_user.SUserPassword;
+import com.leyao.app_service.entity.hs_user.SUserProfile;
 import com.leyao.app_service.entity.hs_user.TUserPage;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 import com.leyao.app_service.service.IHsUserService;
@@ -45,6 +54,18 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Autowired
     SUserFeedbackMapper sUserFeedbackMapper;
+    
+    @Autowired
+    SUserEmailMapper sUserEmailMapper;
+    
+    @Autowired
+    SUserNameMapper sUserNameMapper;
+    
+    @Autowired
+    SUserGenderMapper sUserGenderMapper;
+    
+    @Autowired
+    SUserProfileMapper sUserProfileMapper;
 
     @Override
     public List<TUserSummary> getTUserSummary(Map<String, Object> paramMap) {
@@ -174,12 +195,6 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
-    public int editTUserSummary(TUserSummary tUserSummary) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public List<SUserFeedbackSummary> getSUserFeedbackSummaryByCondition(Map<String, Object> paramMap) {
         return sUserFeedbackMapper.getSUserFeedbackSummaryByCondition(paramMap);
     }
@@ -205,5 +220,101 @@ public class HsUserServiceImpl implements IHsUserService {
 
         SUserFeedback sUserFeedback = HsUserUtil.userFeedbackSummanry2UserFeedback(sUserFeedbackSummary);
         return sUserFeedbackMapper.insertSelective(sUserFeedback);
+    }
+
+    @Override
+    public int addTUserSummary(TUserSummary tUserSummary) {
+        Date timestamp = new Date();
+        tUserSummary.setCreateTs(timestamp);
+        tUserSummary.setUpdateTs(timestamp);
+
+        // HUser
+        HUser hUser = HsUserUtil.userSummary2User(tUserSummary);
+        hUserMapper.insertSelective(hUser);
+        long hUserId = hUserMapper.getMaxHUserId();
+        tUserSummary.sethUserId(hUserId);
+
+        // SUserActive
+        SUserActive sUserActive=HsUserUtil.userSummary2UserActive(tUserSummary);
+        sUserActiveMapper.insertSelective(sUserActive);
+
+        // SUserEmail
+        SUserEmail sUserEmail=HsUserUtil.userSummary2UserEmail(tUserSummary);
+        sUserEmailMapper.insertSelective(sUserEmail);
+
+        // SUserGender
+        SUserGender sUserGender=HsUserUtil.userSummary2UserGender(tUserSummary);
+        sUserGenderMapper.insertSelective(sUserGender);
+
+        // SUserName
+        SUserName sUserName=HsUserUtil.userSummary2UserName(tUserSummary);
+        sUserNameMapper.insertSelective(sUserName);
+
+        // SUserPassword
+        SUserPassword sUserPassword=HsUserUtil.userSummary2UserPassword(tUserSummary);
+        sUserPasswordMapper.insertSelective(sUserPassword);
+
+        // SUserProfile
+        SUserProfile sUserProfile=HsUserUtil.userSummary2UserProfile(tUserSummary);
+        sUserProfileMapper.insertSelective(sUserProfile);
+
+        // TUserPage
+        TUserPage tUserPage=HsUserUtil.userSummary2UserPage(tUserSummary);
+        tUserPageMapper.insertSelective(tUserPage);
+
+        return Response.SUCCESS;
+    }
+
+    @Override
+    public int editTUserSummary(TUserSummary tUserSummary) {
+        Date timestamp = new Date();
+        tUserSummary.setUpdateTs(timestamp);
+
+        // HUser
+        HUser hUser = HsUserUtil.userSummary2User(tUserSummary);
+        hUserMapper.updateByPrimaryKeySelective(hUser);
+
+        // SUserActive
+        SUserActive sUserActive=HsUserUtil.userSummary2UserActive(tUserSummary);
+        sUserActiveMapper.updateByPrimaryKeySelective(sUserActive);
+
+        // SUserEmail
+        SUserEmail sUserEmail=HsUserUtil.userSummary2UserEmail(tUserSummary);
+        sUserEmailMapper.updateByPrimaryKeySelective(sUserEmail);
+
+        // SUserGender
+        SUserGender sUserGender=HsUserUtil.userSummary2UserGender(tUserSummary);
+        sUserGenderMapper.updateByPrimaryKeySelective(sUserGender);
+
+        // SUserName
+        SUserName sUserName=HsUserUtil.userSummary2UserName(tUserSummary);
+        sUserNameMapper.updateByPrimaryKeySelective(sUserName);
+
+        // SUserPassword
+        SUserPassword sUserPassword=HsUserUtil.userSummary2UserPassword(tUserSummary);
+        sUserPasswordMapper.updateByPrimaryKeySelective(sUserPassword);
+
+        // SUserProfile
+        SUserProfile sUserProfile=HsUserUtil.userSummary2UserProfile(tUserSummary);
+        sUserProfileMapper.updateByPrimaryKeySelective(sUserProfile);
+
+        // TUserPage
+        TUserPage tUserPage=HsUserUtil.userSummary2UserPage(tUserSummary);
+        tUserPageMapper.updateByPrimaryKeySelective(tUserPage);
+
+        return Response.SUCCESS;
+    }
+
+    @Override
+    public int deleteTUserSummary(TUserSummary tUserSummary) {
+        Date timestamp = new Date();
+        tUserSummary.setUpdateTs(timestamp);
+        tUserSummary.setsUserActiveInd(StatusEnum.Unactive.getCode());
+
+        // SUserActive
+        SUserActive sUserActive=HsUserUtil.userSummary2UserActive(tUserSummary);
+        sUserActiveMapper.updateByPrimaryKeySelective(sUserActive);
+        
+        return Response.SUCCESS;
     }
 }

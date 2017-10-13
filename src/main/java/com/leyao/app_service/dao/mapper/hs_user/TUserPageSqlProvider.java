@@ -117,6 +117,11 @@ public class TUserPageSqlProvider {
             sql.OR().WHERE("h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
         }
         
+        if (paramMap.get("start") != null && paramMap.get("end") != null) {
+            String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));
+            return sqlString;
+        }
+        
         return sql.toString();
     }
     
