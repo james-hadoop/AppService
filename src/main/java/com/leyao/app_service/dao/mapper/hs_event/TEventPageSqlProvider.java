@@ -194,7 +194,7 @@ public class TEventPageSqlProvider {
     public String getTEventSummaryByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd, eb.s_event_banner_position_cd").FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id");
+        sql.SELECT("ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd, ep.create_ts, ep.update_ts, eb.s_event_banner_position_cd").FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id");
 
         sql.WHERE("ep.s_event_active_ind=0");
 

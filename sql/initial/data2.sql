@@ -67,13 +67,16 @@ INSERT INTO ls_user_event.l_user_event (l_user_event_id,h_user_id,h_event_id,cre
 truncate table hs_user.t_user_page; 
 INSERT INTO hs_user.t_user_page (h_user_id,h_user_phone_nr,s_user_gender_cd,s_user_gender_desc,s_user_name_str,s_user_profile_url,s_user_email_str,s_user_active_ind,create_ts,update_ts) VALUES 
 (1,13333333333,0,'','','','',0,'2000-01-01 00:00:00.000','2000-01-01 00:00:00.000')
-,(3,15821615886,0,'','','','',0,'2017-09-19 23:18:55.000','2017-09-19 23:36:21.000')
 ;
 
 truncate table hs_user.s_user_password;
 INSERT INTO hs_user.s_user_password (s_user_password_id,h_user_id,s_user_password_str,create_ts,update_ts) VALUES 
 (1,1,'5f4dcc3b5aa765d61d8327deb882cf99','2000-01-01 00:00:00.000','2017-09-17 19:46:26.000')
-,(12,3,'5f4dcc3b5aa765d61d8327deb882cf99','2017-09-19 23:18:55.000','2017-09-19 23:23:49.000')
+;
+
+truncate table hs_user.h_user; 
+INSERT INTO hs_user.h_user (h_user_id,h_user_phone_nr,create_ts,update_ts) VALUES 
+(1,13333333333,'2000-01-01 00:00:00.000','2000-01-01 00:00:00.000')
 ;
 
 truncate table hs_user.s_user_feedback; 
@@ -81,12 +84,6 @@ INSERT INTO hs_user.s_user_feedback (s_user_feedback_id,h_user_id,s_user_feedbac
 (1,1,'Leyao app is great!!!','2000-01-01 00:00:00.000','2017-10-10 21:33:40.000')
 ,(2,1,'Hi Leyao!!!','2000-01-01 00:00:00.000','2017-10-10 23:01:04.000')
 ,(3,1,'Hi Leyao2!!!','2000-01-01 00:00:00.000','2000-01-01 00:00:00.000')
-;
-
-truncate table hs_user.h_user; 
-INSERT INTO hs_user.h_user (h_user_id,h_user_phone_nr,create_ts,update_ts) VALUES 
-(1,13333333333,'2000-01-01 00:00:00.000','2000-01-01 00:00:00.000')
-,(3,15821615886,'2017-09-19 23:18:55.000','2017-09-19 23:18:55.000')
 ;
 
 truncate table hs_message.s_message_content; 
