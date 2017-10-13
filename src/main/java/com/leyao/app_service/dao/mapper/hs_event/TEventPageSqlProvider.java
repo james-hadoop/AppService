@@ -128,7 +128,9 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str").FROM("hs_event.t_event_page ep left outer join hs_event.s_event_sub_content_1 sub1 on ep.h_event_id=sub1.h_event_id left outer join hs_event.s_event_sub_content_2 sub2 on sub1.s_event_sub_content_1_id=sub2.s_event_sub_content_2_id");
+        sql.SELECT(
+                "ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str")
+                .FROM("hs_event.t_event_page ep left outer join hs_event.s_event_sub_content_1 sub1 on ep.h_event_id=sub1.h_event_id left outer join hs_event.s_event_sub_content_2 sub2 on sub1.s_event_sub_content_1_id=sub2.s_event_sub_content_2_id");
 
         sql.WHERE("ep.s_event_active_ind=0");
 
@@ -143,17 +145,19 @@ public class TEventPageSqlProvider {
         if (paramMap.get("sEventTypeCd") != null) {
             sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
         }
-        
+
         if (paramMap.get("sEventSearchContentTxt") != null) {
             sql.WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
         }
 
         if (paramMap.get("sUserEventLikeInd") != null) {
-            sql.INNER_JOIN("ls_user_event.s_user_event_like uel on uel.l_user_event_id=l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}");
+            sql.INNER_JOIN(
+                    "ls_user_event.s_user_event_like uel on uel.l_user_event_id=l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sUserEventReadLogTxt") != null) {
-            sql.INNER_JOIN("ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
+            sql.INNER_JOIN(
+                    "ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
         }
 
         return sql.toString();
@@ -180,21 +184,25 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sUserEventLikeInd") != null) {
-            sql.INNER_JOIN("ls_user_event.s_user_event_like uel on uel.l_user_event_id=l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}");
+            sql.INNER_JOIN(
+                    "ls_user_event.s_user_event_like uel on uel.l_user_event_id=l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sUserEventReadLogTxt") != null) {
-            sql.INNER_JOIN("ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
+            sql.INNER_JOIN(
+                    "ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
         }
 
         return sql.toString();
     }
-    
+
     // getTEventSummaryByCondition
     public String getTEventSummaryByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd, ep.create_ts, ep.update_ts, eb.s_event_banner_position_cd").FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id");
+        sql.SELECT(
+                "ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd, ep.create_ts, ep.update_ts, eb.s_event_banner_position_cd")
+                .FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id");
 
         sql.WHERE("ep.s_event_active_ind=0");
 
@@ -205,9 +213,14 @@ public class TEventPageSqlProvider {
         if (paramMap.get("sEventTypeCd") != null) {
             sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
         }
-        
+
         if (paramMap.get("sEventSearchContentTxt") != null) {
             sql.WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+        }
+
+        if (paramMap.get("start") != null && paramMap.get("end") != null) {
+            String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));
+            return sqlString;
         }
 
         return sql.toString();
