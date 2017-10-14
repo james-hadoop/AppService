@@ -109,6 +109,10 @@ public class SMessageContentSqlProvider {
         if (paramMap.get("sMessageCategoryCd") != null) {
             sql.WHERE("mca.s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
         }
+        
+        sql.ORDER_BY("ma.s_message_active_ind");
+        
+        sql.ORDER_BY("mc.update_ts desc");
 
         if (paramMap.get("start") != null && paramMap.get("end") != null) {
             String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));

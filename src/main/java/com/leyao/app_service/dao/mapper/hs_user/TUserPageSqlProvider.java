@@ -119,6 +119,8 @@ public class TUserPageSqlProvider {
         
         sql.ORDER_BY("s_user_active_ind");
         
+        sql.ORDER_BY("update_ts desc");
+        
         if (paramMap.get("start") != null && paramMap.get("end") != null) {
             String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));
             return sqlString;

@@ -221,6 +221,8 @@ public class TEventPageSqlProvider {
         }
         
         sql.ORDER_BY("s_event_active_ind");
+        
+        sql.ORDER_BY("ep.update_ts desc");
 
         if (paramMap.get("start") != null && paramMap.get("end") != null) {
             String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));

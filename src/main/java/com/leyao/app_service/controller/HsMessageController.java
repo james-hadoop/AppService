@@ -141,7 +141,7 @@ public class HsMessageController {
     
     @RequestMapping(value = "/deleteTMessageSummary", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseContent deleteTMessageSummary(TMessageSummary tMessageSummary) {
+    public ResponseContent deleteTMessageSummary(@RequestBody TMessageSummary tMessageSummary) {
         logger.info("/v1/service/message/deleteTMessageSummary() called: hMessageId={}", tMessageSummary.gethMessageId());
         ResponseContent responseContent = new ResponseContent();
         
