@@ -284,8 +284,10 @@ public class HsEventServiceImpl implements IHsEventService {
                 // SEventSubContent2
                 List<SEventSubContent2> sEventSubContent2List = HsEventUtil
                         .eventSummary2EventSubContent2(tEventSummary);
-                for (SEventSubContent2 record : sEventSubContent2List) {
-                    sEventSubContent2Mapper.insertSelective(record);
+                if (null != sEventSubContent2List) {
+                    for (SEventSubContent2 record : sEventSubContent2List) {
+                        sEventSubContent2Mapper.insertSelective(record);
+                    }
                 }
             }
 
@@ -323,9 +325,9 @@ public class HsEventServiceImpl implements IHsEventService {
         // SEventCategory
         SEventCategory sEventCategory = HsEventUtil.eventSummary2EventCategory(tEventSummary);
         sEventCategoryMapper.updateByPrimaryKeySelective(sEventCategory);
-        
+
         // SEventType
-        SEventType sEventType=HsEventUtil.eventSummary2EventType(tEventSummary);
+        SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
         sEventTypeMapper.updateByPrimaryKeySelective(sEventType);
 
         // SEventContent
@@ -360,8 +362,10 @@ public class HsEventServiceImpl implements IHsEventService {
                 // SEventSubContent2
                 List<SEventSubContent2> sEventSubContent2List = HsEventUtil
                         .eventSummary2EventSubContent2(tEventSummary);
-                for (SEventSubContent2 record : sEventSubContent2List) {
-                    sEventSubContent2Mapper.insertSelective(record);
+                if (null != sEventSubContent2List) {
+                    for (SEventSubContent2 record : sEventSubContent2List) {
+                        sEventSubContent2Mapper.insertSelective(record);
+                    }
                 }
             }
 

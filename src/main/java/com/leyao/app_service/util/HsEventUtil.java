@@ -31,7 +31,8 @@ import com.leyao.app_service.entity.hs_event.enums.REventCategoryEnum;
 import com.leyao.app_service.entity.hs_event.enums.REventTypeEnum;
 
 public class HsEventUtil {
-    public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> tEventSummaryList) throws JsonParseException, JsonMappingException, IOException {
+    public static List<TEventPage> eventSummaryList2EventPageList(List<TEventSummary> tEventSummaryList)
+            throws JsonParseException, JsonMappingException, IOException {
         if (null == tEventSummaryList || 0 == tEventSummaryList.size()) {
             return null;
         }
@@ -45,7 +46,8 @@ public class HsEventUtil {
         return tEventPageList;
     }
 
-    public static List<TEventPage> eventSummary2EventPageList(TEventSummary es) throws JsonParseException, JsonMappingException, IOException {
+    public static List<TEventPage> eventSummary2EventPageList(TEventSummary es)
+            throws JsonParseException, JsonMappingException, IOException {
         if (null == es) {
             return null;
         }
@@ -54,14 +56,18 @@ public class HsEventUtil {
 
         List<SEventSubContent1> subContent1s = HsEventUtil.eventSummary2EventSubContent1(es);
         List<String> subContent1Url = new ArrayList<String>();
-        for (SEventSubContent1 subContent1 : subContent1s) {
-            subContent1Url.add(subContent1.toString());
+        if (null != subContent1s) {
+            for (SEventSubContent1 subContent1 : subContent1s) {
+                subContent1Url.add(subContent1.toString());
+            }
         }
 
         List<SEventSubContent2> subContent2s = HsEventUtil.eventSummary2EventSubContent2(es);
         List<String> subContent2Str = es.getsEventSubContent2StrList();
-        for (SEventSubContent2 subContent2 : subContent2s) {
-            subContent2Str.add(subContent2.toString());
+        if (null != subContent2s) {
+            for (SEventSubContent2 subContent2 : subContent2s) {
+                subContent2Str.add(subContent2.toString());
+            }
         }
 
         if (null == subContent1Url || 0 == subContent1Url.size()) {
@@ -170,8 +176,8 @@ public class HsEventUtil {
         if (null != es) {
             tEventSummaryList.add(es);
         }
-        
-       HsEventUtil.makeSubContent(tEventSummaryList);
+
+        HsEventUtil.makeSubContent(tEventSummaryList);
 
         return tEventSummaryList;
     }
@@ -192,13 +198,16 @@ public class HsEventUtil {
                         String subContent2Str = subContent2StrList.get(i);
                         String subContent1Url = event.getsEventSubContent1UrlList().get(i);
 
-                        SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil.JsonString2SubContentJsonEntityWithoutUrl(subContent2Str);
-                        SubContentJsonEntity subContentJsonEntity = new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
+                        SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil
+                                .JsonString2SubContentJsonEntityWithoutUrl(subContent2Str);
+                        SubContentJsonEntity subContentJsonEntity = new SubContentJsonEntity(
+                                subContentJsonEntityWithoutUrl);
                         subContentJsonEntity.setUrl(subContent1Url);
                         subContentJsonEntityList.add(subContentJsonEntity);
                     }
 
-                    event.setsEventSubContentString(HsEventUtil.SubContentJsonEntity2JsonString(subContentJsonEntityList));
+                    event.setsEventSubContentString(
+                            HsEventUtil.SubContentJsonEntity2JsonString(subContentJsonEntityList));
                     event.setsEventSubContent(subContentJsonEntityList);
                 }
             }
@@ -302,12 +311,15 @@ public class HsEventUtil {
         return sEventRecom3;
     }
 
-    public static List<SEventSubContent1> eventSummary2EventSubContent1(TEventSummary es) throws JsonParseException, JsonMappingException, IOException {
-        if (null == es || null == es.getsEventSubContent() || 0 == es.getsEventSubContentString().length()) {
+    public static List<SEventSubContent1> eventSummary2EventSubContent1(TEventSummary es)
+            throws JsonParseException, JsonMappingException, IOException {
+        if (null == es || null == es.getsEventSubContent() || null == es.getsEventSubContentString()
+                || 0 == es.getsEventSubContentString().length()) {
             return null;
         }
 
-        List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(es.getsEventSubContentString());
+        List<SubContentJsonEntity> entities = HsEventUtil
+                .JsonString2SubContentJsonEntity(es.getsEventSubContentString());
 
         List<SEventSubContent1> sEventSubContent1List = new ArrayList<SEventSubContent1>();
         for (SubContentJsonEntity entity : entities) {
@@ -324,18 +336,21 @@ public class HsEventUtil {
     }
 
     public static List<SEventSubContent2> eventSummary2EventSubContent2(TEventSummary es) throws IOException {
-        if (null == es || null == es.getsEventSubContent() || 0 == es.getsEventSubContentString().length()) {
+        if (null == es || null == es.getsEventSubContent() || null == es.getsEventSubContentString()
+                || 0 == es.getsEventSubContentString().length()) {
             return null;
         }
 
-        List<SubContentJsonEntity> entities = HsEventUtil.JsonString2SubContentJsonEntity(es.getsEventSubContentString());
+        List<SubContentJsonEntity> entities = HsEventUtil
+                .JsonString2SubContentJsonEntity(es.getsEventSubContentString());
 
         List<SEventSubContent2> sEventSubContent2List = new ArrayList<SEventSubContent2>();
         for (SubContentJsonEntity entity : entities) {
             SEventSubContent2 sEventSubContent2 = new SEventSubContent2();
             sEventSubContent2.setCreateTs(es.getCreateTs());
             sEventSubContent2.sethEventId(es.gethEventId());
-            sEventSubContent2.setsEventSubContent2Str(HsEventUtil.SubContentJsonEntityWithoutUrl2JsonString(entity.toSubContentJsonEntityWithoutUrl()));
+            sEventSubContent2.setsEventSubContent2Str(
+                    HsEventUtil.SubContentJsonEntityWithoutUrl2JsonString(entity.toSubContentJsonEntityWithoutUrl()));
             sEventSubContent2.setUpdateTs(es.getUpdateTs());
 
             sEventSubContent2List.add(sEventSubContent2);
@@ -360,69 +375,80 @@ public class HsEventUtil {
         return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 
-    public static String SubContentJsonEntity2JsonString(List<SubContentJsonEntity> entities) throws JsonProcessingException {
+    public static String SubContentJsonEntity2JsonString(List<SubContentJsonEntity> entities)
+            throws JsonProcessingException {
         String jsonString = mapper.writeValueAsString(entities);
 
         return jsonString;
     }
 
-    public static List<SubContentJsonEntity> JsonString2SubContentJsonEntity(String json) throws JsonParseException, JsonMappingException, IOException {
+    public static List<SubContentJsonEntity> JsonString2SubContentJsonEntity(String json)
+            throws JsonParseException, JsonMappingException, IOException {
         JavaType javaType = getCollectionType(ArrayList.class, SubContentJsonEntity.class);
 
         List<SubContentJsonEntity> entities = mapper.readValue(json, javaType);
         return entities;
     }
 
-    public static String SubContentJsonEntityWithoutUrl2JsonString(SubContentJsonEntityWithoutUrl entity) throws JsonProcessingException {
+    public static String SubContentJsonEntityWithoutUrl2JsonString(SubContentJsonEntityWithoutUrl entity)
+            throws JsonProcessingException {
         String convertedJobParam = mapper.writeValueAsString(entity);
 
         return convertedJobParam;
     }
 
-    public static SubContentJsonEntityWithoutUrl JsonString2SubContentJsonEntityWithoutUrl(String json) throws JsonParseException, JsonMappingException, IOException {
-        SubContentJsonEntityWithoutUrl entity = mapper.readValue(json, (new SubContentJsonEntityWithoutUrl().getClass()));
+    public static SubContentJsonEntityWithoutUrl JsonString2SubContentJsonEntityWithoutUrl(String json)
+            throws JsonParseException, JsonMappingException, IOException {
+        SubContentJsonEntityWithoutUrl entity = mapper.readValue(json,
+                (new SubContentJsonEntityWithoutUrl().getClass()));
         return entity;
     }
-    
-    public static String makeEventSubContentString(List<SEventSubContent1> eventSubContent1List,List<SEventSubContent2> eventSubContent2List) throws IOException{
-        String result=null;
-        
-        if(null==eventSubContent1List||0==eventSubContent1List.size()||null==eventSubContent2List||0==eventSubContent1List.size()){
+
+    public static String makeEventSubContentString(List<SEventSubContent1> eventSubContent1List,
+            List<SEventSubContent2> eventSubContent2List) throws IOException {
+        String result = null;
+
+        if (null == eventSubContent1List || 0 == eventSubContent1List.size() || null == eventSubContent2List
+                || 0 == eventSubContent1List.size()) {
             return null;
         }
-        
-        List<SubContentJsonEntity> eventSubContentList=new ArrayList<SubContentJsonEntity>();
-        for(int i=0;i<eventSubContent1List.size();i++){
-            SEventSubContent2 eventSubContent2=eventSubContent2List.get(i);
-            SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil.JsonString2SubContentJsonEntityWithoutUrl(eventSubContent2.getsEventSubContent2Str());
-            
-            SubContentJsonEntity subContentJsonEntity=new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
+
+        List<SubContentJsonEntity> eventSubContentList = new ArrayList<SubContentJsonEntity>();
+        for (int i = 0; i < eventSubContent1List.size(); i++) {
+            SEventSubContent2 eventSubContent2 = eventSubContent2List.get(i);
+            SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil
+                    .JsonString2SubContentJsonEntityWithoutUrl(eventSubContent2.getsEventSubContent2Str());
+
+            SubContentJsonEntity subContentJsonEntity = new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
             subContentJsonEntity.setUrl(eventSubContent1List.get(i).getsEventSubContent1Url());
-            
+
             eventSubContentList.add(subContentJsonEntity);
         }
-        
-        result=HsEventUtil.SubContentJsonEntity2JsonString(eventSubContentList);
-        
+
+        result = HsEventUtil.SubContentJsonEntity2JsonString(eventSubContentList);
+
         return result;
     }
-    
-    public static List<SubContentJsonEntity> makeEventSubContent(List<SEventSubContent1> eventSubContent1List,List<SEventSubContent2> eventSubContent2List) throws IOException{
-        if(null==eventSubContent1List||0==eventSubContent1List.size()||null==eventSubContent2List||0==eventSubContent1List.size()){
+
+    public static List<SubContentJsonEntity> makeEventSubContent(List<SEventSubContent1> eventSubContent1List,
+            List<SEventSubContent2> eventSubContent2List) throws IOException {
+        if (null == eventSubContent1List || 0 == eventSubContent1List.size() || null == eventSubContent2List
+                || 0 == eventSubContent1List.size()) {
             return null;
         }
-        
-        List<SubContentJsonEntity> eventSubContentList=new ArrayList<SubContentJsonEntity>();
-        for(int i=0;i<eventSubContent1List.size();i++){
-            SEventSubContent2 eventSubContent2=eventSubContent2List.get(i);
-            SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil.JsonString2SubContentJsonEntityWithoutUrl(eventSubContent2.getsEventSubContent2Str());
-            
-            SubContentJsonEntity subContentJsonEntity=new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
+
+        List<SubContentJsonEntity> eventSubContentList = new ArrayList<SubContentJsonEntity>();
+        for (int i = 0; i < eventSubContent1List.size(); i++) {
+            SEventSubContent2 eventSubContent2 = eventSubContent2List.get(i);
+            SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil
+                    .JsonString2SubContentJsonEntityWithoutUrl(eventSubContent2.getsEventSubContent2Str());
+
+            SubContentJsonEntity subContentJsonEntity = new SubContentJsonEntity(subContentJsonEntityWithoutUrl);
             subContentJsonEntity.setUrl(eventSubContent1List.get(i).getsEventSubContent1Url());
-            
+
             eventSubContentList.add(subContentJsonEntity);
         }
-        
+
         return eventSubContentList;
     }
 
