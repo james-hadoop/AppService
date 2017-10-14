@@ -251,6 +251,10 @@ public class HsEventServiceImpl implements IHsEventService {
         SEventCategory sEventCategory = HsEventUtil.eventSummary2EventCategory(tEventSummary);
         sEventCategoryMapper.insertSelective(sEventCategory);
 
+        // SEventType
+        SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
+        sEventTypeMapper.insertSelective(sEventType);
+
         // SEventContent
         SEventContent sEventContent = HsEventUtil.eventSummary2EventContent(tEventSummary);
         sEventContentMapper.insertSelective(sEventContent);
@@ -284,10 +288,6 @@ public class HsEventServiceImpl implements IHsEventService {
                     sEventSubContent2Mapper.insertSelective(record);
                 }
             }
-
-            // SEventType
-            SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
-            sEventTypeMapper.insertSelective(sEventType);
 
             // TEventPage
             List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
@@ -323,6 +323,10 @@ public class HsEventServiceImpl implements IHsEventService {
         // SEventCategory
         SEventCategory sEventCategory = HsEventUtil.eventSummary2EventCategory(tEventSummary);
         sEventCategoryMapper.updateByPrimaryKeySelective(sEventCategory);
+        
+        // SEventType
+        SEventType sEventType=HsEventUtil.eventSummary2EventType(tEventSummary);
+        sEventTypeMapper.updateByPrimaryKeySelective(sEventType);
 
         // SEventContent
         SEventContent sEventContent = HsEventUtil.eventSummary2EventContent(tEventSummary);
@@ -360,10 +364,6 @@ public class HsEventServiceImpl implements IHsEventService {
                     sEventSubContent2Mapper.insertSelective(record);
                 }
             }
-
-            // SEventType
-            SEventType sEventType = HsEventUtil.eventSummary2EventType(tEventSummary);
-            sEventTypeMapper.updateByPrimaryKeySelective(sEventType);
 
             // TEventPage
             List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);

@@ -41,6 +41,12 @@ public interface HsMessageMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     HsMessage selectByPrimaryKey(Long hMessageId);
+    
+    @Select({"select max(h_message_id) as h_message_id from hs_message.hs_message"})
+    @Results({
+        @Result(column="h_message_id", property="hMessageId", jdbcType=JdbcType.BIGINT)
+    })
+    Long getMaxHMessageId();
 
     @UpdateProvider(type=HsMessageSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(HsMessage record);

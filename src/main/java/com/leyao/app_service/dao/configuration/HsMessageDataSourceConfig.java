@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.hs_message", sqlSessionFactoryRef = "hsEventSqlSessionFactory")
+@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.hs_message", sqlSessionFactoryRef = "hsMessageSqlSessionFactory")
 public class HsMessageDataSourceConfig {
 
     @Bean(name = "hsMessageDataSource")

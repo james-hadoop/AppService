@@ -7,7 +7,7 @@ public class HsMessageSqlProvider {
 
     public String insertSelective(HsMessage record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("hs_message");
+        sql.INSERT_INTO("hs_message.hs_message");
         
         if (record.gethMessageId() != null) {
             sql.VALUES("h_message_id", "#{hMessageId,jdbcType=BIGINT}");

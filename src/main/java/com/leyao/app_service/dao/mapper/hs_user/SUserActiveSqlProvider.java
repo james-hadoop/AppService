@@ -52,7 +52,7 @@ public class SUserActiveSqlProvider {
             sql.SET("update_ts = #{updateTs,jdbcType=TIMESTAMP}");
         }
         
-        sql.WHERE("s_user_active_id = #{sUserActiveId,jdbcType=BIGINT}");
+        sql.WHERE("h_user_id = #{hUserId,jdbcType=BIGINT}");
         
         return sql.toString();
     }

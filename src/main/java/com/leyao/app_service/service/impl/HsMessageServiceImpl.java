@@ -55,7 +55,8 @@ public class HsMessageServiceImpl implements IHsMessageService {
 
         // HsMessage
         HsMessage hsMessage = HsMessageUtil.messageSummary2Message(tMessageSummary);
-        long messageId = hsMessageMapper.insertSelective(hsMessage);
+        hsMessageMapper.insertSelective(hsMessage);
+        long messageId = hsMessageMapper.getMaxHMessageId();
 
         tMessageSummary.sethMessageId(messageId);
 

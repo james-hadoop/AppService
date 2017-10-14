@@ -97,7 +97,7 @@ public class HsUserUtil {
     public static SUserPassword userSummary2UserPassword(TUserSummary tUserSummary) {
         SUserPassword userPassword = new SUserPassword();
         userPassword.sethUserId(tUserSummary.gethUserId());
-        userPassword.setsUserPasswordStr(tUserSummary.getsUserPasswordStr());
+        userPassword.setsUserPasswordStr(CommonUtil.getMD5String(tUserSummary.getsUserPasswordStr()));
         userPassword.setCreateTs(tUserSummary.getCreateTs());
         userPassword.setUpdateTs(tUserSummary.getUpdateTs());
 

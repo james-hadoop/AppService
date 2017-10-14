@@ -159,6 +159,8 @@ public class TEventPageSqlProvider {
             sql.INNER_JOIN(
                     "ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
         }
+        
+        sql.ORDER_BY("ep.s_event_active_ind");
 
         return sql.toString();
     }
@@ -217,6 +219,8 @@ public class TEventPageSqlProvider {
         if (paramMap.get("sEventSearchContentTxt") != null) {
             sql.WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
         }
+        
+        sql.ORDER_BY("s_event_active_ind");
 
         if (paramMap.get("start") != null && paramMap.get("end") != null) {
             String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));

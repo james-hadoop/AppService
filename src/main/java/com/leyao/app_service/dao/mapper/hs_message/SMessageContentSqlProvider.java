@@ -100,15 +100,11 @@ public class SMessageContentSqlProvider {
     public static String getTMessageSummaryListByCondition(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("mc.*, mca.s_message_category_cd").FROM(
-                "hs_user.h_user u, ls_user_message.l_user_message um, ls_user_message.s_user_message_active uma,hs_message.s_message_content mc,hs_message.s_message_category mca,hs_message.s_message_active ma");
+        sql.SELECT("mc.*, mca.s_message_category_cd, ma.s_message_active_ind").FROM(
+                "hs_message.s_message_content mc,hs_message.s_message_category mca,hs_message.s_message_active ma");
 
         sql.WHERE(
-                "u.h_user_id=um.h_user_id and um.l_user_message_id=uma.l_user_message_id and uma.s_user_message_active_ind=0 and um.h_message_id= mc.h_message_id and mc.h_message_id=mca.h_message_id and mc.h_message_id=ma.h_message_id and ma.s_message_active_ind=0");
-
-        if (paramMap.get("hUserPhoneNr") != null) {
-            sql.WHERE("u.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
-        }
+                "mc.h_message_id=mca.h_message_id and mc.h_message_id=ma.h_message_id");
 
         if (paramMap.get("sMessageCategoryCd") != null) {
             sql.WHERE("mca.s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
