@@ -1,6 +1,7 @@
 package com.leyao.app_service.dao.mapper.r_dim;
 
-import com.leyao.app_service.entity.r_dim.REventType;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -10,6 +11,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+
+import com.leyao.app_service.entity.r_dim.REventType;
 
 public interface REventTypeMapper {
     @Delete({
@@ -32,8 +35,7 @@ public interface REventTypeMapper {
     @Select({
         "select",
         "r_event_type_cd, r_event_type_desc, create_ts, update_ts",
-        "from r_event_type",
-        "where r_event_type_cd = #{rEventTypeCd,jdbcType=INTEGER}"
+        "from r_event_type"
     })
     @Results({
         @Result(column="r_event_type_cd", property="rEventTypeCd", jdbcType=JdbcType.INTEGER, id=true),
@@ -41,7 +43,7 @@ public interface REventTypeMapper {
         @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
-    REventType selectByPrimaryKey(Integer rEventTypeCd);
+    List<REventType> getAll();
 
     @UpdateProvider(type=REventTypeSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(REventType record);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leyao.app_service.dao.configuration.DimensionConfig;
 import com.leyao.app_service.dao.mapper.hs_event.HsEventMapper;
 import com.leyao.app_service.dao.mapper.hs_event.TestSEventActiveMapper;
 import com.leyao.app_service.entity.GridContent;
@@ -63,6 +64,16 @@ public class TestController {
         List<TEventPage> sEventActiveList = sEventActiveMapper.getAllSEventActive();
         for (TEventPage es : sEventActiveList) {
             sEventActiveMapper.insertSelective(es);
+        }
+    }
+
+    @RequestMapping(value = "/testDimensionConfig", method = RequestMethod.GET)
+    public void testDimensionConfig() {
+        DimensionConfig dimensionConfig=DimensionConfig.getInstance();
+        
+        System.out.println("DimensionConfig.R_EVENT_CATEGORY_LIST");
+        for (String record : dimensionConfig.R_EVENT_CATEGORY_LIST) {
+            System.out.println("\t" + record);
         }
     }
 }
