@@ -69,10 +69,8 @@ public class TestController {
 
     @RequestMapping(value = "/testDimensionConfig", method = RequestMethod.GET)
     public void testDimensionConfig() {
-        DimensionConfig dimensionConfig=DimensionConfig.getInstance();
-        
-        System.out.println("DimensionConfig.R_EVENT_CATEGORY_LIST");
-        for (String record : dimensionConfig.R_EVENT_CATEGORY_LIST) {
+        System.out.println("DimensionConfig:");
+        for (String record : DimensionConfig.rEventCategoryEnumList) {
             System.out.println("\t" + record);
         }
     }

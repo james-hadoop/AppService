@@ -1,5 +1,7 @@
 package com.leyao.app_service.dao.mapper.hs_event;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -35,8 +37,7 @@ public interface SEventCategoryMapper {
     @Select({
         "select",
         "s_event_category_id, h_event_id, s_event_category_cd, create_ts, update_ts",
-        "from s_event_category",
-        "where s_event_category_id = #{sEventCategoryId,jdbcType=BIGINT}"
+        "from s_event_category"
     })
     @Results({
         @Result(column="s_event_category_id", property="sEventCategoryId", jdbcType=JdbcType.BIGINT, id=true),
@@ -45,7 +46,7 @@ public interface SEventCategoryMapper {
         @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
-    SEventCategory selectByPrimaryKey(Long sEventCategoryId);
+    List<SEventCategory> getAll();
 
     @UpdateProvider(type=SEventCategorySqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SEventCategory record);
