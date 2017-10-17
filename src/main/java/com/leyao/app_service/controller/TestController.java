@@ -14,6 +14,7 @@ import com.leyao.app_service.dao.mapper.hs_event.TestSEventActiveMapper;
 import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.hs_event.HsEvent;
 import com.leyao.app_service.entity.hs_event.TEventPage;
+import com.leyao.app_service.service.IDimensionConfigService;
 import com.leyao.app_service.util.CommonUtil;
 
 @RestController
@@ -69,7 +70,7 @@ public class TestController {
 
     @RequestMapping(value = "/testDimensionConfig", method = RequestMethod.GET)
     public void testDimensionConfig() {
-        System.out.println("DimensionConfig:");
+        System.out.println("DimensionConfig: " + DimensionConfig.rEventCategoryEnumList.size());
         for (String record : DimensionConfig.rEventCategoryEnumList) {
             System.out.println("\t" + record);
         }

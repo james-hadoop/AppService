@@ -34,20 +34,6 @@ public interface SEventCategoryMapper {
     @InsertProvider(type=SEventCategorySqlProvider.class, method="insertSelective")
     int insertSelective(SEventCategory record);
 
-    @Select({
-        "select",
-        "s_event_category_id, h_event_id, s_event_category_cd, create_ts, update_ts",
-        "from s_event_category"
-    })
-    @Results({
-        @Result(column="s_event_category_id", property="sEventCategoryId", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="h_event_id", property="hEventId", jdbcType=JdbcType.BIGINT),
-        @Result(column="s_event_category_cd", property="sEventCategoryCd", jdbcType=JdbcType.INTEGER),
-        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
-    })
-    List<SEventCategory> getAll();
-
     @UpdateProvider(type=SEventCategorySqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SEventCategory record);
 
