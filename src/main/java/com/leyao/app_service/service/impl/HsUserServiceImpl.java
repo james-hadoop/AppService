@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.common.SessionManager;
 import com.leyao.app_service.common.VerifyCodeManager;
+import com.leyao.app_service.dao.configuration.ResourceConfig;
 import com.leyao.app_service.dao.mapper.hs_user.HUserMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserActiveMapper;
 import com.leyao.app_service.dao.mapper.hs_user.SUserEmailMapper;
@@ -35,6 +39,7 @@ import com.leyao.app_service.entity.hs_user.TUserPage;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 import com.leyao.app_service.service.IHsUserService;
 import com.leyao.app_service.util.CommonUtil;
+import com.leyao.app_service.util.FileUtil;
 import com.leyao.app_service.util.HsUserUtil;
 import com.leyao.app_service.util.VerifyCodeUtil;
 
@@ -66,6 +71,9 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Autowired
     SUserProfileMapper sUserProfileMapper;
+
+    @Autowired
+    private ResourceConfig resourceConfig;
 
     @Override
     public List<TUserSummary> getTUserSummary(Map<String, Object> paramMap) {
@@ -324,5 +332,25 @@ public class HsUserServiceImpl implements IHsUserService {
         tUserPageMapper.updateByPrimaryKeySelective(tUserPage);
 
         return Response.SUCCESS;
+    }
+
+    @Override
+    public String uploadFile(String fileBase64, String fileName, String token, Long hUserPhoneNr,
+            HttpServletRequest request) {
+        TUserSummary user = tUserPageMapper.selectByhUserPhoneNr(hUserPhoneNr);
+
+        if (user != null) {
+            String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
+            String newFileName = hUserPhoneNr + ".jpg";
+
+            String newFilePath = FileUtil.saveBase64File(fileBase64, destPath, newFileName);
+            if (newFilePath != null) {
+                return newFilePath;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

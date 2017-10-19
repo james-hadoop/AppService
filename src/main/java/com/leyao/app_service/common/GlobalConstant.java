@@ -1,6 +1,8 @@
 package com.leyao.app_service.common;
 
 public class GlobalConstant {
+    public static final String DEFAULT_SESSION_CODE = "No Verification";
+    
     public static final String NULL_STRING = "?";
 
     public static final String SESSION_CODE_PREFIX = "SN";

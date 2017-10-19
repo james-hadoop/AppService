@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,36 +51,19 @@ public class HsUserController {
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * {
-     *  "rows": [
-     *      {
-     *          "hUserId": 1,
-     *          "hUserPhoneNr": 13333333333,
-     *          "sUserGenderCd": 0,
-     *          "sUserGenderDesc": "?",
-     *          "sUserNameStr": "?",
-     *          "sUserProfileUrl": "?",
-     *          "sUserEmailStr": "?",
-     *          "sUserActiveInd": 0,
-     *          "createTs": 946656000000,
-     *          "updateTs":946656000000,
-     *          "sUserPasswordStr": null,
-     *          "verifyCode": null
-     *         }
-     *  ],
-     * "total": 1
-     * }
+     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hUserId": 1,
+     *                    "hUserPhoneNr": 13333333333, "sUserGenderCd": 0,
+     *                    "sUserGenderDesc": "?", "sUserNameStr": "?",
+     *                    "sUserProfileUrl": "?", "sUserEmailStr": "?",
+     *                    "sUserActiveInd": 0, "createTs": 946656000000,
+     *                    "updateTs":946656000000, "sUserPasswordStr": null,
+     *                    "verifyCode": null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "rows":[],
-     *  "total":0 
-     * }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
     public GridContent getTUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
-            @RequestParam(value = "sUserEmailStr", required=false) String sUserEmailStr,
+            @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
             @RequestParam(value = "hUserPhoneNr", required = false) String hUserPhoneNr,
             @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info(
@@ -107,11 +92,9 @@ public class HsUserController {
      * 
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
-     * @apiSuccessExample {json} Success-Response:
-     *  1234
+     * @apiSuccessExample {json} Success-Response: 1234
      * 
-     * @apiSuccessExample {json} Error-Response:
-     *  -1
+     * @apiSuccessExample {json} Error-Response: -1
      */
     @RequestMapping(value = "/getVerifyCode", method = RequestMethod.POST)
     public String getVerifyCode(@RequestParam(value = "hUserPhoneNr", required = true) String hUserPhoneNr) {
@@ -140,17 +123,11 @@ public class HsUserController {
      * @apiParam {String} sUserPasswordStr User password.
      * @apiParam {Number} verifyCode Verify code.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * {
-     *  "responseResult": "SUCCESS",
-     *  "responseResultMsg": "Regist success"
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg": "Regist success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "responseResult": "ERROR",
-     *  "responseResultMsg": "Regist fail"
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Regist fail" }
      */
     @RequestMapping(value = "regist", method = RequestMethod.POST)
     @ResponseBody
@@ -187,17 +164,12 @@ public class HsUserController {
      * @apiParam {String} hUserPhoneNr User phone number.
      * @apiParam {String} sUserPasswordStr User password.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * {
-     *  "responseResult": "SUCCESS",
-     *  "responseResultMsg":"SNb5412b7c-7fdf-4d6e-add4-04ba9f7821932017-09-14 10:20:01"
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg":"SNb5412b7c-7fdf-4d6e-add4-04ba9f7821932017-09-14
+     *                    10:20:01" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "responseResult": "ERROR",
-     *  "responseResultMsg": "Login fail"
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Login fail" }
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -234,17 +206,11 @@ public class HsUserController {
      * @apiParam {String} sUserPasswordStr User password.
      * @apiParam {Number} verifyCode Verify code.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * { 
-     *  "responseResult": "SUCCESS",
-     *  "responseResultMsg": "Reset success" 
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg": "Reset success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * { 
-     *  "responseResult": "ERROR",
-     *  "responseResultMsg": "Login fail" 
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Login fail" }
      */
     @RequestMapping(value = "reset", method = RequestMethod.POST)
     @ResponseBody
@@ -270,7 +236,7 @@ public class HsUserController {
         }
         return responseContent;
     }
-    
+
     @RequestMapping(value = "/addTUserSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent addTUserSummary(@RequestBody TUserSummary tUserSummary) {
@@ -309,17 +275,11 @@ public class HsUserController {
      * @apiParam {String} sUserPasswordStr User password.
      * @apiParam {Number} verifyCode Verify code.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * { 
-     *  "responseResult": "SUCCESS",
-     *  "responseResultMsg": "Edit success" 
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg": "Edit success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * { 
-     *  "responseResult": "ERROR",
-     *  "responseResultMsg": "Edit fail" 
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Edit fail" }
      */
     @RequestMapping(value = "/editTUserSummary", method = RequestMethod.POST)
     @ResponseBody
@@ -347,12 +307,11 @@ public class HsUserController {
         }
         return responseContent;
     }
-    
+
     @RequestMapping(value = "/deleteTUserSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent deleteTUserSummary(@RequestBody TUserSummary tUserSummary) {
-        logger.info("/v1/service/event/deleteTUserSummary() called: hUserId={}", tUserSummary.gethUserId()
-                        );
+        logger.info("/v1/service/event/deleteTUserSummary() called: hUserId={}", tUserSummary.gethUserId());
         ResponseContent responseContent = new ResponseContent();
 
         try {
@@ -383,17 +342,11 @@ public class HsUserController {
      * @apiParam {String} hUserPhoneNr User phone number.
      * @apiParam {MultipartFile} file Uploaded file multipart.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * { 
-     *  "responseResult": "SUCCESS",
-     *  "responseResultMsg": "Upload success" 
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg": "Upload success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * { 
-     *  "responseResult": "ERROR",
-     *  "responseResultMsg": "Upload fail" 
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Upload fail" }
      */
     @RequestMapping(value = "/uploadPortrait", method = RequestMethod.POST)
     public ResponseContent uploadPortrait(@RequestParam("file") MultipartFile file,
@@ -415,11 +368,33 @@ public class HsUserController {
             file.transferTo(new File(destPath));
 
             System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), hUserPhoneNr));
-       
+
             responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
             responseContent.setResponseResultMsg("Upload success");
         } catch (Exception e) {
             logger.error("/v1/service/user/uploadPortrait()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+
+    @RequestMapping(value = "/uploadProfile",method = RequestMethod.POST)
+    public ResponseContent uploadProfile(
+            @RequestParam(value = "fileName", required = false) String fileName,
+            @RequestParam(value = "base64", required = false) String base64,
+            @RequestParam(value = "sessionCode", required = false) String sessionCode,
+            @RequestParam(value="hUserPhoneNr",required = false) String hUserPhoneNr) {
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            System.out.println("uploadProfile()");
+
+            //hsUserService.uploadFile(file.getBase64(), file.getFileName(), sessionCode, hUserPhoneNr, request);
+
+        } catch (Exception e) {
+            logger.error("/v1/service/user/uploadProfile()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;
@@ -459,17 +434,11 @@ public class HsUserController {
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {String} hUserPhoneNr User phone number.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * {
-     *  "responseResult": "SUCCESS",
-     *  "responseResultMsg": "portrait/13333333333.jpg"
-     * }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg": "portrait/13333333333.jpg" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "responseResult": "ERROR",
-     *  "responseResultMsg": "NULL"
-     * }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "NULL" }
      */
     @RequestMapping(value = "/getPortrait", method = RequestMethod.GET)
     public ResponseContent getPortrait(@RequestParam(value = "hUserPhoneNr", required = true) Long hUserPhoneNr,
@@ -505,26 +474,13 @@ public class HsUserController {
      * @apiParam {Number} [page] Paging - page number.
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * {
-     *  "rows": [ 
-     *      {
-     *          "sUserFeedbackId": 1,
-     *          "hUserId": 1,
-     *          "sUserFeedbackStr": "Leyao app is great!!!",
-     *          "createTs": 946656000000,
-     *          "updateTs": 1507642420000,
-     *          "hUserPhoneNr": 13333333333
-     *       }
-     *  ],
-     *  "total": 1
-     * }
+     * @apiSuccessExample {json} Success-Response: { "rows": [ { "sUserFeedbackId":
+     *                    1, "hUserId": 1, "sUserFeedbackStr": "Leyao app is
+     *                    great!!!", "createTs": 946656000000, "updateTs":
+     *                    1507642420000, "hUserPhoneNr": 13333333333 } ], "total": 1
+     *                    }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "rows":[],
-     *  "total":0
-     * }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getSUserFeedbackSummaryByCondition", method = RequestMethod.GET)
     public GridContent getSUserFeedbackSummaryByCondition(
@@ -556,7 +512,7 @@ public class HsUserController {
         }
         return gridContent;
     }
-    
+
     /**
      * @apiGroup User
      * 
@@ -567,22 +523,17 @@ public class HsUserController {
      * @apiParam {String} sUserFeedbackStr User feedback content.
      * @apiParam {String} hUserPhoneNr User phone number.
      *
-     * @apiSuccessExample {json} Success-Response: 
-     *  {
-     *      "responseResult": "SUCCESS",
-     *      "responseResultMsg": "Add success"
-     *  }
+     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     *                    "responseResultMsg": "Add success" }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     *  {
-     *      "responseResult": "ERROR",
-     *      "responseResultMsg": "Add fail" 
-     *  }
+     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     *                    "responseResultMsg": "Add fail" }
      */
     @RequestMapping(value = "/addSUserFeedbackSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent addSUserFeedbackSummary(@RequestBody SUserFeedbackSummary sUserFeedbackSummary) {
-        logger.info("/v1/service/event/addSUserFeedbackSummary() called: hUserPhoneNr={},sUserFeedbackStr={}", sUserFeedbackSummary.gethUserPhoneNr(),sUserFeedbackSummary.getsUserFeedbackStr());
+        logger.info("/v1/service/event/addSUserFeedbackSummary() called: hUserPhoneNr={},sUserFeedbackStr={}",
+                sUserFeedbackSummary.gethUserPhoneNr(), sUserFeedbackSummary.getsUserFeedbackStr());
         ResponseContent responseContent = new ResponseContent();
 
         try {
