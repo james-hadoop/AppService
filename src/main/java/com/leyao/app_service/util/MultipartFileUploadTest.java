@@ -45,11 +45,11 @@ public class MultipartFileUploadTest {
 
     private static void uploadProfile() throws ClientProtocolException, IOException {
         String imagePath = "C:\\Users\\qjiang\\Pictures\\1.jpg";
-        String imageBase64String = FileUtil.getImageStr(imagePath);
+        String imageBase64String = FileUtil.imageToBase64(imagePath);
 
         ProfileFile profileFile = new ProfileFile();
         profileFile.setFileName(imagePath);
-        profileFile.sethUserPhoneNr("13333333333");
+        profileFile.sethUserPhoneNr(13333333333l);
         profileFile.setSessionCode(GlobalConstant.DEFAULT_SESSION_CODE);
         profileFile.setBase64(imageBase64String);
 

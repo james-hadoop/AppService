@@ -3,8 +3,6 @@ package com.leyao.app_service.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
 import com.leyao.app_service.entity.hs_user.TUserSummary;
 
@@ -35,5 +33,5 @@ public interface IHsUserService {
 
     int addSUserFeedbackSummary(SUserFeedbackSummary sUserFeedbackSummary);
 
-    String uploadFile(String fileBase64, String fileName, String token, Long hUserPhoneNr, HttpServletRequest request);
+    String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr);
 }

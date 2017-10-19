@@ -38,7 +38,7 @@ public class FileUtil {
         }
     }
 
-    public static String getImageStr(String imgFile) {
+    public static String imageToBase64(String imgFile) {
         InputStream inputStream = null;
         byte[] data = null;
         try {
@@ -54,7 +54,7 @@ public class FileUtil {
         return encoder.encode(data);
     }
 
-    public static boolean generateImage(String imgStr, String path) {
+    public static boolean base64ToImage(String imgStr, String path) {
         if (imgStr == null) {
             return false;
         }

@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.configuration.ResourceConfig;
 import com.leyao.app_service.entity.GridContent;
+import com.leyao.app_service.entity.ProfileFile;
 import com.leyao.app_service.entity.ResponseContent;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
@@ -380,19 +379,17 @@ public class HsUserController {
         return responseContent;
     }
 
-    @RequestMapping(value = "/uploadProfile",method = RequestMethod.POST)
-    public ResponseContent uploadProfile(
-            @RequestParam(value = "fileName", required = false) String fileName,
-            @RequestParam(value = "base64", required = false) String base64,
-            @RequestParam(value = "sessionCode", required = false) String sessionCode,
-            @RequestParam(value="hUserPhoneNr",required = false) String hUserPhoneNr) {
+    @RequestMapping(value = "/uploadProfile", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent uploadProfile(@RequestBody ProfileFile profileFile) {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            System.out.println("uploadProfile()");
+            String result = hsUserService.uploadFileBase64(profileFile.getBase64(), profileFile.getFileName(),
+                    profileFile.getSessionCode(), profileFile.gethUserPhoneNr());
 
-            //hsUserService.uploadFile(file.getBase64(), file.getFileName(), sessionCode, hUserPhoneNr, request);
-
+            responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+            responseContent.setResponseResultMsg(result);
         } catch (Exception e) {
             logger.error("/v1/service/user/uploadProfile()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);

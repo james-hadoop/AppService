@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -335,17 +332,15 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
-    public String uploadFile(String fileBase64, String fileName, String token, Long hUserPhoneNr,
-            HttpServletRequest request) {
+    public String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr) {
         TUserSummary user = tUserPageMapper.selectByhUserPhoneNr(hUserPhoneNr);
 
         if (user != null) {
             String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
-            String newFileName = hUserPhoneNr + ".jpg";
 
-            String newFilePath = FileUtil.saveBase64File(fileBase64, destPath, newFileName);
-            if (newFilePath != null) {
-                return newFilePath;
+            boolean result = FileUtil.base64ToImage(fileBase64, destPath);
+            if (result != false) {
+                return resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
             } else {
                 return null;
             }

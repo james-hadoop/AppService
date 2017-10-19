@@ -4,7 +4,7 @@ import com.leyao.app_service.common.GlobalConstant;
 
 public class ProfileFile {
     private String sessionCode = GlobalConstant.DEFAULT_SESSION_CODE;
-    private String hUserPhoneNr;
+    private Long hUserPhoneNr;
     private String fileName;
     private String base64;
 
@@ -32,11 +32,11 @@ public class ProfileFile {
         this.sessionCode = sessionCode;
     }
 
-    public String gethUserPhoneNr() {
+    public Long gethUserPhoneNr() {
         return hUserPhoneNr;
     }
 
-    public void sethUserPhoneNr(String hUserPhoneNr) {
+    public void sethUserPhoneNr(Long hUserPhoneNr) {
         this.hUserPhoneNr = hUserPhoneNr;
     }
 }
