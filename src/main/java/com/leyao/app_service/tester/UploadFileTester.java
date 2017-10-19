@@ -1,4 +1,4 @@
-package com.leyao.app_service.util;
+package com.leyao.app_service.tester;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,8 +17,9 @@ import org.apache.http.impl.client.HttpClients;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leyao.app_service.common.GlobalConstant;
 import com.leyao.app_service.entity.ProfileFile;
+import com.leyao.app_service.util.FileUtil;
 
-public class MultipartFileUploadTest {
+public class UploadFileTester {
     private static ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args) throws ClientProtocolException, IOException {
