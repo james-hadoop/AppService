@@ -136,6 +136,7 @@ public class HsMessageServiceImpl implements IHsMessageService {
     }
 
     @Override
+    @Transactional
     public int associateTMessageSummary(Long hMessageId, List<Long> rowUserIds) {
         if (null == hMessageId || null == rowUserIds || 0 == rowUserIds.size()) {
             return Response.ERROR;

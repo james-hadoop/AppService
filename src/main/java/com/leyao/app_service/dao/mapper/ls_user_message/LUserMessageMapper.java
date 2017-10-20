@@ -48,7 +48,7 @@ public interface LUserMessageMapper {
     
     @Select({"select max(l_user_message_id) as l_user_message_id from ls_user_message.l_user_message"})
     @Results({
-        @Result(column="v", property="lUserMessageId", jdbcType=JdbcType.BIGINT)
+        @Result(column="l_user_message_id", property="lUserMessageId", jdbcType=JdbcType.BIGINT)
     })
     Long getMaxLUserMessageId();
 

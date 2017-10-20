@@ -19,6 +19,7 @@ import com.leyao.app_service.entity.GridContent;
 import com.leyao.app_service.entity.ResponseContent;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
 import com.leyao.app_service.entity.hs_message.TMessageSummary;
+import com.leyao.app_service.entity.ls_user_message.TUserMessageRequest;
 import com.leyao.app_service.service.IHsMessageService;
 
 @RestController
@@ -164,13 +165,14 @@ public class HsMessageController {
     }
     
     @RequestMapping(value = "/associateTMessageSummary", method = RequestMethod.POST)
-    public ResponseContent associateTMessageSummary(@RequestParam(value = "hMessageId", required = true) Long hMessageId,@RequestParam(value = "rowUserIds", required = true) List<Long> rowUserIds) {
-        logger.info("/v1/service/message/associateTMessageSummary() called: hMessageId={}", hMessageId);
+    @ResponseBody
+    public ResponseContent associateTMessageSummary(@RequestBody TUserMessageRequest tUserMessageRequest) {
+        logger.info("/v1/service/message/associateTMessageSummary() called: hMessageId={}", tUserMessageRequest.gethMessageId());
         ResponseContent responseContent = new ResponseContent();
         
         try {
-            int resutl = hsMessageService.associateTMessageSummary(hMessageId, rowUserIds);
-            if (Response.ERROR == resutl) {
+            int result = hsMessageService.associateTMessageSummary(tUserMessageRequest.gethMessageId(), tUserMessageRequest.gethUserIds());
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Delete fail");
             } else {

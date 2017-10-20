@@ -54,7 +54,7 @@ public class LsUserMessageUtil {
     public static SUserMessageActive userMessage2UserMessageActive(LUserMessage lUserMessage) {
         SUserMessageActive sUserMessageActive = new SUserMessageActive();
         sUserMessageActive.setCreateTs(lUserMessage.getCreateTs());
-        sUserMessageActive.setlUserMessageId(lUserMessage.gethMessageId());
+        sUserMessageActive.setlUserMessageId(lUserMessage.getlUserMessageId());
         sUserMessageActive.setUpdateTs(lUserMessage.getUpdateTs());
 
         return sUserMessageActive;
