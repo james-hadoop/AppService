@@ -162,4 +162,27 @@ public class HsMessageController {
         }
         return responseContent;
     }
+    
+    @RequestMapping(value = "/associateTMessageSummary", method = RequestMethod.POST)
+    public ResponseContent associateTMessageSummary(@RequestParam(value = "hMessageId", required = true) Long hMessageId,@RequestParam(value = "rowUserIds", required = true) List<Long> rowUserIds) {
+        logger.info("/v1/service/message/associateTMessageSummary() called: hMessageId={}", hMessageId);
+        ResponseContent responseContent = new ResponseContent();
+        
+        try {
+            int resutl = hsMessageService.associateTMessageSummary(hMessageId, rowUserIds);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Delete fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Delete success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/message/associateTMessageSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
 }

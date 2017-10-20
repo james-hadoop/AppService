@@ -13,14 +13,19 @@ import com.leyao.app_service.dao.mapper.hs_message.HsMessageMapper;
 import com.leyao.app_service.dao.mapper.hs_message.SMessageActiveMapper;
 import com.leyao.app_service.dao.mapper.hs_message.SMessageCategoryMapper;
 import com.leyao.app_service.dao.mapper.hs_message.SMessageContentMapper;
+import com.leyao.app_service.dao.mapper.ls_user_message.LUserMessageMapper;
+import com.leyao.app_service.dao.mapper.ls_user_message.SUserMessageActiveMapper;
 import com.leyao.app_service.entity.enums.StatusEnum;
 import com.leyao.app_service.entity.hs_message.HsMessage;
 import com.leyao.app_service.entity.hs_message.SMessageActive;
 import com.leyao.app_service.entity.hs_message.SMessageCategory;
 import com.leyao.app_service.entity.hs_message.SMessageContent;
 import com.leyao.app_service.entity.hs_message.TMessageSummary;
+import com.leyao.app_service.entity.ls_user_message.LUserMessage;
+import com.leyao.app_service.entity.ls_user_message.SUserMessageActive;
 import com.leyao.app_service.service.IHsMessageService;
 import com.leyao.app_service.util.HsMessageUtil;
+import com.leyao.app_service.util.LsUserMessageUtil;
 
 @Service
 public class HsMessageServiceImpl implements IHsMessageService {
@@ -35,6 +40,12 @@ public class HsMessageServiceImpl implements IHsMessageService {
 
     @Autowired
     SMessageCategoryMapper sMessageCategoryMapper;
+
+    @Autowired
+    LUserMessageMapper lUserMessageMapper;
+
+    @Autowired
+    SUserMessageActiveMapper sUserMessageActiveMapper;
 
     @Override
     public List<TMessageSummary> getTMessageSummaryList(Map<String, Object> paramMap) {
@@ -122,5 +133,28 @@ public class HsMessageServiceImpl implements IHsMessageService {
     @Override
     public int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap) {
         return sMessageContentMapper.getTMessageSummaryListByConditionCount(paramMap);
+    }
+
+    @Override
+    public int associateTMessageSummary(Long hMessageId, List<Long> rowUserIds) {
+        if (null == hMessageId || null == rowUserIds || 0 == rowUserIds.size()) {
+            return Response.ERROR;
+        }
+
+        List<LUserMessage> lUserMessageList = LsUserMessageUtil.makeLsUserMessageList(hMessageId, rowUserIds);
+        if (null == lUserMessageList || 0 == lUserMessageList.size()) {
+            return Response.ERROR;
+        }
+
+        for (LUserMessage lUserMessage : lUserMessageList) {
+            lUserMessageMapper.insertSelective(lUserMessage);
+
+            long lUserMessageId = lUserMessageMapper.getMaxLUserMessageId();
+            lUserMessage.setlUserMessageId(lUserMessageId);
+            SUserMessageActive sUserMessageActive = LsUserMessageUtil.userMessage2UserMessageActive(lUserMessage);
+            sUserMessageActiveMapper.insertSelective(sUserMessageActive);
+        }
+
+        return Response.SUCCESS;
     }
 }

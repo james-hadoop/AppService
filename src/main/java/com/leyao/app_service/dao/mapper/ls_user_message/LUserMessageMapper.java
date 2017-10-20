@@ -45,6 +45,12 @@ public interface LUserMessageMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     LUserMessage selectByPrimaryKey(Long lUserMessageId);
+    
+    @Select({"select max(l_user_message_id) as l_user_message_id from ls_user_message.l_user_message"})
+    @Results({
+        @Result(column="v", property="lUserMessageId", jdbcType=JdbcType.BIGINT)
+    })
+    Long getMaxLUserMessageId();
 
     @UpdateProvider(type=LUserMessageSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(LUserMessage record);
