@@ -45,12 +45,12 @@ public class UploadFileTester {
     }
 
     private static void uploadProfile() throws ClientProtocolException, IOException {
-        String imagePath = "C:\\Users\\qjiang\\Pictures\\1.jpg";
+        String imagePath = "C:\\Users\\qjiang\\Pictures\\2.jpg";
         String imageBase64String = FileUtil.imageToBase64(imagePath);
 
         ProfileFile profileFile = new ProfileFile();
         profileFile.setFileName(imagePath);
-        profileFile.sethUserPhoneNr(13333333333l);
+        profileFile.sethUserPhoneNr(13333333331l);
         profileFile.setSessionCode(GlobalConstant.DEFAULT_SESSION_CODE);
         profileFile.setBase64(imageBase64String);
 
@@ -60,7 +60,7 @@ public class UploadFileTester {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
-        HttpPost httpPost = new HttpPost("http://localhost:8088/v1/service/user/uploadProfile");
+        HttpPost httpPost = new HttpPost("http://47.94.94.196:8088/v1/service/user/uploadProfile");
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setEntity(entity);
 

@@ -17,11 +17,11 @@ import org.springframework.context.annotation.PropertySources;
         @PropertySource(value = "file:${external.config}", ignoreResourceNotFound = true) })
 public class Application implements CommandLineRunner, EmbeddedServletContainerCustomizer {
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(Application.class);
-        springApplication.addListeners(new SpringApplicationStartup());
-        springApplication.run(args);
+//        SpringApplication springApplication = new SpringApplication(Application.class);
+//        springApplication.addListeners(new SpringApplicationStartup());
+//        springApplication.run(args);
 
-        // SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override

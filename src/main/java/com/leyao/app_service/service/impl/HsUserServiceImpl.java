@@ -332,15 +332,20 @@ public class HsUserServiceImpl implements IHsUserService {
     }
 
     @Override
+    @Transactional
     public String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr) {
         TUserSummary user = tUserPageMapper.selectByhUserPhoneNr(hUserPhoneNr);
 
         if (user != null) {
             String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
-
+            String profile = resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
             boolean result = FileUtil.base64ToImage(fileBase64, destPath);
+
+            user.setsUserProfileUrl(profile);
+            editTUserSummary(user);
+
             if (result != false) {
-                return resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
+                return profile;
             } else {
                 return null;
             }

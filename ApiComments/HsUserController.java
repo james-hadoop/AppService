@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.leyao.app_service.common.Response;
 import com.leyao.app_service.dao.configuration.ResourceConfig;
 import com.leyao.app_service.entity.GridContent;
+import com.leyao.app_service.entity.ProfileFile;
 import com.leyao.app_service.entity.ResponseContent;
 import com.leyao.app_service.entity.enums.ResponseResultEnum;
 import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
@@ -77,9 +78,9 @@ public class HsUserController {
      * }
      */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
-    public GridContent TUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
+    public GridContent getTUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
             @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
-            @RequestParam(value = "hUserPhoneNr") String hUserPhoneNr,
+            @RequestParam(value = "hUserPhoneNr", required = false) String hUserPhoneNr,
             @RequestParam(value = "sessionCode", required = true) String sessionCode) {
         logger.info(
                 "/v1/service/user/getTUserSummary() called: sessionCode={}, sUserNameStr={}, sUserEmailStr={}, hUserPhoneNr={}",
@@ -274,7 +275,57 @@ public class HsUserController {
     /**
      * @apiGroup User
      * 
-     * @apiName reset
+     * @apiName addTUserSummary
+     * 
+     * @api {post} /v1/service/user/addTUserSummary 添加用户详情
+     * 
+     * @apiParam {String} hUserPhoneNr User phone number.
+     * @apiParam {String} sUserPasswordStr User password.
+     * @apiParam {Number} verifyCode Verify code.
+     * 
+     * @apiSuccessExample {json} Success-Response: 
+     * { 
+     *  "responseResult": "SUCCESS",
+     *  "responseResultMsg": "Edit success" 
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * { 
+     *  "responseResult": "ERROR",
+     *  "responseResultMsg": "Edit fail" 
+     * }
+     */    
+    @RequestMapping(value = "/addTUserSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent addTUserSummary(@RequestBody TUserSummary tUserSummary) {
+        logger.info(
+                "/v1/service/user/addTUserSummary() called: hUserPhoneNr={},sUserEmailStr={},sUserGenderDesc={},sUserNameStr={}",
+                tUserSummary.gethUserPhoneNr(), tUserSummary.getsUserEmailStr(), tUserSummary.getsUserGenderDesc(),
+                tUserSummary.getsUserNameStr());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsUserService.addTUserSummary(tUserSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("editTUserSummary fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("editTUserSummary success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/user/addTUserSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+
+    /**
+     * @apiGroup User
+     * 
+     * @apiName editTUserSummary
      * 
      * @api {post} /v1/service/user/editTUserSummary 编辑用户详情
      * 
@@ -314,6 +365,30 @@ public class HsUserController {
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/editTUserSummary()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+
+    @RequestMapping(value = "/deleteTUserSummary", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent deleteTUserSummary(@RequestBody TUserSummary tUserSummary) {
+        logger.info("/v1/service/event/deleteTUserSummary() called: hUserId={}", tUserSummary.gethUserId());
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            int resutl = hsUserService.deleteTUserSummary(tUserSummary);
+            if (Response.ERROR == resutl) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("Delete fail");
+            } else {
+                responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+                responseContent.setResponseResultMsg("Delete success");
+            }
+        } catch (Exception e) {
+            logger.error("/v1/service/event/deleteTUserSummary()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;
@@ -363,11 +438,55 @@ public class HsUserController {
             file.transferTo(new File(destPath));
 
             System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), hUserPhoneNr));
-       
+
             responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
             responseContent.setResponseResultMsg("Upload success");
         } catch (Exception e) {
             logger.error("/v1/service/user/uploadPortrait()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
+    }
+
+    /**
+     * @apiGroup User
+     * 
+     * @apiName uploadProfile
+     * 
+     * @api {post} /v1/service/user/uploadProfile 上传用户头像
+     * 
+     * @apiParam {String} sessionCode Logined user session code.
+     * @apiParam {String} fileName File name.
+     * @apiParam {Long} hUserPhoneNr User phone number.
+     * @apiParam {String} base64 Uploaded file BASE64 code
+     * 
+     * @apiSuccessExample {json} Success-Response: 
+     * { 
+     *  "responseResult": "SUCCESS",
+     *  "responseResultMsg": "Upload success" 
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * { 
+     *  "responseResult": "ERROR",
+     *  "responseResultMsg": "Upload fail" 
+     * }
+     */
+    @RequestMapping(value = "/uploadProfile", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseContent uploadProfile(@RequestBody ProfileFile profileFile) {
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            String result = hsUserService.uploadFileBase64(profileFile.getBase64(), profileFile.getFileName(),
+                    profileFile.getSessionCode(), profileFile.gethUserPhoneNr());
+
+            responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+            responseContent.setResponseResultMsg(result);
+        } catch (Exception e) {
+            logger.error("/v1/service/user/uploadProfile()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;
@@ -395,6 +514,28 @@ public class HsUserController {
 
         System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), username));
 
+    }
+    
+    @RequestMapping(value = "/getProfile", method = RequestMethod.GET)
+    public ResponseContent getProfile(@RequestParam(value = "hUserPhoneNr", required = true) Long hUserPhoneNr,
+            @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+        ResponseContent responseContent = new ResponseContent();
+
+        try {
+            if (null == hUserPhoneNr) {
+                responseContent.setResponseResult(ResponseResultEnum.ERROR);
+                responseContent.setResponseResultMsg("getProfile error");
+                return responseContent;
+            }
+            responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
+            responseContent.setResponseResultMsg(resourceConfig.getPortrait() + hUserPhoneNr + ".jpg");
+        } catch (Exception e) {
+            logger.error("/v1/service/user/getProfile()", e);
+            responseContent.setResponseResult(ResponseResultEnum.ERROR);
+            responseContent.setResponseResultMsg("Server internal error");
+            return responseContent;
+        }
+        return responseContent;
     }
 
     /**
@@ -504,7 +645,7 @@ public class HsUserController {
         }
         return gridContent;
     }
-    
+
     /**
      * @apiGroup User
      * 
@@ -530,7 +671,8 @@ public class HsUserController {
     @RequestMapping(value = "/addSUserFeedbackSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent addSUserFeedbackSummary(@RequestBody SUserFeedbackSummary sUserFeedbackSummary) {
-        logger.info("/v1/service/event/addSUserFeedbackSummary() called: hUserPhoneNr={},sUserFeedbackStr={}", sUserFeedbackSummary.gethUserPhoneNr(),sUserFeedbackSummary.getsUserFeedbackStr());
+        logger.info("/v1/service/event/addSUserFeedbackSummary() called: hUserPhoneNr={},sUserFeedbackStr={}",
+                sUserFeedbackSummary.gethUserPhoneNr(), sUserFeedbackSummary.getsUserFeedbackStr());
         ResponseContent responseContent = new ResponseContent();
 
         try {
