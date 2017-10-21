@@ -14,9 +14,9 @@ import org.apache.ibatis.type.JdbcType;
 public interface SUserMessageActiveMapper {
     @Delete({
         "delete from s_user_message_active",
-        "where s_user_message_active_id = #{sUserMessageActiveId,jdbcType=BIGINT}"
+        "where l_user_message_id = #{lUserMessageId,jdbcType=BIGINT}"
     })
-    int deleteByPrimaryKey(Long sUserMessageActiveId);
+    int deleteByPrimaryKey(Long lUserMessageId);
 
     @Insert({
         "insert into s_user_message_active (s_user_message_active_id, l_user_message_id, ",

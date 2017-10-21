@@ -1,6 +1,7 @@
 package com.leyao.app_service.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +135,7 @@ public class HsMessageServiceImpl implements IHsMessageService {
     public int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap) {
         return sMessageContentMapper.getTMessageSummaryListByConditionCount(paramMap);
     }
-    
+
     @Override
     public List<TMessageSummary> getTMessageSummaryListByConditionGlobal(Map<String, Object> paramMap) {
         return sMessageContentMapper.getTMessageSummaryListByConditionGlobal(paramMap);
@@ -158,8 +159,25 @@ public class HsMessageServiceImpl implements IHsMessageService {
         }
 
         for (LUserMessage lUserMessage : lUserMessageList) {
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("hMessageId", hMessageId);
+            paramMap.put("hUserId", lUserMessage.gethUserId());
+
+            // delete SUserMessageActive table
+            List<LUserMessage> deleteLUserMessageList = lUserMessageMapper.selectByMessageIdAndUserId(paramMap);
+            if (null != deleteLUserMessageList && 0 != deleteLUserMessageList.size()) {
+                for (LUserMessage deleteLUserMessage : deleteLUserMessageList) {
+                    sUserMessageActiveMapper.deleteByPrimaryKey(deleteLUserMessage.getlUserMessageId());
+                }
+            }
+
+            // delete LUserMessage table
+            lUserMessageMapper.deleteByPrimaryKey(paramMap);
+
+            // insert LUserMessage table
             lUserMessageMapper.insertSelective(lUserMessage);
 
+            // insert SUserMessageActive table
             long lUserMessageId = lUserMessageMapper.getMaxLUserMessageId();
             lUserMessage.setlUserMessageId(lUserMessageId);
             SUserMessageActive sUserMessageActive = LsUserMessageUtil.userMessage2UserMessageActive(lUserMessage);
