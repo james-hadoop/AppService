@@ -13,6 +13,10 @@ public interface IHsMessageService {
     List<TMessageSummary> getTMessageSummaryListByCondition(Map<String, Object> paramMap);
 
     int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap);
+    
+    List<TMessageSummary> getTMessageSummaryListByConditionGlobal(Map<String, Object> paramMap);
+
+    int getTMessageSummaryListByConditionCountGlobal(Map<String, Object> paramMap);
 
     int addTMessageSummary(TMessageSummary tMessageSummary);
 

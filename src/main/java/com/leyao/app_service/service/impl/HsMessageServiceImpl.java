@@ -134,6 +134,16 @@ public class HsMessageServiceImpl implements IHsMessageService {
     public int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap) {
         return sMessageContentMapper.getTMessageSummaryListByConditionCount(paramMap);
     }
+    
+    @Override
+    public List<TMessageSummary> getTMessageSummaryListByConditionGlobal(Map<String, Object> paramMap) {
+        return sMessageContentMapper.getTMessageSummaryListByConditionGlobal(paramMap);
+    }
+
+    @Override
+    public int getTMessageSummaryListByConditionCountGlobal(Map<String, Object> paramMap) {
+        return sMessageContentMapper.getTMessageSummaryListByConditionCountGlobal(paramMap);
+    }
 
     @Override
     @Transactional

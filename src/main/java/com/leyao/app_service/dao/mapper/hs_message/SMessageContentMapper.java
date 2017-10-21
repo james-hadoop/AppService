@@ -65,6 +65,18 @@ public interface SMessageContentMapper {
 
     @SelectProvider(type = SMessageContentSqlProvider.class, method = "getTMessageSummaryListByConditionCount")
     int getTMessageSummaryListByConditionCount(Map<String, Object> paramMap);
+    
+    @SelectProvider(type = SMessageContentSqlProvider.class, method = "getTMessageSummaryListByConditionGlobal")
+    @Results({ @Result(column = "h_message_id", property = "hMessageId", jdbcType = JdbcType.BIGINT),
+            @Result(column = "s_message_content_str", property = "sMessageContentStr", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_message_category_cd", property = "sMessageCategoryCd", jdbcType = JdbcType.INTEGER),
+            @Result(column="s_message_active_ind", property="sMessageActiveInd", jdbcType=JdbcType.INTEGER),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP) })
+    List<TMessageSummary> getTMessageSummaryListByConditionGlobal(Map<String, Object> paramMap);
+
+    @SelectProvider(type = SMessageContentSqlProvider.class, method = "getTMessageSummaryListByConditionCountGlobal")
+    int getTMessageSummaryListByConditionCountGlobal(Map<String, Object> paramMap);
 
     @UpdateProvider(type = SMessageContentSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SMessageContent record);

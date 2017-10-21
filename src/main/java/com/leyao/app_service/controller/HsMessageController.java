@@ -116,6 +116,68 @@ public class HsMessageController {
         return gridContent;
     }
     
+    /**
+     * @apiGroup Message
+     * 
+     * @apiName getTMessageSummaryListByCondition
+     * 
+     * @api {get} /v1/service/message/getTMessageSummaryListByCondition 获取我的消息
+     * 
+     * @apiParam {String} sessionCode Logined user session code.
+     * @apiParam {Number} [page] Paging - page number.
+     * @apiParam {Number} [rows] Paging - rows in one page.
+     * @apiParam {Number} [hUserPhoneNr] User phone number.
+     * @apiParam {Number} [sMessageCategoryCd] Message category code.
+     * 
+     * @apiSuccessExample {json} Success-Response: 
+     * {
+     *  "rows": [ 
+     *      {
+     *          "hMessageId": 7,
+     *          "sMessageActiveInd": 0,
+     *          "sMessageCategoryCd": 1,
+     *          "sMessageContentStr": "great",
+     *          "createTs": 946627200000,
+     *          "updateTs": 946627200000
+     *      }
+     *  ],
+     *  "total": 1
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
+     * {
+     *  "rows":[],
+     *  "total":0
+     * }
+     */
+    @RequestMapping(value = "/getTMessageSummaryListByConditionGlobal", method = RequestMethod.GET)
+    public GridContent getTMessageSummaryListByConditionGlobal( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                    @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd) {
+        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={}", hUserPhoneNr,sMessageCategoryCd);
+        GridContent gridContent = new GridContent();
+
+        try {
+            int start = (page - 1) * rows;
+            int end = rows;
+
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("hUserPhoneNr", hUserPhoneNr);
+            paramMap.put("sMessageCategoryCd", sMessageCategoryCd);
+            paramMap.put("start", start);
+            paramMap.put("end", end);
+
+            List<TMessageSummary> tMessageSummaryList = hsMessageService.getTMessageSummaryListByConditionGlobal(paramMap);
+            int count = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
+
+            gridContent.setRows(tMessageSummaryList);
+            gridContent.setTotal(count);
+        } catch (Exception e) {
+            logger.error("/v1/service/message/getTMessageSummaryListByCondition()", e);
+            return gridContent;
+        }
+        return gridContent;
+    }
+    
     @RequestMapping(value = "/editTMessageSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent editTMessageSummary(@RequestBody TMessageSummary tMessageSummary) {
