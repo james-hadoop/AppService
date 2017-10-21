@@ -273,39 +273,45 @@ public class HsEventUtil {
     }
 
     public static SEventRecom1 eventSummary2EventRecom1(TEventSummary es) {
+        if (es.getsEventTypeCd() != REventTypeEnum.Audio.getCode()) {
+            return null;
+        }
+
         SEventRecom1 sEventRecom1 = new SEventRecom1();
         sEventRecom1.setCreateTs(es.getCreateTs());
         sEventRecom1.sethEventId(es.gethEventId());
-        if (es.getsEventTypeCd() == REventTypeEnum.Audio.getCode()) {
-            sEventRecom1.setsEventRecomActiveInd(es.getsEventActiveInd());
-            sEventRecom1.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
-        }
+        sEventRecom1.setsEventRecomActiveInd(es.getsEventActiveInd());
+        sEventRecom1.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
         sEventRecom1.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom1;
     }
 
     public static SEventRecom2 eventSummary2EventRecom2(TEventSummary es) {
+        if (es.getsEventTypeCd() != REventTypeEnum.Video.getCode()) {
+            return null;
+        }
+
         SEventRecom2 sEventRecom2 = new SEventRecom2();
         sEventRecom2.setCreateTs(es.getCreateTs());
         sEventRecom2.sethEventId(es.gethEventId());
-        if (es.getsEventTypeCd() == REventTypeEnum.Video.getCode()) {
-            sEventRecom2.setsEventRecomActiveInd(es.getsEventActiveInd());
-            sEventRecom2.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
-        }
+        sEventRecom2.setsEventRecomActiveInd(es.getsEventActiveInd());
+        sEventRecom2.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
         sEventRecom2.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom2;
     }
 
     public static SEventRecom3 eventSummary2EventRecom3(TEventSummary es) {
+        if (es.getsEventTypeCd() != REventTypeEnum.Image.getCode()) {
+            return null;
+        }
+
         SEventRecom3 sEventRecom3 = new SEventRecom3();
         sEventRecom3.setCreateTs(es.getCreateTs());
         sEventRecom3.sethEventId(es.gethEventId());
-        if (es.getsEventTypeCd() == REventTypeEnum.Image.getCode()) {
-            sEventRecom3.setsEventRecomActiveInd(es.getsEventActiveInd());
-            sEventRecom3.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
-        }
+        sEventRecom3.setsEventRecomActiveInd(es.getsEventActiveInd());
+        sEventRecom3.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
         sEventRecom3.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom3;

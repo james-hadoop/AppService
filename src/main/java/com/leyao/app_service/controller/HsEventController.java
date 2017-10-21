@@ -430,7 +430,7 @@ public class HsEventController {
     @RequestMapping(value = "/getTEventSummaryByConditionGlobal", method = RequestMethod.GET)
     public GridContent getTEventSummaryByConditionGlobal(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "100") Integer rows,
                     @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
-                    @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,
+                    @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,@RequestParam(value = "sEventActiveInd", required = false) Integer sEventActiveInd,
                     @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,
                     @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt,
                     @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt) {
@@ -448,6 +448,7 @@ public class HsEventController {
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sEventCategoryCd", sEventCategoryCd);
             paramMap.put("sEventTypeCd", sEventTypeCd);
+            paramMap.put("sEventActiveInd", sEventActiveInd);
             paramMap.put("sUserEventLikeInd", sUserEventLikeInd);
             paramMap.put("sUserEventReadLogTxt", sUserEventReadLogTxt);
             paramMap.put("sEventSearchContentTxt", sEventSearchContentTxt);
@@ -555,10 +556,10 @@ public class HsEventController {
             int resutl = hsEventService.editTEventSummary(tEventSummary);
             if (Response.ERROR == resutl) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("Add fail");
+                responseContent.setResponseResultMsg("Edit fail");
             } else {
                 responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Add success");
+                responseContent.setResponseResultMsg("Edit success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/event/editTEventSummary()", e);
