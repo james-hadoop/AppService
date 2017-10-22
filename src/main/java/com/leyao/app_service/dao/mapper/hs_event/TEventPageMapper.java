@@ -271,6 +271,9 @@ public interface TEventPageMapper {
             @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
             @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR),
             @Result(column = "s_event_banner_position_cd", property = "sEventBannerPositionCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "s_event_recom1_position_cd", property = "sEventRecom1PositionCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "s_event_recom2_position_cd", property = "sEventRecom2PositionCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "s_event_recom3_position_cd", property = "sEventRecom3PositionCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
             @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP)})
     

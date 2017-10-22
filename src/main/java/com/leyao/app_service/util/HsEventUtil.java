@@ -291,12 +291,12 @@ public class HsEventUtil {
         if (es.getsEventTypeCd() != REventTypeEnum.Video.getCode()) {
             return null;
         }
-
+        
         SEventRecom2 sEventRecom2 = new SEventRecom2();
         sEventRecom2.setCreateTs(es.getCreateTs());
         sEventRecom2.sethEventId(es.gethEventId());
         sEventRecom2.setsEventRecomActiveInd(es.getsEventActiveInd());
-        sEventRecom2.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        sEventRecom2.setsEventRecomPositionCd(es.getsEventRecomPositionCd(false));
         sEventRecom2.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom2;

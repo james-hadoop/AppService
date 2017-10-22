@@ -26,26 +26,32 @@ public class TEventSummary {
     private Integer sEventActiveInd = 0;
 
     private Date createTs;
-    
+
     private String createTsString;
 
     private Date updateTs;
 
     private String updateTsString;
-    
+
     private String sEventSearchContentTxt = "?";
 
     private List<String> sEventSubContent1UrlList = new ArrayList<String>();
 
     private List<String> sEventSubContent2StrList = new ArrayList<String>();
-    
-    private List<SubContentJsonEntity> sEventSubContent=new ArrayList<SubContentJsonEntity>();
-    
-    private String sEventSubContentString=null;
+
+    private List<SubContentJsonEntity> sEventSubContent = new ArrayList<SubContentJsonEntity>();
+
+    private String sEventSubContentString = null;
 
     private Integer sEventBannerPositionCd = 0;
 
     private Integer sEventRecomPositionCd = 0;
+
+    private Integer sEventRecom1PositionCd = 0;
+
+    private Integer sEventRecom2PositionCd = 0;
+
+    private Integer sEventRecom3PositionCd = 0;
 
     public Long gethEventId() {
         return hEventId;
@@ -174,9 +180,26 @@ public class TEventSummary {
     public void setsEventBannerPositionCd(Integer sEventBannerPositionCd) {
         this.sEventBannerPositionCd = sEventBannerPositionCd;
     }
+    
+    public Integer getsEventRecomPositionCd(boolean ignore) {
+        return sEventRecomPositionCd;
+    }
 
     public Integer getsEventRecomPositionCd() {
-        return sEventRecomPositionCd;
+        switch (sEventTypeCd) {
+        case 1: {
+            return sEventRecom1PositionCd;
+        }
+        case 2: {
+            return sEventRecom2PositionCd;
+        }
+        case 3: {
+            return sEventRecom3PositionCd;
+        }
+        default: {
+            return sEventRecomPositionCd;
+        }
+        }
     }
 
     public void setsEventRecomPositionCd(Integer sEventRecomPositionCd) {
@@ -197,5 +220,29 @@ public class TEventSummary {
 
     public void setUpdateTsString(String updateTsString) {
         this.updateTsString = updateTsString;
+    }
+
+    public Integer getsEventRecom1PositionCd() {
+        return sEventRecom1PositionCd;
+    }
+
+    public void setsEventRecom1PositionCd(Integer sEventRecom1PositionCd) {
+        this.sEventRecom1PositionCd = sEventRecom1PositionCd;
+    }
+
+    public Integer getsEventRecom2PositionCd() {
+        return sEventRecom2PositionCd;
+    }
+
+    public void setsEventRecom2PositionCd(Integer sEventRecom2PositionCd) {
+        this.sEventRecom2PositionCd = sEventRecom2PositionCd;
+    }
+
+    public Integer getsEventRecom3PositionCd() {
+        return sEventRecom3PositionCd;
+    }
+
+    public void setsEventRecom3PositionCd(Integer sEventRecom3PositionCd) {
+        this.sEventRecom3PositionCd = sEventRecom3PositionCd;
     }
 }
