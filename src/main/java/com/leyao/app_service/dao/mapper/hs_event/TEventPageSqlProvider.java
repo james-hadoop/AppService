@@ -159,7 +159,7 @@ public class TEventPageSqlProvider {
             sql.INNER_JOIN(
                     "ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
         }
-        
+
         sql.ORDER_BY("ep.s_event_active_ind");
 
         return sql.toString();
@@ -213,7 +213,7 @@ public class TEventPageSqlProvider {
         if (paramMap.get("sEventTypeCd") != null) {
             sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
         }
-        
+
         if (paramMap.get("sUserEventLikeInd") != null) {
             sql.WHERE("ep.s_event_active_ind = #{sUserEventLikeInd,jdbcType=INTEGER}");
         }
@@ -221,9 +221,14 @@ public class TEventPageSqlProvider {
         if (paramMap.get("sEventSearchContentTxt") != null) {
             sql.WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
         }
-        
+
+        if (paramMap.get("urlString") != null) {
+            sql.WHERE("ep.s_event_title_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
+                    .WHERE("ep.s_event_content_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')");
+        }
+
         sql.ORDER_BY("s_event_active_ind");
-        
+
         sql.ORDER_BY("ep.update_ts desc");
 
         if (paramMap.get("start") != null && paramMap.get("end") != null) {

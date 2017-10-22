@@ -159,6 +159,10 @@ public class SMessageContentSqlProvider {
             sql.WHERE("mca.s_message_category_cd = #{sMessageCategoryCd,jdbcType=INTEGER}");
         }
         
+        if (paramMap.get("sMessageContentStr") != null) {
+            sql.WHERE("mc.s_message_content_str like concat('%', #{sMessageContentStr,jdbcType=VARCHAR}, '%')");
+        }
+        
         sql.ORDER_BY("ma.s_message_active_ind");
         
         sql.ORDER_BY("mc.update_ts desc");

@@ -433,7 +433,8 @@ public class HsEventController {
                     @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,@RequestParam(value = "sEventActiveInd", required = false) Integer sEventActiveInd,
                     @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,
                     @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt,
-                    @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt) {
+                    @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt,
+                    @RequestParam(value = "urlString", required = false) String urlString) {
         logger.info("/v1/service/event/getTEventSummaryByConditionGlobal() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd={},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt={},sEventSearchContentTxt={}",
                         sessionCode, page, rows, hUserPhoneNr, sEventCategoryCd, sEventTypeCd, sUserEventLikeInd, sUserEventReadLogTxt,sEventSearchContentTxt);
         GridContent gridContent = new GridContent();
@@ -452,6 +453,7 @@ public class HsEventController {
             paramMap.put("sUserEventLikeInd", sUserEventLikeInd);
             paramMap.put("sUserEventReadLogTxt", sUserEventReadLogTxt);
             paramMap.put("sEventSearchContentTxt", sEventSearchContentTxt);
+            paramMap.put("urlString", urlString);
 
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByConditionGlobal(paramMap);
             int count = hsEventService.getTEventSummaryByConditionGlobalCount(paramMap);
