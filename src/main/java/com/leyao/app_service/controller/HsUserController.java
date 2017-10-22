@@ -81,7 +81,8 @@ public class HsUserController {
     public GridContent getTUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
             @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
             @RequestParam(value = "hUserPhoneNr", required = false) String hUserPhoneNr,
-            @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+            @RequestParam(value = "sessionCode", required = true) String sessionCode,
+            @RequestParam(value = "searchCondition", required = false) String searchCondition) {
         logger.info(
                 "/v1/service/user/getTUserSummary() called: sessionCode={}, sUserNameStr={}, sUserEmailStr={}, hUserPhoneNr={}",
                 sessionCode, sUserNameStr, sUserNameStr, hUserPhoneNr);
@@ -91,6 +92,7 @@ public class HsUserController {
         paramMap.put("sUserNameStr", sUserNameStr);
         paramMap.put("sUserEmailStr", sUserEmailStr);
         paramMap.put("hUserPhoneNr", hUserPhoneNr);
+        paramMap.put("searchCondition", searchCondition);
 
         List<TUserSummary> tUserSummaryList = hsUserService.getTUserSummary(paramMap);
         gridContent.setRows(tUserSummaryList);
