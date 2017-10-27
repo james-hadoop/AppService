@@ -1,4 +1,4 @@
-package com.leyao.app_service.controller;
+package com.app_service.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leyao.app_service.common.Response;
-import com.leyao.app_service.entity.GridContent;
-import com.leyao.app_service.entity.ResponseContent;
-import com.leyao.app_service.entity.enums.ResponseResultEnum;
-import com.leyao.app_service.entity.hs_event.TEventSummary;
-import com.leyao.app_service.service.IHsEventService;
+import com.app_service.common.Response;
+import com.app_service.entity.GridContent;
+import com.app_service.entity.ResponseContent;
+import com.app_service.entity.enums.ResponseResultEnum;
+import com.app_service.entity.hs_event.TEventSummary;
+import com.app_service.service.IHsEventService;
 
 @RestController
 @RequestMapping("/v1/service/event")
@@ -165,6 +165,7 @@ public class HsEventController {
      *          "sEventSearchContentTxt": "7",
      *          "sEventSubContent1UrlList": [],
      *          "sEventSubContent2StrList": [],
+     *          "sEventSubContent": [],
      *          "sEventBannerPositionCd": null,
      *          "sEventRecomPositionCd": null
      *      }
@@ -429,10 +430,11 @@ public class HsEventController {
     @RequestMapping(value = "/getTEventSummaryByConditionGlobal", method = RequestMethod.GET)
     public GridContent getTEventSummaryByConditionGlobal(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "100") Integer rows,
                     @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
-                    @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,
+                    @RequestParam(value = "sEventCategoryCd", required = false) Integer sEventCategoryCd, @RequestParam(value = "sEventTypeCd", required = false) Integer sEventTypeCd,@RequestParam(value = "sEventActiveInd", required = false) Integer sEventActiveInd,
                     @RequestParam(value = "sUserEventLikeInd", required = false) Integer sUserEventLikeInd,
                     @RequestParam(value = "sUserEventReadLogTxt", required = false) String sUserEventReadLogTxt,
-                    @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt) {
+                    @RequestParam(value = "sEventSearchContentTxt", required = false) String sEventSearchContentTxt,
+                    @RequestParam(value = "urlString", required = false) String urlString) {
         logger.info("/v1/service/event/getTEventSummaryByConditionGlobal() called: sessionCode={}, page={}, rows={},hUserPhoneNr={},sEventCategoryCd={},sEventTypeCd={},sUserEventLikeInd={},sUserEventReadLogTxt={},sEventSearchContentTxt={}",
                         sessionCode, page, rows, hUserPhoneNr, sEventCategoryCd, sEventTypeCd, sUserEventLikeInd, sUserEventReadLogTxt,sEventSearchContentTxt);
         GridContent gridContent = new GridContent();
@@ -447,9 +449,11 @@ public class HsEventController {
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sEventCategoryCd", sEventCategoryCd);
             paramMap.put("sEventTypeCd", sEventTypeCd);
+            paramMap.put("sEventActiveInd", sEventActiveInd);
             paramMap.put("sUserEventLikeInd", sUserEventLikeInd);
             paramMap.put("sUserEventReadLogTxt", sUserEventReadLogTxt);
             paramMap.put("sEventSearchContentTxt", sEventSearchContentTxt);
+            paramMap.put("urlString", urlString);
 
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByConditionGlobal(paramMap);
             int count = hsEventService.getTEventSummaryByConditionGlobalCount(paramMap);
@@ -554,10 +558,10 @@ public class HsEventController {
             int resutl = hsEventService.editTEventSummary(tEventSummary);
             if (Response.ERROR == resutl) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("Add fail");
+                responseContent.setResponseResultMsg("Edit fail");
             } else {
                 responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Add success");
+                responseContent.setResponseResultMsg("Edit success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/event/editTEventSummary()", e);

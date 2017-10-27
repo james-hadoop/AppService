@@ -496,10 +496,9 @@ public class HsUserController {
         return responseContent;
     }
 
-    @RequestMapping(value = "/upload")
-    public void upload(@RequestParam("file") MultipartFile file, @RequestParam("username") String username)
-            throws IOException {
-        System.out.println("upload()");
+    @RequestMapping(value = "/uploadResource")
+    public void uploadResource(@RequestParam("file") MultipartFile file, @RequestParam("targetDir") String targetDir) throws IOException {
+        System.out.println("uploadResource(): "+targetDir);
 
         byte[] bytes;
 
@@ -514,7 +513,7 @@ public class HsUserController {
 
         file.transferTo(new File(path));
 
-        System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), username));
+        System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), targetDir));
 
     }
     

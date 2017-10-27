@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan(basePackages = "com.leyao.app_service.dao.mapper.r_dim", sqlSessionFactoryRef = "rDimSqlSessionFactory")
+@MapperScan(basePackages = "com.app_service.dao.mapper.r_dim", sqlSessionFactoryRef = "rDimSqlSessionFactory")
 public class RDimDataSourceConfig {
 
     @Bean(name = "rDimDataSource")
