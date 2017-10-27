@@ -1,8 +1,8 @@
-# LeyaoAppService
+# AppService
 
 mvn spring-boot:run
 
-apidoc -i LeyaoAppService/ -o LeyaoAppServiceApiDoc/
+apidoc -i AppService/ -o AppServiceApiDoc/
 
 /bin/sh /data0/mysql7/product/bin/mysqld_safe
 
