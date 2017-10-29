@@ -128,7 +128,15 @@ public class HsMessageServiceImpl implements IHsMessageService {
 
     @Override
     public List<TMessageSummary> getTMessageSummaryListByCondition(Map<String, Object> paramMap) {
-        return sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
+        if (null == paramMap.get("isPush")) {
+            // all messages relevant to me
+            return sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
+        } else {
+            // only messages relevant to me as well as active
+            List<TMessageSummary> messageList = sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
+            
+            return messageList;
+        }
     }
 
     @Override

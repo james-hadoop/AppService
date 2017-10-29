@@ -656,7 +656,7 @@ public class HsUserController {
      * 
      * @apiName addSUserFeedbackSummary
      * 
-     * @api {post} /v1/service/event/addSUserFeedbackSummary 添加用户反馈
+     * @api {post} /v1/service/user/addSUserFeedbackSummary 添加用户反馈
      * 
      * @apiParam {String} sUserFeedbackStr User feedback content.
      * @apiParam {String} hUserPhoneNr User phone number.

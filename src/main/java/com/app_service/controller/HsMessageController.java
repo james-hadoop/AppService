@@ -90,8 +90,8 @@ public class HsMessageController {
      */
     @RequestMapping(value = "/getTMessageSummaryListByCondition", method = RequestMethod.GET)
     public GridContent getTMessageSummaryListByCondition( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd) {
-        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={}", hUserPhoneNr,sMessageCategoryCd);
+                    @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd,@RequestParam(value = "isPush", required = false) Integer isPush) {
+        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={},isPush={}", hUserPhoneNr,sMessageCategoryCd,isPush);
         GridContent gridContent = new GridContent();
 
         try {
@@ -101,6 +101,7 @@ public class HsMessageController {
             Map<String, Object> paramMap = new HashMap<String, Object>();
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sMessageCategoryCd", sMessageCategoryCd);
+            paramMap.put("isPush", isPush);
             paramMap.put("start", start);
             paramMap.put("end", end);
 
