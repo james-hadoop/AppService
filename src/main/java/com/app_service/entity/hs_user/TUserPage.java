@@ -7,7 +7,7 @@ public class TUserPage {
 
     private Long hUserPhoneNr;
 
-    private Integer sUserGenderCd;
+    private Integer sUserGenderCd = 0;
 
     private String sUserGenderDesc;
 
@@ -17,7 +17,7 @@ public class TUserPage {
 
     private String sUserEmailStr;
 
-    private Integer sUserActiveInd;
+    private Integer sUserActiveInd = 0;
 
     private Date createTs;
 

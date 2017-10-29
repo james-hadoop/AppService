@@ -5,11 +5,11 @@ import java.util.Date;
 public class TEventPage implements Comparable<TEventPage> {
     private Long hEventId;
 
-    private Integer sEventCategoryCd;
+    private Integer sEventCategoryCd = 0;
 
     private String rEventCategoryDesc;
 
-    private Integer sEventTypeCd;
+    private Integer sEventTypeCd = 0;
 
     private String rEventTypeDesc;
 
@@ -21,13 +21,13 @@ public class TEventPage implements Comparable<TEventPage> {
 
     private String sEventSubContent2Str;
 
-    private Integer sEventActiveInd;
+    private Integer sEventActiveInd = 0;
 
     private Date createTs;
 
     private Date updateTs;
 
-    private String sEventSearchContentTxt;
+    private String sEventSearchContentTxt = "?";
 
     public Long gethEventId() {
         return hEventId;

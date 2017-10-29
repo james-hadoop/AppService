@@ -283,6 +283,8 @@ public class HsUserController {
      * 
      * @apiParam {String} hUserPhoneNr User phone number.
      * @apiParam {String} sUserPasswordStr User password.
+     * @apiParam {Number} [sUserGenderCd] User gender.
+     * @apiParam {String} [sUserNameStr] User nick name.
      * @apiParam {Number} verifyCode Verify code.
      * 
      * @apiSuccessExample {json} Success-Response: 
@@ -331,9 +333,11 @@ public class HsUserController {
      * 
      * @api {post} /v1/service/user/editTUserSummary 编辑用户详情
      * 
-     * @apiParam {String} hUserPhoneNr User phone number.
-     * @apiParam {String} sUserPasswordStr User password.
      * @apiParam {Number} verifyCode Verify code.
+     * @apiParam {String} hUserPhoneNr User phone number.
+     * @apiParam {String} [sUserPasswordStr] User password.
+     * @apiParam {Number} [sUserGenderCd] User gender.
+     * @apiParam {String} [sUserNameStr] User nick name.
      * 
      * @apiSuccessExample {json} Success-Response: 
      * { 

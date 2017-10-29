@@ -1,4 +1,4 @@
-package com.leyao.app_service.controller;
+package com.app_service.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.leyao.app_service.common.Response;
-import com.leyao.app_service.dao.configuration.ResourceConfig;
-import com.leyao.app_service.entity.GridContent;
-import com.leyao.app_service.entity.ProfileFile;
-import com.leyao.app_service.entity.ResponseContent;
-import com.leyao.app_service.entity.enums.ResponseResultEnum;
-import com.leyao.app_service.entity.hs_user.SUserFeedbackSummary;
-import com.leyao.app_service.entity.hs_user.TUserSummary;
-import com.leyao.app_service.service.IHsUserService;
+import com.app_service.common.Response;
+import com.app_service.dao.configuration.ResourceConfig;
+import com.app_service.entity.GridContent;
+import com.app_service.entity.ProfileFile;
+import com.app_service.entity.ResponseContent;
+import com.app_service.entity.enums.ResponseResultEnum;
+import com.app_service.entity.hs_user.SUserFeedbackSummary;
+import com.app_service.entity.hs_user.TUserSummary;
+import com.app_service.service.IHsUserService;
 
 @RestController
 @RequestMapping("/v1/service/user")
@@ -81,7 +81,8 @@ public class HsUserController {
     public GridContent getTUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
             @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
             @RequestParam(value = "hUserPhoneNr", required = false) String hUserPhoneNr,
-            @RequestParam(value = "sessionCode", required = true) String sessionCode) {
+            @RequestParam(value = "sessionCode", required = true) String sessionCode,
+            @RequestParam(value = "searchCondition", required = false) String searchCondition) {
         logger.info(
                 "/v1/service/user/getTUserSummary() called: sessionCode={}, sUserNameStr={}, sUserEmailStr={}, hUserPhoneNr={}",
                 sessionCode, sUserNameStr, sUserNameStr, hUserPhoneNr);
@@ -91,6 +92,7 @@ public class HsUserController {
         paramMap.put("sUserNameStr", sUserNameStr);
         paramMap.put("sUserEmailStr", sUserEmailStr);
         paramMap.put("hUserPhoneNr", hUserPhoneNr);
+        paramMap.put("searchCondition", searchCondition);
 
         List<TUserSummary> tUserSummaryList = hsUserService.getTUserSummary(paramMap);
         gridContent.setRows(tUserSummaryList);
@@ -494,10 +496,9 @@ public class HsUserController {
         return responseContent;
     }
 
-    @RequestMapping(value = "/upload")
-    public void upload(@RequestParam("file") MultipartFile file, @RequestParam("username") String username)
-            throws IOException {
-        System.out.println("upload()");
+    @RequestMapping(value = "/uploadResource")
+    public void uploadResource(@RequestParam("file") MultipartFile file, @RequestParam("targetDir") String targetDir) throws IOException {
+        System.out.println("uploadResource(): "+targetDir);
 
         byte[] bytes;
 
@@ -512,7 +513,7 @@ public class HsUserController {
 
         file.transferTo(new File(path));
 
-        System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), username));
+        System.out.println(String.format("receive %s from %s", file.getOriginalFilename(), targetDir));
 
     }
     

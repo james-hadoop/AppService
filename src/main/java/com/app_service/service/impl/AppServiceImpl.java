@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.app_service.dao.mapper.hs_event.TEventPageMapper;
 import com.app_service.entity.hs_event.TEventPage;
-import com.app_service.service.ILeyaoAppService;
+import com.app_service.service.IAppService;
 
 @Service
-public class LeyaoAppServiceImpl implements ILeyaoAppService {
+public class AppServiceImpl implements IAppService {
     @Autowired
     TEventPageMapper tEventPageMapper;
 

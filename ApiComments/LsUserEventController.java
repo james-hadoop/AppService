@@ -1,4 +1,4 @@
-package com.leyao.app_service.controller;
+package com.app_service.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leyao.app_service.common.Response;
-import com.leyao.app_service.entity.ResponseContent;
-import com.leyao.app_service.entity.enums.ResponseResultEnum;
-import com.leyao.app_service.entity.ls_user_event.TUserEventSummary;
-import com.leyao.app_service.service.ILsUserEventService;
+import com.app_service.common.Response;
+import com.app_service.entity.ResponseContent;
+import com.app_service.entity.enums.ResponseResultEnum;
+import com.app_service.entity.ls_user_event.TUserEventSummary;
+import com.app_service.service.ILsUserEventService;
 
 @RestController
 @RequestMapping("/v1/service/event")
