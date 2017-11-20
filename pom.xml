@@ -5,7 +5,7 @@
   <artifactId>AppService</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>AppService Maven Webapp</name>
-  <url>http://maven.apache.org</url> 
+  <url>http://maven.apache.org</url>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -51,11 +51,11 @@
       <artifactId>mybatis-spring</artifactId>
       <version>1.3.1</version>
     </dependency>
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-dbcp2</artifactId>
-    <version>2.1.1</version>
-</dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.1.1</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -74,28 +74,28 @@
       <artifactId>CCPRestSmsSDK</artifactId>
       <version>2.6.3</version>
     </dependency>
-<dependency>
-    <groupId>org.apache.httpcomponents</groupId>
-    <artifactId>httpclient</artifactId>
-    <version>4.5.3</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.httpcomponents</groupId>
-    <artifactId>httpmime</artifactId>
-    <version>4.5.3</version>
-</dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>4.5.3</version>
+    </dependency>
 
-<dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-compiler-javac</artifactId>
-            <version>1.8.1</version>
-        </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-compiler-javac</artifactId>
+      <version>1.8.1</version>
+    </dependency>
 
-    
+
   </dependencies>
 
   <properties>
-    <java.version>1.8</java.version> 
+    <java.version>1.8</java.version>
   </properties>
 
   <build>
