@@ -257,8 +257,8 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.reset(tUserSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsUserService.reset(tUserSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("reset fail");
             } else {
@@ -309,8 +309,8 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.addTUserSummary(tUserSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsUserService.addTUserSummary(tUserSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("editTUserSummary fail");
             } else {
@@ -361,8 +361,8 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.editTUserSummary(tUserSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsUserService.editTUserSummary(tUserSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("editTUserSummary fail");
             } else {
@@ -385,8 +385,8 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.deleteTUserSummary(tUserSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsUserService.deleteTUserSummary(tUserSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Delete fail");
             } else {
@@ -681,8 +681,8 @@ public class HsUserController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsUserService.addSUserFeedbackSummary(sUserFeedbackSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsUserService.addSUserFeedbackSummary(sUserFeedbackSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Add fail");
             } else {
