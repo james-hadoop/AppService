@@ -11,13 +11,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app_service.dao.configuration.ResourceConfig;
 import com.app_service.util.DataUtil;
 
 @Service
 public class StaticResourceFilter implements Filter {
-    private static int qualifiedInterval = 1000 * 30;
+    @Autowired
+    private ResourceConfig resourceConfig;
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {
@@ -43,7 +46,7 @@ public class StaticResourceFilter implements Filter {
                     isQulifiedStaticResourceAccess = false;
                 } else {
                     isQulifiedStaticResourceAccess = DataUtil.isQulifiedStaticResourceAccess(queryString,
-                            qualifiedInterval);
+                            resourceConfig.getInterval());
                 }
             } else {
                 isQulifiedStaticResourceAccess = true;

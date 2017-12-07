@@ -9,6 +9,7 @@ public class ResourceConfig {
     private String video;
     private String image;
     private String portrait;
+    private Integer interval;
 
     public String getPrefix() {
         return prefix;
@@ -48,5 +49,13 @@ public class ResourceConfig {
 
     public void setPortrait(String portrait) {
         this.portrait = portrait;
+    }
+
+    public Integer getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Integer interval) {
+        this.interval = interval;
     }
 }
