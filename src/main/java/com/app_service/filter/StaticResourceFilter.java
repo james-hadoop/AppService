@@ -11,14 +11,19 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app_service.controller.HsEventController;
 import com.app_service.dao.configuration.ResourceConfig;
 import com.app_service.util.DataUtil;
 
 @Service
 public class StaticResourceFilter implements Filter {
+    private static final Logger logger = LoggerFactory.getLogger(StaticResourceFilter.class);
+    
     @Autowired
     private ResourceConfig resourceConfig;
 
@@ -54,7 +59,7 @@ public class StaticResourceFilter implements Filter {
 
         } catch (Exception e) {
             // e.printStackTrace();
-            System.out.println("AuthorityFilter.doFilter() exception detected");
+            logger.info("AuthorityFilter.doFilter() exception detected");
             isQulifiedStaticResourceAccess = false;
         }
 
