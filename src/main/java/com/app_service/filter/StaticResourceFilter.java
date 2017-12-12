@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.app_service.controller.HsEventController;
 import com.app_service.dao.configuration.ResourceConfig;
 import com.app_service.util.DataUtil;
 
