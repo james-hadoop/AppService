@@ -12,7 +12,7 @@ import org.apache.commons.codec.binary.Base64;
 
 public class DataUtil {
     private static String key = "key1key1key1key1";
-    private static int qualifiedInterval = 10 * 1000;
+    private static int qualifiedInterval = 7 * 1000;
 
     private static final String CIPHER_ALGORITHM = "DES/ECB/PKCS5Padding";
     private static final String KEY_ALGORITHM = "DES";

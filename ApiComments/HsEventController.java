@@ -503,8 +503,8 @@ public class HsEventController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsEventService.addTEventSummary(tEventSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsEventService.addTEventSummary(tEventSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Add fail");
             } else {
@@ -555,8 +555,8 @@ public class HsEventController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsEventService.editTEventSummary(tEventSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsEventService.editTEventSummary(tEventSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Edit fail");
             } else {
@@ -608,8 +608,8 @@ public class HsEventController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = hsEventService.deleteTEventSummary(tEventSummary);
-            if (Response.ERROR == resutl) {
+            int result = hsEventService.deleteTEventSummary(tEventSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Add fail");
             } else {

@@ -57,8 +57,8 @@ public class LsUserEventController {
         ResponseContent responseContent = new ResponseContent();
 
         try {
-            int resutl = lsUserEventService.feedbackTUserEventSummary(tUserEventSummary);
-            if (Response.ERROR == resutl) {
+            int result = lsUserEventService.feedbackTUserEventSummary(tUserEventSummary);
+            if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Feedback fail");
             } else {
@@ -66,7 +66,7 @@ public class LsUserEventController {
                 responseContent.setResponseResultMsg("Feedback success");
             }
         } catch (Exception e) {
-            logger.error("/v1/service/event/addTEventSummary()", e);
+            logger.error("/v1/service/event/feedbackTEventSummary()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;

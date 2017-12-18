@@ -156,8 +156,8 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sUserEventReadLogTxt") != null) {
-            sql.INNER_JOIN(
-                    "ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
+            sql.INNER_JOIN("ls_user_event.l_user_event lue on lue.h_event_id=ep.h_event_id").INNER_JOIN(
+                    "ls_user_event.s_user_event_read uer on lue.l_user_event_id=uer.l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
         }
 
         sql.ORDER_BY("ep.s_event_active_ind");
@@ -191,8 +191,8 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sUserEventReadLogTxt") != null) {
-            sql.INNER_JOIN(
-                    "ls_user_event.s_user_event_read uer on uer.l_user_event_id=l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
+            sql.INNER_JOIN("ls_user_event.l_user_event lue on lue.h_event_id=ep.h_event_id").INNER_JOIN(
+                    "ls_user_event.s_user_event_read uer on lue.l_user_event_id=uer.l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=INTEGER},'%')");
         }
 
         return sql.toString();

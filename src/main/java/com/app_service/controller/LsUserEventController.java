@@ -66,7 +66,7 @@ public class LsUserEventController {
                 responseContent.setResponseResultMsg("Feedback success");
             }
         } catch (Exception e) {
-            logger.error("/v1/service/event/addTEventSummary()", e);
+            logger.error("/v1/service/event/feedbackTEventSummary()", e);
             responseContent.setResponseResult(ResponseResultEnum.ERROR);
             responseContent.setResponseResultMsg("Server internal error");
             return responseContent;

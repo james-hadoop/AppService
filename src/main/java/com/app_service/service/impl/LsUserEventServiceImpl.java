@@ -4,12 +4,15 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.app_service.common.Response;
+import com.app_service.dao.mapper.hs_user.TUserPageMapper;
 import com.app_service.dao.mapper.ls_user_event.LUserEventMapper;
 import com.app_service.dao.mapper.ls_user_event.SUserEventActiveMapper;
 import com.app_service.dao.mapper.ls_user_event.SUserEventLikeMapper;
 import com.app_service.dao.mapper.ls_user_event.SUserEventReadMapper;
+import com.app_service.entity.hs_user.TUserSummary;
 import com.app_service.entity.ls_user_event.LUserEvent;
 import com.app_service.entity.ls_user_event.SUserEventActive;
 import com.app_service.entity.ls_user_event.SUserEventLike;
@@ -32,14 +35,21 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
 
     @Autowired
     SUserEventReadMapper sUserEventReadMapper;
+    
+    @Autowired
+    TUserPageMapper tUserPageMapper;
 
     @Override
+    @Transactional
     public int feedbackTUserEventSummary(TUserEventSummary tUserEventSummary) {
         Date timestamp = new Date();
         tUserEventSummary.setCreateTs(timestamp);
         tUserEventSummary.setUpdateTs(timestamp);
 
         // LUserEvent
+        TUserSummary user=tUserPageMapper.selectByhUserPhoneNr(tUserEventSummary.gethUserPhoneNr());
+        tUserEventSummary.sethUserId(user.gethUserId());
+        
         LUserEvent lUserEvent = LsUserEventUtil.userEventSummary2UserEvent(tUserEventSummary);
         lUserEventMapper.insertSelective(lUserEvent);
         long lUserEventId = lUserEventMapper.getMaxLUserEventId();
