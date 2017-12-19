@@ -166,12 +166,12 @@ public interface TEventPageMapper {
 
     // getTEventPageListForRecom2Count
     @Select({
-            "SELECT COUNT(1) FROM (SELECT ep.h_event_id FROM (select h_event_id FROM hs_event.t_event_page where s_event_type_cd=2 and s_event_active_ind=0) as ep left outer join hs_event.s_event_recom_2 as er2 on er2.h_event_id=ep.h_event_id limit #{start}, #{end}) as t" })
+            "SELECT COUNT(1) FROM (SELECT ep.h_event_id FROM (select h_event_id FROM hs_event.t_event_page where s_event_type_cd=2 and s_event_active_ind=0) as ep inner join hs_event.s_event_recom_2 as er2 on er2.h_event_id=ep.h_event_id limit #{start}, #{end}) as t" })
     Integer getTEventPageListForRecom2Count(Map<String, Object> paramMap);
 
     // getTEventPageListForRecom3
     @Select({
-            "SELECT ep.*, er3.s_event_recom_position_cd FROM (select * FROM hs_event.t_event_page where s_event_type_cd=3 and s_event_active_ind=0) as ep left outer join hs_event.s_event_recom_3 as er3 on er3.h_event_id=ep.h_event_id order by er3.s_event_recom_position_cd asc, ep.h_event_id desc limit #{start}, #{end}" })
+            "SELECT ep.*, er3.s_event_recom_position_cd FROM (select * FROM hs_event.t_event_page where s_event_type_cd=3 and s_event_active_ind=0) as ep inner join hs_event.s_event_recom_3 as er3 on er3.h_event_id=ep.h_event_id order by er3.s_event_recom_position_cd asc, ep.h_event_id desc limit #{start}, #{end}" })
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
@@ -188,7 +188,7 @@ public interface TEventPageMapper {
 
     // getTEventPageListForRecom3Count
     @Select({
-            "SELECT COUNT(1) FROM (SELECT ep.h_event_id FROM (select h_event_id FROM hs_event.t_event_page where s_event_type_cd=3 and s_event_active_ind=0) as ep left outer join hs_event.s_event_recom_3 as er3 on er3.h_event_id=ep.h_event_id limit #{start}, #{end}) as t" })
+            "SELECT COUNT(1) FROM (SELECT ep.h_event_id FROM (select h_event_id FROM hs_event.t_event_page where s_event_type_cd=3 and s_event_active_ind=0) as ep inner join hs_event.s_event_recom_3 as er3 on er3.h_event_id=ep.h_event_id limit #{start}, #{end}) as t" })
     Integer getTEventPageListForRecom3Count(Map<String, Object> paramMap);
 
     // getTEventPageListByCategory
@@ -216,7 +216,7 @@ public interface TEventPageMapper {
 
     // getTEventPageListForBanner
     @Select({
-            "select ep.* from (select * from hs_event.t_event_page where s_event_active_ind=0) as ep left outer join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id  order by eb.s_event_banner_position_cd, ep.h_event_id desc limit #{start}, #{end}" })
+            "select ep.* from (select * from hs_event.t_event_page where s_event_active_ind=0) as ep inner join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id  order by eb.s_event_banner_position_cd, ep.h_event_id desc limit #{start}, #{end}" })
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
