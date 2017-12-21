@@ -68,6 +68,7 @@ public class HsMessageController {
      * @apiParam {Number} [sMessageCategoryCd] Message category code.
      * 
      * @apiSuccessExample {json} Success-Response: 
+     *
      * {
      *  "rows": [ 
      *      {
@@ -105,8 +106,8 @@ public class HsMessageController {
             paramMap.put("start", start);
             paramMap.put("end", end);
 
-            List<TMessageSummary> tMessageSummaryList = hsMessageService.getTMessageSummaryListByCondition(paramMap);
             int count = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
+            List<TMessageSummary> tMessageSummaryList = hsMessageService.getTMessageSummaryListByCondition(paramMap);
 
             gridContent.setRows(tMessageSummaryList);
             gridContent.setTotal(count);

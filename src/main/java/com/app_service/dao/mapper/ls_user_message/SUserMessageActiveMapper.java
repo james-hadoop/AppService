@@ -1,5 +1,7 @@
 package com.app_service.dao.mapper.ls_user_message;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -47,6 +49,18 @@ public interface SUserMessageActiveMapper {
         @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
     })
     SUserMessageActive selectByPrimaryKey(Long sUserMessageActiveId);
+    
+    @Select({
+        "select * from s_user_message_active where l_user_message_id in (select l_user_message_id from l_user_message where h_user_id=#{hUserId,jdbcType=BIGINT})"
+    })
+    @Results({
+        @Result(column="s_user_message_active_id", property="sUserMessageActiveId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="l_user_message_id", property="lUserMessageId", jdbcType=JdbcType.BIGINT),
+        @Result(column="s_user_message_active_ind", property="sUserMessageActiveInd", jdbcType=JdbcType.INTEGER),
+        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<SUserMessageActive> selectByHUserId(Long hUserId);
 
     @UpdateProvider(type=SUserMessageActiveSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(SUserMessageActive record);

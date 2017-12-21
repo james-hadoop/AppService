@@ -14,6 +14,7 @@ import com.app_service.dao.mapper.hs_message.HsMessageMapper;
 import com.app_service.dao.mapper.hs_message.SMessageActiveMapper;
 import com.app_service.dao.mapper.hs_message.SMessageCategoryMapper;
 import com.app_service.dao.mapper.hs_message.SMessageContentMapper;
+import com.app_service.dao.mapper.hs_user.HUserMapper;
 import com.app_service.dao.mapper.ls_user_message.LUserMessageMapper;
 import com.app_service.dao.mapper.ls_user_message.SUserMessageActiveMapper;
 import com.app_service.entity.enums.StatusEnum;
@@ -22,6 +23,7 @@ import com.app_service.entity.hs_message.SMessageActive;
 import com.app_service.entity.hs_message.SMessageCategory;
 import com.app_service.entity.hs_message.SMessageContent;
 import com.app_service.entity.hs_message.TMessageSummary;
+import com.app_service.entity.hs_user.HUser;
 import com.app_service.entity.ls_user_message.LUserMessage;
 import com.app_service.entity.ls_user_message.SUserMessageActive;
 import com.app_service.service.IHsMessageService;
@@ -47,6 +49,9 @@ public class HsMessageServiceImpl implements IHsMessageService {
 
     @Autowired
     SUserMessageActiveMapper sUserMessageActiveMapper;
+
+    @Autowired
+    HUserMapper hUserMapper;
 
     @Override
     public List<TMessageSummary> getTMessageSummaryList(Map<String, Object> paramMap) {
@@ -127,14 +132,34 @@ public class HsMessageServiceImpl implements IHsMessageService {
     }
 
     @Override
+    @Transactional
     public List<TMessageSummary> getTMessageSummaryListByCondition(Map<String, Object> paramMap) {
-        if (null == paramMap.get("isPush")) {
+        if (null == paramMap.get("isPush") || 0 == (Integer) paramMap.get("isPush")) {
             // all messages relevant to me
             return sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
         } else {
             // only messages relevant to me as well as active
+            // TODO
             List<TMessageSummary> messageList = sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
-            
+
+            Long hUserPhoneNr = (Long) paramMap.get("hUserPhoneNr");
+            if (null == hUserPhoneNr) {
+                return messageList;
+            }
+
+            HUser hUser = hUserMapper.selectByPrimaryKey(hUserPhoneNr);
+            if (null == hUser) {
+                return messageList;
+            }
+
+            List<SUserMessageActive> sUserMessageActiveList = sUserMessageActiveMapper
+                    .selectByHUserId(hUser.gethUserId());
+
+            for (SUserMessageActive sUserMessageActive : sUserMessageActiveList) {
+                sUserMessageActive.setsUserMessageActiveInd(StatusEnum.Unactive.getCode());
+                sUserMessageActiveMapper.updateByPrimaryKeySelective(sUserMessageActive);
+            }
+
             return messageList;
         }
     }
