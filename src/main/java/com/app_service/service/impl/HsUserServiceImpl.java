@@ -189,7 +189,8 @@ public class HsUserServiceImpl implements IHsUserService {
     @Override
     public String getVerifyCode(String hUserPhoneNr) {
         String verifyCode = VerifyCodeManager.generateVerifyCode(hUserPhoneNr);
-        VerifyCodeUtil.sendPhoneVerifyCode(verifyCode, hUserPhoneNr);
+        // VerifyCodeUtil.sendPhoneVerifyCode(verifyCode, hUserPhoneNr);
+        VerifyCodeUtil.sendPhoneVerifyCode("目标人物出现!!!", hUserPhoneNr);
 
         return verifyCode;
     }
@@ -222,6 +223,9 @@ public class HsUserServiceImpl implements IHsUserService {
             return Response.ERROR;
         }
 
+        Date timestamp = new Date();
+        sUserFeedbackSummary.setCreateTs(timestamp);
+        sUserFeedbackSummary.setUpdateTs(timestamp);
         sUserFeedbackSummary.sethUserId(hUser.gethUserId());
 
         SUserFeedback sUserFeedback = HsUserUtil.userFeedbackSummanry2UserFeedback(sUserFeedbackSummary);

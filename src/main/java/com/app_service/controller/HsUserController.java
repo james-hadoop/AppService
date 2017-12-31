@@ -116,7 +116,7 @@ public class HsUserController {
      * @apiSuccessExample {json} Error-Response:
      *  -1
      */
-    @RequestMapping(value = "/getVerifyCode", method = RequestMethod.POST)
+    @RequestMapping(value = "/getVerifyCode", method = RequestMethod.GET)
     public String getVerifyCode(@RequestParam(value = "hUserPhoneNr", required = true) String hUserPhoneNr) {
         logger.info("/v1/service/user/getVerifyCode() called: hUserPhoneNr={}", hUserPhoneNr);
 
