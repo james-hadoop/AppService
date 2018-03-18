@@ -49,6 +49,7 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
         // LUserEvent
         TUserSummary user=tUserPageMapper.selectByhUserPhoneNr(tUserEventSummary.gethUserPhoneNr());
         tUserEventSummary.sethUserId(user.gethUserId());
+        tUserEventSummary.sethEventId(tUserEventSummary.gethEventId());
         
         LUserEvent lUserEvent = LsUserEventUtil.userEventSummary2UserEvent(tUserEventSummary);
         lUserEventMapper.insertSelective(lUserEvent);

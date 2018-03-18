@@ -9,6 +9,7 @@ import com.app_service.entity.ls_user_event.TUserEventSummary;
 public class LsUserEventUtil {
     public static LUserEvent userEventSummary2UserEvent(TUserEventSummary tUserEventSummary) {
         LUserEvent lUserEvent = new LUserEvent();
+        lUserEvent.sethUserId(tUserEventSummary.gethUserId());
         lUserEvent.setCreateTs(tUserEventSummary.getCreateTs());
         lUserEvent.setlUserEventId(tUserEventSummary.getlUserEventId());
         lUserEvent.sethEventId(tUserEventSummary.gethEventId());

@@ -128,7 +128,6 @@
 
       <resource>
         <directory>src/main/resources</directory>
-        <targetPath>BOOT-INF/</targetPath>
         <includes>
           <include>**/*.properties</include>
         </includes>

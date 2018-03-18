@@ -9,7 +9,7 @@ apidoc -i AppService/ -o AppServiceApiDoc/
 /data0/mysql7/product/bin/mysqld --basedir=/data0/mysql7/product --datadir=/data0/mysql7/dbdata --plugin-dir=/data0/mysql7/product/lib/plugin --user=mysql --log-error=/data0/mysql7/mysqllog/logfile/mysqld.err --open-files-limit=10240 --pid-file=/data0/mysql7/dbdatamysqld.pid --socket=/data0/mysql7/dbdata/mysql.sock --port=3306
 
 
-## Reponse format
+## Reponse formatincubator-airflow
 {"responseResultEnum":"SUCCESS","responseResultMsg":"Login success"}
 
 {"responseResultEnum":"ERROR","responseResultMsg":"Login fail"}
@@ -47,6 +47,9 @@ curl -XPOST 'localhost:8088/v1/service/user/regist' -H 'Content-Type: applicatio
 
 ## login
 curl -XPOST 'localhost:8088/v1/service/user/login' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13000000000,"sUserPasswordStr":"password" }'
+
+## feedbackTEventSummary
+curl -XPOST 'localhost:8088/v1/service/event/feedbackTEventSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13333333333,"hEventId":10}'
 
 ## test
 http://localhost:8088/v1/test/getHsEvent
