@@ -5,14 +5,14 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
-  <filter>
+<!--   <filter>
     <filter-name>staticResourceFilter</filter-name>
-    <filter-class>com.james.spring.filter.StaticResourceFilter</filter-class>
+    <filter-class>com.app_service.filter.StaticResourceFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>staticResourceFilter</filter-name>
     <url-pattern>/hello</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
 
   <servlet>
     <servlet-name>default</servlet-name>

@@ -62,6 +62,8 @@ public class StaticResourceFilter implements Filter {
             isQulifiedStaticResourceAccess = false;
         }
 
+        // shut down this filter
+        isQulifiedStaticResourceAccess = true;
         if (false == isQulifiedStaticResourceAccess) {
             response.sendRedirect("/global/errorPage");
         }
