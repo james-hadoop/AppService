@@ -205,6 +205,7 @@ public class HsEventServiceImpl implements IHsEventService {
     @Override
     public List<TEventSummary> getTEventSummaryByConditionGlobal(Map<String, Object> paramMap) throws IOException {
         List<TEventSummary> tEventSummaryList = tEventPageMapper.getTEventSummaryByCondition(paramMap);
+        
         for (TEventSummary event : tEventSummaryList) {
             List<SEventSubContent1> eventSubContent1List = sEventSubContent1Mapper
                     .getEventSubContent1ByEventId(event.gethEventId());
@@ -221,7 +222,7 @@ public class HsEventServiceImpl implements IHsEventService {
 
     @Override
     public int getTEventSummaryByConditionGlobalCount(Map<String, Object> paramMap) {
-        return tEventPageMapper.getTEventPageListByConditionCount(paramMap);
+        return tEventPageMapper.getTEventSummaryByConditionCount(paramMap);
     }
 
     @Override

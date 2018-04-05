@@ -30,11 +30,15 @@ public class DataUtil {
         System.out.println(entity.getData() + " => " + entity.getTimestamp());
         System.out.println("----------------------- divider -------------------------");
 
-        Thread.sleep(5 * 1000);
+        // Thread.sleep(5 * 1000);
 
         boolean isQulifiedStaticResourceAccess = DataUtil.isQulifiedStaticResourceAccess(encodedData,
                 qualifiedInterval);
         System.out.println("isQulifiedStaticResourceAccess=" + isQulifiedStaticResourceAccess);
+
+        System.out.println("----------------------- divider -------------------------");
+        DataWithTimestampEntity entity1 = DataUtil.decode(key, "BFt+zV+j9SlZYUc/CKXtlVM3H/qb7eP0");
+        System.out.println(entity1.getData() + " => " + entity1.getTimestamp());
 
     }
 
@@ -72,6 +76,7 @@ public class DataUtil {
         String result = null;
 
         String str = data + DIVIDER_BETWEEN_DATA_AND_TIMESTAMP + Long.toString(timestamp);
+        str="hello james,1522394379";
         result = encrypt(str, key.getBytes());
 
         return result;

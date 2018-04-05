@@ -235,9 +235,9 @@ public interface TEventPageMapper {
     @Select({
             "select count(1) from (select ep.h_event_id from (select h_event_id from hs_event.t_event_page where s_event_active_ind=0) as ep left outer join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id limit #{start}, #{end}) as t" })
     Integer getTEventPageListForBannerCount(Map<String, Object> paramMap);
-    
+
     // getTEventPageListByCondition
-    @SelectProvider(type=TEventPageSqlProvider.class, method="getTEventPageListByCondition")
+    @SelectProvider(type = TEventPageSqlProvider.class, method = "getTEventPageListByCondition")
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
@@ -254,11 +254,11 @@ public interface TEventPageMapper {
     List<TEventPage> getTEventPageListByCondition(Map<String, Object> paramMap);
 
     // getTEventPageListByConditionCount
-    @SelectProvider(type=TEventPageSqlProvider.class, method="getTEventPageListByConditionCount")
+    @SelectProvider(type = TEventPageSqlProvider.class, method = "getTEventPageListByConditionCount")
     Integer getTEventPageListByConditionCount(Map<String, Object> paramMap);
-    
+
     // getTEventSummaryByCondition
-    @SelectProvider(type=TEventPageSqlProvider.class, method="getTEventSummaryByCondition")
+    @SelectProvider(type = TEventPageSqlProvider.class, method = "getTEventSummaryByCondition")
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
@@ -275,7 +275,11 @@ public interface TEventPageMapper {
             @Result(column = "s_event_recom2_position_cd", property = "sEventRecom2PositionCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "s_event_recom3_position_cd", property = "sEventRecom3PositionCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP)})
-    
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP) })
+
     List<TEventSummary> getTEventSummaryByCondition(Map<String, Object> paramMap);
+
+    // getTEventSummaryByConditionCount
+    @SelectProvider(type = TEventPageSqlProvider.class, method = "getTEventSummaryByConditionCount")
+    Integer getTEventSummaryByConditionCount(Map<String, Object> paramMap);
 }
