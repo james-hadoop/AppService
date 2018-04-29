@@ -262,15 +262,21 @@ public class HsEventServiceImpl implements IHsEventService {
 
         // SEventRecom1
         SEventRecom1 sEventRecom1 = HsEventUtil.eventSummary2EventRecom1(tEventSummary);
+        if(null!=sEventRecom1) {
         sEventRecom1Mapper.insertSelective(sEventRecom1);
+        }
 
         // SEventRecom2
         SEventRecom2 sEventRecom2 = HsEventUtil.eventSummary2EventRecom2(tEventSummary);
+        if(null!=sEventRecom2) {
         sEventRecom2Mapper.insertSelective(sEventRecom2);
+        }
 
         // SEventRecom3
         SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
+        if(null!=sEventRecom3) {
         sEventRecom3Mapper.insertSelective(sEventRecom3);
+        }
 
         try {
             if (null != tEventSummary.getsEventSubContentString()

@@ -312,10 +312,10 @@ public class HsUserController {
             int result = hsUserService.addTUserSummary(tUserSummary);
             if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("editTUserSummary fail");
+                responseContent.setResponseResultMsg("addTUserSummary fail");
             } else {
                 responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("editTUserSummary success");
+                responseContent.setResponseResultMsg("addTUserSummary success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/user/addTUserSummary()", e);
