@@ -205,7 +205,7 @@ public class HsEventServiceImpl implements IHsEventService {
     @Override
     public List<TEventSummary> getTEventSummaryByConditionGlobal(Map<String, Object> paramMap) throws IOException {
         List<TEventSummary> tEventSummaryList = tEventPageMapper.getTEventSummaryByCondition(paramMap);
-        
+
         for (TEventSummary event : tEventSummaryList) {
             List<SEventSubContent1> eventSubContent1List = sEventSubContent1Mapper
                     .getEventSubContent1ByEventId(event.gethEventId());
@@ -262,20 +262,20 @@ public class HsEventServiceImpl implements IHsEventService {
 
         // SEventRecom1
         SEventRecom1 sEventRecom1 = HsEventUtil.eventSummary2EventRecom1(tEventSummary);
-        if(null!=sEventRecom1) {
-        sEventRecom1Mapper.insertSelective(sEventRecom1);
+        if (null != sEventRecom1) {
+            sEventRecom1Mapper.insertSelective(sEventRecom1);
         }
 
         // SEventRecom2
         SEventRecom2 sEventRecom2 = HsEventUtil.eventSummary2EventRecom2(tEventSummary);
-        if(null!=sEventRecom2) {
-        sEventRecom2Mapper.insertSelective(sEventRecom2);
+        if (null != sEventRecom2) {
+            sEventRecom2Mapper.insertSelective(sEventRecom2);
         }
 
         // SEventRecom3
         SEventRecom3 sEventRecom3 = HsEventUtil.eventSummary2EventRecom3(tEventSummary);
-        if(null!=sEventRecom3) {
-        sEventRecom3Mapper.insertSelective(sEventRecom3);
+        if (null != sEventRecom3) {
+            sEventRecom3Mapper.insertSelective(sEventRecom3);
         }
 
         try {
@@ -300,8 +300,8 @@ public class HsEventServiceImpl implements IHsEventService {
 
             // TEventPage
             List<TEventPage> tEventPageList = HsEventUtil.eventSummary2EventPageList(tEventSummary);
-            for (TEventPage record : tEventPageList) {
-                tEventPageMapper.insertSelective(record);
+            if (null != tEventPageList && 0 < tEventPageList.size()) {
+                tEventPageMapper.insertSelective(tEventPageList.get(0));
             }
         } catch (Exception e) {
             e.printStackTrace();

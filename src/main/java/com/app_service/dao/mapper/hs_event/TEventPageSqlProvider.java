@@ -238,13 +238,14 @@ public class TEventPageSqlProvider {
 
         return sql.toString();
     }
-    
+
     // getTEventSummaryByConditionCount
     public String getTEventSummaryByConditionCount(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("count(1)")
-        .FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id left outer join hs_event.s_event_recom_1 er1 on ep.h_event_id=er1.h_event_id left outer join hs_event.s_event_recom_2 er2 on ep.h_event_id=er2.h_event_id left outer join hs_event.s_event_recom_3 er3 on ep.h_event_id=er3.h_event_id");
+        sql.SELECT(
+                "ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd, ep.s_event_active_ind, ep.create_ts, ep.update_ts, eb.s_event_banner_position_cd, er1.s_event_recom_position_cd s_event_recom1_position_cd, er2.s_event_recom_position_cd s_event_recom2_position_cd, er3.s_event_recom_position_cd s_event_recom3_position_cd")
+                .FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id left outer join hs_event.s_event_recom_1 er1 on ep.h_event_id=er1.h_event_id left outer join hs_event.s_event_recom_2 er2 on ep.h_event_id=er2.h_event_id left outer join hs_event.s_event_recom_3 er3 on ep.h_event_id=er3.h_event_id");
 
         if (paramMap.get("sEventCategoryCd") != null) {
             sql.WHERE("ep.s_event_category_cd = #{sEventCategoryCd,jdbcType=INTEGER}");
@@ -271,12 +272,7 @@ public class TEventPageSqlProvider {
 
         sql.ORDER_BY("ep.update_ts desc");
 
-        if (paramMap.get("start") != null && paramMap.get("end") != null) {
-            String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));
-            return sqlString;
-        }
-
-        return sql.toString();
+        return "SELECT count(1) from( " + sql.toString() + " ) event_page";
     }
 
     public static void main(String[] args) {
