@@ -218,7 +218,7 @@ public class HsUserServiceImpl implements IHsUserService {
             return Response.ERROR;
         }
 
-        HUser hUser = hUserMapper.selectByPrimaryKey(hUserPhoneNr);
+        HUser hUser = hUserMapper.selectByPhoneNr(hUserPhoneNr);
         if (null == hUser) {
             return Response.ERROR;
         }

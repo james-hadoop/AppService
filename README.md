@@ -9,7 +9,7 @@ apidoc -i AppService/ -o AppServiceApiDoc/
 /data0/mysql7/product/bin/mysqld --basedir=/data0/mysql7/product --datadir=/data0/mysql7/dbdata --plugin-dir=/data0/mysql7/product/lib/plugin --user=mysql --log-error=/data0/mysql7/mysqllog/logfile/mysqld.err --open-files-limit=10240 --pid-file=/data0/mysql7/dbdatamysqld.pid --socket=/data0/mysql7/dbdata/mysql.sock --port=3306
 
 
-## Reponse formatincubator-airflow
+## Reponse format
 {"responseResultEnum":"SUCCESS","responseResultMsg":"Login success"}
 
 {"responseResultEnum":"ERROR","responseResultMsg":"Login fail"}
@@ -76,3 +76,9 @@ http://localhost:8088/v1/service/user/getPortrait?hUserPhoneNr=13333333333&sessi
 ]
 
 [{"url":"audio/a.mp3","lyricist":"peter","composer":"tom","singer":"linda"},{"url":"audio/b.mp3","lyricist":"fang","composer":"jay","singer":"jay"}]
+
+## addSUserFeedbackSummary
+curl -XPOST 'localhost:8088/v1/service/user/addSUserFeedbackSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13333333333,"sUserFeedbackStr":"this is feedback"}'
+
+## getTMessageSummaryUnreadCount
+http://localhost:8088/v1/service/message/getTMessageSummaryUnreadCount?sessionCode=hello&hUserPhoneNr=13333333333

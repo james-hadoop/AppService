@@ -14,54 +14,44 @@ import org.apache.ibatis.type.JdbcType;
 import com.app_service.entity.hs_user.HUser;
 
 public interface HUserMapper {
-    @Delete({
-        "delete from h_user",
-        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
-    })
+    @Delete({ "delete from h_user", "where h_user_id = #{hUserId,jdbcType=BIGINT}" })
     int deleteByPrimaryKey(Long hUserId);
 
-    @Insert({
-        "insert into h_user (h_user_id, h_user_phone_nr, ",
-        "create_ts, update_ts)",
-        "values (#{hUserId,jdbcType=BIGINT}, #{hUserPhoneNr,jdbcType=BIGINT}, ",
-        "#{createTs,jdbcType=TIMESTAMP}, #{updateTs,jdbcType=TIMESTAMP})"
-    })
-    @Options(useGeneratedKeys=true, keyProperty="hUserId", keyColumn="h_user_id")
+    @Insert({ "insert into h_user (h_user_id, h_user_phone_nr, ", "create_ts, update_ts)",
+            "values (#{hUserId,jdbcType=BIGINT}, #{hUserPhoneNr,jdbcType=BIGINT}, ",
+            "#{createTs,jdbcType=TIMESTAMP}, #{updateTs,jdbcType=TIMESTAMP})" })
+    @Options(useGeneratedKeys = true, keyProperty = "hUserId", keyColumn = "h_user_id")
     long insert(HUser record);
 
-    @InsertProvider(type=HUserSqlProvider.class, method="insertSelective")
-    @Options(useGeneratedKeys=true, keyProperty="hUserId", keyColumn="h_user_id")
+    @InsertProvider(type = HUserSqlProvider.class, method = "insertSelective")
+    @Options(useGeneratedKeys = true, keyProperty = "hUserId", keyColumn = "h_user_id")
     long insertSelective(HUser record);
 
-    @Select({
-        "select",
-        "h_user_id, h_user_phone_nr, create_ts, update_ts",
-        "from h_user",
-        "where h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}"
-    })
-    @Results({
-        @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="h_user_phone_nr", property="hUserPhoneNr", jdbcType=JdbcType.BIGINT),
-        @Result(column="create_ts", property="createTs", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_ts", property="updateTs", jdbcType=JdbcType.TIMESTAMP)
-    })
+    @Select({ "select", "h_user_id, h_user_phone_nr, create_ts, update_ts", "from h_user",
+            "where h_user_id = #{hUserId,jdbcType=BIGINT}" })
+    @Results({ @Result(column = "h_user_id", property = "hUserId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "h_user_phone_nr", property = "hUserPhoneNr", jdbcType = JdbcType.BIGINT),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP) })
     HUser selectByPrimaryKey(Long hUserId);
-    
-    @UpdateProvider(type=HUserSqlProvider.class, method="updateByPrimaryKeySelective")
+
+    @Select({
+            "select h_user_id, h_user_phone_nr, create_ts, update_ts from h_user where h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}" })
+    @Results({ @Result(column = "h_user_id", property = "hUserId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "h_user_phone_nr", property = "hUserPhoneNr", jdbcType = JdbcType.BIGINT),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP) })
+    HUser selectByPhoneNr(Long hUserPhoneNr);
+
+    @UpdateProvider(type = HUserSqlProvider.class, method = "updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(HUser record);
 
-    @Update({
-        "update h_user",
-        "set h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT},",
-          "create_ts = #{createTs,jdbcType=TIMESTAMP},",
-          "update_ts = #{updateTs,jdbcType=TIMESTAMP}",
-        "where h_user_id = #{hUserId,jdbcType=BIGINT}"
-    })
+    @Update({ "update h_user", "set h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT},",
+            "create_ts = #{createTs,jdbcType=TIMESTAMP},", "update_ts = #{updateTs,jdbcType=TIMESTAMP}",
+            "where h_user_id = #{hUserId,jdbcType=BIGINT}" })
     int updateByPrimaryKey(HUser record);
-    
-    @Select({"select max(h_user_id) as h_user_id from hs_user.h_user"})
-    @Results({
-        @Result(column="h_user_id", property="hUserId", jdbcType=JdbcType.BIGINT)
-    })
+
+    @Select({ "select max(h_user_id) as h_user_id from hs_user.h_user" })
+    @Results({ @Result(column = "h_user_id", property = "hUserId", jdbcType = JdbcType.BIGINT) })
     long getMaxHUserId();
 }

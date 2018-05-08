@@ -67,32 +67,26 @@ public class HsMessageController {
      * @apiParam {Number} [hUserPhoneNr] User phone number.
      * @apiParam {Number} [sMessageCategoryCd] Message category code.
      * 
-     * @apiSuccessExample {json} Success-Response: 
+     * @apiSuccessExample {json} Success-Response:
      *
-     * {
-     *  "rows": [ 
-     *      {
-     *          "hMessageId": 7,
-     *          "sMessageActiveInd": 0,
-     *          "sMessageCategoryCd": 1,
-     *          "sMessageContentStr": "great",
-     *          "createTs": 946627200000,
-     *          "updateTs": 946627200000
-     *      }
-     *  ],
-     *  "total": 1
-     * }
+     *                    { "rows": [ { "hMessageId": 7, "sMessageActiveInd": 0,
+     *                    "sMessageCategoryCd": 1, "sMessageContentStr": "great",
+     *                    "createTs": 946627200000, "updateTs": 946627200000 } ],
+     *                    "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "rows":[],
-     *  "total":0
-     * }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTMessageSummaryListByCondition", method = RequestMethod.GET)
-    public GridContent getTMessageSummaryListByCondition( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd,@RequestParam(value = "isPush", required = false) Integer isPush) {
-        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={},isPush={}", hUserPhoneNr,sMessageCategoryCd,isPush);
+    public GridContent getTMessageSummaryListByCondition(
+            @RequestParam(value = "sessionCode", required = true) String sessionCode,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+            @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
+            @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd,
+            @RequestParam(value = "isPush", required = false) Integer isPush) {
+        logger.info(
+                "/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={},isPush={}",
+                hUserPhoneNr, sMessageCategoryCd, isPush);
         GridContent gridContent = new GridContent();
 
         try {
@@ -117,7 +111,45 @@ public class HsMessageController {
         }
         return gridContent;
     }
-    
+
+    /**
+     * @apiGroup Message
+     * 
+     * @apiName getTMessageSummaryUnreadCount
+     * 
+     * @api {get} /v1/service/message/getTMessageSummaryUnreadCount 获取我的未读消息
+     * 
+     * @apiParam {String} sessionCode Logined user session code.
+     * @apiParam {Number} hUserPhoneNr User phone number.
+     * @apiParam {Number} [sMessageCategoryCd] Message category code.
+     * 
+     * @apiSuccessExample {json} Success-Response: 3
+     * 
+     * @apiSuccessExample {json} Error-Response: 0
+     */
+    @RequestMapping(value = "/getTMessageSummaryUnreadCount", method = RequestMethod.GET)
+    public Integer getTMessageSummaryUnreadCount(
+            @RequestParam(value = "sessionCode", required = true) String sessionCode,
+            @RequestParam(value = "hUserPhoneNr", required = true) Long hUserPhoneNr,
+            @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd) {
+        logger.info(
+                "/v1/service/message/getTMessageSummaryUnreadCount() called: hUserPhoneNr={},sMessageCategoryCd={},isPush={}",
+                hUserPhoneNr);
+        int unreadMessageCount = 0;
+
+        try {
+            Map<String, Object> paramMap = new HashMap<String, Object>();
+            paramMap.put("hUserPhoneNr", hUserPhoneNr);
+            paramMap.put("sMessageCategoryCd", sMessageCategoryCd);
+
+            unreadMessageCount = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
+        } catch (Exception e) {
+            logger.error("/v1/service/message/getTMessageSummaryUnreadCount()", e);
+            return unreadMessageCount;
+        }
+        return unreadMessageCount;
+    }
+
     /**
      * @apiGroup Message
      * 
@@ -131,31 +163,24 @@ public class HsMessageController {
      * @apiParam {Number} [hUserPhoneNr] User phone number.
      * @apiParam {Number} [sMessageCategoryCd] Message category code.
      * 
-     * @apiSuccessExample {json} Success-Response: 
-     * {
-     *  "rows": [ 
-     *      {
-     *          "hMessageId": 7,
-     *          "sMessageActiveInd": 0,
-     *          "sMessageCategoryCd": 1,
-     *          "sMessageContentStr": "great",
-     *          "createTs": 946627200000,
-     *          "updateTs": 946627200000
-     *      }
-     *  ],
-     *  "total": 1
-     * }
+     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hMessageId": 7,
+     *                    "sMessageActiveInd": 0, "sMessageCategoryCd": 1,
+     *                    "sMessageContentStr": "great", "createTs": 946627200000,
+     *                    "updateTs": 946627200000 } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: 
-     * {
-     *  "rows":[],
-     *  "total":0
-     * }
+     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTMessageSummaryListByConditionGlobal", method = RequestMethod.GET)
-    public GridContent getTMessageSummaryListByConditionGlobal( @RequestParam(value = "sessionCode", required = true) String sessionCode, @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                    @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr, @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd,@RequestParam(value = "sMessageContentStr", required = false) String sMessageContentStr) {
-        logger.info("/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={},sMessageContentStr={}", hUserPhoneNr,sMessageCategoryCd,sMessageContentStr);
+    public GridContent getTMessageSummaryListByConditionGlobal(
+            @RequestParam(value = "sessionCode", required = true) String sessionCode,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+            @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
+            @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd,
+            @RequestParam(value = "sMessageContentStr", required = false) String sMessageContentStr) {
+        logger.info(
+                "/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={},sMessageContentStr={}",
+                hUserPhoneNr, sMessageCategoryCd, sMessageContentStr);
         GridContent gridContent = new GridContent();
 
         try {
@@ -169,7 +194,8 @@ public class HsMessageController {
             paramMap.put("start", start);
             paramMap.put("end", end);
 
-            List<TMessageSummary> tMessageSummaryList = hsMessageService.getTMessageSummaryListByConditionGlobal(paramMap);
+            List<TMessageSummary> tMessageSummaryList = hsMessageService
+                    .getTMessageSummaryListByConditionGlobal(paramMap);
             int count = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
 
             gridContent.setRows(tMessageSummaryList);
@@ -180,7 +206,7 @@ public class HsMessageController {
         }
         return gridContent;
     }
-    
+
     @RequestMapping(value = "/editTMessageSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent editTMessageSummary(@RequestBody TMessageSummary tMessageSummary) {
@@ -204,13 +230,14 @@ public class HsMessageController {
         }
         return responseContent;
     }
-    
+
     @RequestMapping(value = "/deleteTMessageSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent deleteTMessageSummary(@RequestBody TMessageSummary tMessageSummary) {
-        logger.info("/v1/service/message/deleteTMessageSummary() called: hMessageId={}", tMessageSummary.gethMessageId());
+        logger.info("/v1/service/message/deleteTMessageSummary() called: hMessageId={}",
+                tMessageSummary.gethMessageId());
         ResponseContent responseContent = new ResponseContent();
-        
+
         try {
             int resutl = hsMessageService.deleteTMessageSummary(tMessageSummary);
             if (Response.ERROR == resutl) {
@@ -228,15 +255,17 @@ public class HsMessageController {
         }
         return responseContent;
     }
-    
+
     @RequestMapping(value = "/associateTMessageSummary", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent associateTMessageSummary(@RequestBody TUserMessageRequest tUserMessageRequest) {
-        logger.info("/v1/service/message/associateTMessageSummary() called: hMessageId={}", tUserMessageRequest.gethMessageId());
+        logger.info("/v1/service/message/associateTMessageSummary() called: hMessageId={}",
+                tUserMessageRequest.gethMessageId());
         ResponseContent responseContent = new ResponseContent();
-        
+
         try {
-            int result = hsMessageService.associateTMessageSummary(tUserMessageRequest.gethMessageId(), tUserMessageRequest.gethUserIds());
+            int result = hsMessageService.associateTMessageSummary(tUserMessageRequest.gethMessageId(),
+                    tUserMessageRequest.gethUserIds());
             if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
                 responseContent.setResponseResultMsg("Delete fail");

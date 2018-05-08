@@ -139,7 +139,6 @@ public class HsMessageServiceImpl implements IHsMessageService {
             return sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
         } else {
             // only messages relevant to me as well as active
-            // TODO
             List<TMessageSummary> messageList = sMessageContentMapper.getTMessageSummaryListByCondition(paramMap);
 
             Long hUserPhoneNr = (Long) paramMap.get("hUserPhoneNr");
