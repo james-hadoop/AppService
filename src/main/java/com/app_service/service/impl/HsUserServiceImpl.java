@@ -281,6 +281,13 @@ public class HsUserServiceImpl implements IHsUserService {
     public int editTUserSummary(TUserSummary tUserSummary) {
         Date timestamp = new Date();
         tUserSummary.setUpdateTs(timestamp);
+        
+        // find HUser by phone number
+        HUser hUserInDatabase = hUserMapper.selectByPhoneNr(tUserSummary.gethUserPhoneNr());
+        if(null==hUserInDatabase) {
+            return Response.ERROR;
+        }
+        tUserSummary.sethUserId(hUserInDatabase.gethUserId());
 
         // HUser
         HUser hUser = HsUserUtil.userSummary2User(tUserSummary);
