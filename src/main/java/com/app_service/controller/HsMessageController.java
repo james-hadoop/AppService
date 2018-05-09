@@ -128,26 +128,28 @@ public class HsMessageController {
      * @apiSuccessExample {json} Error-Response: 0
      */
     @RequestMapping(value = "/getTMessageSummaryUnreadCount", method = RequestMethod.GET)
-    public Integer getTMessageSummaryUnreadCount(
+    public GridContent getTMessageSummaryUnreadCount(
             @RequestParam(value = "sessionCode", required = true) String sessionCode,
             @RequestParam(value = "hUserPhoneNr", required = true) Long hUserPhoneNr,
             @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd) {
         logger.info(
                 "/v1/service/message/getTMessageSummaryUnreadCount() called: hUserPhoneNr={},sMessageCategoryCd={},isPush={}",
                 hUserPhoneNr);
-        int unreadMessageCount = 0;
+        GridContent gridContent = new GridContent();
 
         try {
             Map<String, Object> paramMap = new HashMap<String, Object>();
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sMessageCategoryCd", sMessageCategoryCd);
 
-            unreadMessageCount = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
+            int unreadMessageCount = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
+            gridContent.setRows(null);
+            gridContent.setTotal(unreadMessageCount);
         } catch (Exception e) {
             logger.error("/v1/service/message/getTMessageSummaryUnreadCount()", e);
-            return unreadMessageCount;
+            return gridContent;
         }
-        return unreadMessageCount;
+        return gridContent;
     }
 
     /**
