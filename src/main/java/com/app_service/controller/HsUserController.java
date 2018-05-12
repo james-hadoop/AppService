@@ -411,6 +411,7 @@ public class HsUserController {
      * 
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {String} fileName File name.
+     * @apiParam {String} currentPortraitName Current PortraitName.
      * @apiParam {Long} hUserPhoneNr User phone number.
      * @apiParam {String} base64 Uploaded file BASE64 code
      * 
@@ -423,11 +424,13 @@ public class HsUserController {
     @RequestMapping(value = "/uploadProfile", method = RequestMethod.POST)
     @ResponseBody
     public ResponseContent uploadProfile(@RequestBody ProfileFile profileFile) {
+        logger.info("/v1/service/user/uploadProfile() called: hUserPhoneNr={},fileName={},currentPortraitName={}}",
+                profileFile.gethUserPhoneNr(), profileFile.getFileName(), profileFile.getCurrentPortraitName());
         ResponseContent responseContent = new ResponseContent();
 
         try {
             String result = hsUserService.uploadFileBase64(profileFile.getBase64(), profileFile.getFileName(),
-                    profileFile.getSessionCode(), profileFile.gethUserPhoneNr());
+                    profileFile.getSessionCode(), profileFile.gethUserPhoneNr(), profileFile.getCurrentPortraitName());
 
             responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
             responseContent.setResponseResultMsg(result);

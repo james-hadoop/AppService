@@ -7,6 +7,7 @@ public class ProfileFile {
     private Long hUserPhoneNr;
     private String fileName;
     private String base64;
+    private String currentPortraitName;
 
     public String getFileName() {
         return fileName;
@@ -38,5 +39,13 @@ public class ProfileFile {
 
     public void sethUserPhoneNr(Long hUserPhoneNr) {
         this.hUserPhoneNr = hUserPhoneNr;
+    }
+
+    public String getCurrentPortraitName() {
+        return currentPortraitName;
+    }
+
+    public void setCurrentPortraitName(String currentPortraitName) {
+        this.currentPortraitName = currentPortraitName;
     }
 }

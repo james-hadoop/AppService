@@ -33,5 +33,5 @@ public interface IHsUserService {
 
     int addSUserFeedbackSummary(SUserFeedbackSummary sUserFeedbackSummary);
 
-    String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr);
+    String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr, String currentPortraitName);
 }

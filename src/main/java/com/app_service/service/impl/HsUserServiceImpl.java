@@ -281,10 +281,10 @@ public class HsUserServiceImpl implements IHsUserService {
     public int editTUserSummary(TUserSummary tUserSummary) {
         Date timestamp = new Date();
         tUserSummary.setUpdateTs(timestamp);
-        
+
         // find HUser by phone number
         HUser hUserInDatabase = hUserMapper.selectByPhoneNr(tUserSummary.gethUserPhoneNr());
-        if(null==hUserInDatabase) {
+        if (null == hUserInDatabase) {
             return Response.ERROR;
         }
         tUserSummary.sethUserId(hUserInDatabase.gethUserId());
@@ -310,8 +310,11 @@ public class HsUserServiceImpl implements IHsUserService {
         sUserNameMapper.updateByPrimaryKeySelective(sUserName);
 
         // SUserPassword
-        SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
-        sUserPasswordMapper.updateByPrimaryKeySelective(sUserPassword);
+        if (null != tUserSummary.getsUserPasswordStr() && 0 < tUserSummary.getsUserPasswordStr().length()
+                && (!tUserSummary.getsUserPasswordStr().equalsIgnoreCase("d41d8cd98f00b204e9800998ecf8427e"))) {
+            SUserPassword sUserPassword = HsUserUtil.userSummary2UserPassword(tUserSummary);
+            sUserPasswordMapper.updateByPrimaryKeySelective(sUserPassword);
+        }
 
         // SUserProfile
         SUserProfile sUserProfile = HsUserUtil.userSummary2UserProfile(tUserSummary);
@@ -344,18 +347,25 @@ public class HsUserServiceImpl implements IHsUserService {
 
     @Override
     @Transactional
-    public String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr) {
+    public String uploadFileBase64(String fileBase64, String fileName, String token, Long hUserPhoneNr, String currentPortraitName) {
         TUserSummary user = tUserPageMapper.selectByhUserPhoneNr(hUserPhoneNr);
 
         if (user != null) {
             String destPath = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
+            String destPath2 = resourceConfig.getPrefix() + resourceConfig.getPortrait() + hUserPhoneNr + "_2.jpg";
+
             String profile = resourceConfig.getPortrait() + hUserPhoneNr + ".jpg";
+            if (!currentPortraitName.contains("_")) {
+                profile = resourceConfig.getPortrait() + hUserPhoneNr + "_2.jpg";
+            }
+
             boolean result = FileUtil.base64ToImage(fileBase64, destPath);
+            boolean result2 = FileUtil.base64ToImage(fileBase64, destPath2);
 
             user.setsUserProfileUrl(profile);
             editTUserSummary(user);
 
-            if (result != false) {
+            if (result != false && result2 != false) {
                 return profile;
             } else {
                 return null;
