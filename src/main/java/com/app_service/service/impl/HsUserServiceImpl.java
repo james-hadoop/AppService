@@ -363,6 +363,7 @@ public class HsUserServiceImpl implements IHsUserService {
             boolean result2 = FileUtil.base64ToImage(fileBase64, destPath2);
 
             user.setsUserProfileUrl(profile);
+            user.setsUserPasswordStr(null);
             editTUserSummary(user);
 
             if (result != false && result2 != false) {

@@ -146,7 +146,7 @@ public class HsMessageServiceImpl implements IHsMessageService {
                 return messageList;
             }
 
-            HUser hUser = hUserMapper.selectByPrimaryKey(hUserPhoneNr);
+            HUser hUser = hUserMapper.selectByPhoneNr(hUserPhoneNr);
             if (null == hUser) {
                 return messageList;
             }
