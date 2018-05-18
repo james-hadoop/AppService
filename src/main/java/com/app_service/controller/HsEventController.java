@@ -43,9 +43,9 @@ public class HsEventController {
      * 
      * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "vedio",
-     *                    "sEventTitleUrl": "vedio/1.mp4"
-     *                    "sEventContentUrl":"vedio/1.mp4", "sEventActiveInd": 0,
+     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
+     *                    "sEventTitleUrl": "video/1.mp4"
+     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
      *                    "createTs": 946627200000, "updateTs": 946627200000,
      *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
      *                    [], "sEventSubContent2StrList": [],
@@ -140,9 +140,9 @@ public class HsEventController {
      * 
      * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "vedio",
-     *                    "sEventTitleUrl": "vedio/1.mp4"
-     *                    "sEventContentUrl":"vedio/1.mp4", "sEventActiveInd": 0,
+     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
+     *                    "sEventTitleUrl": "video/1.mp4"
+     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
      *                    "createTs": 946627200000, "updateTs": 946627200000,
      *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
      *                    [], "sEventSubContent2StrList": [], "sEventSubContent":
@@ -196,9 +196,9 @@ public class HsEventController {
      * 
      * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "vedio",
-     *                    "sEventTitleUrl": "vedio/1.mp4"
-     *                    "sEventContentUrl":"vedio/1.mp4", "sEventActiveInd": 0,
+     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
+     *                    "sEventTitleUrl": "video/1.mp4"
+     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
      *                    "createTs": 946627200000, "updateTs": 946627200000,
      *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
      *                    [], "sEventSubContent2StrList": [],
@@ -273,9 +273,9 @@ public class HsEventController {
      * 
      * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "vedio",
-     *                    "sEventTitleUrl": "vedio/1.mp4"
-     *                    "sEventContentUrl":"vedio/1.mp4", "sEventActiveInd": 0,
+     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
+     *                    "sEventTitleUrl": "video/1.mp4"
+     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
      *                    "createTs": 946627200000, "updateTs": 946627200000,
      *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
      *                    [], "sEventSubContent2StrList": [],
@@ -350,9 +350,9 @@ public class HsEventController {
      * 
      * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "vedio",
-     *                    "sEventTitleUrl": "vedio/1.mp4"
-     *                    "sEventContentUrl":"vedio/1.mp4", "sEventActiveInd": 0,
+     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
+     *                    "sEventTitleUrl": "video/1.mp4"
+     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
      *                    "createTs": 946627200000, "updateTs": 946627200000,
      *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
      *                    [], "sEventSubContent2StrList": [],

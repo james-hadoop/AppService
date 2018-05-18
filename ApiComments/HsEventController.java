@@ -49,9 +49,9 @@ public class HsEventController {
      *          "sEventCategoryCd": 0,
      *          "rEventCategoryDesc": "d1",
      *          "sEventTypeCd": 1,
-     *          "rEventTypeDesc": "vedio",
-     *          "sEventTitleUrl": "vedio/1.mp4"
-     *          "sEventContentUrl":"vedio/1.mp4",
+     *          "rEventTypeDesc": "video",
+     *          "sEventTitleUrl": "video/1.mp4"
+     *          "sEventContentUrl":"video/1.mp4",
      *          "sEventActiveInd": 0,
      *          "createTs": 946627200000,
      *          "updateTs": 946627200000,
@@ -156,9 +156,9 @@ public class HsEventController {
      *          "sEventCategoryCd": 0,
      *          "rEventCategoryDesc": "d1",
      *          "sEventTypeCd": 1,
-     *          "rEventTypeDesc": "vedio",
-     *          "sEventTitleUrl": "vedio/1.mp4"
-     *          "sEventContentUrl":"vedio/1.mp4",
+     *          "rEventTypeDesc": "video",
+     *          "sEventTitleUrl": "video/1.mp4"
+     *          "sEventContentUrl":"video/1.mp4",
      *          "sEventActiveInd": 0,
      *          "createTs": 946627200000,
      *          "updateTs": 946627200000,
@@ -226,9 +226,9 @@ public class HsEventController {
      *          "sEventCategoryCd": 0,
      *          "rEventCategoryDesc": "d1",
      *          "sEventTypeCd": 1,
-     *          "rEventTypeDesc": "vedio",
-     *          "sEventTitleUrl": "vedio/1.mp4"
-     *          "sEventContentUrl":"vedio/1.mp4",
+     *          "rEventTypeDesc": "video",
+     *          "sEventTitleUrl": "video/1.mp4"
+     *          "sEventContentUrl":"video/1.mp4",
      *          "sEventActiveInd": 0,
      *          "createTs": 946627200000,
      *          "updateTs": 946627200000,
@@ -320,9 +320,9 @@ public class HsEventController {
      *          "sEventCategoryCd": 0,
      *          "rEventCategoryDesc": "d1",
      *          "sEventTypeCd": 1,
-     *          "rEventTypeDesc": "vedio",
-     *          "sEventTitleUrl": "vedio/1.mp4"
-     *          "sEventContentUrl":"vedio/1.mp4",
+     *          "rEventTypeDesc": "video",
+     *          "sEventTitleUrl": "video/1.mp4"
+     *          "sEventContentUrl":"video/1.mp4",
      *          "sEventActiveInd": 0,
      *          "createTs": 946627200000,
      *          "updateTs": 946627200000,
@@ -405,9 +405,9 @@ public class HsEventController {
      *          "sEventCategoryCd": 0,
      *          "rEventCategoryDesc": "d1",
      *          "sEventTypeCd": 1,
-     *          "rEventTypeDesc": "vedio",
-     *          "sEventTitleUrl": "vedio/1.mp4"
-     *          "sEventContentUrl":"vedio/1.mp4",
+     *          "rEventTypeDesc": "video",
+     *          "sEventTitleUrl": "video/1.mp4"
+     *          "sEventContentUrl":"video/1.mp4",
      *          "sEventActiveInd": 0,
      *          "createTs": 946627200000,
      *          "updateTs": 946627200000,

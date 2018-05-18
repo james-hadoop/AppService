@@ -1,7 +1,7 @@
 package com.app_service.entity.hs_event.enums;
 
 public enum REventTypeEnum {
-    Undefined("Undefined", 0), Audio("Audio", 1), Video("Video", 2), Image("Image", 3);
+    Undefined("undefined", 0), Audio("audio", 1), Video("video", 2), Image("image", 3);
 
     private String value;
     private int code;
