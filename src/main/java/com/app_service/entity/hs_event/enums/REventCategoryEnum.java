@@ -1,7 +1,7 @@
 package com.app_service.entity.hs_event.enums;
 
 public enum REventCategoryEnum {
-    Undefined("未定义", 0),Activity("乐谣活动", 1), Education("音乐教学", 2), Share("艺人分享", 3), Album("音乐专辑", 4);
+    Undefined("未定义", 0), Activity("盒声活动", 1), Education("音乐教学", 2), Share("艺人分享", 3), Album("音乐专辑", 4);
 
     private String value;
     private int code;
