@@ -216,7 +216,7 @@ public interface TEventPageMapper {
 
     // getTEventPageListForBanner
     @Select({
-            "select ep.* from (select * from hs_event.t_event_page where s_event_active_ind=0) as ep inner join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id  order by eb.s_event_banner_position_cd, ep.h_event_id desc limit #{start}, #{end}" })
+            "select ep.* from (select * from hs_event.t_event_page where s_event_active_ind=0) as ep inner join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id  order by eb.s_event_banner_position_cd desc, ep.h_event_id desc limit #{start}, #{end}" })
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),

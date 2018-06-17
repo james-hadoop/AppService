@@ -120,7 +120,7 @@ public class HsEventUtil {
 
         Set<Long> eventIdSet = new HashSet<Long>();
 
-        java.util.Collections.sort(tEventPageList, null);
+        // java.util.Collections.sort(tEventPageList, null);
         // for (TEventPage ep : tEventPageList) {
         // System.out.print(ep.gethEventId());
         // }
