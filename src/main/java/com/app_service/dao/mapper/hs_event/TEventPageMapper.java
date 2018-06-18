@@ -193,7 +193,7 @@ public interface TEventPageMapper {
 
     // getTEventPageListByCategory
     @Select({
-            "select p.*,sc.s_event_sub_content_1_url as s_event_sub_content_1_url_r,sc.s_event_sub_content_2_str as s_event_sub_content_2_str_r from  (select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0) as p left outer join (select sc1.h_event_id, sc1.s_event_sub_content_1_url,sc2.s_event_sub_content_2_str from hs_event.s_event_sub_content_1 as sc1 inner join hs_event.s_event_sub_content_2 as sc2 on sc1.s_event_sub_content_1_id = sc2.s_event_sub_content_2_id) as sc on sc.h_event_id=p.h_event_id order by h_event_id desc limit #{start}, #{end}" })
+            "select p.*,sc.s_event_sub_content_1_url as s_event_sub_content_1_url_r,sc.s_event_sub_content_2_str as s_event_sub_content_2_str_r from  (select * from hs_event.t_event_page where s_event_category_cd=#{sEventCategoryCd} and s_event_active_ind=0) as p left outer join (select sc1.h_event_id, sc1.s_event_sub_content_1_url,sc2.s_event_sub_content_2_str from hs_event.s_event_sub_content_1 as sc1 inner join hs_event.s_event_sub_content_2 as sc2 on sc1.s_event_sub_content_1_id = sc2.s_event_sub_content_2_id) as sc on sc.h_event_id=p.h_event_id order by update_ts desc, h_event_id desc limit #{start}, #{end}" })
     @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
             @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
             @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
