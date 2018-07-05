@@ -31,9 +31,10 @@ http://localhost:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=2&ses
 #### Activity("Activity", 1), Education("Education", 2),  Share("Share", 3), Album("Album", 4);
 http://localhost:8088/v1/service/event/getTEventSummaryByCategory
 
-http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=4?sessionCode=hello
+# 音乐专辑
+http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=4&sessionCode=hello
 
-http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1?sessionCode=hello&page=1&rows=7
+http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1&sessionCode=hello&page=1&rows=7
 
 ## eventVersion
 http://localhost:8088/v1/service/event/checkUpdate?eventVersion=1505223163561
@@ -83,3 +84,5 @@ curl -XPOST 'localhost:8088/v1/service/user/addSUserFeedbackSummary' -H 'Content
 ## getTMessageSummaryUnreadCount
 http://localhost:8088/v1/service/message/getTMessageSummaryUnreadCount?sessionCode=hello&hUserPhoneNr=13333333333
 
+## getTMessageSummaryListByCondition
+http://localhost:8088/v1/service/message/getTMessageSummaryListByCondition?sessionCode=hello&hUserPhoneNr=13333333333

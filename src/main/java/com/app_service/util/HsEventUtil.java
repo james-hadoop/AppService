@@ -190,13 +190,15 @@ public class HsEventUtil {
 
             for (TEventSummary event : eventSummaryList) {
                 List<String> subContent2StrList = event.getsEventSubContent2StrList();
+                List<String> subContent1UrlList = event.getsEventSubContent1UrlList();
 
-                if (null != subContent2StrList && 0 != subContent2StrList.size()) {
+                if (null != subContent2StrList && 0 != subContent2StrList.size() && null != subContent1UrlList
+                        && 0 != subContent1UrlList.size()) {
                     List<SubContentJsonEntity> subContentJsonEntityList = new ArrayList<SubContentJsonEntity>();
 
                     for (int i = 0; i < subContent2StrList.size(); i++) {
                         String subContent2Str = subContent2StrList.get(i);
-                        String subContent1Url = event.getsEventSubContent1UrlList().get(i);
+                        String subContent1Url = subContent1UrlList.get(i);
 
                         SubContentJsonEntityWithoutUrl subContentJsonEntityWithoutUrl = HsEventUtil
                                 .JsonString2SubContentJsonEntityWithoutUrl(subContent2Str);
@@ -291,7 +293,7 @@ public class HsEventUtil {
         if (es.getsEventTypeCd() != REventTypeEnum.Video.getCode()) {
             return null;
         }
-        
+
         SEventRecom2 sEventRecom2 = new SEventRecom2();
         sEventRecom2.setCreateTs(es.getCreateTs());
         sEventRecom2.sethEventId(es.gethEventId());
