@@ -196,6 +196,19 @@ public class HsEventServiceImpl implements IHsEventService {
         List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
         return tEventSummaryList;
     }
+    
+    @Override
+    public List<TEventSummary> getTEventSummaryByConditionAndUser(Map<String, Object> paramMap) {
+        List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListByConditionAndUser(paramMap);
+
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        return tEventSummaryList;
+    }
+
+    @Override
+    public int getTEventSummaryByConditionAndUserCount(Map<String, Object> paramMap) {
+        return tEventPageMapper.getTEventPageListByConditionAndUserCount(paramMap);
+    }
 
     @Override
     public int getTEventSummaryByConditionCount(Map<String, Object> paramMap) {

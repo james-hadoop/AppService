@@ -52,6 +52,15 @@ http://localhost:8088/v1/service/message/getTMessageSummaryUnreadCount?sessionCo
 ## 添加用户反馈
 curl -XPOST 'localhost:8088/v1/service/user/addSUserFeedbackSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13333333333,"sUserFeedbackStr":"this is feedback"}'
 
+## 获取我的历史
+http://localhost:8088/v1/service/event/getTEventSummaryByConditionAndUser?sessionCode=hello&hUserPhoneNr=13333333333
+
+## 获取我的关注
+http://localhost:8088/v1/service/event/getTEventSummaryByConditionAndUser?sessionCode=hello&hUserPhoneNr=13333333333&sUserEventLikeInd=1
+
+## 获取我评论过的事件
+http://localhost:8088/v1/service/event/getTEventSummaryByConditionAndUser?sessionCode=hello&hUserPhoneNr=13333333333&sUserEventReadLogTxt=great
+
 ## getVerifyCode
 curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=13000000000'
 

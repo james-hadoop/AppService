@@ -44,4 +44,8 @@ public interface IHsEventService {
     List<SEventSubContent1> getEventSubContent1ByEventId(Long hEventId);
     
     List<SEventSubContent2> getEventSubContent2ByEventId(Long hEventId);
+    
+    List<TEventSummary> getTEventSummaryByConditionAndUser(Map<String, Object> paramMap);
+    
+    int getTEventSummaryByConditionAndUserCount(Map<String, Object> paramMap);
 }
