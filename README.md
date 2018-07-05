@@ -16,29 +16,41 @@ apidoc -i AppService/ -o AppServiceApiDoc/
 
 {"responseResultEnum":"ERROR","responseResultMsg":"Server internal error"}
 
-## getEvents
-http://localhost:8088/v1/service/event/getEvents?sEventTypeCd=1&page=1&rows=7
+## 获取Banner
+http://localhost:8088/v1/service/event/getTEventSummaryForBanner?sessionCode=hello
 
-## getTEventSummaryByType
-#### Image("Image", 1), Audio("Audio", 2), Video("Video", 3);
-http://localhost:8088/v1/service/event/getTEventSummaryByType
+## 获取音乐专辑
+http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sessionCode=hello&sEventCategoryCd=4
 
-http://localhost:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=1&sessionCode=hello
+## 获取听我
+http://localhost:8088/v1/service/event/getTEventSummaryByType?sessionCode=hello&sEventTypeCd=1
 
-http://localhost:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=hello&page=1&rows=7
+## 获取看我
+http://localhost:8088/v1/service/event/getTEventSummaryByType?sessionCode=hello&sEventTypeCd=2
 
-## getTEventSummaryByCategory
-#### Activity("Activity", 1), Education("Education", 2),  Share("Share", 3), Album("Album", 4);
-http://localhost:8088/v1/service/event/getTEventSummaryByCategory
+## 获取读我
+http://localhost:8088/v1/service/event/getTEventSummaryByType?sessionCode=hello&sEventTypeCd=3
 
-# 音乐专辑
-http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=4&sessionCode=hello
+## 获取活动
+http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sessionCode=hello&sEventCategoryCd=1
 
-http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1&sessionCode=hello&page=1&rows=7
+## 获取教学
+http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sessionCode=hello&sEventCategoryCd=2
 
-## eventVersion
-http://localhost:8088/v1/service/event/checkUpdate?eventVersion=1505223163561
+## 获取分享
+http://localhost:8088/v1/service/event/getTEventSummaryByCategory?sessionCode=hello&sEventCategoryCd=3
 
+## 获取头像
+http://localhost:8088/v1/service/user/getPortrait?hUserPhoneNr=13333333333&sessionCode=hello
+
+## 获取消息
+http://localhost:8088/v1/service/message/getTMessageSummaryListByCondition?sessionCode=hello&hUserPhoneNr=13333333333&isPush=1
+
+## 获取未读消息数
+http://localhost:8088/v1/service/message/getTMessageSummaryUnreadCount?sessionCode=hello&hUserPhoneNr=13333333333
+
+## 添加用户反馈
+curl -XPOST 'localhost:8088/v1/service/user/addSUserFeedbackSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13333333333,"sUserFeedbackStr":"this is feedback"}'
 
 ## getVerifyCode
 curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=13000000000'
@@ -52,37 +64,5 @@ curl -XPOST 'localhost:8088/v1/service/user/login' -H 'Content-Type: application
 ## feedbackTEventSummary
 curl -XPOST 'localhost:8088/v1/service/event/feedbackTEventSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13333333333,"hEventId":10}'
 
-## test
-http://localhost:8088/v1/test/getHsEvent
-
-http://localhost:8088/v1/test/getAllSEventActive
-
-## getPortrait
-http://localhost:8088/v1/service/user/getPortrait?hUserPhoneNr=13333333333&sessionCode=hello
-
 ## SEventSubContent1 & SEventSubContent2
-[
-    {
-        "url": "audio/a.mp3",
-        "lyricist": "peter",
-        "composer": "tom",
-        "singer": "linda"
-    },
-    {
-        "url": "audio/b.mp3",
-        "lyricist": "fang",
-        "composer": "jay",
-        "singer": "jay"
-    }
-]
-
 [{"url":"audio/a.mp3","lyricist":"peter","composer":"tom","singer":"linda"},{"url":"audio/b.mp3","lyricist":"fang","composer":"jay","singer":"jay"}]
-
-## addSUserFeedbackSummary
-curl -XPOST 'localhost:8088/v1/service/user/addSUserFeedbackSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr": 13333333333,"sUserFeedbackStr":"this is feedback"}'
-
-## getTMessageSummaryUnreadCount
-http://localhost:8088/v1/service/message/getTMessageSummaryUnreadCount?sessionCode=hello&hUserPhoneNr=13333333333
-
-## getTMessageSummaryListByCondition
-http://localhost:8088/v1/service/message/getTMessageSummaryListByCondition?sessionCode=hello&hUserPhoneNr=13333333333

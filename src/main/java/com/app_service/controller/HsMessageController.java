@@ -80,10 +80,10 @@ public class HsMessageController {
     public GridContent getTMessageSummaryListByCondition(
             @RequestParam(value = "sessionCode", required = true) String sessionCode,
             @RequestParam(value = "page", defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+            @RequestParam(value = "rows", defaultValue = "100") Integer rows,
             @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
             @RequestParam(value = "sMessageCategoryCd", required = false) Integer sMessageCategoryCd,
-            @RequestParam(value = "isPush", required = false) Integer isPush) {
+            @RequestParam(value = "isPush", required = true) Integer isPush) {
         logger.info(
                 "/v1/service/message/getTMessageSummaryListByCondition() called: hUserPhoneNr={},sMessageCategoryCd={},isPush={}",
                 hUserPhoneNr, sMessageCategoryCd, isPush);
