@@ -61,6 +61,15 @@ http://localhost:8088/v1/service/event/getTEventSummaryByConditionAndUser?sessio
 ## 获取我评论过的事件
 http://localhost:8088/v1/service/event/getTEventSummaryByConditionAndUser?sessionCode=hello&hUserPhoneNr=13333333333&sUserEventReadLogTxt=great
 
+## 提交浏览记录
+curl -XPOST 'http://localhost:8088/v1/service/user_event/feedbackTEventSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr":13333333333, "hEventId":61}'
+
+## 提交关注记录
+curl -XPOST 'http://localhost:8088/v1/service/user_event/feedbackTEventSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr":13333333333, "hEventId":62, "sUserEventLikeInd":1}'
+
+## 提交评论记录
+curl -XPOST 'http://localhost:8088/v1/service/user_event/feedbackTEventSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr":13333333333, "hEventId":63, "sUserEventReadLogTxt":"not bad"}'
+
 ## getVerifyCode
 curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=13000000000'
 

@@ -16,7 +16,7 @@ import com.app_service.entity.ls_user_event.TUserEventSummary;
 import com.app_service.service.ILsUserEventService;
 
 @RestController
-@RequestMapping("/v1/service/event")
+@RequestMapping("/v1/service/user_event")
 public class LsUserEventController {
     private static final Logger logger = LoggerFactory.getLogger(LsUserEventController.class);
 

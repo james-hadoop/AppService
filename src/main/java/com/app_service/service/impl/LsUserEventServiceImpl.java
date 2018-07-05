@@ -35,7 +35,7 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
 
     @Autowired
     SUserEventReadMapper sUserEventReadMapper;
-    
+
     @Autowired
     TUserPageMapper tUserPageMapper;
 
@@ -47,10 +47,10 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
         tUserEventSummary.setUpdateTs(timestamp);
 
         // LUserEvent
-        TUserSummary user=tUserPageMapper.selectByhUserPhoneNr(tUserEventSummary.gethUserPhoneNr());
+        TUserSummary user = tUserPageMapper.selectByhUserPhoneNr(tUserEventSummary.gethUserPhoneNr());
         tUserEventSummary.sethUserId(user.gethUserId());
         tUserEventSummary.sethEventId(tUserEventSummary.gethEventId());
-        
+
         LUserEvent lUserEvent = LsUserEventUtil.userEventSummary2UserEvent(tUserEventSummary);
         lUserEventMapper.insertSelective(lUserEvent);
         long lUserEventId = lUserEventMapper.getMaxLUserEventId();
@@ -62,13 +62,13 @@ public class LsUserEventServiceImpl implements ILsUserEventService {
         sUserEventActiveMapper.insertSelective(sUserEventActive);
 
         // SUserEventLike
-        if (tUserEventSummary.getrUserEventCategory() == RUserEventCategoryEnum.Like) {
+        if (null != tUserEventSummary.getsUserEventLikeInd()) {
             SUserEventLike sUserEventLike = LsUserEventUtil.userEventSummary2UserEventLike(tUserEventSummary);
             sUserEventLikeMapper.insertSelective(sUserEventLike);
         }
 
         // SUserEventRead
-        if (tUserEventSummary.getrUserEventCategory() == RUserEventCategoryEnum.Read) {
+        if (null != tUserEventSummary.getsUserEventReadLogTxt()) {
             SUserEventRead sUserEventRead = LsUserEventUtil.userEventSummary2UserEventRead(tUserEventSummary);
             sUserEventReadMapper.insertSelective(sUserEventRead);
         }

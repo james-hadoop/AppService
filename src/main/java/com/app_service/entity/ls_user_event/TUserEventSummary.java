@@ -11,7 +11,7 @@ public class TUserEventSummary {
 
     private Long hEventId;
 
-    private Integer sUserEventActiveInd;
+    private Integer sUserEventActiveInd=0;
 
     private Integer sUserEventLikeInd;
 
