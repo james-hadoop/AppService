@@ -283,7 +283,7 @@ public class HsEventUtil {
         sEventRecom1.setCreateTs(es.getCreateTs());
         sEventRecom1.sethEventId(es.gethEventId());
         sEventRecom1.setsEventRecomActiveInd(es.getsEventActiveInd());
-        sEventRecom1.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        sEventRecom1.setsEventRecomPositionCd(es.getsEventRecomPositionCd(false));
         sEventRecom1.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom1;
@@ -313,7 +313,7 @@ public class HsEventUtil {
         sEventRecom3.setCreateTs(es.getCreateTs());
         sEventRecom3.sethEventId(es.gethEventId());
         sEventRecom3.setsEventRecomActiveInd(es.getsEventActiveInd());
-        sEventRecom3.setsEventRecomPositionCd(es.getsEventRecomPositionCd());
+        sEventRecom3.setsEventRecomPositionCd(es.getsEventRecomPositionCd(false));
         sEventRecom3.setUpdateTs(es.getUpdateTs());
 
         return sEventRecom3;
