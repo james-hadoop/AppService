@@ -74,7 +74,8 @@ public class HsEventController {
             paramMap.put("end", end);
 
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
-            int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+            int count=6;
+            //int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
 
             // List<TEventSummary> tEventSummaryList = new
             // ArrayList<TEventSummary>();

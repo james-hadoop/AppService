@@ -1,6 +1,7 @@
 package com.app_service.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,7 @@ public class HsEventServiceImpl implements IHsEventService {
 
     @Override
     public List<TEventSummary> getTEventSummaryByType(Map<String, Object> paramMap) {
-        List<TEventPage> tEventPageList;
+        List<TEventPage> tEventPageList = new ArrayList<TEventPage>();
 
         Integer sEventTypeCd = (Integer) paramMap.get("sEventTypeCd");
         if (null == sEventTypeCd || -1 == sEventTypeCd) {
@@ -100,13 +101,175 @@ public class HsEventServiceImpl implements IHsEventService {
         } else {
             switch (sEventTypeCd) {
             case 1:
-                tEventPageList = tEventPageMapper.getTEventPageListForRecom1(paramMap);
+                // tEventPageList = tEventPageMapper.getTEventPageListForRecom1(paramMap);
+                paramMap.put("sEventRecomPositionCd", 0);
+                List<TEventPage> tEventPageList1_0 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_0 || 0 == tEventPageList1_0.size()) {
+                    return null;
+                }
+
+                paramMap.put("sEventRecomPositionCd", 6);
+                List<TEventPage> tEventPageList1_6 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_6 || 0 == tEventPageList1_6.size()) {
+                    tEventPageList.add(tEventPageList1_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList1_6.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 5);
+                List<TEventPage> tEventPageList1_5 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_5 || 0 == tEventPageList1_5.size()) {
+                    tEventPageList.add(tEventPageList1_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList1_5.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 4);
+                List<TEventPage> tEventPageList1_4 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_4 || 0 == tEventPageList1_4.size()) {
+                    tEventPageList.add(tEventPageList1_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList1_4.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 3);
+                List<TEventPage> tEventPageList1_3 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_3 || 0 == tEventPageList1_3.size()) {
+                    tEventPageList.add(tEventPageList1_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList1_3.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 2);
+                List<TEventPage> tEventPageList1_2 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_2 || 0 == tEventPageList1_2.size()) {
+                    tEventPageList.add(tEventPageList1_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList1_2.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 1);
+                List<TEventPage> tEventPageList1_1 = tEventPageMapper.getTEventPageListForRecom1ByRecomPosition(paramMap);
+                if (null == tEventPageList1_1 || 0 == tEventPageList1_1.size()) {
+                    tEventPageList.add(tEventPageList1_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList1_1.get(0));
+                }
+                
                 break;
             case 2:
-                tEventPageList = tEventPageMapper.getTEventPageListForRecom2(paramMap);
+                //tEventPageList = tEventPageMapper.getTEventPageListForRecom2(paramMap);
+                paramMap.put("sEventRecomPositionCd", 0);
+                List<TEventPage> tEventPageList2_0 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_0 || 0 == tEventPageList2_0.size()) {
+                    return null;
+                }
+
+                paramMap.put("sEventRecomPositionCd", 6);
+                List<TEventPage> tEventPageList2_6 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_6 || 0 == tEventPageList2_6.size()) {
+                    tEventPageList.add(tEventPageList2_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList2_6.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 5);
+                List<TEventPage> tEventPageList2_5 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_5 || 0 == tEventPageList2_5.size()) {
+                    tEventPageList.add(tEventPageList2_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList2_5.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 4);
+                List<TEventPage> tEventPageList2_4 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_4 || 0 == tEventPageList2_4.size()) {
+                    tEventPageList.add(tEventPageList2_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList2_4.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 3);
+                List<TEventPage> tEventPageList2_3 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_3 || 0 == tEventPageList2_3.size()) {
+                    tEventPageList.add(tEventPageList2_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList2_3.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 2);
+                List<TEventPage> tEventPageList2_2 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_2 || 0 == tEventPageList2_2.size()) {
+                    tEventPageList.add(tEventPageList2_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList2_2.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 1);
+                List<TEventPage> tEventPageList2_1 = tEventPageMapper.getTEventPageListForRecom2ByRecomPosition(paramMap);
+                if (null == tEventPageList2_1 || 0 == tEventPageList2_1.size()) {
+                    tEventPageList.add(tEventPageList2_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList2_1.get(0));
+                }
+                
                 break;
             case 3:
-                tEventPageList = tEventPageMapper.getTEventPageListForRecom3(paramMap);
+                //tEventPageList = tEventPageMapper.getTEventPageListForRecom3(paramMap);
+                paramMap.put("sEventRecomPositionCd", 0);
+                List<TEventPage> tEventPageList3_0 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_0 || 0 == tEventPageList3_0.size()) {
+                    return null;
+                }
+
+                paramMap.put("sEventRecomPositionCd", 6);
+                List<TEventPage> tEventPageList3_6 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_6 || 0 == tEventPageList3_6.size()) {
+                    tEventPageList.add(tEventPageList3_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList3_6.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 5);
+                List<TEventPage> tEventPageList3_5 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_5 || 0 == tEventPageList3_5.size()) {
+                    tEventPageList.add(tEventPageList3_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList3_5.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 4);
+                List<TEventPage> tEventPageList3_4 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_4 || 0 == tEventPageList3_4.size()) {
+                    tEventPageList.add(tEventPageList3_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList3_4.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 3);
+                List<TEventPage> tEventPageList3_3 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_3 || 0 == tEventPageList3_3.size()) {
+                    tEventPageList.add(tEventPageList3_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList3_3.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 2);
+                List<TEventPage> tEventPageList3_2 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_2 || 0 == tEventPageList3_2.size()) {
+                    tEventPageList.add(tEventPageList3_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList3_2.get(0));
+                }
+
+                paramMap.put("sEventRecomPositionCd", 1);
+                List<TEventPage> tEventPageList3_1 = tEventPageMapper.getTEventPageListForRecom3ByRecomPosition(paramMap);
+                if (null == tEventPageList3_1 || 0 == tEventPageList3_1.size()) {
+                    tEventPageList.add(tEventPageList3_0.get(0));
+                } else {
+                    tEventPageList.add(tEventPageList3_1.get(0));
+                }
+                
                 break;
             default:
                 tEventPageList = tEventPageMapper.getAllTEventPageList(paramMap);
@@ -196,7 +359,7 @@ public class HsEventServiceImpl implements IHsEventService {
         List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
         return tEventSummaryList;
     }
-    
+
     @Override
     public List<TEventSummary> getTEventSummaryByConditionAndUser(Map<String, Object> paramMap) {
         List<TEventPage> tEventPageList = tEventPageMapper.getTEventPageListByConditionAndUser(paramMap);

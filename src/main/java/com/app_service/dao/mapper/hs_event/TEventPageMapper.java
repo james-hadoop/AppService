@@ -303,4 +303,55 @@ public interface TEventPageMapper {
     // getTEventSummaryByConditionCount
     @SelectProvider(type = TEventPageSqlProvider.class, method = "getTEventSummaryByConditionCount")
     Integer getTEventSummaryByConditionCount(Map<String, Object> paramMap);
+    
+    // getTEventPageListForRecom1ByRecomPosition
+    @Select({
+            "SELECT ep.*, er1.s_event_recom_position_cd FROM (select * FROM hs_event.t_event_page where s_event_type_cd=1 and s_event_active_ind=0) as ep inner join hs_event.s_event_recom_1 as er1 on er1.h_event_id=ep.h_event_id where er1.s_event_recom_position_cd=#{sEventRecomPositionCd} order by er1.s_event_recom_position_cd desc, er1.h_event_id desc limit 1" })
+    @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_type_cd", property = "sEventTypeCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_type_desc", property = "rEventTypeDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_1_url", property = "sEventSubContent1Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
+    List<TEventPage> getTEventPageListForRecom1ByRecomPosition(Map<String, Object> paramMap);
+
+    // getTEventPageListForRecom2ByRecomPosition
+    @Select({
+            "SELECT ep.*, er2.s_event_recom_position_cd FROM (select * FROM hs_event.t_event_page where s_event_type_cd=2 and s_event_active_ind=0) as ep inner join hs_event.s_event_recom_2 as er2 on er2.h_event_id=ep.h_event_id where er2.s_event_recom_position_cd=#{sEventRecomPositionCd} order by er2.s_event_recom_position_cd desc, er2.h_event_id desc limit 1" })
+    @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_type_cd", property = "sEventTypeCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_type_desc", property = "rEventTypeDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_2_url", property = "sEventSubContent2Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
+    List<TEventPage> getTEventPageListForRecom2ByRecomPosition(Map<String, Object> paramMap);
+
+    // getTEventPageListForRecom3ByRecomPosition
+    @Select({
+            "SELECT ep.*, er3.s_event_recom_position_cd FROM (select * FROM hs_event.t_event_page where s_event_type_cd=3 and s_event_active_ind=0) as ep inner join hs_event.s_event_recom_3 as er3 on er3.h_event_id=ep.h_event_id where er3.s_event_recom_position_cd=#{sEventRecomPositionCd} order by er3.s_event_recom_position_cd desc, er3.h_event_id desc limit 1" })
+    @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_type_cd", property = "sEventTypeCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_type_desc", property = "rEventTypeDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_3_url", property = "sEventSubContent3Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
+    List<TEventPage> getTEventPageListForRecom3ByRecomPosition(Map<String, Object> paramMap);
 }
