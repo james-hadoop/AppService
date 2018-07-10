@@ -264,7 +264,7 @@ public class TEventPageSqlProvider {
         SQL sql = new SQL();
 
         sql.SELECT(
-                "ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str")
+                "distinct ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str")
                 .FROM("ls_user_event.l_user_event lue inner join ls_user_event.s_user_event_active uea on uea.l_user_event_id=lue.l_user_event_id and uea.s_user_event_active_ind=0 inner join hs_event.s_event_active sea on sea.h_event_id=lue.h_event_id and sea.s_event_active_ind=0 inner join hs_user.h_user h_user on h_user.h_user_id=lue.h_user_id"
                         + " left outer join hs_event.t_event_page ep on ep.h_event_id=lue.h_event_id left outer join hs_event.s_event_sub_content_1 sub1 on ep.h_event_id=sub1.h_event_id left outer join hs_event.s_event_sub_content_2 sub2 on sub1.s_event_sub_content_1_id=sub2.s_event_sub_content_2_id");
 
@@ -280,7 +280,12 @@ public class TEventPageSqlProvider {
                     "ls_user_event.s_user_event_read uer on lue.l_user_event_id=uer.l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=VARCHAR},'%')");
         }
 
-        sql.ORDER_BY("ep.s_event_active_ind");
+        //sql.ORDER_BY("lue.l_user_event_id desc");
+
+        if (paramMap.get("start") != null && paramMap.get("end") != null) {
+            String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));
+            return sqlString;
+        }
 
         return sql.toString();
     }
@@ -289,8 +294,9 @@ public class TEventPageSqlProvider {
     public String getTEventPageListByConditionAndUserCount(Map<String, Object> paramMap) {
         SQL sql = new SQL();
 
-        sql.SELECT("count(1)").FROM(
-                "ls_user_event.l_user_event lue inner join ls_user_event.s_user_event_active uea on uea.l_user_event_id=lue.l_user_event_id and uea.s_user_event_active_ind=0 inner join hs_event.s_event_active sea on sea.h_event_id=lue.h_event_id and sea.s_event_active_ind=0 inner join hs_user.h_user h_user on h_user.h_user_id=lue.h_user_id"
+        sql.SELECT(
+                "distinct ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str")
+                .FROM("ls_user_event.l_user_event lue inner join ls_user_event.s_user_event_active uea on uea.l_user_event_id=lue.l_user_event_id and uea.s_user_event_active_ind=0 inner join hs_event.s_event_active sea on sea.h_event_id=lue.h_event_id and sea.s_event_active_ind=0 inner join hs_user.h_user h_user on h_user.h_user_id=lue.h_user_id"
                         + " left outer join hs_event.t_event_page ep on ep.h_event_id=lue.h_event_id left outer join hs_event.s_event_sub_content_1 sub1 on ep.h_event_id=sub1.h_event_id left outer join hs_event.s_event_sub_content_2 sub2 on sub1.s_event_sub_content_1_id=sub2.s_event_sub_content_2_id");
 
         sql.WHERE("ep.s_event_active_ind=0").WHERE("h_user.h_user_phone_nr = #{hUserPhoneNr,jdbcType=BIGINT}");
@@ -305,9 +311,7 @@ public class TEventPageSqlProvider {
                     "ls_user_event.s_user_event_read uer on lue.l_user_event_id=uer.l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=VARCHAR},'%')");
         }
 
-        sql.ORDER_BY("ep.s_event_active_ind");
-
-        return sql.toString();
+        return "select count(1) FROM ("+sql.toString()+") alias_name";
     }
 
     public static void main(String[] args) {
