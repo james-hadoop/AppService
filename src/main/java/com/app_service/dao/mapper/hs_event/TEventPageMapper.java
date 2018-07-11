@@ -230,6 +230,23 @@ public interface TEventPageMapper {
             @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
             @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
     List<TEventPage> getTEventPageListForBanner(Map<String, Object> paramMap);
+    
+    // getTEventPageListForBannerByPosition
+    @Select({
+            "select ep.* from (select * from hs_event.t_event_page where s_event_active_ind=0) as ep inner join hs_event.s_event_banner as eb on eb.h_event_id=ep.h_event_id where eb.s_event_banner_active_ind=0 and eb.s_event_banner_position_cd=#{sEventBannerPositionCd} order by eb.s_event_banner_position_cd desc, ep.h_event_id desc limit 1" })
+    @Results({ @Result(column = "h_event_id", property = "hEventId", jdbcType = JdbcType.BIGINT, id = true),
+            @Result(column = "s_event_category_cd", property = "sEventCategoryCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_category_desc", property = "rEventCategoryDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_type_cd", property = "sEventTypeCd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "r_event_type_desc", property = "rEventTypeDesc", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_title_url", property = "sEventTitleUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_content_url", property = "sEventContentUrl", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_sub_content_1_url", property = "sEventSubContent1Url", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "s_event_active_ind", property = "sEventActiveInd", jdbcType = JdbcType.INTEGER),
+            @Result(column = "create_ts", property = "createTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "update_ts", property = "updateTs", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "s_event_search_content_txt", property = "sEventSearchContentTxt", jdbcType = JdbcType.LONGVARCHAR) })
+    List<TEventPage> getTEventPageListForBannerByPosition(Map<String, Object> paramMap);
 
     // getTEventPageListForBannerCount
     @Select({

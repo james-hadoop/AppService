@@ -43,7 +43,7 @@ public class TEventSummary {
 
     private String sEventSubContentString = null;
 
-    private Integer sEventBannerPositionCd = 0;
+    private Integer sEventBannerPositionCd = -1;
 
     private Integer sEventRecomPositionCd = 0;
 

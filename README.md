@@ -70,6 +70,9 @@ curl -XPOST 'http://localhost:8088/v1/service/user_event/feedbackTEventSummary' 
 ## 提交评论记录
 curl -XPOST 'http://localhost:8088/v1/service/user_event/feedbackTEventSummary' -H 'Content-Type: application/json' -d' {"hUserPhoneNr":13333333333, "hEventId":63, "sUserEventReadLogTxt":"not bad"}'
 
+## 模糊查询
+http://localhost:8088/v1/service/event/getTEventSummaryByConditionGlobal?sessionCode=hello&sEventSearchContentTxt=search
+
 ## getVerifyCode
 curl -XPOST 'localhost:8088/v1/service/user/getVerifyCode?hUserPhoneNr=13000000000'
 

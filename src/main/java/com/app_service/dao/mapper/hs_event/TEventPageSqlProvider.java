@@ -189,26 +189,25 @@ public class TEventPageSqlProvider {
                 .FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id left outer join hs_event.s_event_recom_1 er1 on ep.h_event_id=er1.h_event_id left outer join hs_event.s_event_recom_2 er2 on ep.h_event_id=er2.h_event_id left outer join hs_event.s_event_recom_3 er3 on ep.h_event_id=er3.h_event_id");
 
         if (paramMap.get("sEventCategoryCd") != null) {
-            sql.WHERE("ep.s_event_category_cd = #{sEventCategoryCd,jdbcType=INTEGER}");
+            sql.OR().WHERE("ep.s_event_category_cd = #{sEventCategoryCd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sEventTypeCd") != null) {
-            sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
+            sql.OR().WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sUserEventLikeInd") != null) {
-            sql.WHERE("ep.s_event_active_ind = #{sUserEventLikeInd,jdbcType=INTEGER}");
+            sql.OR().WHERE("ep.s_event_active_ind = #{sUserEventLikeInd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sEventSearchContentTxt") != null) {
-            sql.WHERE("ep.s_event_sub_content_2_str like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
         }
 
         if (paramMap.get("urlString") != null) {
-            sql.WHERE("ep.s_event_title_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
+            sql.OR().WHERE("ep.s_event_title_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
                     .WHERE("ep.s_event_content_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
                     .WHERE("ep.s_event_search_content_txt like concat('%',#{urlString,jdbcType=VARCHAR},'%')");
-            ;
         }
 
         sql.ORDER_BY("s_event_active_ind");
@@ -232,31 +231,28 @@ public class TEventPageSqlProvider {
                 .FROM("hs_event.t_event_page ep left outer join hs_event.s_event_banner eb on ep.h_event_id=eb.h_event_id left outer join hs_event.s_event_recom_1 er1 on ep.h_event_id=er1.h_event_id left outer join hs_event.s_event_recom_2 er2 on ep.h_event_id=er2.h_event_id left outer join hs_event.s_event_recom_3 er3 on ep.h_event_id=er3.h_event_id");
 
         if (paramMap.get("sEventCategoryCd") != null) {
-            sql.WHERE("ep.s_event_category_cd = #{sEventCategoryCd,jdbcType=INTEGER}");
+            sql.OR().WHERE("ep.s_event_category_cd = #{sEventCategoryCd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sEventTypeCd") != null) {
-            sql.WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
+            sql.OR().WHERE("ep.s_event_type_cd = #{sEventTypeCd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sUserEventLikeInd") != null) {
-            sql.WHERE("ep.s_event_active_ind = #{sUserEventLikeInd,jdbcType=INTEGER}");
+            sql.OR().WHERE("ep.s_event_active_ind = #{sUserEventLikeInd,jdbcType=INTEGER}");
         }
 
         if (paramMap.get("sEventSearchContentTxt") != null) {
-            sql.WHERE("ep.s_event_sub_content_2_str like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
         }
 
         if (paramMap.get("urlString") != null) {
-            sql.WHERE("ep.s_event_title_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
-                    .WHERE("ep.s_event_content_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')");
+            sql.OR().WHERE("ep.s_event_title_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
+                    .WHERE("ep.s_event_content_url like concat('%',#{urlString,jdbcType=VARCHAR},'%')").OR()
+                    .WHERE("ep.s_event_search_content_txt like concat('%',#{urlString,jdbcType=VARCHAR},'%')");
         }
 
-        sql.ORDER_BY("s_event_active_ind");
-
-        sql.ORDER_BY("ep.update_ts desc");
-
-        return "SELECT count(1) from( " + sql.toString() + " ) event_page";
+        return "SELECT count(1) from( " + sql.toString() + " ) event_page_temp";
     }
 
     // getTEventPageListByConditionAndUser
