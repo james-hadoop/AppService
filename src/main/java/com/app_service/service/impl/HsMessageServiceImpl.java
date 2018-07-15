@@ -151,13 +151,14 @@ public class HsMessageServiceImpl implements IHsMessageService {
                 return messageList;
             }
 
-            List<SUserMessageActive> sUserMessageActiveList = sUserMessageActiveMapper
-                    .selectByHUserId(hUser.gethUserId());
-
-            for (SUserMessageActive sUserMessageActive : sUserMessageActiveList) {
-                sUserMessageActive.setsUserMessageActiveInd(StatusEnum.Unactive.getCode());
-                sUserMessageActiveMapper.updateByPrimaryKeySelective(sUserMessageActive);
-            }
+            // deactive the message has been read
+            // List<SUserMessageActive> sUserMessageActiveList = sUserMessageActiveMapper
+            // .selectByHUserId(hUser.gethUserId());
+            //
+            // for (SUserMessageActive sUserMessageActive : sUserMessageActiveList) {
+            // sUserMessageActive.setsUserMessageActiveInd(StatusEnum.Unactive.getCode());
+            // sUserMessageActiveMapper.updateByPrimaryKeySelective(sUserMessageActive);
+            // }
 
             return messageList;
         }

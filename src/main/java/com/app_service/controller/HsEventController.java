@@ -306,8 +306,8 @@ public class HsEventController {
             int end = rows;
 
             Map<String, Object> paramMap = new HashMap<String, Object>();
-            paramMap.put("start", start);
-            paramMap.put("end", end);
+            //paramMap.put("start", start);
+            //paramMap.put("end", end);
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sEventCategoryCd", sEventCategoryCd);
             paramMap.put("sEventTypeCd", sEventTypeCd);

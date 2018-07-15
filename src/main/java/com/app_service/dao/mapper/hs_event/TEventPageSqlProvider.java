@@ -201,7 +201,7 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sEventSearchContentTxt") != null) {
-            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')").AND().WHERE("ep.s_event_content_url not like '%mp3'").AND().WHERE("ep.s_event_content_url not like '%mp4'");
         }
 
         if (paramMap.get("urlString") != null) {
@@ -243,7 +243,7 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sEventSearchContentTxt") != null) {
-            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')");
+            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')").AND().WHERE("ep.s_event_content_url not like '%mp3'").AND().WHERE("ep.s_event_content_url not like '%mp4'");
         }
 
         if (paramMap.get("urlString") != null) {
