@@ -97,8 +97,8 @@ public class HsMessageController {
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sMessageCategoryCd", sMessageCategoryCd);
             paramMap.put("isPush", isPush);
-            paramMap.put("start", start);
-            paramMap.put("end", end);
+            // paramMap.put("start", start);
+            // paramMap.put("end", end);
 
             int count = hsMessageService.getTMessageSummaryListByConditionCount(paramMap);
             List<TMessageSummary> tMessageSummaryList = hsMessageService.getTMessageSummaryListByCondition(paramMap);
