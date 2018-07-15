@@ -182,6 +182,35 @@ public class HsEventUtil {
         return tEventSummaryList;
     }
 
+    public static List<TEventSummary> eventPageList2EventSummaryListWithoutSubEvents(List<TEventPage> tEventPageList) {
+        if (null == tEventPageList || 0 == tEventPageList.size()) {
+            return null;
+        }
+
+        List<TEventSummary> tEventSummaryList = new ArrayList<TEventSummary>();
+
+        for (TEventPage ep : tEventPageList) {
+            TEventSummary es = new TEventSummary();
+
+            es.sethEventId(ep.gethEventId());
+            es.setsEventCategoryCd(ep.getsEventCategoryCd());
+            es.setrEventCategoryDesc(ep.getrEventCategoryDesc());
+            es.setsEventTypeCd(ep.getsEventTypeCd());
+            es.setrEventTypeDesc(ep.getrEventTypeDesc());
+            es.setsEventTitleUrl(ep.getsEventTitleUrl());
+            es.setsEventContentUrl(ep.getsEventContentUrl());
+
+            es.setsEventActiveInd(ep.getsEventActiveInd());
+            es.setCreateTs(ep.getCreateTs());
+            es.setUpdateTs(ep.getUpdateTs());
+            es.setsEventSearchContentTxt(ep.getsEventSearchContentTxt());
+            
+            tEventSummaryList.add(es);
+        }
+
+        return tEventSummaryList;
+    }
+
     public static List<TEventSummary> makeSubContent(List<TEventSummary> eventSummaryList) {
         try {
             if (null == eventSummaryList || 0 == eventSummaryList.size()) {

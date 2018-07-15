@@ -419,7 +419,7 @@ public class HsEventServiceImpl implements IHsEventService {
             tEventPageList.add(tEventPageList1_1.get(0));
         }
 
-        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryListWithoutSubEvents(tEventPageList);
         return tEventSummaryList;
     }
 
