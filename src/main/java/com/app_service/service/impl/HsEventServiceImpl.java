@@ -297,7 +297,7 @@ public class HsEventServiceImpl implements IHsEventService {
             }
         }
 
-        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryList(tEventPageList);
+        List<TEventSummary> tEventSummaryList = HsEventUtil.eventPageList2EventSummaryListWithoutSubEvents(tEventPageList);
         return tEventSummaryList;
     }
 
