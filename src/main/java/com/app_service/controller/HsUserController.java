@@ -40,28 +40,6 @@ public class HsUserController {
     @Autowired
     private IHsUserService hsUserService;
 
-    /**
-     * @apiGroup User
-     * 
-     * @apiName getTUserSummary
-     * 
-     * @api {get} /v1/service/user/getTUserSummary 获取用户详情
-     * 
-     * @apiParam {String} sessionCode Logined user session code.
-     * @apiParam {String} hUserPhoneNr User phone number.
-     * 
-     * @apiSuccessExample {json} Success-Response: 
-     * { "rows": [ { "hUserId": 1,
-     *                    "hUserPhoneNr": 13333333333, "sUserGenderCd": 0,
-     *                    "sUserGenderDesc": "?", "sUserNameStr": "?",
-     *                    "sUserProfileUrl": "?", "sUserEmailStr": "?",
-     *                    "sUserActiveInd": 0, "createTs": 946656000000,
-     *                    "updateTs":946656000000, "sUserPasswordStr": null,
-     *                    "verifyCode": null } ], "total": 1 }
-     * 
-     * @apiSuccessExample {json} Error-Response: 
-     * { "rows":[], "total":0 }
-     */
     @RequestMapping(value = "/getTUserSummary", method = RequestMethod.GET)
     public GridContent getTUserSummary(@RequestParam(value = "sUserNameStr", required = false) String sUserNameStr,
             @RequestParam(value = "sUserEmailStr", required = false) String sUserEmailStr,
@@ -221,7 +199,7 @@ public class HsUserController {
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "responseResult": "ERROR",
-     *                    "responseResultMsg": "Login fail" }
+     *                    "responseResultMsg": "Reset fail" }
      */
     @RequestMapping(value = "reset", method = RequestMethod.POST)
     @ResponseBody
@@ -263,11 +241,11 @@ public class HsUserController {
      * 
      * @apiSuccessExample {json} Success-Response: 
      * { "responseResult": "SUCCESS",
-     *                    "responseResultMsg": "Edit success" }
+     *                    "responseResultMsg": "Add success" }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "responseResult": "ERROR",
-     *                    "responseResultMsg": "Edit fail" }
+     *                    "responseResultMsg": "Add fail" }
      */
     @RequestMapping(value = "/addTUserSummary", method = RequestMethod.POST)
     @ResponseBody

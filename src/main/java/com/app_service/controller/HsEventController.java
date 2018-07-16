@@ -42,16 +42,28 @@ public class HsEventController {
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response: 
-     * { "rows": [ { "hEventId": 7,
-     *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
-     *                    "sEventTitleUrl": "video/1.mp4"
-     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
-     *                    "createTs": 946627200000, "updateTs": 946627200000,
-     *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
-     *                    [], "sEventSubContent2StrList": [],
-     *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
-     *                    null } ], "total": 1 }
+     * {
+     *     "rows": [
+     *         {
+     *             "hEventId": 7,
+     *             "sEventCategoryCd": 0,
+     *             "rEventCategoryDesc": "d1",
+     *             "sEventTypeCd": 1,
+     *             "rEventTypeDesc": "video",
+     *             "sEventTitleUrl": "video/1.mp4",
+     *             "sEventContentUrl": "video/1.mp4",
+     *             "sEventActiveInd": 0,
+     *             "createTs": 946627200000,
+     *             "updateTs": 946627200000,
+     *             "sEventSearchContentTxt": "7",
+     *             "sEventSubContent1UrlList": [],
+     *             "sEventSubContent2StrList": [],
+     *             "sEventBannerPositionCd": null,
+     *             "sEventRecomPositionCd": null
+     *         }
+     *     ],
+     *     "total": 1
+     * }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "rows":[], "total":0 }
@@ -143,16 +155,28 @@ public class HsEventController {
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response: 
-     * { "rows": [ { "hEventId": 7,
-     *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
-     *                    "sEventTitleUrl": "video/1.mp4"
-     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
-     *                    "createTs": 946627200000, "updateTs": 946627200000,
-     *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
-     *                    [], "sEventSubContent2StrList": [], "sEventSubContent":
-     *                    [], "sEventBannerPositionCd": null,
-     *                    "sEventRecomPositionCd": null } ], "total": 1 }
+     * {
+     *     "rows": [
+     *         {
+     *             "hEventId": 7,
+     *             "sEventCategoryCd": 0,
+     *             "rEventCategoryDesc": "d1",
+     *             "sEventTypeCd": 1,
+     *             "rEventTypeDesc": "video",
+     *             "sEventTitleUrl": "video/1.mp4",
+     *             "sEventContentUrl": "video/1.mp4",
+     *             "sEventActiveInd": 0,
+     *             "createTs": 946627200000,
+     *             "updateTs": 946627200000,
+     *             "sEventSearchContentTxt": "7",
+     *             "sEventSubContent1UrlList": [],
+     *             "sEventSubContent2StrList": [],
+     *             "sEventBannerPositionCd": null,
+     *             "sEventRecomPositionCd": null
+     *         }
+     *     ],
+     *     "total": 1
+     * }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "rows":[], "total":0 }
@@ -201,16 +225,28 @@ public class HsEventController {
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
      * @apiSuccessExample {json} Success-Response: 
-     * { "rows": [ { "hEventId": 7,
-     *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
-     *                    "sEventTitleUrl": "video/1.mp4"
-     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
-     *                    "createTs": 946627200000, "updateTs": 946627200000,
-     *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
-     *                    [], "sEventSubContent2StrList": [],
-     *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
-     *                    null } ], "total": 1 }
+     * {
+     *     "rows": [
+     *         {
+     *             "hEventId": 7,
+     *             "sEventCategoryCd": 0,
+     *             "rEventCategoryDesc": "d1",
+     *             "sEventTypeCd": 1,
+     *             "rEventTypeDesc": "video",
+     *             "sEventTitleUrl": "video/1.mp4",
+     *             "sEventContentUrl": "video/1.mp4",
+     *             "sEventActiveInd": 0,
+     *             "createTs": 946627200000,
+     *             "updateTs": 946627200000,
+     *             "sEventSearchContentTxt": "7",
+     *             "sEventSubContent1UrlList": [],
+     *             "sEventSubContent2StrList": [],
+     *             "sEventBannerPositionCd": null,
+     *             "sEventRecomPositionCd": null
+     *         }
+     *     ],
+     *     "total": 1
+     * }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "rows":[], "total":0 }
@@ -267,25 +303,37 @@ public class HsEventController {
     /**
      * @apiGroup Event
      * 
-     * @apiName getTEventSummaryByCondition
+     * @apiName getTEventSummaryByConditionAndUser
      * 
-     * @api {get} /v1/service/event/getTEventSummaryByCondition 获取我的历史/我的关注
+     * @api {get} /v1/service/event/getTEventSummaryByConditionAndUser 获取我的历史/我的关注
      * 
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} hUserPhoneNr User phone number.
      * @apiParam {Number} [sUserEventLikeInd] Event like code sUserEventLikeInd=1.
      * 
      * @apiSuccessExample {json} Success-Response: 
-     * { "rows": [ { "hEventId": 7,
-     *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
-     *                    "sEventTitleUrl": "video/1.mp4"
-     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
-     *                    "createTs": 946627200000, "updateTs": 946627200000,
-     *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
-     *                    [], "sEventSubContent2StrList": [],
-     *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
-     *                    null } ], "total": 1 }
+          * {
+     *     "rows": [
+     *         {
+     *             "hEventId": 7,
+     *             "sEventCategoryCd": 0,
+     *             "rEventCategoryDesc": "d1",
+     *             "sEventTypeCd": 1,
+     *             "rEventTypeDesc": "video",
+     *             "sEventTitleUrl": "video/1.mp4",
+     *             "sEventContentUrl": "video/1.mp4",
+     *             "sEventActiveInd": 0,
+     *             "createTs": 946627200000,
+     *             "updateTs": 946627200000,
+     *             "sEventSearchContentTxt": "7",
+     *             "sEventSubContent1UrlList": [],
+     *             "sEventSubContent2StrList": [],
+     *             "sEventBannerPositionCd": null,
+     *             "sEventRecomPositionCd": null
+     *         }
+     *     ],
+     *     "total": 1
+     * }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "rows":[], "total":0 }
@@ -403,18 +451,31 @@ public class HsEventController {
      * @apiParam {String} [sEventSearchContentTxt] User search text.
      * 
      * @apiSuccessExample {json} Success-Response: 
-     * { "rows": [ { "hEventId": 7,
-     *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
-     *                    "sEventTitleUrl": "video/1.mp4"
-     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
-     *                    "createTs": 946627200000, "updateTs": 946627200000,
-     *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
-     *                    [], "sEventSubContent2StrList": [],
-     *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
-     *                    null } ], "total": 1 }
      * 
-     * @apiFailExample {json} Error-Response: 
+     * {
+     *     "rows": [
+     *         {
+     *             "hEventId": 7,
+     *             "sEventCategoryCd": 0,
+     *             "rEventCategoryDesc": "d1",
+     *             "sEventTypeCd": 1,
+     *             "rEventTypeDesc": "video",
+     *             "sEventTitleUrl": "video/1.mp4",
+     *             "sEventContentUrl": "video/1.mp4",
+     *             "sEventActiveInd": 0,
+     *             "createTs": 946627200000,
+     *             "updateTs": 946627200000,
+     *             "sEventSearchContentTxt": "7",
+     *             "sEventSubContent1UrlList": [],
+     *             "sEventSubContent2StrList": [],
+     *             "sEventBannerPositionCd": null,
+     *             "sEventRecomPositionCd": null
+     *         }
+     *     ],
+     *     "total": 1
+     * }
+     * 
+     * @apiSuccessExample {json} Error-Response: 
      * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByConditionGlobal", method = RequestMethod.GET)
@@ -482,11 +543,11 @@ public class HsEventController {
      *
      * @apiSuccessExample {json} Success-Response: 
      * { "responseResult": "SUCCESS",
-     *                    "responseResultMsg": "Reset success" }
+     *                    "responseResultMsg": "Add success" }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "responseResult": "ERROR",
-     *                    "responseResultMsg": "Login fail" }
+     *                    "responseResultMsg": "Add fail" }
      */
     @RequestMapping(value = "/addTEventSummary", method = RequestMethod.POST)
     @ResponseBody
@@ -531,11 +592,11 @@ public class HsEventController {
      *
      * @apiSuccessExample {json} Success-Response: 
      * { "responseResult": "SUCCESS",
-     *                    "responseResultMsg": "Reset success" }
+     *                    "responseResultMsg": "Edit success" }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "responseResult": "ERROR",
-     *                    "responseResultMsg": "Login fail" }
+     *                    "responseResultMsg": "Edit fail" }
      */
     @RequestMapping(value = "/editTEventSummary", method = RequestMethod.POST)
     @ResponseBody
@@ -580,11 +641,11 @@ public class HsEventController {
      *
      * @apiSuccessExample {json} Success-Response: 
      * { "responseResult": "SUCCESS",
-     *                    "responseResultMsg": "Reset success" }
+     *                    "responseResultMsg": "Delete success" }
      * 
      * @apiSuccessExample {json} Error-Response: 
      * { "responseResult": "ERROR",
-     *                    "responseResultMsg": "Login fail" }
+     *                    "responseResultMsg": "Delete fail" }
      */
     @RequestMapping(value = "/deleteTEventSummary", method = RequestMethod.POST)
     @ResponseBody
@@ -596,10 +657,10 @@ public class HsEventController {
             int result = hsEventService.deleteTEventSummary(tEventSummary);
             if (Response.ERROR == result) {
                 responseContent.setResponseResult(ResponseResultEnum.ERROR);
-                responseContent.setResponseResultMsg("Add fail");
+                responseContent.setResponseResultMsg("Delete fail");
             } else {
                 responseContent.setResponseResult(ResponseResultEnum.SUCCESS);
-                responseContent.setResponseResultMsg("Add success");
+                responseContent.setResponseResultMsg("Delete success");
             }
         } catch (Exception e) {
             logger.error("/v1/service/event/deleteTEventSummary()", e);
