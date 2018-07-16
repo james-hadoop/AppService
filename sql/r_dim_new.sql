@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.26-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.20, for macos10.12 (x86_64)
 --
--- Host: localhost    Database: r_dim
+-- Host: 47.94.94.196    Database: r_dim
 -- ------------------------------------------------------
--- Server version	10.1.26-MariaDB
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `r_dim`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `r_dim` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `r_dim`;
 
 --
 -- Table structure for table `r_event_category`
@@ -29,7 +37,7 @@ CREATE TABLE `r_event_category` (
   `update_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '系统更新时间',
   PRIMARY KEY (`r_event_category_cd`),
   KEY `idx_create_ts` (`create_ts`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='事件种类关联表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='事件种类关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +46,6 @@ CREATE TABLE `r_event_category` (
 
 LOCK TABLES `r_event_category` WRITE;
 /*!40000 ALTER TABLE `r_event_category` DISABLE KEYS */;
-INSERT INTO `r_event_category` VALUES (0,'未定义','1999-12-31 16:00:00','2017-10-16 09:28:11'),(1,'乐谣活动','1999-12-31 16:00:00','1999-12-31 16:00:00'),(2,'音乐教学','1999-12-31 16:00:00','1999-12-31 16:00:00'),(3,'艺人分享','1999-12-31 16:00:00','1999-12-31 16:00:00'),(4,'音乐专辑','1999-12-31 16:00:00','1999-12-31 16:00:00');
 /*!40000 ALTER TABLE `r_event_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +63,7 @@ CREATE TABLE `r_event_position` (
   `update_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '系统更新时间',
   PRIMARY KEY (`r_event_position_cd`),
   KEY `idx_create_ts` (`create_ts`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='事件位置关联表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='事件位置关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +72,6 @@ CREATE TABLE `r_event_position` (
 
 LOCK TABLES `r_event_position` WRITE;
 /*!40000 ALTER TABLE `r_event_position` DISABLE KEYS */;
-INSERT INTO `r_event_position` VALUES (1,'1','1999-12-31 16:00:00','1999-12-31 16:00:00'),(2,'2','1999-12-31 16:00:00','1999-12-31 16:00:00'),(3,'3','1999-12-31 16:00:00','1999-12-31 16:00:00'),(4,'4','1999-12-31 16:00:00','1999-12-31 16:00:00'),(5,'5','1999-12-31 16:00:00','1999-12-31 16:00:00'),(6,'6','1999-12-31 16:00:00','1999-12-31 16:00:00');
 /*!40000 ALTER TABLE `r_event_position` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +89,7 @@ CREATE TABLE `r_event_type` (
   `update_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '系统更新时间',
   PRIMARY KEY (`r_event_type_cd`),
   KEY `idx_create_ts` (`create_ts`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='事件类型关联表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='事件类型关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +98,6 @@ CREATE TABLE `r_event_type` (
 
 LOCK TABLES `r_event_type` WRITE;
 /*!40000 ALTER TABLE `r_event_type` DISABLE KEYS */;
-INSERT INTO `r_event_type` VALUES (0,'未定义','1999-12-31 16:00:00','2017-10-16 09:30:52'),(1,'图片','1999-12-31 16:00:00','1999-12-31 16:00:00'),(2,'音频','1999-12-31 16:00:00','1999-12-31 16:00:00'),(3,'视频','1999-12-31 16:00:00','1999-12-31 16:00:00');
 /*!40000 ALTER TABLE `r_event_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +141,7 @@ CREATE TABLE `r_user_gender` (
   `update_ts` timestamp NULL DEFAULT '1999-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '系统更新时间',
   PRIMARY KEY (`r_user_gender_cd`),
   KEY `idx_create_ts` (`create_ts`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户性别关联表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户性别关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,13 +150,8 @@ CREATE TABLE `r_user_gender` (
 
 LOCK TABLES `r_user_gender` WRITE;
 /*!40000 ALTER TABLE `r_user_gender` DISABLE KEYS */;
-INSERT INTO `r_user_gender` VALUES (0,'未定义','1999-12-31 16:00:00','2017-10-16 09:32:09'),(1,'男','1999-12-31 16:00:00','1999-12-31 16:00:00'),(2,'女','1999-12-31 16:00:00','1999-12-31 16:00:00');
 /*!40000 ALTER TABLE `r_user_gender` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'r_dim'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-16 17:32:47
+-- Dump completed on 2018-07-15  8:25:49
