@@ -28,12 +28,12 @@ public class LsUserEventController {
      * 
      * @apiName feedbackTEventSummary
      * 
-     * @api {post} /v1/service/event/feedbackTEventSummary 添加用户阅读记录
+     * @api {post} /v1/service/event/feedbackTEventSummary 添加用户阅读记录/添加用户关注记录
      * 
      * @apiParam {Number} hUserPhoneNr User phone number.
      * @apiParam {Number} hEventId Event ID.
      * @apiParam {String} rUserEventCategory Event Category.
-     * @apiParam {String} sUserEventLikeInd User like code.
+     * @apiParam {String} sUserEventLikeInd User like code.(sUserEventLikeInd=1:关注)
      * @apiParam {String} sUserEventReadLogTxt User feedback text.
      *
      * @apiSuccessExample {json} Success-Response: 

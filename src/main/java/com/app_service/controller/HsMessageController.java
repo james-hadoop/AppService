@@ -68,13 +68,13 @@ public class HsMessageController {
      * @apiParam {Number} [sMessageCategoryCd] Message category code.
      * 
      * @apiSuccessExample {json} Success-Response:
-     *
      *                    { "rows": [ { "hMessageId": 7, "sMessageActiveInd": 0,
      *                    "sMessageCategoryCd": 1, "sMessageContentStr": "great",
      *                    "createTs": 946627200000, "updateTs": 946627200000 } ],
      *                    "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiSuccessExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTMessageSummaryListByCondition", method = RequestMethod.GET)
     public GridContent getTMessageSummaryListByCondition(
@@ -123,9 +123,11 @@ public class HsMessageController {
      * @apiParam {Number} hUserPhoneNr User phone number.
      * @apiParam {Number} [sMessageCategoryCd] Message category code.
      * 
-     * @apiSuccessExample {json} Success-Response: 3
+     * @apiSuccessExample {json} Success-Response: 
+     * 3
      * 
-     * @apiSuccessExample {json} Error-Response: 0
+     * @apiSuccessExample {json} Error-Response: 
+     * 0
      */
     @RequestMapping(value = "/getTMessageSummaryUnreadCount", method = RequestMethod.GET)
     public GridContent getTMessageSummaryUnreadCount(
@@ -165,12 +167,14 @@ public class HsMessageController {
      * @apiParam {Number} [hUserPhoneNr] User phone number.
      * @apiParam {Number} [sMessageCategoryCd] Message category code.
      * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hMessageId": 7,
+     * @apiSuccessExample {json} Success-Response: 
+     * { "rows": [ { "hMessageId": 7,
      *                    "sMessageActiveInd": 0, "sMessageCategoryCd": 1,
      *                    "sMessageContentStr": "great", "createTs": 946627200000,
      *                    "updateTs": 946627200000 } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiSuccessExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTMessageSummaryListByConditionGlobal", method = RequestMethod.GET)
     public GridContent getTMessageSummaryListByConditionGlobal(

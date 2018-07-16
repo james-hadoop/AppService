@@ -34,14 +34,15 @@ public class HsEventController {
      * 
      * @apiName getTEventSummaryByType
      * 
-     * @api {get} /v1/service/event/getTEventSummaryByType 根据事件类型获取事件
+     * @api {get} /v1/service/event/getTEventSummaryByType 根据事件类型获取事件(sEventTypeCd=1:听我/sEventTypeCd=2:看我/sEventTypeCd=3:读我)
      * 
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} sEventTypeCd Event type.
      * @apiParam {Number} [page] Paging - page number.
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
+     * @apiSuccessExample {json} Success-Response: 
+     * { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
      *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
      *                    "sEventTitleUrl": "video/1.mp4"
@@ -52,7 +53,8 @@ public class HsEventController {
      *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
      *                    null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiSuccessExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByType", method = RequestMethod.GET)
     public GridContent getTEventSummaryByType(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -74,8 +76,8 @@ public class HsEventController {
             paramMap.put("end", end);
 
             List<TEventSummary> tEventSummaryList = hsEventService.getTEventSummaryByType(paramMap);
-            int count=6;
-            //int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
+            int count = 6;
+            // int count = hsEventService.getTEventSummaryByTypeCount(paramMap);
 
             // List<TEventSummary> tEventSummaryList = new
             // ArrayList<TEventSummary>();
@@ -132,14 +134,16 @@ public class HsEventController {
      * 
      * @apiName getTEventSummaryByCategory
      * 
-     * @api {get} /v1/service/event/getTEventSummaryByCategory 根据事件类目获取事件
+     * @api {get} /v1/service/event/getTEventSummaryByCategory
+     *      根据事件类目获取事件(sEventCategoryCd=1:盒声活动/sEventCategoryCd=2:音乐教学/sEventCategoryCd=3:艺人分享/sEventCategoryCd=4:音乐专辑)
      * 
      * @apiParam {String} sessionCode Logined user session code.
      * @apiParam {Number} sEventCategoryCd Event category
      * @apiParam {Number} [page] Paging - page number.
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
+     * @apiSuccessExample {json} Success-Response: 
+     * { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
      *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
      *                    "sEventTitleUrl": "video/1.mp4"
@@ -150,7 +154,8 @@ public class HsEventController {
      *                    [], "sEventBannerPositionCd": null,
      *                    "sEventRecomPositionCd": null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiSuccessExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByCategory", method = RequestMethod.GET)
     public GridContent getTEventSummaryByCategory(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -195,7 +200,8 @@ public class HsEventController {
      * @apiParam {Number} [page] Paging - page number.
      * @apiParam {Number} [rows] Paging - rows in one page.
      * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
+     * @apiSuccessExample {json} Success-Response: 
+     * { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
      *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
      *                    "sEventTitleUrl": "video/1.mp4"
@@ -206,7 +212,8 @@ public class HsEventController {
      *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
      *                    null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiSuccessExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryForBanner", method = RequestMethod.GET)
     public GridContent getTEventSummaryForBanner(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -246,9 +253,11 @@ public class HsEventController {
      * 
      * @apiParam {String} eventVersion Event version.
      * 
-     * @apiSuccessExample {json} Success-Response: 1505223163561
+     * @apiSuccessExample {json} Success-Response: 
+     * 1505223163561
      * 
-     * @apiSuccessExample {json} Error-Response: 1505223163561
+     * @apiSuccessExample {json} Error-Response: 
+     * 1505223163561
      */
     @RequestMapping(value = "/checkUpdate", method = RequestMethod.GET)
     public String checkUpdate(@RequestParam(value = "eventVersion") String eventVersion) {
@@ -260,19 +269,14 @@ public class HsEventController {
      * 
      * @apiName getTEventSummaryByCondition
      * 
-     * @api {get} /v1/service/event/getTEventSummaryByCondition 获取我的历史/我的关注/我的反馈事件
+     * @api {get} /v1/service/event/getTEventSummaryByCondition 获取我的历史/我的关注
      * 
      * @apiParam {String} sessionCode Logined user session code.
-     * @apiParam {Number} [page] Paging - page number.
-     * @apiParam {Number} [rows] Paging - rows in one page.
-     * @apiParam {Number} [hUserPhoneNr] User phone number.
-     * @apiParam {Number} [sEventCategoryCd] Event category code.
-     * @apiParam {Number} [sEventTypeCd] Event type code.
-     * @apiParam {Number} [sUserEventLikeInd] Event like code.
-     * @apiParam {String} [sUserEventReadLogTxt] Event read log.
-     * @apiParam {String} [sEventSearchContentTxt] User search text.
+     * @apiParam {Number} hUserPhoneNr User phone number.
+     * @apiParam {Number} [sUserEventLikeInd] Event like code sUserEventLikeInd=1.
      * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
+     * @apiSuccessExample {json} Success-Response: 
+     * { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
      *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
      *                    "sEventTitleUrl": "video/1.mp4"
@@ -283,10 +287,12 @@ public class HsEventController {
      *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
      *                    null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiSuccessExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByConditionAndUser", method = RequestMethod.GET)
-    public GridContent getTEventSummaryByConditionAndUser(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public GridContent getTEventSummaryByConditionAndUser(
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "10") Integer rows,
             @RequestParam(value = "sessionCode", required = true) String sessionCode,
             @RequestParam(value = "hUserPhoneNr", required = false) Long hUserPhoneNr,
@@ -306,8 +312,8 @@ public class HsEventController {
             int end = rows;
 
             Map<String, Object> paramMap = new HashMap<String, Object>();
-            //paramMap.put("start", start);
-            //paramMap.put("end", end);
+            // paramMap.put("start", start);
+            // paramMap.put("end", end);
             paramMap.put("hUserPhoneNr", hUserPhoneNr);
             paramMap.put("sEventCategoryCd", sEventCategoryCd);
             paramMap.put("sEventTypeCd", sEventTypeCd);
@@ -331,37 +337,7 @@ public class HsEventController {
 
         return gridContent;
     }
-    
-    /**
-     * @apiGroup Event
-     * 
-     * @apiName getTEventSummaryByCondition
-     * 
-     * @api {get} /v1/service/event/getTEventSummaryByCondition 获取我的历史/我的关注/我的反馈事件
-     * 
-     * @apiParam {String} sessionCode Logined user session code.
-     * @apiParam {Number} [page] Paging - page number.
-     * @apiParam {Number} [rows] Paging - rows in one page.
-     * @apiParam {Number} [hUserPhoneNr] User phone number.
-     * @apiParam {Number} [sEventCategoryCd] Event category code.
-     * @apiParam {Number} [sEventTypeCd] Event type code.
-     * @apiParam {Number} [sUserEventLikeInd] Event like code.
-     * @apiParam {String} [sUserEventReadLogTxt] Event read log.
-     * @apiParam {String} [sEventSearchContentTxt] User search text.
-     * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
-     *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
-     *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
-     *                    "sEventTitleUrl": "video/1.mp4"
-     *                    "sEventContentUrl":"video/1.mp4", "sEventActiveInd": 0,
-     *                    "createTs": 946627200000, "updateTs": 946627200000,
-     *                    "sEventSearchContentTxt": "7", "sEventSubContent1UrlList":
-     *                    [], "sEventSubContent2StrList": [],
-     *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
-     *                    null } ], "total": 1 }
-     * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
-     */
+
     @RequestMapping(value = "/getTEventSummaryByCondition", method = RequestMethod.GET)
     public GridContent getTEventSummaryByCondition(@RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "10") Integer rows,
@@ -426,7 +402,8 @@ public class HsEventController {
      * @apiParam {String} [sUserEventReadLogTxt] Event read log.
      * @apiParam {String} [sEventSearchContentTxt] User search text.
      * 
-     * @apiSuccessExample {json} Success-Response: { "rows": [ { "hEventId": 7,
+     * @apiSuccessExample {json} Success-Response: 
+     * { "rows": [ { "hEventId": 7,
      *                    "sEventCategoryCd": 0, "rEventCategoryDesc": "d1",
      *                    "sEventTypeCd": 1, "rEventTypeDesc": "video",
      *                    "sEventTitleUrl": "video/1.mp4"
@@ -437,7 +414,8 @@ public class HsEventController {
      *                    "sEventBannerPositionCd": null, "sEventRecomPositionCd":
      *                    null } ], "total": 1 }
      * 
-     * @apiSuccessExample {json} Error-Response: { "rows":[], "total":0 }
+     * @apiFailExample {json} Error-Response: 
+     * { "rows":[], "total":0 }
      */
     @RequestMapping(value = "/getTEventSummaryByConditionGlobal", method = RequestMethod.GET)
     public GridContent getTEventSummaryByConditionGlobal(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -502,10 +480,12 @@ public class HsEventController {
      * @apiParam {Number} sEventBannerPositionCd Event banner position.
      * @apiParam {Number} sEventRecomPositionCd Event recommend position.
      *
-     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     * @apiSuccessExample {json} Success-Response: 
+     * { "responseResult": "SUCCESS",
      *                    "responseResultMsg": "Reset success" }
      * 
-     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     * @apiSuccessExample {json} Error-Response: 
+     * { "responseResult": "ERROR",
      *                    "responseResultMsg": "Login fail" }
      */
     @RequestMapping(value = "/addTEventSummary", method = RequestMethod.POST)
@@ -549,10 +529,12 @@ public class HsEventController {
      * @apiParam {Number} sEventBannerPositionCd Event banner position.
      * @apiParam {Number} sEventRecomPositionCd Event recommend position.
      *
-     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     * @apiSuccessExample {json} Success-Response: 
+     * { "responseResult": "SUCCESS",
      *                    "responseResultMsg": "Reset success" }
      * 
-     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     * @apiSuccessExample {json} Error-Response: 
+     * { "responseResult": "ERROR",
      *                    "responseResultMsg": "Login fail" }
      */
     @RequestMapping(value = "/editTEventSummary", method = RequestMethod.POST)
@@ -596,10 +578,12 @@ public class HsEventController {
      * @apiParam {Number} sEventBannerPositionCd Event banner position.
      * @apiParam {Number} sEventRecomPositionCd Event recommend position.
      *
-     * @apiSuccessExample {json} Success-Response: { "responseResult": "SUCCESS",
+     * @apiSuccessExample {json} Success-Response: 
+     * { "responseResult": "SUCCESS",
      *                    "responseResultMsg": "Reset success" }
      * 
-     * @apiSuccessExample {json} Error-Response: { "responseResult": "ERROR",
+     * @apiSuccessExample {json} Error-Response: 
+     * { "responseResult": "ERROR",
      *                    "responseResultMsg": "Login fail" }
      */
     @RequestMapping(value = "/deleteTEventSummary", method = RequestMethod.POST)
