@@ -201,7 +201,10 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sEventSearchContentTxt") != null) {
-            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')").AND().WHERE("ep.s_event_content_url not like '%mp3'").AND().WHERE("ep.s_event_content_url not like '%mp4'");
+            sql.OR().WHERE(
+                    "ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')")
+                    .AND().WHERE("ep.s_event_content_url not like '%mp3'").AND()
+                    .WHERE("ep.s_event_content_url not like '%mp4'");
         }
 
         if (paramMap.get("urlString") != null) {
@@ -243,7 +246,10 @@ public class TEventPageSqlProvider {
         }
 
         if (paramMap.get("sEventSearchContentTxt") != null) {
-            sql.OR().WHERE("ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')").AND().WHERE("ep.s_event_content_url not like '%mp3'").AND().WHERE("ep.s_event_content_url not like '%mp4'");
+            sql.OR().WHERE(
+                    "ep.s_event_search_content_txt like concat('%',#{sEventSearchContentTxt,jdbcType=VARCHAR},'%')")
+                    .AND().WHERE("ep.s_event_content_url not like '%mp3'").AND()
+                    .WHERE("ep.s_event_content_url not like '%mp4'");
         }
 
         if (paramMap.get("urlString") != null) {
@@ -260,7 +266,7 @@ public class TEventPageSqlProvider {
         SQL sql = new SQL();
 
         sql.SELECT(
-                "distinct ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str")
+                "distinct ep.h_event_id,ep.r_event_category_desc,ep.s_event_category_cd,ep.s_event_content_url,ep.s_event_title_url,ep.s_event_type_cd,sub1.s_event_sub_content_1_url,sub2.s_event_sub_content_2_str,lue.update_ts")
                 .FROM("ls_user_event.l_user_event lue inner join ls_user_event.s_user_event_active uea on uea.l_user_event_id=lue.l_user_event_id and uea.s_user_event_active_ind=0 inner join hs_event.s_event_active sea on sea.h_event_id=lue.h_event_id and sea.s_event_active_ind=0 inner join hs_user.h_user h_user on h_user.h_user_id=lue.h_user_id"
                         + " left outer join hs_event.t_event_page ep on ep.h_event_id=lue.h_event_id left outer join hs_event.s_event_sub_content_1 sub1 on ep.h_event_id=sub1.h_event_id left outer join hs_event.s_event_sub_content_2 sub2 on sub1.s_event_sub_content_1_id=sub2.s_event_sub_content_2_id");
 
@@ -268,7 +274,7 @@ public class TEventPageSqlProvider {
 
         if (paramMap.get("sUserEventLikeInd") != null) {
             sql.INNER_JOIN(
-                    "ls_user_event.s_user_event_like uel on uel.l_user_event_id=lue.l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}");
+                    "ls_user_event.s_user_event_like uel on uel.l_user_event_id=lue.l_user_event_id and uel.s_user_event_like_ind= #{sUserEventLikeInd,jdbcType=INTEGER}").ORDER_BY("uel.update_ts desc");
         }
 
         if (paramMap.get("sUserEventReadLogTxt") != null) {
@@ -276,7 +282,11 @@ public class TEventPageSqlProvider {
                     "ls_user_event.s_user_event_read uer on lue.l_user_event_id=uer.l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=VARCHAR},'%')");
         }
 
-        //sql.ORDER_BY("lue.l_user_event_id desc");
+//        if (paramMap.get("sUserEventLikeInd") != null) {
+//            sql.ORDER_BY("uel.update_ts desc");
+//        } else {
+            sql.ORDER_BY("lue.update_ts desc");
+//        }
 
         if (paramMap.get("start") != null && paramMap.get("end") != null) {
             String sqlString = sql.toString() + (" limit " + paramMap.get("start") + ", " + paramMap.get("end"));
@@ -307,7 +317,7 @@ public class TEventPageSqlProvider {
                     "ls_user_event.s_user_event_read uer on lue.l_user_event_id=uer.l_user_event_id and uer.s_user_event_read_log_txt like concat('%',#{sUserEventReadLogTxt,jdbcType=VARCHAR},'%')");
         }
 
-        return "select count(1) FROM ("+sql.toString()+") alias_name";
+        return "select count(1) FROM (" + sql.toString() + ") alias_name";
     }
 
     public static void main(String[] args) {
